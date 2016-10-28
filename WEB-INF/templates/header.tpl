@@ -7,7 +7,7 @@
 {if $i18n.language.rtl}
   <link href="{$smarty.const.RTL_CSS}" rel="stylesheet" type="text/css">
 {/if}
-  <title>Time Tracker{if $title} - {$title}{/if}</title>
+  <title>MST Time Tracker{if $title} - {$title}{/if}</title>
   <script src="js/strftime.js"></script>
   <script>
     {* Setup locale for strftime *}
@@ -27,11 +27,7 @@
       <!-- top image -->
       <table cellspacing="0" cellpadding="0" width="100%" border="0">
         <tr>
-{if $user->custom_logo}
-          <td align="center">
-{else}
-          <td bgcolor="#a6ccf7" background="images/top_bg.gif" align="center">
-{/if}
+          <td align="center" bgcolor="black">
             <table cellspacing="0" cellpadding="0" width="{$tab_width}" border="0">
               <tr>
                 <td valign="top">
@@ -41,7 +37,7 @@
 {if $user->custom_logo}
                       <td height="55" align="center"><img alt="Time Tracker" width="300" height="43" src="{$custom_logo}" border="0"></a></td>
 {else}
-                      <td height="55" align="center"><a href="https://www.anuko.com/lp/tt_1.htm" target="_blank"><img alt="Anuko Time Tracker" width="300" height="43" src="images/tt_logo.png" border="0"></a></td>
+                      <td height="55" align="center"><a href="https://www.mstsolutions.com/" target="_blank"><img alt="MST Time Tracker" width="105" height="50" src="images/mst_logo.png" border="0"></a></td>
 {/if}
                     </tr>
                   </table>
@@ -59,9 +55,7 @@
       <table cellspacing="0" cellpadding="3" width="100%" border="0">
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
-            <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a> &middot;
-            <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a> &middot;
-            <a class="systemMenu" href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a>
+            <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a>
           </td>
         </tr>
       </table>
@@ -83,9 +77,7 @@
         <tr>
           <td class="systemMenu" height="17" align="center">&nbsp;
             <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a> &middot;
-            <a class="systemMenu" href="profile_edit.php">{$i18n.menu.profile}</a> &middot;
-            <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a> &middot;
-            <a class="systemMenu" href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a>
+            <a class="systemMenu" href="profile_edit.php">{$i18n.menu.profile}</a>
           </td>
         </tr>
       </table>
