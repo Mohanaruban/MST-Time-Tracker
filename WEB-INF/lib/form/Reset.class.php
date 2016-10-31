@@ -26,27 +26,40 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
-require_once('../initialize.php');
+import('form.FormElement');
+	
+class Reset extends FormElement {
+	var $cClassName	= "Reset";
 
-// Redirects for admin and client roles.
-if ($auth->isAuthenticated()) {
-  if ($user->isAdmin()) {
-    header('Location: ../admin_teams.php');
-    exit();
-  } elseif ($user->isClient()) {
-    header('Location: ../reports.php');
-    exit();
-  }
+	function __construct($name,$value="")
+	{
+		$this->mName			= $name;
+		$this->mValue			= $value;
+	}
+
+	function toStringControl()	{
+		if (!$this->isRenderable()) return "";
+	    
+	    if ($this->mId=="") $this->mId = $this->mName;
+	    
+		$html = "\n\t<input";
+		$html .= " type=\"reset\" name=\"$this->mName\" id=\"$this->mId\"";
+		
+		if (!$this->isEnable()) {
+			$html .= " disabled=\"true\"";
+		}
+		
+		$html .= " value=\"$this->mValue\"";
+
+		if ($this->mClassStyle!="")
+			   $html .= " class=\"$this->mClassStyle\"";
+		
+		if ($this->mOnClick) {
+			$html .= " onclick=\"".$this->mOnClick."\"";
+		}
+		
+		$html .= ">";
+		
+		return $html;
+	}
 }
-// Redirect to time.php or mobile/time.php for other roles.
-?>
-
-<html>
-  <script src="../js/strftime.js"></script>
-  <script>
-    location.href = "time.php?date="+(new Date()).strftime('<?php print DB_DATEFORMAT;?>');
-  </script>
-  <noscript>
-    <p>Your browser does not support JavaScript. Time Tracker will not work without it.</p>
-  </noscript>
-</html>

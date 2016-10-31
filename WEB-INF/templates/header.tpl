@@ -4,6 +4,7 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link href="{$smarty.const.DEFAULT_CSS}" rel="stylesheet" type="text/css">
+  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 {if $i18n.language.rtl}
   <link href="{$smarty.const.RTL_CSS}" rel="stylesheet" type="text/css">
 {/if}
@@ -37,7 +38,7 @@
 {if $user->custom_logo}
                       <td height="55" align="center"><img alt="Time Tracker" width="300" height="43" src="{$custom_logo}" border="0"></a></td>
 {else}
-                      <td height="55" align="center"><a href="https://www.mstsolutions.com/" target="_blank"><img alt="MST Time Tracker" width="105" height="50" src="images/mst_logo.png" border="0"></a></td>
+                      <td height="60" align="center"><a href="http://www.mstsolutions.com/" target="_blank"><img alt="MST Time Tracker" width="105" height="50" src="images/mst_logo.png" border="0"></a></td>
 {/if}
                     </tr>
                   </table>
@@ -121,24 +122,9 @@
       </table>
       <!-- end of sub menu for authorized user -->
   {/if}
-{else}
-      <!-- top menu for non authorized user -->
-      <table cellspacing="0" cellpadding="3" width="100%" border="0">
-        <tr>
-          <td class="systemMenu" height="17" align="center">&nbsp;
-            <a class="systemMenu" href="login.php">{$i18n.menu.login}</a> &middot;
-  {if isTrue($smarty.const.MULTITEAM_MODE) && $smarty.const.AUTH_MODULE == 'db'}
-            <a class="systemMenu" href="register.php">{$i18n.menu.create_team}</a> &middot;
-  {/if}
-            <a class="systemMenu" href="{$smarty.const.FORUM_LINK}" target="_blank">{$i18n.menu.forum}</a> &middot;
-            <a class="systemMenu" href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a>
-          </td>
-        </tr>
-      </table>
 {/if}
-      <br>
 
-      <!-- page title and user details -->
+      <!-- page title lod user details -->
 {if $title}
       <table cellspacing="0" cellpadding="5" width="{$tab_width+20}" border="0">
         <tr><td class="sectionHeader"><div class="pageTitle">{$title}{if $timestring}: {$timestring}{/if}</div></td></tr>
