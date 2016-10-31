@@ -60,6 +60,12 @@ class TextField extends FormElement {
 			  
 			if ($this->mStyle!="")
 			   $html .= " style=\"$this->mStyle\"";
+
+			if ($this->mClassStyle!="")
+			   $html .= " class=\"$this->mClassStyle\"";
+			 
+			if ($this->mPlaceholder!="")
+			   $html .= " placeholder=\"$this->mPlaceholder\"";
 			  
 			if ($this->mMaxLength!="")
 			   $html .= " maxlength=\"$this->mMaxLength\"";
