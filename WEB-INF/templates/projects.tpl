@@ -2,11 +2,11 @@
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
 
-<table cellspacing="0" cellpadding="7" border="0" width="720">
+<table class="table">
   <tr>
     <td valign="top">
 {if $user->canManageTeam()}
-      <table cellspacing="1" cellpadding="3" border="0" width="100%">
+      <table class="table">
   {if $inactive_projects}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.projects.active_projects}</td></tr>
   {/if}
@@ -37,7 +37,7 @@
       </table>
 
   {if $inactive_projects}
-      <table cellspacing="1" cellpadding="3" border="0" width="100%">
+      <table class="table">
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.projects.inactive_projects}</td></tr>
         <tr>
           <td width="35%" class="tableHeader">{$i18n.label.thing_name}</td>
@@ -64,7 +64,7 @@
       </table>
   {/if}
 {else}
-      <table cellspacing="1" cellpadding="3" border="0" width="100%">
+      <table class="table">
         <tr>
           <td class="tableHeader">{$i18n.label.thing_name}</td>
           <td class="tableHeader">{$i18n.label.description}</td>
