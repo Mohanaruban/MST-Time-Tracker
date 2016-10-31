@@ -105,17 +105,17 @@ if ($request->isPost()) {
 }
 
 $form = new Form('profileForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','value'=>$cl_login,'enable'=>$can_change_login));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name,'class'=>'form-control','placeholder'=>'Enter Name'));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','value'=>$cl_login,'enable'=>$can_change_login, 'class'=>'form-control', 'placeholder'=>'Enter Login Name'));
 if (!$auth->isPasswordExternal()) {
-  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password1','aspassword'=>true,'value'=>$cl_password1));
-  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password2','aspassword'=>true,'value'=>$cl_password2));
+  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password1','aspassword'=>true,'value'=>$cl_password1,'class'=>'form-control'));
+  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password2','aspassword'=>true,'value'=>$cl_password2,'class'=>'form-control'));
 }
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email,'enable'=>$can_change_login));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email,'enable'=>$can_change_login,'class'=>'form-control'));
 if ($user->canManageTeam()) {
-  $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team));
+  $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team,'class'=>'form-control','placeholder'=>'Enter Team Name'));
   $form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','style'=>'width: 350px;','cols'=>'55','rows'=>'4','value'=>$cl_address));
-  $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency));
+  $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency,'class'=>'form-control'));
   $DECIMAL_MARK_OPTIONS = array(array('id'=>'.','name'=>'.'),array('id'=>',','name'=>','));
   $form->addInput(array('type'=>'combobox','name'=>'decimal_mark','style'=>'width: 150px','data'=>$DECIMAL_MARK_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_decimal_mark,
     'onchange'=>'adjustDecimalPreview()'));
@@ -135,18 +135,18 @@ if ($user->canManageTeam()) {
     $longname_lang[] = array('id'=>I18n::getLangFromFilename($lfile),'name'=>$lname);
   }
   $longname_lang = mu_sort($longname_lang, 'name');
-  $form->addInput(array('type'=>'combobox','name'=>'lang','style'=>'width: 150px','data'=>$longname_lang,'datakeys'=>array('id','name'),'value'=>$cl_lang));
+  $form->addInput(array('type'=>'combobox', 'class'=>'form-control', 'name'=>'lang','style'=>'width: 150px','data'=>$longname_lang,'datakeys'=>array('id','name'),'value'=>$cl_lang));
   $DATE_FORMAT_OPTIONS = array(
     array('id'=>'%Y-%m-%d','name'=>'Y-m-d'),
     array('id'=>'%m/%d/%Y','name'=>'m/d/Y'),
     array('id'=>'%d.%m.%Y','name'=>'d.m.Y'),
     array('id'=>'%d.%m.%Y %a','name'=>'d.m.Y a'));
-  $form->addInput(array('type'=>'combobox','name'=>'format_date','style'=>'width: 150px;','data'=>$DATE_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_custom_format_date,
+  $form->addInput(array('type'=>'combobox', 'class'=>'form-control', 'name'=>'format_date','style'=>'width: 150px;','data'=>$DATE_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_custom_format_date,
     'onchange'=>'MakeFormatPreview(&quot;date_format_preview&quot;, this);'));
   $TIME_FORMAT_OPTIONS = array(
     array('id'=>'%H:%M','name'=>$i18n->getKey('form.profile.24_hours')),
     array('id'=>'%I:%M %p','name'=>$i18n->getKey('form.profile.12_hours')));
-  $form->addInput(array('type'=>'combobox','name'=>'format_time','style'=>'width: 150px;','data'=>$TIME_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_custom_format_time,
+  $form->addInput(array('type'=>'combobox', 'class'=>'form-control', 'name'=>'format_time','style'=>'width: 150px;','data'=>$TIME_FORMAT_OPTIONS,'datakeys'=>array('id','name'),'value'=>$cl_custom_format_time,
     'onchange'=>'MakeFormatPreview(&quot;time_format_preview&quot;, this);'));
 
   // Prepare week start choices.
@@ -154,27 +154,27 @@ if ($user->canManageTeam()) {
   foreach ($i18n->weekdayNames as $id => $week_dn) {
     $week_start_options[] = array('id' => $id, 'name' => $week_dn);
   }
-  $form->addInput(array('type'=>'combobox','name'=>'start_week','style'=>'width: 150px;','data'=>$week_start_options,'datakeys'=>array('id','name'),'value'=>$cl_start_week));
+  $form->addInput(array('type'=>'combobox', 'class'=>'form-control','name'=>'start_week','style'=>'width: 150px;','data'=>$week_start_options,'datakeys'=>array('id','name'),'value'=>$cl_start_week));
 
   // Prepare tracking mode choices.
   $tracking_mode_options = array();
   $tracking_mode_options[MODE_TIME] = $i18n->getKey('form.profile.mode_time');
   $tracking_mode_options[MODE_PROJECTS] = $i18n->getKey('form.profile.mode_projects');
   $tracking_mode_options[MODE_PROJECTS_AND_TASKS] = $i18n->getKey('form.profile.mode_projects_and_tasks');
-  $form->addInput(array('type'=>'combobox','name'=>'tracking_mode','style'=>'width: 150px;','data'=>$tracking_mode_options,'value'=>$cl_tracking_mode));
+  $form->addInput(array('type'=>'combobox', 'class'=>'form-control', 'name'=>'tracking_mode','style'=>'width: 150px;','data'=>$tracking_mode_options,'value'=>$cl_tracking_mode));
 
   // Prepare record type choices.
   $record_type_options = array();
   $record_type_options[TYPE_ALL] = $i18n->getKey('form.profile.type_all');
   $record_type_options[TYPE_START_FINISH] = $i18n->getKey('form.profile.type_start_finish');
   $record_type_options[TYPE_DURATION] = $i18n->getKey('form.profile.type_duration');
-  $form->addInput(array('type'=>'combobox','name'=>'record_type','style'=>'width: 150px;','data'=>$record_type_options,'value'=>$cl_record_type));
+  $form->addInput(array('type'=>'combobox', 'class'=>'form-control', 'name'=>'record_type','style'=>'width: 150px;','data'=>$record_type_options,'value'=>$cl_record_type));
 
   // Prepare uncompleted indicators choices.
   $uncompleted_indicators_options = array();
   $uncompleted_indicators_options[UNCOMPLETED_INDICATORS_NONE] = $i18n->getKey('form.profile.uncompleted_indicators_none');
   $uncompleted_indicators_options[UNCOMPLETED_INDICATORS] = $i18n->getKey('form.profile.uncompleted_indicators_show');
-  $form->addInput(array('type'=>'combobox','name'=>'uncompleted_indicators','style'=>'width: 150px;','data'=>$uncompleted_indicators_options,'value'=>$cl_uncompleted_indicators));
+  $form->addInput(array('type'=>'combobox', 'class'=>'form-control', 'name'=>'uncompleted_indicators','style'=>'width: 150px;','data'=>$uncompleted_indicators_options,'value'=>$cl_uncompleted_indicators));
 
   $form->addInput(array('type'=>'checkbox','name'=>'charts','data'=>1,'value'=>$cl_charts));
   $form->addInput(array('type'=>'checkbox','name'=>'clients','data'=>1,'value'=>$cl_clients,'onchange'=>'handlePluginCheckboxes()'));
@@ -188,7 +188,7 @@ if ($user->canManageTeam()) {
   $form->addInput(array('type'=>'checkbox','name'=>'locking','data'=>1,'value'=>$cl_locking,'onchange'=>'handlePluginCheckboxes()'));
   $form->addInput(array('type'=>'checkbox','name'=>'quotas','data'=>1,'value'=>$cl_quotas,'onchange'=>'handlePluginCheckboxes()'));
 }
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-success', 'name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
 if ($request->isPost()) {
   // Validate user input.

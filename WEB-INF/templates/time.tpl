@@ -255,11 +255,11 @@ function get_time() {
 {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
         <tr>
           <td align="right">{$i18n.label.start}:</td>
-          <td>{$forms.timeRecordForm.start.control}&nbsp;<input onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
+          <td>{$forms.timeRecordForm.start.control}&nbsp;<input class="btn btn-primary btn-xs" onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
         </tr>
         <tr>
           <td align="right">{$i18n.label.finish}:</td>
-          <td>{$forms.timeRecordForm.finish.control}&nbsp;<input onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
+          <td>{$forms.timeRecordForm.finish.control}&nbsp;<input class="btn btn-primary btn-xs" onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
         </tr>
 {/if}
 {if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}

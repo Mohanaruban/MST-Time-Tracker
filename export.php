@@ -43,7 +43,7 @@ if (function_exists('bzcompress'))
 
 $form = new Form('exportForm');
 $form->addInput(array('type'=>'combobox','name'=>'compression','value'=>$cl_compression,'data'=>$compressors));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.export')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-primary', 'name'=>'btn_submit','value'=>$i18n->getKey('button.export')));
 
 if ($request->isPost()) {
 

@@ -74,13 +74,13 @@ if ($request->isPost()) {
 }
 
 $form = new Form('userForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 300px;','value'=>$cl_name));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','style'=>'width: 300px;','value'=>$cl_login));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 300px;','value'=>$cl_name,'class'=>'form-control','placeholder'=>'Enter Name'));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','style'=>'width: 300px;','value'=>$cl_login,'class'=>'form-control','placeholder'=>'Enter Login Name'));
 if (!$auth->isPasswordExternal()) {
   $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'pas1','aspassword'=>true,'value'=>$cl_password1));
   $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'pas2','aspassword'=>true,'value'=>$cl_password2));
 }
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email,'class'=>'form-control','placeholder'=>'Enter Email'));
 
 $roles[ROLE_USER] = $i18n->getKey('label.user');
 $roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');
@@ -129,7 +129,7 @@ $table->addColumn(new TableColumn('name', $i18n->getKey('label.project'), new Na
 $table->addColumn(new TableColumn('p_rate', $i18n->getKey('form.users.rate'), new RateCellRenderer()));
 $form->addInputElement($table);
 
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
+$form->addInput(array('type'=>'submit','name'=>'btn_submit','class'=>'btn btn-success','value'=>$i18n->getKey('button.submit')));
 
 if ($request->isPost()) {
   // Validate user input.

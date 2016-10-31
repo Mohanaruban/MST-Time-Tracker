@@ -27,7 +27,7 @@
       </table>
 
       <table width="100%">
-        <tr><td align="center"><br><form><input type="button" onclick="chLocation('client_add.php');" value="{$i18n.button.add_client}"></form></td></tr>
+        <tr><td align="center"><br><form><input class="btn btn-success" type="button" onclick="chLocation('client_add.php');" value="{$i18n.button.add_client}"></form></td></tr>
       </table>
 
   {if $inactive_clients}
