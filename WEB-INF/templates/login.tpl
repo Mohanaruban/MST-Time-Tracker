@@ -6,10 +6,23 @@
   }
 //-->
 </script>
-<div class="row">
-  <div class="col-sm-4 col-sm-offset-4">
-    {$forms.loginForm.open}
-    {include file="login.`$smarty.const.AUTH_MODULE`.tpl"}
-    {$forms.loginForm.close}
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+          <h3 class="panel-title">Login Information</h3>
+          </div>
+          <div class="panel-body">
+            <div class="col-sm-12">
+              {$forms.loginForm.open}
+              {include file="login.`$smarty.const.AUTH_MODULE`.tpl"}
+              {$forms.loginForm.close}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

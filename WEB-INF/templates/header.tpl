@@ -5,9 +5,9 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link href="{$smarty.const.DEFAULT_CSS}" rel="stylesheet" type="text/css">
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-{if $i18n.language.rtl}
+  {if $i18n.language.rtl}
   <link href="{$smarty.const.RTL_CSS}" rel="stylesheet" type="text/css">
-{/if}
+  {/if}
   <title>MST Time Tracker{if $title} - {$title}{/if}</title>
   <script src="js/strftime.js"></script>
   <script>
@@ -19,144 +19,148 @@
 
 <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" {$onload}>
 
-{assign var="tab_width" value="700"}
+  {assign var="tab_width" value="700"}
 
-<table height="100%" cellspacing="0" cellpadding="0" width="100%" border="0">
-  <tr>
-    <td valign="top" align="center"> <!-- This is to centrally align all our content. -->
+  <table height="100%" cellspacing="0" cellpadding="0" width="100%" border="0">
+    <tr>
+      <td valign="top" align="center"> <!-- This is to centrally align all our content. -->
 
-      <!-- top image -->
-      <table cellspacing="0" cellpadding="0" width="100%" border="0">
-        <tr>
-          <td align="center" bgcolor="black">
-            <table cellspacing="0" cellpadding="0" width="{$tab_width}" border="0">
-              <tr>
-                <td valign="top">
-                  <table cellspacing="0" cellpadding="0" width="100%" border="0">
-                    <tr><td height="6" colspan="2"><img width="1" height="6" src="images/1x1.gif" border="0"></td></tr>
-                    <tr valign="top">
-{if $user->custom_logo}
-                      <td height="55" align="center"><img alt="Time Tracker" width="300" height="43" src="{$custom_logo}" border="0"></a></td>
-{else}
-                      <td height="60" align="center"><a href="http://www.mstsolutions.com/" target="_blank"><img alt="MST Time Tracker" width="105" height="50" src="images/mst_logo.png" border="0"></a></td>
-{/if}
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-      <!-- end of top image -->
+        <!-- top image -->
+        <table cellspacing="0" cellpadding="0" width="100%" border="0">
+          <tr>
+            <td align="center" bgcolor="black">
+              <table cellspacing="0" cellpadding="0" width="{$tab_width}" border="0">
+                <tr>
+                  <td valign="top">
+                    <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                      <tr><td height="6" colspan="2"><img width="1" height="6" src="images/1x1.gif" border="0"></td></tr>
+                      <tr valign="top">
+                        {if $user->custom_logo}
+                        <td height="55" align="center"><img alt="Time Tracker" width="300" height="43" src="{$custom_logo}" border="0"></a></td>
+                        {else}
+                        <td height="60" align="center"><a href="http://www.mstsolutions.com/" target="_blank"><img alt="MST Time Tracker" width="105" height="50" src="images/mst_logo.png" border="0"></a></td>
+                        {/if}
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <!-- end of top image -->
 
-{if $authenticated}
-  {if $user->isAdmin()}
-      <!-- top menu for admin -->
-      <table cellspacing="0" cellpadding="3" width="100%" border="0">
-        <tr>
-          <td class="systemMenu" height="17" align="center">&nbsp;
-            <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a>
-          </td>
-        </tr>
-      </table>
-      <!-- end of top menu for admin -->
+        {if $authenticated}
+        {if $user->isAdmin()}
+        <!-- top menu for admin -->
+        <table cellspacing="0" cellpadding="3" width="100%" border="0">
+          <tr>
+            <td class="systemMenu" height="17" align="center">&nbsp;
+              <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a>
+            </td>
+          </tr>
+        </table>
+        <!-- end of top menu for admin -->
 
-      <!-- sub menu for admin -->
-      <table cellspacing="0" cellpadding="3" width="100%" border="0">
-        <tr>
-          <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
-            <a class="mainMenu" href="admin_teams.php">{$i18n.menu.teams}</a> &middot;
-            <a class="mainMenu" href="admin_options.php">{$i18n.menu.options}</a>
-          </td>
-        </tr>
-      </table>
-      <!-- end of sub menu for admin -->
-  {else}
-      <!-- top menu for authorized user -->
-      <table cellspacing="0" cellpadding="3" width="100%" border="0">
-        <tr>
-          <td class="systemMenu" height="17" align="center">&nbsp;
-            <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a> &middot;
-            <a class="systemMenu" href="profile_edit.php">{$i18n.menu.profile}</a>
-          </td>
-        </tr>
-      </table>
-      <!-- end of top menu for authorized user -->
+        <!-- sub menu for admin -->
+        <table cellspacing="0" cellpadding="3" width="100%" border="0">
+          <tr>
+            <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
+              <a class="mainMenu" href="admin_teams.php">{$i18n.menu.teams}</a> &middot;
+              <a class="mainMenu" href="admin_options.php">{$i18n.menu.options}</a>
+            </td>
+          </tr>
+        </table>
+        <!-- end of sub menu for admin -->
+        {else}
+        <!-- top menu for authorized user -->
+        <table cellspacing="0" cellpadding="3" width="100%" border="0">
+          <tr>
+            <td class="systemMenu" height="17" align="center">&nbsp;
+              <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a> &middot;
+              <a class="systemMenu" href="profile_edit.php">{$i18n.menu.profile}</a>
+            </td>
+          </tr>
+        </table>
+        <!-- end of top menu for authorized user -->
 
-      <!-- sub menu for authorized user -->
-      <table cellspacing="0" cellpadding="3" width="100%" border="0">
-        <tr>
-          <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
-    {if !$user->isClient()}
-           <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
-    {/if}
-    {if $user->isPluginEnabled('ex') && !$user->isClient()}
-            &middot; <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
-    {/if}
-            {if !$user->isClient()}&middot; {/if}<a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a>
-    {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
-            &middot; <a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a>
-    {/if}
-    {if ($user->isPluginEnabled('ch') && !$user->isClient()) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode
-      || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isPluginEnabled('cl'))}
-            &middot; <a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a>
-    {/if}
-    {if !$user->isClient() && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-            &middot; <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
-    {/if}
-    {if $user->canManageTeam() && ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-            &middot; <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
-    {/if}
-    {if !$user->isClient()}
-            &middot; <a class="mainMenu" href="users.php">{$i18n.menu.users}</a>
-    {/if}
-    {if $user->canManageTeam() && $user->isPluginEnabled('cl')}
-            &middot; <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
-    {/if}
-    {if $user->isManager()}
-            &middot; <a class="mainMenu" href="export.php">{$i18n.menu.export}</a>
-    {/if}
-          </td>
-        </tr>
-      </table>
-      <!-- end of sub menu for authorized user -->
-  {/if}
-{/if}
+        <!-- sub menu for authorized user -->
+        <table cellspacing="0" cellpadding="3" width="100%" border="0">
+          <tr>
+            <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">&nbsp;
+              {if !$user->isClient()}
+              <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
+              {/if}
+              {if $user->isPluginEnabled('ex') && !$user->isClient()}
+              &middot; <a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a>
+              {/if}
+              {if !$user->isClient()}&middot; {/if}<a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a>
+              {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
+              &middot; <a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a>
+              {/if}
+              {if ($user->isPluginEnabled('ch') && !$user->isClient()) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode
+              || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isPluginEnabled('cl'))}
+              &middot; <a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a>
+              {/if}
+              {if !$user->isClient() && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+              &middot; <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
+              {/if}
+              {if $user->canManageTeam() && ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+              &middot; <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
+              {/if}
+              {if !$user->isClient()}
+              &middot; <a class="mainMenu" href="users.php">{$i18n.menu.users}</a>
+              {/if}
+              {if $user->canManageTeam() && $user->isPluginEnabled('cl')}
+              &middot; <a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a>
+              {/if}
+              {if $user->isManager()}
+              &middot; <a class="mainMenu" href="export.php">{$i18n.menu.export}</a>
+              {/if}
+            </td>
+          </tr>
+        </table>
+        <!-- end of sub menu for authorized user -->
+        {/if}
+        {/if}
 
-      <!-- page title lod user details -->
-{if $title}
-      <table cellspacing="0" cellpadding="5" width="{$tab_width+20}" border="0">
-        <tr><td class="sectionHeader"><div class="pageTitle">{$title}{if $timestring}: {$timestring}{/if}</div></td></tr>
-        <tr><td>{$user->name|escape:'html'}{if $user->isAdmin()} {$i18n.label.role_admin}{elseif $user->isManager()} {$i18n.label.role_manager}{elseif $user->canManageTeam()} {$i18n.label.role_comanager}{/if}{if $user->behalf_id > 0} <b>{$i18n.label.on_behalf} {$user->behalf_name|escape:'html'}</b>{/if}{if $user->team}, {$user->team|escape:'html'}{/if}</td></tr>
-      </table>
-{/if}
-      <!-- end of page title and user details -->
+        <!-- page title lod user details -->
+        {if $title}
 
-      <!-- output errors -->
-{if $err->yes()}
-      <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
-        <tr>
-          <td class="error">
-  {foreach $err->getErrors() as $error}
-            {$error.message}<br> {* No need to escape as they are not coming from user and may contain a link. *}
-  {/foreach}
-          </td>
-        </tr>
-      </table>
-{/if}
-      <!-- end of output errors -->
+        <div class="breadcrumb">
+          <h4>{$title}</h4>
+        </div>
 
-      <!-- output messages -->
-{if $msg->yes()}
-      <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
-        <tr>
-          <td class="info_message">
-  {foreach $msg->getErrors() as $message}
-            {$message.message}<br> {* No need to escape. *}
-  {/foreach}
-          </td>
-        </tr>
-      </table>
-{/if}
-      <!-- end of output messages -->
+        <table cellspacing="0" cellpadding="5" width="{$tab_width+20}" border="0">
+          <tr><td>{$user->name|escape:'html'}{if $user->isAdmin()} {$i18n.label.role_admin}{elseif $user->isManager()} {$i18n.label.role_manager}{elseif $user->canManageTeam()} {$i18n.label.role_comanager}{/if}{if $user->behalf_id > 0} <b>{$i18n.label.on_behalf} {$user->behalf_name|escape:'html'}</b>{/if}{if $user->team}, {$user->team|escape:'html'}{/if}</td></tr>
+        </table>
+        {/if}
+        <!-- end of page title and user details -->
+
+        <!-- output errors -->
+        {if $err->yes()}
+        <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
+          <tr>
+            <td class="error">
+              {foreach $err->getErrors() as $error}
+              {$error.message}<br> {* No need to escape as they are not coming from user and may contain a link. *}
+              {/foreach}
+            </td>
+          </tr>
+        </table>
+        {/if}
+        <!-- end of output errors -->
+
+        <!-- output messages -->
+        {if $msg->yes()}
+        <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
+          <tr>
+            <td class="info_message">
+              {foreach $msg->getErrors() as $message}
+              {$message.message}<br> {* No need to escape. *}
+              {/foreach}
+            </td>
+          </tr>
+        </table>
+        {/if}
+        <!-- end of output messages -->
