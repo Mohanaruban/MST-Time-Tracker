@@ -56,7 +56,7 @@ $form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','s
 $form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'layout'=>'H','datakeys'=>array('id','name'),'value'=>$cl_projects));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.add')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-primary', 'name'=>'btn_submit','value'=>$i18n->getKey('button.add')));
 
 if ($request->isPost()) {
   // Validate user input.
