@@ -401,6 +401,12 @@ class DateField extends TextField {
       if ($this->mStyle!="")
          $html .= " style=\"$this->mStyle\"";
 
+      if ($this->mClassStyle!="")
+         $html .= " class=\"$this->mClassStyle\"";
+       
+      if ($this->mPlaceholder!="")
+         $html .= " placeholder=\"$this->mPlaceholder\"";
+
         $html .= " maxlength=\"50\"";
 
       if ($this->mOnChange!="")

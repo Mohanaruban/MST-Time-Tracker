@@ -61,6 +61,12 @@ class Checkbox extends FormElement {
 		   
 		if ($this->mStyle!="")
 		   $html .= " style=\"$this->mStyle\"";
+		
+		if ($this->mClassStyle!="")
+			   $html .= " class=\"$this->mClassStyle\"";
+			 
+		if ($this->mPlaceholder!="")
+			   $html .= " placeholder=\"$this->mPlaceholder\"";
 
 		if ($this->mChecked || (($this->mValue == $this->mOptions) && ($this->mValue != null)))
 		   $html .= " checked=\"true\"";
