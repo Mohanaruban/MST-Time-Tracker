@@ -73,6 +73,9 @@ class TextArea extends FormElement {
 		if ($this->mStyle!="")
 		   $html .= " style=\"$this->mStyle\"";
 
+		if ($this->mClassStyle!="")
+			   $html .= " class=\"$this->mClassStyle\"";
+
 		if ($this->mOnKeyPress) {
 			$html .= " onkeypress=\"$this->mOnKeyPress\"";
 		}
