@@ -11,30 +11,30 @@
 //Prepare an array of projects ids for clients.
 project_ids = new Array();
 {foreach $client_list as $client}
-  project_ids[{$client.id}] = "{$client.projects}";
+project_ids[{$client.id}] = "{$client.projects}";
 {/foreach}
 // Prepare an array of project names.
 project_names = new Array();
 {foreach $project_list as $project}
-  project_names[{$project.id}] = "{$project.name|escape:'javascript'}";
+project_names[{$project.id}] = "{$project.name|escape:'javascript'}";
 {/foreach}
 // We'll use this array to populate project dropdown when client is not selected.
 var idx = 0;
 projects = new Array();
 {foreach $project_list as $project}
-  projects[idx] = new Array("{$project.id}", "{$project.name|escape:'javascript'}");
-  idx++;
+projects[idx] = new Array("{$project.id}", "{$project.name|escape:'javascript'}");
+idx++;
 {/foreach}
 
 // Prepare an array of task ids for projects.
 task_ids = new Array();
 {foreach $project_list as $project}
-  task_ids[{$project.id}] = "{$project.tasks}";
+task_ids[{$project.id}] = "{$project.tasks}";
 {/foreach}
 // Prepare an array of task names.
 task_names = new Array();
 {foreach $task_list as $task}
-  task_names[{$task.id}] = "{$task.name|escape:'javascript'}";
+task_names[{$task.id}] = "{$task.name|escape:'javascript'}";
 {/foreach}
 
 // Mandatory top options for project and task dropdowns.
@@ -197,79 +197,83 @@ function setNow(formField) {
 }
 </script>
 
-{$forms.timeRecordForm.open}
-<table cellspacing="4" cellpadding="7" border="0">
-<tr>
-  <td>
-  <table width = "100%">
-  <tr>
-    <td valign="top">
-    <table border="0">
-{if $user->isPluginEnabled('cl')}
-    <tr>
-      <td align="right">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}:</td>
-      <td>{$forms.timeRecordForm.client.control}</td>
-    </tr>
-{/if}
-{if $user->isPluginEnabled('iv')}
-    <tr>
-      <td align="right">&nbsp;</td>
-      <td><label>{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</label></td>
-    </tr>
-{/if}
-{if ($custom_fields && $custom_fields->fields[0])} 
-    <tr>
-      <td align="right">{$custom_fields->fields[0]['label']|escape:'html'}{if $custom_fields->fields[0]['required']} (*){/if}:</td><td>{$forms.timeRecordForm.cf_1.control}</td>
-    </tr>
-{/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-    <tr>
-      <td align="right">{$i18n.label.project} (*):</td>
-      <td>{$forms.timeRecordForm.project.control}</td>
-    </tr>
-{/if}
-{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-    <tr>
-      <td align="right">{$i18n.label.task} (*):</td>
-      <td>{$forms.timeRecordForm.task.control}</td>
-    </tr>
-{/if}
-{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
-    <tr>
-      <td align="right">{$i18n.label.start}:</td>
-      <td>{$forms.timeRecordForm.start.control}&nbsp;<input onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
-    </tr>
-    <tr>
-      <td align="right">{$i18n.label.finish}:</td>
-      <td>{$forms.timeRecordForm.finish.control}&nbsp;<input onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></td>
-    </tr>
-{/if}
-{if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
-    <tr>
-      <td align="right">{$i18n.label.duration}:</td>
-      <td>{$forms.timeRecordForm.duration.control}&nbsp;{$i18n.form.time.duration_format}</td>
-    </tr>
-{/if}
-    <tr>
-      <td align="right">{$i18n.label.date}:</td>
-      <td>{$forms.timeRecordForm.date.control}</td>
-    </tr>
-    <tr>
-      <td align="right">{$i18n.label.note}:</td>
-      <td>{$forms.timeRecordForm.note.control}</td>
-    </tr>
-    <tr>
-      <td colspan="2">&nbsp;</td>
-    </tr>
-    <tr>
-      <td></td>
-      <td align="left">{$forms.timeRecordForm.btn_save.control} {$forms.timeRecordForm.btn_copy.control} {$forms.timeRecordForm.btn_delete.control}</td>
-    </tr>
-    </table>
-    </td>
-    </tr>
-  </table>
-  </td>
-  </tr>
-</table>
-{$forms.timeRecordForm.close}
+
+<div class="col-sm-8 col-sm-offset-2 text-center">
+  {$forms.timeRecordForm.open}
+  <div class="row">
+    <div class="col-md-12">
+
+      {if $user->isPluginEnabled('cl')}
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}</label>
+        <div class="col-sm-10">{$forms.timeRecordForm.client.control}</div>
+      </div>
+      {/if}
+
+      {if $user->isPluginEnabled('iv')}
+      <div class="form-group">
+        <label class="col-sm-2 control-label">&nbsp;</label>
+        <div class="col-sm-10">{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</div>
+      </div>
+      {/if}
+
+      {if ($custom_fields && $custom_fields->fields[0])} 
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{$custom_fields->fields[0]['label']|escape:'html'}{if $custom_fields->fields[0]['required']} (*){/if}</label>
+        <div class="col-sm-10">{$forms.timeRecordForm.cf_1.control}</div>
+      </div>
+      {/if}
+
+      {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{$i18n.label.project} (*)</label>
+        <div class="col-sm-10">{$forms.timeRecordForm.project.control}</div>
+      </div>
+      {/if}
+
+      {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{$i18n.label.task} (*)</label>
+        <div class="col-sm-10">{$forms.timeRecordForm.task.control}</div>
+      </div>
+      {/if}
+
+      {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{$i18n.label.start}</label>
+        <div class="col-sm-10">{$forms.timeRecordForm.start.control}&nbsp;<span class="pull-right" style="margin-top: -30px;"><input onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}" class="btn btn-primary btn-xs"></span></div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{$i18n.label.finish}</label>
+        <div class="col-sm-10">{$forms.timeRecordForm.finish.control}&nbsp;<span class="pull-right" style="margin-top: -30px;"><input onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}" class="btn btn-primary btn-xs"></span></div>
+      </div>
+      {/if}
+
+      {if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{$i18n.label.duration}</label>
+        <div class="col-sm-10">{$forms.timeRecordForm.duration.control}&nbsp;{$i18n.form.time.duration_format}</div>
+      </div>
+      {/if}
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{$i18n.label.date}</label>
+        <div class="col-sm-10">{$forms.timeRecordForm.date.control}</div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{$i18n.label.note}</label>
+        <div class="col-sm-10">{$forms.timeRecordForm.note.control}</div>
+      </div>    
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">{$forms.timeRecordForm.btn_save.control} {$forms.timeRecordForm.btn_copy.control} {$forms.timeRecordForm.btn_delete.control}</div>
+      </div>
+    </div>
+  </div>
+  {$forms.timeRecordForm.close}
+</div>

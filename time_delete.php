@@ -80,8 +80,8 @@ if ($request->isPost()) {
 
 $form = new Form('timeRecordForm');
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
-$form->addInput(array('type'=>'submit','name'=>'delete_button','value'=>$i18n->getKey('label.delete')));
-$form->addInput(array('type'=>'submit','name'=>'cancel_button','value'=>$i18n->getKey('button.cancel')));
+$form->addInput(array('type'=>'submit','name'=>'delete_button','class'=>'btn btn-danger','value'=>$i18n->getKey('label.delete')));
+$form->addInput(array('type'=>'submit','name'=>'cancel_button','class'=>'btn btn-warning','value'=>$i18n->getKey('button.cancel')));
 
 $smarty->assign('time_rec', $time_rec);
 $smarty->assign('forms', array($form->getName() => $form->toArray()));
