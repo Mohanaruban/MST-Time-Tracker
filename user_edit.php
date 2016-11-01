@@ -104,25 +104,26 @@ if ($request->isPost()) {
 }
 
 $form = new Form('userForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 300px;','value'=>$cl_name));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','style'=>'width: 300px;','value'=>$cl_login));
+$form->addFormStyle(array('class'=>'form-horizontal'));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name', 'class'=>'form-control','value'=>$cl_name));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login', 'class'=>'form-control','value'=>$cl_login));
 if (!$auth->isPasswordExternal()) {
-  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'pas1','aspassword'=>true,'value'=>$cl_password1));
-  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'pas2','aspassword'=>true,'value'=>$cl_password2));
+  $form->addInput(array('type'=>'text','maxlength'=>'30', 'class'=>'form-control', 'name'=>'pas1','aspassword'=>true,'value'=>$cl_password1));
+  $form->addInput(array('type'=>'text','maxlength'=>'30', 'class'=>'form-control', 'name'=>'pas2','aspassword'=>true,'value'=>$cl_password2));
 }
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','style'=>'width: 300px;','value'=>$cl_email));
+$form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control', 'name'=>'email','value'=>$cl_email));
 
 $roles[ROLE_USER] = $i18n->getKey('label.user');
 $roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');
 if ($user->isPluginEnabled('cl'))
   $roles[ROLE_CLIENT] = $i18n->getKey('label.client');
-$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()','name'=>'role','value'=>$cl_role,'data'=>$roles));
+$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()', 'class'=>'form-control', 'name'=>'role','value'=>$cl_role,'data'=>$roles));
 if ($user->isPluginEnabled('cl'))
-  $form->addInput(array('type'=>'combobox','name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+  $form->addInput(array('type'=>'combobox', 'class'=>'form-control', 'name'=>'client', 'value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
-$form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
+$form->addInput(array('type'=>'combobox', 'class'=>'form-control', 'name'=>'status', 'value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
-$form->addInput(array('type'=>'floatfield','maxlength'=>'10','name'=>'rate','format'=>'.2','value'=>$cl_rate));
+$form->addInput(array('type'=>'floatfield','maxlength'=>'10', 'class'=>'form-control', 'name'=>'rate','format'=>'.2','value'=>$cl_rate));
 
 // Define classes for the projects table.
 class NameCellRenderer extends DefaultCellRenderer {
@@ -160,7 +161,7 @@ $table->addColumn(new TableColumn('p_rate', $i18n->getKey('form.users.rate'), ne
 $form->addInputElement($table);
 
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$user_id));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.save')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-success', 'name'=>'btn_submit','value'=>$i18n->getKey('button.save')));
 
 if ($request->isPost()) {
   // Validate user input.

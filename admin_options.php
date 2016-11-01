@@ -51,14 +51,14 @@ if ($request->isPost()) {
 }
 
 $form = new Form('optionsForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name,'class'=>'form-control','placeholder'=>'Enter Name'));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','value'=>$cl_login,'class'=>'form-control','placeholder'=>'Enter Login Name'));
+$form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control', 'name'=>'name','value'=>$cl_name,'class'=>'form-control','placeholder'=>'Enter Name'));
+$form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control', 'name'=>'login','value'=>$cl_login,'class'=>'form-control','placeholder'=>'Enter Login Name'));
 if (!$auth->isPasswordExternal()) {
-  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password1','aspassword'=>true,'value'=>$cl_password1));
-  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password2','aspassword'=>true,'value'=>$cl_password2));
+  $form->addInput(array('type'=>'text','maxlength'=>'30', 'class'=>'form-control', 'name'=>'password1','aspassword'=>true,'value'=>$cl_password1));
+  $form->addInput(array('type'=>'text','maxlength'=>'30', 'class'=>'form-control', 'name'=>'password2','aspassword'=>true,'value'=>$cl_password2));
 }
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email,'class'=>'form-control','placeholder'=>'Enter Email'));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
+$form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control', 'name'=>'email','value'=>$cl_email,'class'=>'form-control','placeholder'=>'Enter Email'));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-success', 'name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
 
 if ($request->isPost()) {
   // Validate user input.
