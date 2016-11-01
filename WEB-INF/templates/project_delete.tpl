@@ -1,5 +1,5 @@
 <div class="col-sm-6 col-sm-offset-3 text-center">
-{$forms.projectForm.open}
+{$forms.projectDeleteForm.open}
   <div class="row">
     <div class="col-sm-12">
 
