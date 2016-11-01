@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset={$smarty.const.CHARSET}">
@@ -95,9 +96,9 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in as {$user->name|escape:'html'}{if $user->isAdmin()} {$i18n.label.role_admin}{elseif $user->isManager()} {$i18n.label.role_manager}{elseif $user->canManageTeam()} {$i18n.label.role_comanager}{/if}
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  {if !$user->isAdmin()}
+                  {if !$user->v}
                   <li><a href="profile_edit.php">Edit Profile</a></li>
-                  <li class="divider"></li>
+                  <li class="divider visible-md visible-lg visible-sm"></li>
                   {/if}
                   <li><a href="logout.php">{$i18n.menu.logout}</a></li>
                 </ul>
@@ -114,6 +115,7 @@
       <div class="breadcrumb">
         <h5>
           {if $user->team}<span class="text-muted">{$user->team|escape:'html'} / </span>{/if}
+          {if $user->isAdmin()}<span class="text-muted">Administrator / </span>{/if}
           <span class="text-primary">{$title}</span>        
         </h5>
       </div>
@@ -122,29 +124,29 @@
         <div class="row">
           <!-- output errors -->
           {if $err->yes()}
-          <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
-            <tr>
-              <td class="error">
-                {foreach $err->getErrors() as $error}
-                {$error.message}<br> {* No need to escape as they are not coming from user and may contain a link. *}
-                {/foreach}
-              </td>
-            </tr>
-          </table>
+          <div class="col-md-12 text-center">
+            <div class="alert alert-dismissible alert-danger">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Oops!</strong> Fix these error(s)<br/>
+              {foreach $err->getErrors() as $error}
+              {$error.message}<br>
+              {/foreach}
+            </div>
+          </div>
           {/if}
           <!-- end of output errors -->
 
           <!-- output messages -->
           {if $msg->yes()}
-          <table cellspacing="4" cellpadding="7" width="{$tab_width}" border="0">
-            <tr>
-              <td class="info_message">
-                {foreach $msg->getErrors() as $message}
-                {$message.message}<br> {* No need to escape. *}
-                {/foreach}
-              </td>
-            </tr>
-          </table>
+          <div class="col-md-12 text-center">
+            <div class="alert alert-dismissible alert-info">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Heads Up!</strong><br/>
+              {foreach $msg->getErrors() as $message}
+              {$message.message}<br> {* No need to escape. *}
+              {/foreach}
+            </div>
+          </div>
           {/if}
           <!-- end of output messages -->
         </div>

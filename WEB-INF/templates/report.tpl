@@ -5,12 +5,12 @@
 {$forms.reportForm.open}
 <table width="720">
   <td valign="top">
-    <table border="0" cellpadding="3" cellspacing="1" width="100%">
+    <table class="table">
       <tr>
         <td valign="top" class="sectionHeaderNoBorder" align="center">{$i18n.form.report.export} {if file_exists('WEB-INF/lib/tcpdf')}<a href="topdf.php">PDF</a>,{/if} <a href="tofile.php?type=xml">XML</a> {$i18n.label.or} <a href="tofile.php?type=csv">CSV</a></td>
       </tr>
     </table>
-    <table border="0" cellpadding="3" cellspacing="1" width="100%">
+    <table class="table">
 <!-- totals only report -->
 {if $bean->getAttribute('chtotalsonly')}
       <tr>
