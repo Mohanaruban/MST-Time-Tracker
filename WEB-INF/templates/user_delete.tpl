@@ -1,20 +1,21 @@
+
+<div class="col-sm-8 col-sm-offset-2 text-center">
 {$forms.userDeleteForm.open}
-<table cellspacing="4" cellpadding="7" border="0">
-  <tr>
-    <td>
-      <table cellspacing="0" cellpadding="0" border="0">
-        <tr>
-          <td colspan="2" align="center"><b>{$user_to_delete|escape:'html'}</b></td>
-        </tr>
-        <tr>
-          <td colspan="2" align="center">&nbsp;</td>
-        </tr>
-        <tr>
-          <td align="right">{$forms.userDeleteForm.btn_delete.control}&nbsp;</td>
-          <td align="left">&nbsp;{$forms.userDeleteForm.btn_cancel.control}</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
+<div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+      <div class="col-sm-9 control-label">{$user_to_delete|escape:'html'}</div>
+    
+      </div>
+    </div>
+  </div>
+
+    <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <div class="col-sm-9">{$forms.userDeleteForm.btn_delete.control} {$forms.userDeleteForm.btn_cancel.control}</div>
+      </div>
+    </div>
+  </div>
 {$forms.userDeleteForm.close}
+</div>

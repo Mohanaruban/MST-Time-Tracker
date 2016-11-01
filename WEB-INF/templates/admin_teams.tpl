@@ -2,11 +2,11 @@
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
 
-<table cellspacing="0" cellpadding="7" border="0" width="720">
+<table class="table">
   <tr><td valign="top">{$i18n.form.teams.hint}</td></tr>
 </table>
 
-<table cellspacing="1" cellpadding="3" border="0" width="720">
+<table class="table">
   <tr>
     <td width="3%" class="tableHeader">{$i18n.label.id}</td>
     <td width="70%" class="tableHeader">{$i18n.label.thing_name}</td>
@@ -34,8 +34,8 @@
     <td align="center">
       <br>
       <form>
-        <input type="button" onclick="chLocation('admin_team_add.php');" value="{$i18n.button.create_team}">&nbsp;{$i18n.label.or}&nbsp;
-        <input type="button" onclick="chLocation('import.php');" value="{$i18n.button.import}">
+        <input class="btn btn-success" type="button" onclick="chLocation('admin_team_add.php');" value="{$i18n.button.create_team}">&nbsp;{$i18n.label.or}&nbsp;
+        <input class="btn btn-info" type="button" onclick="chLocation('import.php');" value="{$i18n.button.import}">
       </form>
     </td>
   </tr>

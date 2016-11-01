@@ -31,53 +31,61 @@ function handleClientControl() {
 }
 </script>
 
+<div class="col-md-8 col-md-offset-2 text-center">
 {$forms.userForm.open}
-<table cellspacing="4" cellpadding="7" border="0">
-  <table cellspacing="1" cellpadding="2" border="0">
-    <tr>
-      <td align="right">{$i18n.label.person_name} (*):</td>
-      <td>{$forms.userForm.name.control}</td>
-    </tr>
-    <tr>
-      <td align="right">{$i18n.label.login} (*):</td>
-      <td>{$forms.userForm.login.control}</td>
-    </tr>
+
+<div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.person_name} (*)</label>
+        <div class="col-sm-9">{$forms.userForm.name.control}</div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.login} (*)</label>
+        <div class="col-sm-9">{$forms.userForm.login.control}</div>
+      </div>
 {if !$auth_external}
-    <tr>
-      <td align="right">{$i18n.label.password} (*):</td>
-      <td>{$forms.userForm.pas1.control}</td>
-    </tr>
-    <tr>
-      <td align="right">{$i18n.label.confirm_password} (*):</td>
-      <td>{$forms.userForm.pas2.control}</td>
-    </tr>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.password} (*)</label>
+        <div class="col-sm-9">{$forms.userForm.pas1.control}</div>
+      </div>
+          <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.confirm_password} (*)</label>
+        <div class="col-sm-9">{$forms.userForm.pas2.control}</div>
+      </div>
 {/if}
-    <tr>
-      <td align="right" nowrap>{$i18n.label.email}:</td>
-      <td>{$forms.userForm.email.control}</td>
-    </tr>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.email}</label>
+        <div class="col-sm-9">{$forms.userForm.email.control}</div>
+      </div>
 {if $user->isManager()}
-    <tr>
-      <td align="right">{$i18n.form.users.role}:</td>
-      <td>{$forms.userForm.role.control} {$forms.userForm.client.control}</td>
-    </tr>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.form.users.role}</label>
+        <div class="col-sm-9">{$forms.userForm.role.control} {$forms.userForm.client.control}</div>
+      </div>
 {/if}
-    <tr>
-      <td align="right">{$i18n.form.users.default_rate}&nbsp;(0{$user->decimal_mark}00):</td>
-      <td>{$forms.userForm.rate.control}</td>
-    </tr>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.form.users.default_rate}&nbsp;(0{$user->decimal_mark}00)</label>
+        <div class="col-sm-9">{$forms.userForm.rate.control}</div>
+      </div>
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-    <tr valign="top">
-      <td align="right">{$i18n.label.projects}:</td>
-      <td>{$forms.userForm.projects.control}</td>
-    </tr>
-    <tr>
-      <td colspan="2" align="center">{$i18n.label.required_fields}</td>
-    </tr>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.projects}</label>
+        <div class="col-sm-9">{$forms.userForm.projects.control}</div>
+      </div>
 {/if}
-    <tr>
-      <td colspan="2" align="center" height="50">{$forms.userForm.btn_submit.control}</td>
-    </tr>
-  </table>
-</table>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+      <div class="col-sm-9 col-sm-offset-3">{$forms.userForm.btn_submit.control}</div>
+      </div>
+    </div>
+  </div>
+
 {$forms.userForm.close}
+</div>
+</div>
+</div>

@@ -60,16 +60,17 @@ if ($request->isPost()) {
 }
 
 $form = new Form('clientForm');
+$form->addFormStyle(array('class'=>'form-horizontal'));
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
-$form->addInput(array('type'=>'text','name'=>'name','maxlength'=>'100','style'=>'width: 350px;','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','style'=>'width: 350px;','cols'=>'55','rows'=>'5','value'=>$cl_address));
-$form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
-$form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
+$form->addInput(array('type'=>'text','name'=>'name','maxlength'=>'100', 'class'=>'form-control','value'=>$cl_name));
+$form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255', 'class'=>'form-control','cols'=>'55','rows'=>'5','value'=>$cl_address));
+$form->addInput(array('type'=>'floatfield', 'class'=>'form-control', 'name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
+$form->addInput(array('type'=>'combobox', 'class'=>'form-control', 'name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'datakeys'=>array('id','name'),'layout'=>'H','value'=>$cl_projects));
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
-$form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-success', 'name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-primary', 'name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
 
 if ($request->isPost()) {
   // Validate user input.
