@@ -103,6 +103,8 @@ $_SESSION['task'] = $cl_task;
 // Elements of timeRecordForm.
 $form = new Form('timeRecordForm');
 
+$form->addFormStyle(array('class'=>'form-horizontal'));
+
 if ($user->canManageTeam()) {
   $user_list = ttTeamHelper::getActiveUsers(array('putSelfFirst'=>true));
   if (count($user_list) > 1) {
@@ -202,8 +204,8 @@ if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
   $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');",'class'=>'form-control','placeholder'=>'Enter Duration'));
 if (!defined('NOTE_INPUT_HEIGHT'))
 	define('NOTE_INPUT_HEIGHT', 40);
-$form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 600px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_note));
-$form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date)); // calendar
+$form->addInput(array('type'=>'textarea','name'=>'note','value'=>$cl_note, 'class'=>'form-control'));
+$form->addInput(array('type'=>'calendar','name'=>'date','value'=>$cl_date, 'class'=>'form-control')); // calendar
 if ($user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','data'=>1,'value'=>$cl_billable));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.
