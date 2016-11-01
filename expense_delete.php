@@ -67,8 +67,9 @@ if ($request->isPost()) {
 } // isPost
 
 $form = new Form('expenseItemForm');
+$form->addFormStyle(array('class'=>'form-horizontal'));
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
-$form->addInput(array('type'=>'submit','name'=>'delete_button','value'=>$i18n->getKey('label.delete')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-danger', 'name'=>'delete_button','value'=>$i18n->getKey('label.delete')));
 $form->addInput(array('type'=>'submit','name'=>'cancel_button','value'=>$i18n->getKey('button.cancel')));
 
 $smarty->assign('expense_item', $expense_item);
