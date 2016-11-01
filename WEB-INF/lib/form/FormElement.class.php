@@ -46,6 +46,8 @@ class FormElement {
 	var $mRenderable    = true;
 	var $mEnabled		= true;
 	var $cClassName		= "FormElement";
+	var $mClassStyle	= "";
+	var $mPlaceholder	= "";
 	var $mI18n 			= null;
 
 	function __construct() {
@@ -85,6 +87,12 @@ class FormElement {
 
 	function setStyle($value)	{ $this->mStyle = $value; }
 	function getStyle() { return $this->mStyle; }
+
+	function setClassStyle($value)	{ $this->mClassStyle = $value; }
+	function getClassStyle() { return $this->mClassStyle; }
+
+	function setPlaceholder($value)	{ $this->mPlaceholder = $value; }
+	function getPlaceholder() { return $this->mPlaceholder; }
 	
 	function setRenderable($flag)	{ $this->mRenderable = $flag;	}
 	function isRenderable()	{ return $this->mRenderable; }

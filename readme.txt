@@ -1,13 +1,3 @@
-Anuko Time Tracker.
-Copyright (c) Anuko (https://www.anuko.com).
-
-Project home page: https://www.anuko.com/time_tracker/index.htm
-Free hosting of Time Tracker for individuals and small teams is available at https://timetracker.anuko.com
-
-Each file in this archive is protected by the LIBERAL FREEWARE LICENSE. 
-Read the file license.txt for details.
-
-
 INSTALLATION INSTRUCTIONS
 
 Detailed documentation is available at https://www.anuko.com/time_tracker/install_guide/index.htm

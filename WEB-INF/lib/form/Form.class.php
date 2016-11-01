@@ -35,6 +35,7 @@
 
 class Form {
     var $formName      = "";
+	var $formClass	   = "";
 	var $mAction       = "";
 	var $mMethod       = "post";
 	var $mEnctype      = "";
@@ -47,6 +48,11 @@ class Form {
     
     function __construct($formid) {
         $this->formName = $formid;
+    }
+
+    function addFormStyle($formStyleArr) {
+    	if (isset($formStyleArr["class"])) 
+    		$this->formClass = $formStyleArr["class"];
     }
     
     function setRequest(&$request) {
@@ -201,6 +207,11 @@ class Form {
 			    import('form.Submit');
 			    $el = new Submit($arguments["name"]);
 			    break;
+
+			case "reset":
+			    import('form.Reset');
+			    $el = new Reset($arguments["name"]);
+			    break;
 			    
 			case "calendar":
 			    import('form.Calendar');
@@ -232,6 +243,8 @@ class Form {
 			if (isset($arguments["enable"])) $el->setEnable($arguments["enable"]);
 			
 			if (isset($arguments["style"])) $el->setStyle($arguments["style"]);
+			if (isset($arguments["class"])) $el->setClassStyle($arguments["class"]);
+			if (isset($arguments["placeholder"])) $el->setPlaceholder($arguments["placeholder"]);
 			if (isset($arguments["size"])) $el->setSize($arguments["size"]);
 			
 			if (isset($arguments["label"])) $el->setLabel($arguments["label"]);
@@ -268,6 +281,9 @@ class Form {
         
         if ($this->mMethod!="") 
             $html .= " method=\"$this->mMethod\"";
+
+        if ($this->formClass!="")
+			   $html .= " class=\"$this->formClass\"";
         
         // for upload forms
         foreach ($this->mElements as $elname=>$el) {
