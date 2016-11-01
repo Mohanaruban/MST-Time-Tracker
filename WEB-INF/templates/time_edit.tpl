@@ -213,7 +213,7 @@ function setNow(formField) {
       {if $user->isPluginEnabled('iv')}
       <div class="form-group">
         <label class="col-sm-2 control-label">&nbsp;</label>
-        <div class="col-sm-10">{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</div>
+        <div class="col-sm-10 text-left">{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</div>
       </div>
       {/if}
 

@@ -44,7 +44,7 @@ $form = new Form('projectDeleteForm');
 $form->addFormStyle(array('class'=>'form-horizontal'));
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_project_id));
 $form->addInput(array('type'=>'submit','name'=>'btn_delete','class'=>'btn btn-danger','value'=>$i18n->getKey('label.delete')));
-$form->addInput(array('type'=>'submit','name'=>'btn_cancel','class'=>'btn btn-success','value'=>$i18n->getKey('button.cancel')));
+$form->addInput(array('type'=>'submit','name'=>'btn_cancel','class'=>'btn btn-warning','value'=>$i18n->getKey('button.cancel')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
@@ -56,7 +56,8 @@ if ($request->isPost()) {
         $err->add($i18n->getKey('error.db'));
     } else
       $err->add($i18n->getKey('error.db'));
-  } elseif ($request->getParameter('btn_cancel')) {
+  } 
+  if ($request->getParameter('btn_cancel')) {
     header('Location: projects.php');
     exit();
   }
