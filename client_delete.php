@@ -42,11 +42,12 @@ $client = ttClientHelper::getClient($id);
 $client_to_delete = $client['name'];
 
 $form = new Form('clientDeleteForm');
+$form->addFormStyle(array('class'=>'form-horizontal'));
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$id));
 $form->addInput(array('type'=>'combobox', 'class'=>'form-control', 'name'=>'delete_client_entries',
   'data'=>array('0'=>$i18n->getKey('dropdown.do_not_delete'),'1'=>$i18n->getKey('dropdown.delete'))));
-$form->addInput(array('type'=>'submit', 'class'=>'btn btn-danger btn-xs', 'name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
-$form->addInput(array('type'=>'submit', 'class'=>'btn btn-primary btn-xs', 'name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-danger', 'name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-primary', 'name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
 
 if ($request->isPost()) {
   if(ttClientHelper::getClient($id)) {

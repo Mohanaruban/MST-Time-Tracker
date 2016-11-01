@@ -1,22 +1,26 @@
 <script>
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
-
+<div class="col-sm-8 col-sm-offset-2">
+  <div class="row">
+    <div class="col-sm-12">
 <table class="table">
   <tr>
     <td valign="top">
 {if $user->canManageTeam()}
-      <table class="table">
+      <table class="table table-responsive table-striped table-hover table-bordered">
   {if $inactive_users}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.active_users}</td></tr>
   {/if}
+  <thead>
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.person_name}</td>
-          <td width="35%" class="tableHeader">{$i18n.label.login}</td>
-          <td width="10%" class="tableHeader">{$i18n.form.users.role}</td>
-          <td width="10%" class="tableHeader">{$i18n.label.edit}</td>
-          <td width="10%" class="tableHeader">{$i18n.label.delete}</td>
+          <th width="35%">{$i18n.label.person_name}</th>
+          <th width="35%">{$i18n.label.login}</th>
+          <th width="10%">{$i18n.form.users.role}</th>
+          <th width="10%">{$i18n.label.edit}</th>
+          <th width="10%">{$i18n.label.delete}</th>
         </tr>
+  </thead>
   {if $active_users}
     {foreach $active_users as $u}
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
@@ -57,17 +61,24 @@
           </td>
         </tr>
       </table>
+    </div>
+  </div>
+</div>
+
+
 
   {if $inactive_users}
-      <table class="table">
+      <table class="table table-responsive table-striped table-hover table-bordered">
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.inactive_users}</td></tr>
+        <thead>
         <tr>
-          <td width="35%" class="tableHeader">{$i18n.label.person_name}</td>
-          <td width="35%" class="tableHeader">{$i18n.label.login}</td>
-          <td width="10%" class="tableHeader">{$i18n.form.users.role}</td>
-          <td width="10%" class="tableHeader">{$i18n.label.edit}</td>
-          <td width="10%" class="tableHeader">{$i18n.label.delete}</td>
+          <th width="35%">{$i18n.label.person_name}</th>
+          <th width="35%">{$i18n.label.login}</th>
+          <th width="10%">{$i18n.form.users.role}</th>
+          <th width="10%">{$i18n.label.edit}</th>
+          <th width="10%">{$i18n.label.delete}</th>
         </tr>
+        </thead>
     {foreach $inactive_users as $u}
         <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
           <td>{$u.name|escape:'html'}</td>

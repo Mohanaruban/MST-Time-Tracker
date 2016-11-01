@@ -68,52 +68,53 @@ function get_date() {
 }
 </script>
 
+
+<div class="col-sm-8 col-sm-offset-2 text-center">
 {$forms.expensesForm.open}
-<table cellspacing="4" cellpadding="0" border="0">
-  <tr>
-    <td valign="top">
-      <table>
+  <div class="row">
+    <div class="col-sm-6">
 {if $on_behalf_control}
-        <tr>
-          <td align="right">{$i18n.label.user}:</td>
-          <td>{$forms.expensesForm.onBehalfUser.control}</td>
-        </tr>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.user}</label>
+        <div class="col-sm-9">{$forms.expensesForm.onBehalfUser.control}</div>
+    </div>
 {/if}
 {if $user->isPluginEnabled('cl')}
-        <tr>
-          <td align="right">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}:</td>
-          <td>{$forms.expensesForm.client.control}</td>
-        </tr>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}</label>
+        <div class="col-sm-9">{$forms.expensesForm.client.control}</div>
+    </div>
 {/if}
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <tr>
-          <td align="right">{$i18n.label.project} (*):</td>
-          <td>{$forms.expensesForm.project.control}</td>
-        </tr>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.project} (*)</label>
+        <div class="col-sm-9">{$forms.expensesForm.project.control}</div>
+    </div>
 {/if}
-        <tr>
-          <td align="right">{$i18n.label.item} (*):</td>
-          <td>{$forms.expensesForm.item_name.control}</td>
-        </tr>
-        <tr>
-          <td align="right">{$i18n.label.cost} (*):</td>
-          <td>{$forms.expensesForm.cost.control} {$user->currency|escape:'html'}</td>
-        </tr>
-      </table>
-    </td>
-    <td valign="top">
-      <table>
-        <tr><td>{$forms.expensesForm.date.control}</td></tr>
-      </table>
-    </td>
-  </tr>
-</table>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.item} (*)</label>
+        <div class="col-sm-9">{$forms.expensesForm.item_name.control}</div>
+    </div>
 
-<table>
-  <tr>
-    <td align="center" colspan="2">{$forms.expensesForm.btn_submit.control}</td>
-  </tr>
-</table>
+            <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.cost} (*)</label>
+        <div class="col-sm-9">{$forms.expensesForm.cost.control} {$user->currency|escape:'html'}</div>
+    </div>
+
+</div>
+<div class="col-md-6">
+      {$forms.expensesForm.date.control}
+    </div>
+</div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+      <div class="col-sm-9 col-sm-offset-3">{$forms.expensesForm.btn_submit.control}</div>
+      </div>
+    </div>
+  </div>
+
+
 
 <table width="720">
 <tr>
@@ -155,3 +156,4 @@ function get_date() {
 </tr>
 </table>
 {$forms.expensesForm.close}
+</div>
