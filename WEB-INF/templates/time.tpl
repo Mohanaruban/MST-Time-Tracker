@@ -302,61 +302,65 @@ function get_time() {
 
 <div class="col-xs-12" style="height:30px;"></div>
 
-<div class="col-sm-8 col-sm-offset-2 text-center">
+<div class="col-sm-8 col-sm-offset-2">
   <div class="row">
     <div class="col-sm-12">
       {if $time_records}
-      <table class="table table-responsive">
-        <tr>
-          {if $user->isPluginEnabled('cl')}
-          <td width="20%" class="tableHeader">{$i18n.label.client}</td>
-          {/if}
-          {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-          <td class="tableHeader">{$i18n.label.project}</td>
-          {/if}
-          {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-          <td class="tableHeader">{$i18n.label.task}</td>
-          {/if}
-          {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
-          <td width="5%" class="tableHeader" align='right'>{$i18n.label.start}</td>
-          <td width="5%" class="tableHeader" align='right'>{$i18n.label.finish}</td>
-          {/if}
-          <td width="5%" class="tableHeader">{$i18n.label.duration}</td>
-          <td class="tableHeader">{$i18n.label.note}</td>
-          <td width="5%" class="tableHeader">{$i18n.label.edit}</td>
-        </tr>
-        {foreach $time_records as $record}
-        <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}" {if !$record.billable} class="not_billable" {/if}>
-          {if $user->isPluginEnabled('cl')}
-          <td valign='top'>{$record.client|escape:'html'}</td>
-          {/if}
-          {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-          <td valign='top'>{$record.project|escape:'html'}</td>
-          {/if}
-          {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-          <td valign='top'>{$record.task|escape:'html'}</td>
-          {/if}
-          {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
-          <td nowrap align='right' valign='top'>{if $record.start}{$record.start}{else}&nbsp;{/if}</td>
-          <td nowrap align='right' valign='top'>{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
-          {/if}
-          <td align='right' valign='top'>{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
-          <td valign='top'>{if $record.comment}{$record.comment|escape:'html'}{else}&nbsp;{/if}</td>
-          <td valign='top' align='center'>
-            {if $record.invoice_id}
-            &nbsp;
-            {else}
-            <a href='time_edit.php?id={$record.id}'>{$i18n.label.edit}</a>
-            {if ($record.duration == '0:00' && $record.start <> '')}
-            <input type='hidden' name='record_id' value='{$record.id}'>
-            <input type='hidden' name='browser_date' value=''>
-            <input type='hidden' name='browser_time' value=''>
-            <input type='submit' id='btn_stop' name='btn_stop' onclick='browser_date.value=get_date();browser_time.value=get_time()' value='{$i18n.button.stop}'>
+      <table class="table table-responsive table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            {if $user->isPluginEnabled('cl')}
+            <th width="20%">{$i18n.label.client}</th>
             {/if}
+            {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+            <th>{$i18n.label.project}</th>
             {/if}
-          </td>
-        </tr>
-        {/foreach}
+            {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+            <th>{$i18n.label.task}</th>
+            {/if}
+            {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+            <th width="5%" align='right'>{$i18n.label.start}</th>
+            <th width="5%" align='right'>{$i18n.label.finish}</th>
+            {/if}
+            <th width="5%">{$i18n.label.duration}</th>
+            <th>{$i18n.label.note}</th>
+            <th width="5%">{$i18n.label.edit}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {foreach $time_records as $record}
+          <tr {if !$record.billable} class="not_billable" {/if}>
+            {if $user->isPluginEnabled('cl')}
+            <td valign='top'>{$record.client|escape:'html'}</td>
+            {/if}
+            {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+            <td valign='top'>{$record.project|escape:'html'}</td>
+            {/if}
+            {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+            <td valign='top'>{$record.task|escape:'html'}</td>
+            {/if}
+            {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+            <td nowrap align='right' valign='top'>{if $record.start}{$record.start}{else}&nbsp;{/if}</td>
+            <td nowrap align='right' valign='top'>{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
+            {/if}
+            <td align='right' valign='top'>{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
+            <td valign='top'>{if $record.comment}{$record.comment|escape:'html'}{else}&nbsp;{/if}</td>
+            <td valign='top' align='center'>
+              {if $record.invoice_id}
+              &nbsp;
+              {else}
+              <a href='time_edit.php?id={$record.id}'>{$i18n.label.edit}</a>
+              {if ($record.duration == '0:00' && $record.start <> '')}
+              <input type='hidden' name='record_id' value='{$record.id}'>
+              <input type='hidden' name='browser_date' value=''>
+              <input type='hidden' name='browser_time' value=''>
+              <input type='submit' id='btn_stop' name='btn_stop' onclick='browser_date.value=get_date();browser_time.value=get_time()' value='{$i18n.button.stop}'>
+              {/if}
+              {/if}
+            </td>
+          </tr>
+          {/foreach}
+        </tbody>
       </table>
       {/if}
     </td>
