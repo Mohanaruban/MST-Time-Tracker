@@ -58,8 +58,9 @@ if ($request->isPost()) {
 }
 
 $form = new Form('projectForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'project_name','style'=>'width: 250px;','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
+$form->addFormStyle(array('class'=>'form-horizontal'));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'project_name','class'=>'form-control','value'=>$cl_name));
+$form->addInput(array('type'=>'textarea','name'=>'description','class'=>'form-control','value'=>$cl_description));
 $form->addInput(array('type'=>'checkboxgroup','name'=>'users','data'=>$all_users,'layout'=>'H','value'=>$cl_users));
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $form->addInput(array('type'=>'checkboxgroup','name'=>'tasks','data'=>$all_tasks,'layout'=>'H','value'=>$cl_tasks));
