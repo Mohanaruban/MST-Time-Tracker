@@ -51,6 +51,7 @@ if ($request->isPost()) {
 }
 
 $form = new Form('optionsForm');
+$form->addFormStyle(array('class'=>'form-horizontal'));
 $form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control', 'name'=>'name','value'=>$cl_name,'class'=>'form-control','placeholder'=>'Enter Name'));
 $form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control', 'name'=>'login','value'=>$cl_login,'class'=>'form-control','placeholder'=>'Enter Login Name'));
 if (!$auth->isPasswordExternal()) {

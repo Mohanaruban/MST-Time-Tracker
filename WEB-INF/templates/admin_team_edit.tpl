@@ -1,3 +1,58 @@
+<div class="col-sm-6 col-sm-offset-3 text-center">
+  {$forms.teamForm.open}
+  <div class="row">
+    <div class="col-sm-12">
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.team_name}</label>
+        <div class="col-sm-9">{$forms.teamForm.team_name.control}</div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.manager_name}*</label>
+        <div class="col-sm-9">{$forms.teamForm.manager_name.control}</div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.manager_login}*</label>
+        <div class="col-sm-9">{$forms.teamForm.manager_login.control}</div>
+      </div>
+{if !$auth_external}
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.password}*</label>
+        <div class="col-sm-9">{$forms.teamForm.password1.control}</div>
+      </div>
+     
+     <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.confirm_password}*</label>
+        <div class="col-sm-9">{$forms.teamForm.password2.control}</div>
+      </div>
+{/if}
+        <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.email}</label>
+        <div class="col-sm-9">{$forms.teamForm.manager_email.control}</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+
+     <div class="form-group">
+      <div class="col-md-12 text-center">
+        {$forms.teamForm.btn_save.control}&nbsp;{$forms.teamForm.btn_cancel.control}
+      </div>
+    </div>
+    
+  </div>
+</div>
+{$forms.teamForm.close}
+</div>
+
+
+<!--
+
 {$forms.teamForm.open}
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
@@ -43,3 +98,5 @@
   </tr>
 </table>
 {$forms.teamForm.close}
+
+-->

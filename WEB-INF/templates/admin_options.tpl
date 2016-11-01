@@ -1,3 +1,55 @@
+
+<div class="col-sm-6 col-sm-offset-3 text-center">
+  {$forms.optionsForm.open}
+  <div class="row">
+    <div class="col-sm-12">
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.person_name}*</label>
+        <div class="col-sm-9">{$forms.optionsForm.name.control}</div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.login}*</label>
+        <div class="col-sm-9">{$forms.optionsForm.login.control}</div>
+      </div>
+{if !$auth_external}
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.password}</label>
+        <div class="col-sm-9">{$forms.optionsForm.password1.control}</div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.confirm_password}</label>
+        <div class="col-sm-9">{$forms.optionsForm.password2.control}</div>
+      </div>
+      
+   {/if}
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.email}</label>
+        <div class="col-sm-9">{$forms.optionsForm.email.control}</div>
+      </div>
+   
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+
+     <div class="form-group">
+      <div class="col-md-12 text-center">
+        {$forms.optionsForm.btn_submit.control}
+      </div>
+    </div>
+    
+  </div>
+</div>
+{$forms.optionsForm.close}
+</div>
+
+
+<!--
 {$forms.optionsForm.open}
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
@@ -37,3 +89,4 @@
   </tr>
 </table>
 {$forms.optionsForm.close}
+-->
