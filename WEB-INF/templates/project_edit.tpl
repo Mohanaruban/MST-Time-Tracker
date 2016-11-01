@@ -4,7 +4,7 @@
     <div class="col-sm-12">
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.thing_name}</label>
+        <label class="col-sm-3 control-label">{$i18n.label.thing_name}*</label>
         <div class="col-sm-9">{$forms.projectForm.project_name.control}</div>
       </div>
 

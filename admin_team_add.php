@@ -48,6 +48,7 @@ if ($request->isPost()) {
 }
 
 $form = new Form('teamForm');
+$form->addFormStyle(array('class'=>'form-horizontal'));
 $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name', 'class'=>'form-control','value'=>$cl_team_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control','name'=>'manager_name','value'=>$cl_manager_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control','name'=>'manager_login','value'=>$cl_manager_login));
