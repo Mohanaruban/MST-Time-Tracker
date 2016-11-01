@@ -163,14 +163,16 @@ function handleCheckboxes() {
 
                 {if (($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) || ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN))}
                 <div class="form-group">
-                  <div class="col-sm-6">
+                  <div class="col-sm-12">
                     <label class="col-sm-3 control-label">{if $user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)}{$i18n.label.client}{/if}
                     </label>
                     <div class="col-sm-8">
                       {$forms.reportForm.client.control}
                     </div>
                   </div>
-                  <div class="col-sm-6">
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-12">
                     <label class="col-sm-3 control-label">{if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)}{$i18n.label.option}{/if}
                     </label>
                     <div class="col-sm-8">
@@ -207,11 +209,13 @@ function handleCheckboxes() {
 
                   {if $user->isPluginEnabled('iv')}
                   <div class="form-group">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                       <label class="col-sm-3 control-label">{$i18n.form.time.billable}</label>
                       <div class="col-sm-8">{$forms.reportForm.include_records.control}</div>
                     </div>
-                    <div class="col-md-6">
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12">
                       <label class="col-sm-3 control-label">{$i18n.label.invoice}</label>
                       <div class="col-sm-8">{$forms.reportForm.invoice.control}</div>
                     </div>
