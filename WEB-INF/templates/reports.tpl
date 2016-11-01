@@ -13,8 +13,8 @@ var project_property;
 
 // Populate obj_tasks with task ids for each relevant project.
 {foreach $project_list as $project}
-  project_property = project_prefix + {$project.id};
-  obj_tasks[project_property] = "{$project.tasks}";
+project_property = project_prefix + {$project.id};
+obj_tasks[project_property] = "{$project.tasks}";
 {/foreach}
 
 // Prepare an array of task names.
@@ -23,8 +23,8 @@ var project_property;
 task_names = new Array();
 var idx = 0;
 {foreach $task_list as $task}
-  task_names[idx] = new Array({$task.id}, "{$task.name|escape:'javascript'}");
-  idx++;
+task_names[idx] = new Array({$task.id}, "{$task.name|escape:'javascript'}");
+idx++;
 {/foreach}
 
 
@@ -93,14 +93,14 @@ function fillTaskDropdown(project_id) {
 // Build JavaScript array for assigned projects out of passed in PHP array.
 var assigned_projects = new Array();
 {if $assigned_projects}
-  {foreach $assigned_projects as $user_id => $projects}
-    assigned_projects[{$user_id}] = new Array();
-    {if $projects}
-      {foreach $projects as $idx => $project_id}
-        assigned_projects[{$user_id}][{$idx}] = {$project_id};
-      {/foreach}
-    {/if}
-  {/foreach}
+{foreach $assigned_projects as $user_id => $projects}
+assigned_projects[{$user_id}] = new Array();
+{if $projects}
+{foreach $projects as $idx => $project_id}
+assigned_projects[{$user_id}][{$idx}] = {$project_id};
+{/foreach}
+{/if}
+{/foreach}
 {/if}
 
 // selectAssignedUsers is called when a project is changed in project dropdown.
@@ -129,9 +129,9 @@ function selectAssignedUsers(project_id) {
             break;
           }
         }
+      }
     }
   }
-}
 
 // handleCheckboxes - unmarks and disables the "Totals only" checkbox when
 // "no grouping" is selected in the associated dropdown.
@@ -143,159 +143,204 @@ function handleCheckboxes() {
     totalsOnlyCheckbox.checked = false;
     totalsOnlyCheckbox.disabled = true;
   } else
-    totalsOnlyCheckbox.disabled = false;
+  totalsOnlyCheckbox.disabled = false;
 }
 </script>
 
-{$forms.reportForm.open}
-<div style="padding: 0 0 10 0;">
-  <table border="0" class="divider">
-    <tr>
-      <td>
-        <table cellspacing="1" cellpadding="3" border="0">
-          <tr>
-            <td>{$i18n.label.fav_report}:</td><td>{$forms.reportForm.favorite_report.control}</td>
-            <td>{$forms.reportForm.btn_generate.control}&nbsp;{$forms.reportForm.btn_delete.control}</td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</div>
+<div class="col-sm-8 col-sm-offset-2 text-center">
+  {$forms.reportForm.open}
+  <div class="row">
+    <div class="col-sm-12">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#NewReport" class="btn btn-primary btn-lg" data-toggle="tab" aria-expanded="true">Generate fresh report</a></li>
+        <li class=""><a href="#FavoriteReport" class="btn btn-primary btn-lg" data-toggle="tab" aria-expanded="false">Generate from favorite</a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active in" id="NewReport">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="col-md-12">
 
-<table cellspacing="4" cellpadding="7" border="0">
-  <tr>
-    <td valign="top" colspan="2" align="center">
-      <table border="0" cellpadding="3">
-{if (($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) || ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN))}
-        <tr>
-  {if $user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)}<td><b>{$i18n.label.client}</b></td>{else}<td>&nbsp;</td>{/if}
-          <td>&nbsp;</td>
-  {if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)}<td><b>{$i18n.label.option}</b></td>{else}<td>&nbsp;</td>{/if}
-        </tr>
-        <tr>
-          <td>{$forms.reportForm.client.control}</td>
-          <td>&nbsp;</td>
-          <td>{$forms.reportForm.option.control}</td>
-        </tr>
-{/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <tr>
-          <td><b>{$i18n.label.project}</b></td>
-          <td>&nbsp;</td>
-  {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-          <td><b>{$i18n.label.task}</b></td>
-  {/if}
-        </tr>
-{/if}
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <tr>
-          <td>{$forms.reportForm.project.control}</td>
-          <td>&nbsp;</td>
-  {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-          <td>{$forms.reportForm.task.control}</td>
-  {/if}
-        </tr>
-{/if}
-{if $user->isPluginEnabled('iv')}
-        <tr>
-          <td><b>{$i18n.form.time.billable}</b></td>
-          <td>&nbsp;</td>
-          <td><b>{$i18n.label.invoice}</b></td>
-        </tr>
-        <tr valign="top">
-          <td>{$forms.reportForm.include_records.control}</td>
-          <td>&nbsp;</td>
-          <td>{$forms.reportForm.invoice.control}</td>
-        </tr>
-{/if}
-{if $user->canManageTeam() || $user->isClient()}
-        <tr>
-          <td colspan="3"><b>{$i18n.label.users}</b></td>
-        </tr>
-        <tr>
-          <td colspan="3">{$forms.reportForm.users.control}</td>
-        </tr>
-{/if}
-        <tr>
-          <td><b>{$i18n.form.reports.select_period}</b></td>
-          <td>&nbsp;</td>
-          <td><b>{$i18n.form.reports.set_period}</b></td>
-        </tr>
-        <tr valign="top">
-          <td>{$forms.reportForm.period.control}</td>
-          <td align="right">{$i18n.label.start_date}:</td>
-          <td>{$forms.reportForm.start_date.control}</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td align="right">{$i18n.label.end_date}:</td>
-          <td>{$forms.reportForm.end_date.control}</td>
-        </tr>
-        <tr><td colspan="3"><b>{$i18n.form.reports.show_fields}</b></td></tr>
-        <tr>
-          <td colspan="3">
-            <table border="0" width="100%">
-{if $user->isPluginEnabled('cl') || $user->isPluginEnabled('iv')}
-              <tr>
-  {if $user->isPluginEnabled('cl')}
-                <td width="25%"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td>
-  {/if}
-  {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
-                <td width="25%"><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></td>
-  {/if}
-              </tr>
-{/if}
-              <tr>
-                <td width="25%">{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<label>{$forms.reportForm.chproject.control}&nbsp;{$i18n.label.project}</label>{/if}</td>
-                <td width="25%">{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<label>{$forms.reportForm.chstart.control}&nbsp;{$i18n.label.start}</label>{/if}</td>
-                <td width="25%"><label>{$forms.reportForm.chduration.control}&nbsp;{$i18n.label.duration}</label></td>
-{if ((($user->canManageTeam() || $user->isClient()) || $user->isPluginEnabled('ex')) && defined('COST_ON_REPORTS') && isTrue($smarty.const.COST_ON_REPORTS))}
-                  <td width="25%"><label>{$forms.reportForm.chcost.control}&nbsp;{$i18n.label.cost}</label></td>
-{else}
-                  <td></td>
-{/if}
-              </tr>
-              <tr>
-                <td>{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<label>{$forms.reportForm.chtask.control}&nbsp;{$i18n.label.task}</label>{/if}</td>
-                <td>{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<label>{$forms.reportForm.chfinish.control}&nbsp;{$i18n.label.finish}</label>{/if}</td>
-                <td><label>{$forms.reportForm.chnote.control}&nbsp;{$i18n.label.note}</label></td>
-{if ($custom_fields && $custom_fields->fields[0])}
-                <td><label>{$forms.reportForm.chcf_1.control}&nbsp;{$custom_fields->fields[0]['label']|escape:'html'}</label></td>
-{else}
-                <td></td>
-{/if}
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td><b>{$i18n.form.reports.group_by}</b></td>
-        </tr>
-        <tr valign="top">
-          <td>{$forms.reportForm.group_by.control} <label>{$forms.reportForm.chtotalsonly.control} {$i18n.form.reports.totals_only}</label></td>
-        </tr>
-      </table>
+                {if (($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) || ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN))}
+                <div class="form-group">
+                  <div class="col-sm-6">
+                    <label class="col-sm-3 control-label">{if $user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)}{$i18n.label.client}{/if}
+                    </label>
+                    <div class="col-sm-8">
+                      {$forms.reportForm.client.control}
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="col-sm-3 control-label">{if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)}{$i18n.label.option}{/if}
+                    </label>
+                    <div class="col-sm-8">
+                      {$forms.reportForm.option.control}
+                    </div>
+                  </div>
+                </div>
+                {/if}
 
-<div style="padding: 10 0 10 0;">
-  <table border="0" class="divider">
-    <tr>
-      <td align="center">
-        <table cellspacing="1" cellpadding="3" border="0">
-          <tr>
-            <td>{$i18n.form.reports.save_as_favorite}:</td><td>{$forms.reportForm.new_fav_report.control}</td>
-            <td>{$forms.reportForm.btn_save.control}</td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</div>
+                {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label class="col-sm-3 control-label">{$i18n.label.project}</label>
+                    <div class="col-sm-8">
+                      {$forms.reportForm.project.control}
+                    </div>
+                  </div>
+                </div>
+                {/if}
 
-      <table border="0" cellpadding="3" width="100%">
-        <tr><td colspan="3" height="50" align="center">{$forms.reportForm.btn_generate.control}</td></tr>
-      </table>
-    </td>
-  </tr>
-</table>
-{$forms.reportForm.close}
+                {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label class="col-sm-3 control-label">{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+                      {$i18n.label.task}
+                      {/if}
+                    </label>
+                    <div class="col-sm-8">{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+                      {$forms.reportForm.task.control}
+                      {/if}</div>
+                    </div>
+                  </div>
+                  {/if}
+
+                  {if $user->isPluginEnabled('iv')}
+                  <div class="form-group">
+                    <div class="col-md-6">
+                      <label class="col-sm-3 control-label">{$i18n.form.time.billable}</label>
+                      <div class="col-sm-8">{$forms.reportForm.include_records.control}</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="col-sm-3 control-label">{$i18n.label.invoice}</label>
+                      <div class="col-sm-8">{$forms.reportForm.invoice.control}</div>
+                    </div>
+                  </div>
+                  {/if}
+
+                  {if $user->canManageTeam() || $user->isClient()}
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <label class="col-sm-3 control-label">{$i18n.label.users}</label>
+                      <div class="col-sm-8">{$forms.reportForm.users.control}</div>
+                    </div>
+                  </div>
+                  {/if}
+
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <label class="col-sm-3 control-label">{$i18n.form.reports.select_period}</label>
+                      <div class="col-sm-8">
+                        {$forms.reportForm.period.control}
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <label class="col-sm-3 control-label">{$i18n.form.reports.set_period}</label>
+                      <div class="col-sm-4">{$forms.reportForm.start_date.control}</div>
+                      <div class="col-sm-4">{$forms.reportForm.end_date.control}</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <label class="col-sm-3 control-label">{$i18n.form.reports.show_fields}</label>
+                      <div class="col-sm-8">
+                        <table class="table">
+                          {if $user->isPluginEnabled('cl') || $user->isPluginEnabled('iv')}
+                          <tr align="left">
+                            {if $user->isPluginEnabled('cl')}
+                            <td width="25%"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td>
+                            {/if}
+                            {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
+                            <td width="25%"><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></td>
+                            {/if}
+                          </tr>
+                          {/if}
+                          <tr align="left">
+                            <td width="25%">{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<label>{$forms.reportForm.chproject.control}&nbsp;{$i18n.label.project}</label>{/if}</td>
+                            <td width="25%">{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<label>{$forms.reportForm.chstart.control}&nbsp;{$i18n.label.start}</label>{/if}</td>
+                            <td width="25%"><label>{$forms.reportForm.chduration.control}&nbsp;{$i18n.label.duration}</label></td>
+                            {if ((($user->canManageTeam() || $user->isClient()) || $user->isPluginEnabled('ex')) && defined('COST_ON_REPORTS') && isTrue($smarty.const.COST_ON_REPORTS))}
+                            <td width="25%"><label>{$forms.reportForm.chcost.control}&nbsp;{$i18n.label.cost}</label></td>
+                            {else}
+                            <td></td>
+                            {/if}
+                          </tr>
+                          <tr align="left">
+                            <td>{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<label>{$forms.reportForm.chtask.control}&nbsp;{$i18n.label.task}</label>{/if}</td>
+                            <td>{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<label>{$forms.reportForm.chfinish.control}&nbsp;{$i18n.label.finish}</label>{/if}</td>
+                            <td><label>{$forms.reportForm.chnote.control}&nbsp;{$i18n.label.note}</label></td>
+                            {if ($custom_fields && $custom_fields->fields[0])}
+                            <td><label>{$forms.reportForm.chcf_1.control}&nbsp;{$custom_fields->fields[0]['label']|escape:'html'}</label></td>
+                            {else}
+                            <td></td>
+                            {/if}
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <label class="col-sm-3 control-label">{$i18n.form.reports.group_by}</label>
+                      <div class="col-sm-8">
+                        {$forms.reportForm.group_by.control}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <label class="col-sm-3 control-label"></label>
+                      <div class="col-sm-8 text-left">
+                        {$forms.reportForm.chtotalsonly.control} {$i18n.form.reports.totals_only}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <label class="col-sm-3 control-label">{$i18n.form.reports.save_as_favorite}</label>
+                      <div class="col-sm-8">{$forms.reportForm.new_fav_report.control}
+                        <span class="pull-right" style="margin-top: -30px;">{$forms.reportForm.btn_save.control}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-footer">
+                <div class="row">
+                  <div class="col-md-12">
+                    {$forms.reportForm.btn_generate.control}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="FavoriteReport">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">{$i18n.label.fav_report}</label>
+                  <div class="col-sm-8">{$forms.reportForm.favorite_report.control}</div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-12 text-center">{$forms.reportForm.btn_generate.control}&nbsp;{$forms.reportForm.btn_delete.control}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {$forms.reportForm.close}
+  </div>

@@ -1,43 +1,61 @@
-{$forms.mailForm.open}
-<table cellspacing="4" cellpadding="7" border="0">
-<tr>
-  <td>
-    <table cellspacing="4" cellpadding="7" border="0">
-    <tr>
-      <td valign="top" colspan="2">
-        <table>
-        <tr>
-          <td align='right'>{$i18n.form.mail.from} (*):</td>
-          <td>{$smarty.const.SENDER}</td>
-        </tr>
-        <tr>
-          <td align='right'>{$i18n.form.mail.to} (*):</td>
-          <td>{$forms.mailForm.receiver.control}</td>
-        </tr>
-        <tr>
-          <td align='right'>{$i18n.form.mail.cc}:</td>
-          <td>{$forms.mailForm.cc.control}</td>
-        </tr>
-        <tr>
-          <td align='right'>{$i18n.form.mail.subject} (*):</td>
-          <td>{$forms.mailForm.subject.control}</td>
-        </tr>
-        <tr>
-          <td align='right'>{$i18n.label.comment}:</td>
-          <td>{$forms.mailForm.comment.control}</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>{$i18n.label.required_fields}</td>
-        </tr>
-        <tr>
-          <td colspan="2" align="center" height="70">{$forms.mailForm.btn_send.control}</td>
-        </tr>
-        </table>
-      </td>
-    </tr>
-    </table>
-  </td>
-</tr>
-</table>
-{$forms.mailForm.close}
+<div class="col-sm-8 col-sm-offset-2 text-center">
+  {$forms.mailForm.open}
+  <div class="row">
+    <div class="col-sm-12">
+
+      <div class="form-group">
+        <div class="col-md-12">
+          <label class="col-sm-3 control-label">{$i18n.form.mail.from} (*)</label>
+          <div class="col-sm-8 text-left">
+            {$smarty.const.SENDER}
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-md-12">
+          <label class="col-sm-3 control-label">{$i18n.form.mail.to} (*)</label>
+          <div class="col-sm-8">
+            {$forms.mailForm.receiver.control}
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-md-12">
+          <label class="col-sm-3 control-label">{$i18n.form.mail.cc}:</label>
+          <div class="col-sm-8">
+            {$forms.mailForm.cc.control}
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-md-12">
+          <label class="col-sm-3 control-label">{$i18n.form.mail.subject} (*)</label>
+          <div class="col-sm-8">
+            {$forms.mailForm.subject.control}
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-md-12">
+          <label class="col-sm-3 control-label">{$i18n.label.comment}</label>
+          <div class="col-sm-8">
+            {$forms.mailForm.comment.control}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-3">{$forms.mailForm.btn_send.control}</div>
+          </div>
+        </div>
+      </div>
+      {$forms.mailForm.close}
+    </div>
+  </div>
+</div>

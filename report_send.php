@@ -52,11 +52,12 @@ if ($request->isPost()) {
 }
 
 $form = new Form('mailForm');
-$form->addInput(array('type'=>'text','name'=>'receiver','style'=>'width: 300px;','value'=>$cl_receiver));
-$form->addInput(array('type'=>'text','name'=>'cc','style'=>'width: 300px;','value'=>$cl_cc));
-$form->addInput(array('type'=>'text','name'=>'subject','style'=>'width: 300px;','value'=>$cl_subject));
-$form->addInput(array('type'=>'textarea','name'=>'comment','maxlength'=>'250','style'=>'width: 300px; height: 60px;'));
-$form->addInput(array('type'=>'submit','name'=>'btn_send','value'=>$i18n->getKey('button.send')));
+$form->addFormStyle(array('class'=>'form-horizontal'));
+$form->addInput(array('type'=>'text','name'=>'receiver','class'=>'form-control','value'=>$cl_receiver));
+$form->addInput(array('type'=>'text','name'=>'cc','class'=>'form-control','value'=>$cl_cc));
+$form->addInput(array('type'=>'text','name'=>'subject','class'=>'form-control','value'=>$cl_subject));
+$form->addInput(array('type'=>'textarea','name'=>'comment','maxlength'=>'250','class'=>'form-control'));
+$form->addInput(array('type'=>'submit','name'=>'btn_send','class'=>'btn btn-success','value'=>$i18n->getKey('button.send')));
 
 if ($request->isPost()) {
   // Validate user input.
