@@ -41,6 +41,7 @@ $team_details = ttTeamHelper::getTeamDetails($team_id);
 $team_name = $team_details['team_name'];
 
 $form = new Form('teamForm');
+$form->addFormStyle(array('class'=>'form-horizontal'));
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$team_id));
 $form->addInput(array('type'=>'submit','class'=>'btn btn-danger', 'name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 $form->addInput(array('type'=>'submit','class'=>'btn btn-primary', 'name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
