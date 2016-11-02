@@ -1,7 +1,11 @@
 <script>
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
-
+ 
+ 
+<div class="col-sm-8 col-sm-offset-2">
+  <div class="row">
+    <div class="col-sm-12">
 <table cellspacing="0" cellpadding="7" border="0" width="720">
   <tr>
     <td>
@@ -66,7 +70,16 @@
       {/if}
     </td>
   </tr>
-  <tr><td align="center"><br><form>
-    <input type="button" onclick="chLocation('invoice_send.php?id={$invoice_id}');" value="{$i18n.button.send_by_email}">
-  </form></td></tr>
+ 
 </table>
+</div>
+</div>
+</div>
+<div class="col-sm-8 col-sm-offset-2">
+  <div class="row text-center">
+    <div class="col-sm-12">
+      <input class="btn btn-success" type="button" onclick="chLocation('invoice_send.php?id={$invoice_id}');" value="{$i18n.button.send_by_email}">
+    
+    </div><br/><br/>
+  </div>
+</div>

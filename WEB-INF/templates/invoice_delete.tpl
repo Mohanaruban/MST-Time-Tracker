@@ -4,13 +4,12 @@
     <div class="col-sm-12">
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.form.invoice.invoice_to_delete}</label>
-        <div class="col-sm-9">{$invoice_to_delete|escape:'html'}</div>
+        <label class="col-sm-9 text-left">{$invoice_to_delete|escape:'html'}</label>
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.form.invoice.invoice_entries}</label>
         <div class="col-sm-9">{$forms.invoiceDeleteForm.delete_invoice_entries.control}</div>
       </div>
-      ...
     </div>
   </div>
   <div class="row">
