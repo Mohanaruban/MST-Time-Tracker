@@ -1,25 +1,23 @@
-{$forms.clientDeleteForm.open}
-<table cellspacing="4" cellpadding="7" border="0">
-  <tr>
-    <td>
-      <table cellspacing="0" cellpadding="2" border="0">
-        <tr>
-          <td>{$i18n.form.client.client_to_delete}:</td>
-          <th>{$client_to_delete|escape:'html'}</th>
-        </tr>
-        <tr>
-          <td>{$i18n.form.client.client_entries}:</td>
-          <td>{$forms.clientDeleteForm.delete_client_entries.control}</td>
-        </tr>
-        <tr>
-          <td colspan="2" align="center">&nbsp;</td>
-        </tr>
-        <tr>
-          <td align="right">{$forms.clientDeleteForm.btn_delete.control}&nbsp;</td>
-          <td align="left">&nbsp;{$forms.clientDeleteForm.btn_cancel.control}</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-{$forms.clientDeleteForm.close}
+<div class="col-sm-8 col-sm-offset-2 text-center">
+  {$forms.clientDeleteForm.open}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label class="col-sm-3 text-right">{$i18n.form.client.client_to_delete}</label>
+        <label class="col-sm-9 text-left">{$client_to_delete|escape:'html'}</label>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.form.client.client_entries}</label>
+        <div class="col-sm-9">{$forms.clientDeleteForm.delete_client_entries.control}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-2">{$forms.clientDeleteForm.btn_delete.control}&nbsp;{$forms.clientDeleteForm.btn_cancel.control}</div>
+      </div>
+    </div>
+  </div>
+  {$forms.clientDeleteForm.close}
+</div>

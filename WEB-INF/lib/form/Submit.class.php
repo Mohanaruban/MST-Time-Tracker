@@ -50,6 +50,9 @@ class Submit extends FormElement {
 		}
 		
 		$html .= " value=\"$this->mValue\"";
+
+		if ($this->mClassStyle!="")
+			   $html .= " class=\"$this->mClassStyle\"";
 		
 		if ($this->mOnClick) {
 			$html .= " onclick=\"".$this->mOnClick."\"";

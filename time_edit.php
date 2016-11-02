@@ -105,13 +105,15 @@ if ($request->isPost()) {
 // Initialize elements of 'timeRecordForm'.
 $form = new Form('timeRecordForm');
 
+$form->addFormStyle(array('class'=>'form-horizontal'));
+
 // Dropdown for clients in MODE_TIME. Use all active clients.
 if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
   $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
     'name'=>'client',
-    'style'=>'width: 250px;',
+    'class'=>'form-control',
     'value'=>$cl_client,
     'data'=>$active_clients,
     'datakeys'=>array('id', 'name'),
@@ -125,7 +127,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillTaskDropdown(this.value);',
     'name'=>'project',
-    'style'=>'width: 250px;',
+    'class'=>'form-control',
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
@@ -152,7 +154,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'client',
-      'style'=>'width: 250px;',
+      'class'=>'form-control',
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
@@ -164,7 +166,7 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
   $task_list = ttTeamHelper::getActiveTasks($user->team_id);
   $form->addInput(array('type'=>'combobox',
     'name'=>'task',
-    'style'=>'width: 250px;',
+    'class'=>'form-control',
     'value'=>$cl_task,
     'data'=>$task_list,
     'datakeys'=>array('id','name'),
@@ -173,8 +175,8 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
 
 // Add other controls.
 if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
-  $form->addInput(array('type'=>'text','name'=>'start','value'=>$cl_start,'onchange'=>"formDisable('start');"));
-  $form->addInput(array('type'=>'text','name'=>'finish','value'=>$cl_finish,'onchange'=>"formDisable('finish');"));
+  $form->addInput(array('type'=>'text','name'=>'start','class'=>'form-control','value'=>$cl_start,'onchange'=>"formDisable('start');"));
+  $form->addInput(array('type'=>'text','name'=>'finish','class'=>'form-control','value'=>$cl_finish,'onchange'=>"formDisable('finish');"));
 }
 if (!$user->canManageTeam() && defined('READONLY_START_FINISH') && isTrue(READONLY_START_FINISH)) {
   // Make the start and finish fields read-only.
@@ -182,9 +184,9 @@ if (!$user->canManageTeam() && defined('READONLY_START_FINISH') && isTrue(READON
   $form->getElement('finish')->setEnable(false);
 }
 if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
-  $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
-$form->addInput(array('type'=>'datefield','name'=>'date','maxlength'=>'20','value'=>$cl_date));
-$form->addInput(array('type'=>'textarea','name'=>'note','style'=>'width: 250px; height: 200px;','value'=>$cl_note));
+  $form->addInput(array('type'=>'text','name'=>'duration','class'=>'form-control','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
+$form->addInput(array('type'=>'datefield','name'=>'date','class'=>'form-control','maxlength'=>'20','value'=>$cl_date));
+$form->addInput(array('type'=>'textarea','name'=>'note','class'=>'form-control','value'=>$cl_note));
 // If we have custom fields - add controls for them.
 if ($custom_fields && $custom_fields->fields[0]) {
   // Only one custom field is supported at this time.
@@ -193,7 +195,7 @@ if ($custom_fields && $custom_fields->fields[0]) {
   } elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
     $form->addInput(array('type'=>'combobox',
       'name'=>'cf_1',
-      'style'=>'width: 250px;',
+      'class'=>'form-control',
       'value'=>$cl_cf_1,
       'data'=>$custom_fields->options,
       'empty' => array('' => $i18n->getKey('dropdown.select'))));
@@ -204,9 +206,9 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 if ($user->isPluginEnabled('iv'))
   $form->addInput(array('type'=>'checkbox','name'=>'billable','data'=>1,'value'=>$cl_billable));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_save or btn_copy click.
-$form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.save')));
-$form->addInput(array('type'=>'submit','name'=>'btn_copy','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.copy')));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-success','name'=>'btn_save','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.save')));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-warning','name'=>'btn_copy','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.copy')));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-danger','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 
 if ($request->isPost()) {
 

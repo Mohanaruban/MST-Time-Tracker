@@ -48,15 +48,16 @@ if ($request->isPost()) {
 }
 
 $form = new Form('teamForm');
-$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team_name));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_name','value'=>$cl_manager_name));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_login','value'=>$cl_manager_login));
+$form->addFormStyle(array('class'=>'form-horizontal'));
+$form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name', 'class'=>'form-control','value'=>$cl_team_name));
+$form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control','name'=>'manager_name','value'=>$cl_manager_name));
+$form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control','name'=>'manager_login','value'=>$cl_manager_login));
 if (!$auth->isPasswordExternal()) {
-  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password1','aspassword'=>true,'value'=>$cl_password1));
-  $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password2','aspassword'=>true,'value'=>$cl_password2));
+  $form->addInput(array('type'=>'text','maxlength'=>'30', 'class'=>'form-control','name'=>'password1','aspassword'=>true,'value'=>$cl_password1));
+  $form->addInput(array('type'=>'text','maxlength'=>'30', 'class'=>'form-control','name'=>'password2','aspassword'=>true,'value'=>$cl_password2));
 }
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'manager_email','value'=>$cl_manager_email));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
+$form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control','name'=>'manager_email','value'=>$cl_manager_email));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-success', 'name'=>'btn_submit','value'=>$i18n->getKey('button.submit')));
 
 if ($request->isPost()) {
   // Validate user input.

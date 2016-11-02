@@ -59,14 +59,14 @@ $cl_cost = $request->getParameter('cost');
 
 // Elements of expensesForm.
 $form = new Form('expensesForm');
-
+$form->addFormStyle(array('class'=>'form-horizontal'));
 if ($user->canManageTeam()) {
   $user_list = ttTeamHelper::getActiveUsers(array('putSelfFirst'=>true));
   if (count($user_list) > 1) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'this.form.submit();',
       'name'=>'onBehalfUser',
-      'style'=>'width: 250px;',
+      'class'=>'form-control',
       'value'=>$on_behalf_id,
       'data'=>$user_list,
       'datakeys'=>array('id','name')));
@@ -80,7 +80,7 @@ if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'client',
-      'style'=>'width: 250px;',
+      'class'=>'form-control',
       'value'=>$cl_client,
       'data'=>$active_clients,
       'datakeys'=>array('id', 'name'),
@@ -94,7 +94,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
   $form->addInput(array('type'=>'combobox',
     // 'onchange'=>'fillTaskDropdown(this.value);',
     'name'=>'project',
-    'style'=>'width: 250px;',
+    'class'=>'form-control',
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
@@ -120,18 +120,18 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'client',
-      'style'=>'width: 250px;',
+      'class'=>'form-control',
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
       'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
   }
 }
-$form->addInput(array('type'=>'textarea','maxlength'=>'800','name'=>'item_name','style'=>'width: 250px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_item_name));
-$form->addInput(array('type'=>'text','maxlength'=>'40','name'=>'cost','style'=>'width: 100px;','value'=>$cl_cost));
-$form->addInput(array('type'=>'calendar','name'=>'date','highlight'=>'expenses','value'=>$cl_date)); // calendar
+$form->addInput(array('type'=>'textarea','maxlength'=>'800','name'=>'item_name','class'=>'form-control','value'=>$cl_item_name));
+$form->addInput(array('type'=>'text','maxlength'=>'40','name'=>'cost','class'=>'form-control', 'value'=>$cl_cost));
+$form->addInput(array('type'=>'calendar', 'class'=>'form-control', 'name'=>'date','highlight'=>'expenses','value'=>$cl_date)); // calendar
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_submit click.
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.submit')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-success','name'=>'btn_submit','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.submit')));
 
 // Submit.
 if ($request->isPost()) {

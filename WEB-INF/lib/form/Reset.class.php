@@ -27,11 +27,9 @@
 // +----------------------------------------------------------------------+
 
 import('form.FormElement');
-
-class Checkbox extends FormElement {
-    var $mChecked	= false;
-    var $mOptions	= null;
-    var $cClassName		= "Checkbox";
+	
+class Reset extends FormElement {
+	var $cClassName	= "Reset";
 
 	function __construct($name,$value="")
 	{
@@ -39,44 +37,28 @@ class Checkbox extends FormElement {
 		$this->mValue			= $value;
 	}
 
-	function setChecked($value)	{ $this->mChecked = $value; }
-	function isChecked() { return $this->mChecked; }
-	
-	function setData($value)	{ $this->mOptions = $value; }
-	function getData() { return $this->mOptions; }
-	
 	function toStringControl()	{
 		if (!$this->isRenderable()) return "";
 	    
 	    if ($this->mId=="") $this->mId = $this->mName;
 	    
-		$html = "\n\t<input type=\"checkbox\"";
-		$html .= " name=\"$this->mName\" id=\"$this->mId\"";
+		$html = "\n\t<input";
+		$html .= " type=\"reset\" name=\"$this->mName\" id=\"$this->mId\"";
 		
-		if ($this->mTabindex!="")
-		   $html .= " tabindex=\"$this->mTabindex\"";
-		   
-		if ($this->mOnChange!="")
-		   $html .= " onchange=\"$this->mOnChange\"";
-		   
-		if ($this->mStyle!="")
-		   $html .= " style=\"$this->mStyle\"";
+		if (!$this->isEnable()) {
+			$html .= " disabled=\"true\"";
+		}
 		
+		$html .= " value=\"$this->mValue\"";
+
 		if ($this->mClassStyle!="")
 			   $html .= " class=\"$this->mClassStyle\"";
-			 
-		if ($this->mPlaceholder!="")
-			   $html .= " placeholder=\"$this->mPlaceholder\"";
-
-		if ($this->mChecked || (($this->mValue == $this->mOptions) && ($this->mValue != null)))
-		   $html .= " checked=\"true\"";
-		   
-		if (!$this->isEnable())
-		   $html .= " disabled=\"disabled\"";
-		   
-		$html .= " value=\"".htmlspecialchars($this->mOptions)."\"";
 		
-		$html .= "/>\n";   
+		if ($this->mOnClick) {
+			$html .= " onclick=\"".$this->mOnClick."\"";
+		}
+		
+		$html .= ">";
 		
 		return $html;
 	}

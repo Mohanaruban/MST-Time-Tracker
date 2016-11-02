@@ -1,3 +1,56 @@
+
+
+<div class="col-sm-6 col-sm-offset-3 text-center">
+  {$forms.teamForm.open}
+  <div class="row">
+    <div class="col-sm-12">
+
+     <div class="form-group">
+      <label class="col-sm-3 control-label">{$i18n.label.team_name}</label>
+      <div class="col-sm-9">{$forms.teamForm.team_name.control}</div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-3 control-label">{$i18n.label.manager_name}*</label>
+      <div class="col-sm-9">{$forms.teamForm.manager_name.control}</div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-3 control-label">{$i18n.label.manager_login}*</label>
+      <div class="col-sm-9">{$forms.teamForm.manager_login.control}</div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-3 control-label">{$i18n.label.password}*</label>
+      <div class="col-sm-9">{$forms.teamForm.password1.control}</div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-3 control-label">{$i18n.label.confirm_password}*</label>
+      <div class="col-sm-9">{$forms.teamForm.password2.control}</div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-3 control-label">{$i18n.label.email}</label>
+      <div class="col-sm-9">{$forms.teamForm.manager_email.control}</div>
+    </div>
+
+    
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 text-center">
+    {$forms.teamForm.btn_submit.control}
+  </div>
+</div>
+{$forms.teamForm.close}
+</div> 
+
+
+
+<!--
 {$forms.teamForm.open}
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
@@ -16,7 +69,7 @@
           <td align="right" nowrap>{$i18n.label.manager_login} (*):</td>
           <td>{$forms.teamForm.manager_login.control}</td>
         </tr>
-{if !$auth_external}
+        {if !$auth_external}
         <tr>
           <td align="right" nowrap>{$i18n.label.password} (*):</td>
           <td>{$forms.teamForm.password1.control}</td>
@@ -25,7 +78,7 @@
           <td align="right" nowrap>{$i18n.label.confirm_password} (*):</td>
           <td>{$forms.teamForm.password2.control}</td>
         </tr>
-{/if}
+        {/if}
         <tr>
           <td align="right" nowrap>{$i18n.label.email}:</td>
           <td>{$forms.teamForm.manager_email.control}</td>
@@ -43,3 +96,4 @@
   </tr>
 </table>
 {$forms.teamForm.close}
+-->

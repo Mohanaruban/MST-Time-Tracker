@@ -1,48 +1,44 @@
-{$forms.invoiceForm.open}
-<table cellspacing="4" cellpadding="7" border="0">
-  <tr>
-    <td>
-      <table cellspacing="1" cellpadding="2" border="0">
-        <tr>
-          <td align="right">{$i18n.form.invoice.number} (*):</td>
-          <td>{$forms.invoiceForm.number.control}</td>
-        </tr>
-        <tr>
-          <td align="right">{$i18n.label.date} (*):</td>
-          <td>{$forms.invoiceForm.date.control}</td>
-        </tr>
-        <tr>
-          <td align="right">{$i18n.label.client} (*):</td>
-          <td>{$forms.invoiceForm.client.control}</td>
-        </tr>
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <tr>
-          <td align="right">{$i18n.label.project}:</td>
-          <td>{$forms.invoiceForm.project.control}</td>
-        </tr>
-{/if}
-        <tr>
-          <td align="right">{$i18n.label.start_date} (*):</td>
-          <td>{$forms.invoiceForm.start.control}</td>
-        </tr>
-        <tr>
-          <td align="right">{$i18n.label.end_date} (*):</td>
-          <td>{$forms.invoiceForm.finish.control}</td>
-        </tr>
-        <tr>
-          <td height="40"></td>
-          <td>{$i18n.label.required_fields}</td>
-        </tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr>
-          <td colspan="2" align="center" height="50">{$forms.invoiceForm.btn_submit.control}</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-{$forms.invoiceForm.close}
-
+<div class="col-sm-8 col-sm-offset-2 text-center">
+  {$forms.invoiceForm.open}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.form.invoice.number} (*)</label>
+        <div class="col-sm-9">{$forms.invoiceForm.number.control}</div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.date} (*)</label>
+        <div class="col-sm-9">{$forms.invoiceForm.date.control}</div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.client} (*)</label>
+        <div class="col-sm-9">{$forms.invoiceForm.client.control}</div>
+      </div>
+      {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.project}</label>
+        <div class="col-sm-9">{$forms.invoiceForm.project.control}</div>
+      </div>
+      {/if}
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.start_date} (*)</label>
+        <div class="col-sm-9">{$forms.invoiceForm.start.control}</div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.end_date} (*)</label>
+        <div class="col-sm-9">{$forms.invoiceForm.finish.control}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">{$forms.invoiceForm.btn_submit.control}</div>
+      </div>
+    </div>
+  </div>
+  {$forms.invoiceForm.close}
+</div>
 <script>
 // Set the date field to browser today in user date format.
 var dateField = document.getElementById("date");

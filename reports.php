@@ -51,19 +51,21 @@ if ($user->isPluginEnabled('cf')) {
 
 $form = new Form('reportForm');
 
+$form->addFormStyle(array('class'=>'form-horizontal'));
+
 // Get saved favorite reports for user.
 $report_list = ttFavReportHelper::getReports($user->id);
 $form->addInput(array('type'=>'combobox',
+  'class'=>'form-control',
   'name'=>'favorite_report',
   'onchange'=>'document.reportForm.fav_report_changed.value=1;document.reportForm.submit();',
-  'style'=>'width: 250px;',
   'data'=>$report_list,
   'datakeys'=>array('id','name'),
   'empty'=>array('-1'=>$i18n->getKey('dropdown.no'))));
 $form->addInput(array('type'=>'hidden','name'=>'fav_report_changed'));
 // Generate and Delete buttons.
-$form->addInput(array('type'=>'submit','name'=>'btn_generate','value'=>$i18n->getKey('button.generate')));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete'),'onclick'=>"return confirm('".$i18n->getKey('form.reports.confirm_delete')."')"));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-primary','name'=>'btn_generate','value'=>$i18n->getKey('button.generate')));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-danger','name'=>'btn_delete','value'=>$i18n->getKey('label.delete'),'onclick'=>"return confirm('".$i18n->getKey('form.reports.confirm_delete')."')"));
 
 // Dropdown for clients if the clients plugin is enabled.
 if ($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) {
@@ -72,8 +74,8 @@ if ($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) {
   else
     $client_list = ttClientHelper::getClientsForUser();
   $form->addInput(array('type'=>'combobox',
+    'class'=>'form-control',
     'name'=>'client',
-    'style'=>'width: 250px;',
     'data'=>$client_list,
     'datakeys'=>array('id', 'name'),
     'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
@@ -82,7 +84,7 @@ if ($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) {
 // If we have a TYPE_DROPDOWN custom field - add control to select an option.
 if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
     $form->addInput(array('type'=>'combobox','name'=>'option',
-      'style'=>'width: 250px;',
+      'class'=>'form-control',
       'value'=>$cl_cf_1,
       'data'=>$custom_fields->options,
       'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
@@ -97,17 +99,17 @@ if ($user->canManageTeam()) {
   $project_list = ttProjectHelper::getAssignedProjects($user->id);	
 }
 $form->addInput(array('type'=>'combobox',
+  'class'=>'form-control',
   'onchange'=>'fillTaskDropdown(this.value);selectAssignedUsers(this.value);',
   'name'=>'project',
-  'style'=>'width: 250px;',
   'data'=>$project_list,
   'datakeys'=>array('id','name'),
   'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
   $task_list = ttTeamHelper::getActiveTasks($user->team_id);
   $form->addInput(array('type'=>'combobox',
+    'class'=>'form-control',
     'name'=>'task',
-    'style'=>'width: 250px;',
     'data'=>$task_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
@@ -117,8 +119,8 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
 $include_options = array('1'=>$i18n->getKey('form.reports.include_billable'),
   '2'=>$i18n->getKey('form.reports.include_not_billable'));
 $form->addInput(array('type'=>'combobox',
+  'class'=>'form-control',
   'name'=>'include_records',
-  'style'=>'width: 250px;',
   'data'=>$include_options,
   'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 
@@ -126,8 +128,8 @@ $form->addInput(array('type'=>'combobox',
 $invoice_options = array('1'=>$i18n->getKey('form.reports.include_invoiced'),
   '2'=>$i18n->getKey('form.reports.include_not_invoiced'));
 $form->addInput(array('type'=>'combobox',
+  'class'=>'form-control',
   'name'=>'invoice',
-  'style'=>'width: 250px;',
   'data'=>$invoice_options,
   'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 
@@ -153,22 +155,21 @@ if ($user->canManageTeam() || $user->isClient()) {
     'name'=>'users',
     'data'=>$user_list,
     'layout'=>'V',
-    'groupin'=>$row_count,
-    'style'=>'width: 100%;'));
+    'groupin'=>$row_count));
 }
 
 // Add control for time period.
 $form->addInput(array('type'=>'combobox',
+  'class'=>'form-control',
   'name'=>'period',
-  'style'=>'width: 250px;',
   'data'=>array(INTERVAL_THIS_MONTH=>$i18n->getKey('dropdown.this_month'),
     INTERVAL_LAST_MONTH=>$i18n->getKey('dropdown.last_month'),
     INTERVAL_THIS_WEEK=>$i18n->getKey('dropdown.this_week'),
     INTERVAL_LAST_WEEK=>$i18n->getKey('dropdown.last_week')),
   'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 // Add controls for start and end dates.
-$form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start_date'));
-$form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'end_date'));
+$form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start_date', 'class'=>'form-control'));
+$form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'end_date', 'class'=>'form-control'));
 
 // Add checkboxes for fields.
 if ($user->isPluginEnabled('cl'))
@@ -205,15 +206,15 @@ if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
 if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
   $group_by_options['cf_1'] = $custom_fields->fields[0]['label'];
 }
-$form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by','data'=>$group_by_options));
+$form->addInput(array('type'=>'combobox','onchange'=>'handleCheckboxes();','name'=>'group_by','data'=>$group_by_options, 'class'=>'form-control'));
 $form->addInput(array('type'=>'checkbox','name'=>'chtotalsonly','data'=>1));
 
 // Add text field for a new favorite report name.
-$form->addInput(array('type'=>'text','name'=>'new_fav_report','maxlength'=>'30','style'=>'width: 250px;'));
+$form->addInput(array('type'=>'text','name'=>'new_fav_report','maxlength'=>'30','class'=>'form-control','placeholder'=>'Enter Favorite'));
 // Save button.
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-success btn-xs', 'name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
-$form->addInput(array('type'=>'submit','name'=>'btn_generate','value'=>$i18n->getKey('button.generate')));
+$form->addInput(array('type'=>'submit', 'name'=>'btn_generate','value'=>$i18n->getKey('button.generate')));
 
 // Create a bean (which is a mechanism to remember form values in session).
 $bean = new ActionForm('reportBean', $form, $request);

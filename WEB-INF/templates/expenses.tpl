@@ -68,69 +68,71 @@ function get_date() {
 }
 </script>
 
+
+<div class="col-sm-8 col-sm-offset-2 text-center">
 {$forms.expensesForm.open}
-<table cellspacing="4" cellpadding="0" border="0">
-  <tr>
-    <td valign="top">
-      <table>
+  <div class="row">
+    <div class="col-sm-6">
 {if $on_behalf_control}
-        <tr>
-          <td align="right">{$i18n.label.user}:</td>
-          <td>{$forms.expensesForm.onBehalfUser.control}</td>
-        </tr>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.user}</label>
+        <div class="col-sm-9">{$forms.expensesForm.onBehalfUser.control}</div>
+    </div>
 {/if}
 {if $user->isPluginEnabled('cl')}
-        <tr>
-          <td align="right">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}:</td>
-          <td>{$forms.expensesForm.client.control}</td>
-        </tr>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}</label>
+        <div class="col-sm-9">{$forms.expensesForm.client.control}</div>
+    </div>
 {/if}
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <tr>
-          <td align="right">{$i18n.label.project} (*):</td>
-          <td>{$forms.expensesForm.project.control}</td>
-        </tr>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.project} (*)</label>
+        <div class="col-sm-9">{$forms.expensesForm.project.control}</div>
+    </div>
 {/if}
-        <tr>
-          <td align="right">{$i18n.label.item} (*):</td>
-          <td>{$forms.expensesForm.item_name.control}</td>
-        </tr>
-        <tr>
-          <td align="right">{$i18n.label.cost} (*):</td>
-          <td>{$forms.expensesForm.cost.control} {$user->currency|escape:'html'}</td>
-        </tr>
-      </table>
-    </td>
-    <td valign="top">
-      <table>
-        <tr><td>{$forms.expensesForm.date.control}</td></tr>
-      </table>
-    </td>
-  </tr>
-</table>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.item} (*)</label>
+        <div class="col-sm-9">{$forms.expensesForm.item_name.control}</div>
+    </div>
 
-<table>
-  <tr>
-    <td align="center" colspan="2">{$forms.expensesForm.btn_submit.control}</td>
-  </tr>
-</table>
+            <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.cost} (*)</label>
+        <div class="col-sm-9">{$forms.expensesForm.cost.control}<span class="pull-right" style="margin-top: -30px;">{$user->currency|escape:'html'}</span></div>
+    </div>
 
-<table width="720">
-<tr>
-  <td valign="top">
+</div>
+<div class="col-md-6">
+      {$forms.expensesForm.date.control}
+    </div>
+</div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+      <div class="col-sm-9 col-sm-offset-2">{$forms.expensesForm.btn_submit.control}</div>
+      </div>
+    </div>
+  </div>
+
+
+
+
 {if $expense_items}
-      <table border="0" cellpadding="3" cellspacing="1" width="100%">
+      <table class="table table-responsive table-striped table-hover table-bordered">
+      <thead>
       <tr>
   {if $user->isPluginEnabled('cl')}
-        <td width="20%" class="tableHeader">{$i18n.label.client}</td>
+
+        <th width="20%" >{$i18n.label.client}</th>
   {/if}
   {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <td class="tableHeader">{$i18n.label.project}</td>
+        <th >{$i18n.label.project}</th>
   {/if}
-        <td class="tableHeader">{$i18n.label.item}</td>
-        <td width="5%" class="tableHeaderCentered">{$i18n.label.cost}</td>
-        <td width="5%" class="tableHeader">{$i18n.label.edit}</td>
+        <th >{$i18n.label.item}</th>
+        <th width="5%">{$i18n.label.cost}</th>
+        <th width="5%" >{$i18n.label.edit}</th>
       </tr>
+      </thead>
   {foreach $expense_items as $item}
       <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
     {if $user->isPluginEnabled('cl')}
@@ -151,7 +153,6 @@ function get_date() {
       </tr>
     </table>
 {/if}
-  </td>
-</tr>
-</table>
+
 {$forms.expensesForm.close}
+</div>

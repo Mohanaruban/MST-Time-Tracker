@@ -132,15 +132,15 @@ class CheckboxGroup extends FormElement {
 	    }
 	    
 	    
-	    $html = "\n\t<table style=\"".$this->mStyle."\"><tr><td align=\"center\" bgcolor=\"eeeeee\">\n";
+	    $html = "\n\t<table class=\"table\" style=\"margin-bottom: -20px;\"><tr><td>\n";
 	    $html .= '<a href="#" onclick="setAll'.$this->getName().'(true);return false;">'.$this->lSelAll.'</a>&nbsp;/&nbsp;<a href="#" onclick="setAll'.$this->getName().'(false);return false;">'.$this->lSelNone.'</a>';
 	    $html .= "</td></tr>\n";
 	    $html .= "<tr><td>";
-	    $html .= "\n\t<table width=\"100%\">\n";
+	    $html .= "\n\t<table class=\"table\">\n";
 	    for ($i = 0; $i < $renderRows; $i++) {
 	    	$html .= "<tr>";
 	    	for ($j = 0; $j < $renderCols; $j++) {
-    			$html .= "\t<td width=\"".(floor(100/$renderCols))."%\">".(isset($renderArray[$j][$i])?$renderArray[$j][$i]:"&nbsp;")."</td>\n";
+    			$html .= "\t<td style=\"border:none\" align=\"left\" width=\"".(floor(100/$renderCols))."%\">".(isset($renderArray[$j][$i])?$renderArray[$j][$i]:"&nbsp;")."</td>\n";
 	    	}
 	    	$html .= "</tr>\n";
 	    }

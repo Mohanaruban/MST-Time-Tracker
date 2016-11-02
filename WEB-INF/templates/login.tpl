@@ -1,21 +1,23 @@
 <script>
-<!--
-function get_date() {
-  var date = new Date();
-  return date.strftime("%Y-%m-%d");
-}
+  <!--
+  function get_date() {
+    var date = new Date();
+    return date.strftime("%Y-%m-%d");
+  }
 //-->
 </script>
-<table cellspacing="4" cellpadding="7" border="0">
-  <tr>
-    <td>
-      {$forms.loginForm.open}
-      {include file="login.`$smarty.const.AUTH_MODULE`.tpl"}
-      {$forms.loginForm.close}
-    </td>
-  </tr>
-</table>
 
-{if !empty($about_text)}
-  <div id="LoginAboutText"> {$about_text} </div>
-{/if}
+<div class="col-md-5 col-md-offset-4 text-center">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Login Information</h3>
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-12">
+        {$forms.loginForm.open}
+        {include file="login.`$smarty.const.AUTH_MODULE`.tpl"}
+        {$forms.loginForm.close}
+      </div>
+    </div>
+  </div>
+</div>
