@@ -234,7 +234,7 @@ function get_time() {
       {if $user->isPluginEnabled('iv')}
       <div class="form-group">
         <label class="col-md-3 control-label">&nbsp;</label>
-        <div class="col-md-9">{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</div>
+        <div class="col-md-9 text-left">{$forms.timeRecordForm.billable.control}{$i18n.form.time.billable}</div>
       </div>
       {/if}
 

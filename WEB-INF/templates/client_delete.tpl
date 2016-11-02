@@ -3,8 +3,8 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.form.client.client_to_delete}</label>
-        <div class="col-sm-9">{$client_to_delete|escape:'html'}</div>
+        <label class="col-sm-3 text-right">{$i18n.form.client.client_to_delete}</label>
+        <label class="col-sm-9 text-left">{$client_to_delete|escape:'html'}</label>
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.form.client.client_entries}</label>
