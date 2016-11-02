@@ -66,6 +66,7 @@ if ($request->isPost()) {
 
 // Initialize elements of 'expenseItemForm'.
 $form = new Form('expenseItemForm');
+$form->addFormStyle(array('class'=>'form-horizontal'));
 
 // Dropdown for clients in MODE_TIME. Use all active clients.
 if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {

@@ -1,41 +1,37 @@
-{$forms.clientForm.open}
-<table cellspacing="4" cellpadding="7" border="0">
-  <tr>
-    <td>
-      <table cellspacing="1" cellpadding="2" border="0">
-        <tr>
-          <td align="right">{$i18n.label.client_name} (*):</td>
-          <td>{$forms.clientForm.name.control}</td>
-        </tr>
-        <tr>
-          <td align="right">{$i18n.label.client_address}:</td>
-          <td>{$forms.clientForm.address.control}</td>
-        </tr>
-        <tr>
-          <td align="right">{$i18n.label.tax}, %:</td>
-          <td>{$forms.clientForm.tax.control}&nbsp;(0{$user->decimal_mark}00)</td>
-        </tr>
-        <tr>
-          <td align = "right">{$i18n.label.status}:</td>
-          <td>{$forms.clientForm.status.control}</td>
-        </tr>
-        <tr>
-          <td height="40"></td>
-          <td>{$i18n.label.required_fields}</td>
-        </tr>
-        <tr><td>&nbsp;</td></tr>
-{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <tr>
-          <td align="right">{$i18n.label.projects}:</td>
-          <td>{$forms.clientForm.projects.control}</td>
-        </tr>
-{/if}
-        <tr><td>&nbsp;</td></tr>
-        <tr>
-          <td colspan="2" align="center" height="50">{$forms.clientForm.btn_save.control} {$forms.clientForm.btn_copy.control}</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-{$forms.clientForm.close}
+<div class="col-sm-8 col-sm-offset-2 text-center">
+  {$forms.clientForm.open}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.client_name} (*)</label>
+        <div class="col-sm-9">{$forms.clientForm.name.control}</div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.client_address}</label>
+        <div class="col-sm-9">{$forms.clientForm.address.control}</div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.tax}, %</label>
+        <div class="col-sm-9">{$forms.clientForm.tax.control}&nbsp;(0{$user->decimal_mark}00</div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.status}</label>
+        <div class="col-sm-9">{$forms.clientForm.status.control}</div>
+      </div>
+      {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.projects}</label>
+        <div class="col-sm-9">{$forms.clientForm.projects.control}</div>
+        </div>
+      {/if}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">{$forms.clientForm.btn_save.control} {$forms.clientForm.btn_copy.control}</div>
+          </div>
+        </div>
+      </div>
+      {$forms.clientForm.close}
+    </div>
+  </div>
+</div>

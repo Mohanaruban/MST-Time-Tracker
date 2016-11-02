@@ -96,7 +96,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in as {$user->name|escape:'html'}{if $user->isAdmin()} {$i18n.label.role_admin}{elseif $user->isManager()} {$i18n.label.role_manager}{elseif $user->canManageTeam()} {$i18n.label.role_comanager}{/if}
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  {if !$user->v}
+                  {if !$user->isAdmin()}
                   <li><a href="profile_edit.php">Edit Profile</a></li>
                   <li class="divider visible-md visible-lg visible-sm"></li>
                   {/if}

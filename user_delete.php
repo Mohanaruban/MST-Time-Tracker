@@ -60,8 +60,8 @@ else
 // Create confirmation form.
 $form = new Form('userDeleteForm');
 $form->addInput(array('type'=>'hidden', 'class'=>'form-control', 'name'=>'id','value'=>$user_id));
-$form->addInput(array('type'=>'submit', 'class'=>'btn btn-danger btn', 'name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
-$form->addInput(array('type'=>'submit', 'class'=>'btn btn-primary btn', 'name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-danger', 'name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-warning', 'name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
