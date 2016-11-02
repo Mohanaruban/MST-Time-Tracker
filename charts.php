@@ -122,6 +122,8 @@ if ($request->getMethod( )== 'POST') {
 // Elements of chartForm.
 $chart_form = new Form('chartForm');
 
+$chart_form->addFormStyle(array('class'=>'form-horizontal'));
+
 // User dropdown. Changes the user "on behalf" of whom we are working. 
 if ($user->canManageTeam()) {
   $user_list = ttTeamHelper::getActiveUsers(array('putSelfFirst'=>true));
@@ -132,6 +134,7 @@ if ($user->canManageTeam()) {
       'value'=>$on_behalf_id,
       'data'=>$user_list,
       'datakeys'=>array('id','name'),
+      'class'=>'form-control'
     ));
     $smarty->assign('on_behalf_control', 1);
   }
@@ -150,7 +153,8 @@ $chart_form->addInput(array('type' => 'combobox',
   'onchange' => 'if(this.form) this.form.submit();',
   'name' => 'interval',
   'value' => $cl_interval,
-  'data' => $intervals
+  'data' => $intervals,
+  'class'=>'form-control'
 ));
 
 // Chart type options.
@@ -169,7 +173,8 @@ if ($chart_selector) {
     'onchange' => 'if(this.form) this.form.submit();',
     'name' => 'type',
     'value' => $cl_type,
-    'data' => $types
+    'data' => $types,
+    'class'=>'form-control'
   ));
 }
 
