@@ -151,7 +151,7 @@ class RateCellRenderer extends DefaultCellRenderer {
 // Create projects table.
 $table = new Table('projects');
 $table->setIAScript('setRate');
-$table->setTableOptions(array('class'=>'table table-responsive table-striped table-hover table-bordered'));
+$table->setTableOptions(array('class'=>'table table-responsive table-striped table-hover table-bordered text-left', 'id'=>"projectTable"));
 $table->setRowOptions(array('valign'=>'top'));
 $table->setData($projects);
 $table->setKeyField('id');
