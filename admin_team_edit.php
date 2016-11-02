@@ -60,6 +60,7 @@ if ($request->isPost()) {
 }
 
 $form = new Form('teamForm');
+$form->addFormStyle(array('class'=>'form-horizontal'));
 $form->addInput(array('type'=>'text','maxlength'=>'80', 'class'=>'form-control','name'=>'team_name','value'=>$cl_team_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control','name'=>'manager_name','value'=>$cl_manager_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control','name'=>'manager_login','value'=>$cl_manager_login));
@@ -70,7 +71,7 @@ if (!$auth->isPasswordExternal()) {
 $form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control','name'=>'manager_email','value'=>$cl_manager_email));
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$team_id));
 $form->addInput(array('type'=>'submit', 'class'=>'btn btn-success','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
-$form->addInput(array('type'=>'submit','class'=>'btn btn-primary', 'name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-warning', 'name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_save')) {
