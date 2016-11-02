@@ -42,7 +42,8 @@ if (function_exists('bzcompress'))
   $compressors['bzip'] = $i18n->getKey('form.export.compression_bzip');
 
 $form = new Form('exportForm');
-$form->addInput(array('type'=>'combobox','name'=>'compression','value'=>$cl_compression,'data'=>$compressors));
+$form->addFormStyle(array('class'=>'form-horizontal'));
+$form->addInput(array('type'=>'combobox','class'=>'form-control','name'=>'compression','value'=>$cl_compression,'data'=>$compressors));
 $form->addInput(array('type'=>'submit', 'class'=>'btn btn-primary', 'name'=>'btn_submit','value'=>$i18n->getKey('button.export')));
 
 if ($request->isPost()) {
