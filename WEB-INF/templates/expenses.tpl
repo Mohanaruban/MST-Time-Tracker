@@ -109,29 +109,30 @@ function get_date() {
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-      <div class="col-sm-9 col-sm-offset-3">{$forms.expensesForm.btn_submit.control}</div>
+      <div class="col-sm-9 col-sm-offset-2">{$forms.expensesForm.btn_submit.control}</div>
       </div>
     </div>
   </div>
 
 
 
-<table width="720">
-<tr>
-  <td valign="top">
+
 {if $expense_items}
-      <table border="0" cellpadding="3" cellspacing="1" width="100%">
+      <table class="table table-responsive table-striped table-hover table-bordered">
+      <thead>
       <tr>
   {if $user->isPluginEnabled('cl')}
-        <td width="20%" class="tableHeader">{$i18n.label.client}</td>
+
+        <th width="20%" >{$i18n.label.client}</th>
   {/if}
   {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <td class="tableHeader">{$i18n.label.project}</td>
+        <th >{$i18n.label.project}</th>
   {/if}
-        <td class="tableHeader">{$i18n.label.item}</td>
-        <td width="5%" class="tableHeaderCentered">{$i18n.label.cost}</td>
-        <td width="5%" class="tableHeader">{$i18n.label.edit}</td>
+        <th >{$i18n.label.item}</th>
+        <th width="5%">{$i18n.label.cost}</th>
+        <th width="5%" >{$i18n.label.edit}</th>
       </tr>
+      </thead>
   {foreach $expense_items as $item}
       <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
     {if $user->isPluginEnabled('cl')}
@@ -152,8 +153,6 @@ function get_date() {
       </tr>
     </table>
 {/if}
-  </td>
-</tr>
-</table>
+
 {$forms.expensesForm.close}
 </div>

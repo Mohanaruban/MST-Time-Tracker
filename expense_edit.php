@@ -67,41 +67,40 @@ if ($request->isPost()) {
 // Initialize elements of 'expenseItemForm'.
 $form = new Form('expenseItemForm');
 $form->addFormStyle(array('class'=>'form-horizontal'));
-
 // Dropdown for clients in MODE_TIME. Use all active clients.
 if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
   $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
   $form->addInput(array('type'=>'combobox',
     'onchange'=>'fillProjectDropdown(this.value);',
     'name'=>'client',
-    'style'=>'width: 250px;',
+    'class'=>'form-control',
     'value'=>$cl_client,
     'data'=>$active_clients,
     'datakeys'=>array('id', 'name'),
     'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
-  // Note: in other modes the client list is filtered to relevant clients only. See below.
+// Note: in other modes the client list is filtered to relevant clients only. See below.
 }
 
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
-  // Dropdown for projects assigned to user.
+// Dropdown for projects assigned to user.
   $project_list = $user->getAssignedProjects();
   $form->addInput(array('type'=>'combobox',
     'name'=>'project',
-    'style'=>'width: 250px;',
+    'class'=>'form-control',
     'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
-  // Dropdown for clients if the clients plugin is enabled.
+// Dropdown for clients if the clients plugin is enabled.
   if ($user->isPluginEnabled('cl')) {
     $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
-    // We need an array of assigned project ids to do some trimming. 
+// We need an array of assigned project ids to do some trimming. 
     foreach($project_list as $project)
       $projects_assigned_to_user[] = $project['id'];
 
-    // Build a client list out of active clients. Use only clients that are relevant to user.
-    // Also trim their associated project list to only assigned projects (to user).
+// Build a client list out of active clients. Use only clients that are relevant to user.
+// Also trim their associated project list to only assigned projects (to user).
     foreach($active_clients as $client) {
       $projects_assigned_to_client = explode(',', $client['projects']);
       $intersection = array_intersect($projects_assigned_to_client, $projects_assigned_to_user);
@@ -113,25 +112,25 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     $form->addInput(array('type'=>'combobox',
       'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'client',
-      'style'=>'width: 250px;',
+      'class'=>'form-control',
       'value'=>$cl_client,
       'data'=>$client_list,
       'datakeys'=>array('id', 'name'),
       'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
   }
 }
-$form->addInput(array('type'=>'textarea','maxlength'=>'800','name'=>'item_name','style'=>'width: 250px; height:'.NOTE_INPUT_HEIGHT.'px;','value'=>$cl_item_name));
-$form->addInput(array('type'=>'text','maxlength'=>'40','name'=>'cost','style'=>'width: 100px;','value'=>$cl_cost));
-$form->addInput(array('type'=>'datefield','name'=>'date','maxlength'=>'20','value'=>$cl_date));
+$form->addInput(array('type'=>'textarea','maxlength'=>'800','name'=>'item_name','class'=>'form-control','value'=>$cl_item_name));
+$form->addInput(array('type'=>'text','maxlength'=>'40','name'=>'cost','class'=>'form-control','value'=>$cl_cost));
+$form->addInput(array('type'=>'datefield','class'=>'form-control','name'=>'date','maxlength'=>'20','value'=>$cl_date));
 // Hidden control for record id.
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
 $form->addInput(array('type'=>'hidden','name'=>'browser_today','value'=>'')); // User current date, which gets filled in on btn_save or btn_copy click.
-$form->addInput(array('type'=>'submit','name'=>'btn_save','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.save')));
-$form->addInput(array('type'=>'submit','name'=>'btn_copy','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.copy')));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-success','name'=>'btn_save','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.save')));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-warning','name'=>'btn_copy','onclick'=>'browser_today.value=get_date()','value'=>$i18n->getKey('button.copy')));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-danger','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
 
 if ($request->isPost()) {
-  // Validate user input.
+// Validate user input.
   if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
     $err->add($i18n->getKey('error.client'));
   if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
@@ -141,62 +140,62 @@ if ($request->isPost()) {
   if (!ttValidFloat($cl_cost)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.cost'));
   if (!ttValidDate($cl_date)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.date'));
 
-  // This is a new date for the expense item.
+// This is a new date for the expense item.
   $new_date = new DateAndTime($user->date_format, $cl_date);
 
-  // Prohibit creating entries in future.
+// Prohibit creating entries in future.
   if (defined('FUTURE_ENTRIES') && !isTrue(FUTURE_ENTRIES)) {
     $browser_today = new DateAndTime(DB_DATEFORMAT, $request->getParameter('browser_today', null));
     if ($new_date->after($browser_today))
       $err->add($i18n->getKey('error.future_date'));
   }
 
-  // Save record.
+// Save record.
   if ($request->getParameter('btn_save')) {
-    // We need to:
-    // 1) Prohibit updating locked entries (that are in locked range).
-    // 2) Prohibit saving unlocked entries into locked range.
+// We need to:
+// 1) Prohibit updating locked entries (that are in locked range).
+// 2) Prohibit saving unlocked entries into locked range.
 
-    // Now, step by step.
-    // 1) Prohibit saving locked entries in any form.
+// Now, step by step.
+// 1) Prohibit saving locked entries in any form.
     if ($user->isDateLocked($item_date))
       $err->add($i18n->getKey('error.range_locked'));
 
-    // 2) Prohibit saving unlocked entries into locked range.
+// 2) Prohibit saving unlocked entries into locked range.
     if ($err->no() && $user->isDateLocked($new_date))
       $err->add($i18n->getKey('error.range_locked'));
 
-    // Now, an update.
+// Now, an update.
     if ($err->no()) {
       if (ttExpenseHelper::update(array('id'=>$cl_id,'date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getActiveUser(),
-          'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost))) {
+        'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost))) {
         header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
-        exit();
-      }
+      exit();
     }
   }
+}
 
-  // Save as new record.
-  if ($request->getParameter('btn_copy')) {
-    // We need to prohibit saving into locked interval.
-    if ($user->isDateLocked($new_date))
-      $err->add($i18n->getKey('error.range_locked'));
+// Save as new record.
+if ($request->getParameter('btn_copy')) {
+// We need to prohibit saving into locked interval.
+  if ($user->isDateLocked($new_date))
+    $err->add($i18n->getKey('error.range_locked'));
 
-    // Now, a new insert.
-    if ($err->no()) {
-      if (ttExpenseHelper::insert(array('date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getActiveUser(),
-        'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1))) {
-        header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
-        exit();
-      } else
-        $err->add($i18n->getKey('error.db'));
-    }
-  }
-
-  if ($request->getParameter('btn_delete')) {
-    header("Location: expense_delete.php?id=$cl_id");
+// Now, a new insert.
+  if ($err->no()) {
+    if (ttExpenseHelper::insert(array('date'=>$new_date->toString(DB_DATEFORMAT),'user_id'=>$user->getActiveUser(),
+      'client_id'=>$cl_client,'project_id'=>$cl_project,'name'=>$cl_item_name,'cost'=>$cl_cost,'status'=>1))) {
+      header('Location: expenses.php?date='.$new_date->toString(DB_DATEFORMAT));
     exit();
-  }
+  } else
+  $err->add($i18n->getKey('error.db'));
+}
+}
+
+if ($request->getParameter('btn_delete')) {
+  header("Location: expense_delete.php?id=$cl_id");
+  exit();
+}
 } // isPost
 
 $smarty->assign('client_list', $client_list);

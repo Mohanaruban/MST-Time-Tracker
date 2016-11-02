@@ -41,13 +41,15 @@ $invoice = ttInvoiceHelper::getInvoice($cl_invoice_id);
 $invoice_to_delete = $invoice['name'];
 
 $form = new Form('invoiceDeleteForm');
+$form->addFormStyle(array('class'=>'form-horizontal'));
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_invoice_id));
 $form->addInput(array('type'=>'combobox',
     'name'=>'delete_invoice_entries',
+    'class'=>'form-control',
     'data'=>array('0'=>$i18n->getKey('dropdown.do_not_delete'),'1'=>$i18n->getKey('dropdown.delete')),
 ));
-$form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
-$form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-danger','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-primary','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
