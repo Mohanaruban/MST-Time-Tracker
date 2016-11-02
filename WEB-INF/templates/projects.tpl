@@ -19,7 +19,7 @@
         </thead>
         {if $active_projects}
         {foreach $active_projects as $project}
-        <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+        <tr>
           <td>{$project.name|escape:'html'}</td>
           <td>{$project.description|escape:'html'}</td>
           <td><a href="project_edit.php?id={$project.id}">{$i18n.label.edit}</a></td>
@@ -57,7 +57,7 @@
   </tr>
   </thead>
   {foreach $inactive_projects as $project}
-  <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+  <tr>
     <td>{$project.name|escape:'html'}</td>
     <td>{$project.description|escape:'html'}</td>
     <td><a href="project_edit.php?id={$project.id}">{$i18n.label.edit}</a></td>
@@ -82,7 +82,7 @@
   </tr>
   {if $active_projects}
   {foreach $active_projects as $project}
-  <tr bgcolor="{cycle values="#f5f5f5,#dedee5"}">
+  <tr>
     <td>{$project.name|escape:'html'}</td>
     <td>{$project.description|escape:'html'}</td>
   </tr>

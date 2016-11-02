@@ -1,20 +1,22 @@
+<div class="col-sm-8 col-sm-offset-2">
 {$forms.expenseItemForm.open}
-<table cellspacing="4" cellpadding="7" border="0" width="720">
-<tr>
-  <td>
-  <table border='0' cellpadding='3' cellspacing='1' width="100%">
+  <div class="row">
+    <div class="col-sm-12">
+  <table class="table table-responsive table-striped table-hover table-bordered">
   <tr>
+  <thead>
 {if $user->isPluginEnabled('cl')}
-    <td class="tableHeader" align="center">{$i18n.label.client}</td>
+    <th>{$i18n.label.client}</th>
 {/if}
 
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-    <td class="tableHeader" align="center">{$i18n.label.project}</td>
+    <th>{$i18n.label.project}</th>
 {/if}
-    <td class="tableHeader" align="center">{$i18n.label.item}</td>
-    <td class="tableHeader" align="center">{$i18n.label.cost}</td>
+    <th>{$i18n.label.item}</th>
+    <th>{$i18n.label.cost}</th>
   </tr>
-  <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
+  </thead>
+  <tr>
 {if $user->isPluginEnabled('cl')}
   <td>{$expense_item.client_name|escape:'html'}</td>
 {/if}
@@ -25,6 +27,11 @@
     <td align="right">{$expense_item.cost}</td>
   </tr>
   </table>
+  
+  </div>
+  </div>
+    <div class="row">
+    <div class="col-sm-12">
   <table width="100%">
   <tr>
     <td align="center">&nbsp;</td>
@@ -33,7 +40,7 @@
     <td align="center">{$forms.expenseItemForm.delete_button.control}&nbsp;&nbsp;{$forms.expenseItemForm.cancel_button.control}</td>
   </tr>
   </table>
-  </td>
-</tr>
-</table>
+  </div>
+  </div>
 {$forms.expenseItemForm.close}
+</div>

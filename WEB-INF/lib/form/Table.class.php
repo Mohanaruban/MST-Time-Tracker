@@ -134,7 +134,7 @@ class Table extends FormElement {
     
     // Print headers.
 	if (($this->mInteractive && (count($this->mHeaders) > 1)) || (!$this->mInteractive && (count($this->mHeaders) > 0))) {
-      $html .= "<tr";
+      $html .= "<thead><tr";
       if (count($this->mRowOptions) > 0) {
         foreach ($this->mRowOptions as $k=>$v) {
           $html .= " $k=\"$v\"";
@@ -150,12 +150,12 @@ class Table extends FormElement {
         }
         $html .= ">$header</th>\n";
       }
-      $html .= "</tr>\n";
+      $html .= "</tr></thead>\n";
     }
     
     // Print rows.
     for ($row = 0; $row < count($this->mData); $row++) {
-      $html .= "\n<tr bgcolor=\"".$this->mBgColor."\" onmouseover=\"setRowBackground(this, '".$this->mBgColorOver."')\" onmouseout=\"setRowBackground(this, null)\">\n";
+      $html .= "\n<tr>\n";
       for ($col = 0; $col < $this->getColumnCount(); $col++) {
         if (0 == $col && strtolower(get_class($this->mColumns[$col]->getRenderer())) == 'checkboxcellrenderer') {
           // Checkbox for the row. Determine if selected.
