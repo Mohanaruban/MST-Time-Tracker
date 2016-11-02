@@ -47,22 +47,23 @@ if ($request->isPost()) {
 }
 
 $form = new Form('invoiceForm');
-$form->addInput(array('type'=>'datefield','name'=>'date','size'=>'20','value'=>$cl_date));
+$form->addFormStyle(array('class'=>'form-horizontal'));
+$form->addInput(array('type'=>'datefield','class'=>'form-control','name'=>'date','size'=>'20','value'=>$cl_date));
 
 // Dropdown for clients if the clients plugin is enabled.
 if ($user->isPluginEnabled('cl')) {
   $clients = ttTeamHelper::getActiveClients($user->team_id);
-  $form->addInput(array('type'=>'combobox','name'=>'client','style'=>'width: 250px;','data'=>$clients,'datakeys'=>array('id','name'),'value'=>$cl_client,'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+  $form->addInput(array('type'=>'combobox','name'=>'client','class'=>'form-control','data'=>$clients,'datakeys'=>array('id','name'),'value'=>$cl_client,'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 }
 // Dropdown for projects.
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
   $projects = ttTeamHelper::getActiveProjects($user->team_id);
-  $form->addInput(array('type'=>'combobox','name'=>'project','style'=>'width: 250px;','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_project,'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
+  $form->addInput(array('type'=>'combobox','name'=>'project','class'=>'form-control','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_project,'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 }
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'number','style'=>'width: 250px;','value'=>$cl_number));
-$form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'start','value'=>$cl_start));
-$form->addInput(array('type'=>'datefield','maxlength'=>'20','name'=>'finish','value'=>$cl_finish));
-$form->addInput(array('type'=>'submit','name'=>'btn_submit','value'=>$i18n->getKey('button.add')));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'number','class'=>'form-control','value'=>$cl_number));
+$form->addInput(array('type'=>'datefield','maxlength'=>'20', 'class'=>'form-control','name'=>'start','value'=>$cl_start));
+$form->addInput(array('type'=>'datefield','maxlength'=>'20', 'class'=>'form-control','name'=>'finish','value'=>$cl_finish));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-success','name'=>'btn_submit','value'=>$i18n->getKey('button.add')));
 
 if ($request->isPost()) {
   // Validate user input.

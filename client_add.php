@@ -51,11 +51,12 @@ if ($request->isPost()) {
 }
 
 $form = new Form('clientForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 350px;','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','style'=>'width: 350px;','cols'=>'55','rows'=>'5','value'=>$cl_address));
-$form->addInput(array('type'=>'floatfield','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
+$form->addFormStyle(array('class'=>'form-horizontal'));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','class'=>'form-control','value'=>$cl_name));
+$form->addInput(array('type'=>'textarea', 'class'=>'form-control', 'name'=>'address','maxlength'=>'255','class'=>'form-control','cols'=>'55','rows'=>'5','value'=>$cl_address));
+$form->addInput(array('type'=>'floatfield', 'class'=>'form-control','name'=>'tax','size'=>'10','format'=>'.2','value'=>$cl_tax));
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
-  $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','data'=>$projects,'layout'=>'H','datakeys'=>array('id','name'),'value'=>$cl_projects));
+  $form->addInput(array('type'=>'checkboxgroup', 'class'=>'form-control',  'name'=>'projects','data'=>$projects,'layout'=>'H','datakeys'=>array('id','name'),'value'=>$cl_projects));
 $form->addInput(array('type'=>'submit', 'class'=>'btn btn-primary', 'name'=>'btn_submit','value'=>$i18n->getKey('button.add')));
 
 if ($request->isPost()) {
