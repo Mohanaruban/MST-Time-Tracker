@@ -46,7 +46,10 @@ class TextField extends FormElement {
 		if (!$this->isRenderable()) return "";
 	    
 		if (!$this->isEnable()) {
-			$html = "<input name=\"$this->mName\" value=\"".htmlspecialchars($this->getValue())."\" readonly>\n";  
+			$html = "<input name=\"$this->mName\" value=\"".htmlspecialchars($this->getValue())."\"";  
+			if ($this->mClassStyle!="")
+			   $html .= " class=\"$this->mClassStyle\"";
+			$html .= " readonly>";
 		} else {
 			
 		    if ($this->mId=="") $this->mId = $this->mName;

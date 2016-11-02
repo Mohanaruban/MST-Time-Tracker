@@ -145,16 +145,16 @@ function handlePluginCheckboxes() {
 
       {* initialize preview text *}
       <script>
-      MakeFormatPreview("date_format_preview", document.getElementById("format_date"));
-      MakeFormatPreview("time_format_preview", document.getElementById("format_time"));
+        MakeFormatPreview("date_format_preview", document.getElementById("format_date"));
+        MakeFormatPreview("time_format_preview", document.getElementById("format_time"));
 
-      function adjustDecimalPreview()
-      {
-        var mark = document.getElementById("decimal_mark").value;
-        var example = document.getElementById("decimal_preview");
-        example.innerHTML = "<i>3"+mark+"14</i>";
-      }
-      adjustDecimalPreview();
+        function adjustDecimalPreview()
+        {
+          var mark = document.getElementById("decimal_mark").value;
+          var example = document.getElementById("decimal_preview");
+          example.innerHTML = "<i>3"+mark+"14</i>";
+        }
+        adjustDecimalPreview();
       </script>
 
       <div class="form-group">
@@ -206,22 +206,16 @@ function handlePluginCheckboxes() {
         <div class="col-sm-9 text-left">{$forms.profileForm.quotas.control}</div>
       </div>
       {/if}
-
-
-
-
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-12">
-
       <div class="form-group">
         <div class="col-md-12 text-center">
           {$forms.profileForm.btn_save.control}
         </div>
       </div>
-
     </div>
   </div>
   {$forms.profileForm.close}
