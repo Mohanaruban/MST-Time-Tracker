@@ -210,9 +210,9 @@ $form->addInput(array('type'=>'submit','name'=>'btn_submit','class'=>'btn btn-su
 if ($custom_fields && $custom_fields->fields[0]) {
   // Only one custom field is supported at this time.
   if ($custom_fields->fields[0]['type'] == CustomFields::TYPE_TEXT) {
-    $form->addInput(array('type'=>'text','name'=>'cf_1','value'=>$cl_cf_1));
+    $form->addInput(array('type'=>'text','name'=>'cf_1','class' => 'form-control','value'=>$cl_cf_1));
   } elseif ($custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
-    $form->addInput(array('type'=>'combobox','name'=>'cf_1',
+    $form->addInput(array('type'=>'combobox','name'=>'cf_1', 'class' => 'form-control',
       'value'=>$cl_cf_1,
       'data'=>$custom_fields->options,
       'empty'=>array(''=>$i18n->getKey('dropdown.select'))));

@@ -45,13 +45,14 @@ if ($request->isPost()) {
 }
 
 $form = new Form('fieldForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>''));
-$form->addInput(array('type'=>'combobox','name'=>'type',
+$form->addFormStyle(array('class'=>'form-horizontal'));
+$form->addInput(array('type'=>'text','maxlength'=>'100','class'=>'form-control','name'=>'name','value'=>''));
+$form->addInput(array('type'=>'combobox','class'=>'form-control','name'=>'type',
   'data'=>array(CustomFields::TYPE_TEXT=>$i18n->getKey('label.type_text'),
                 CustomFields::TYPE_DROPDOWN=>$i18n->getKey('label.type_dropdown'))
 ));
-$form->addInput(array('type'=>'checkbox','name'=>'required','data'=>1,'value'=>'0'));
-$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));	
+$form->addInput(array('type'=>'checkbox','class'=>'form-control','name'=>'required','data'=>1,'value'=>'0'));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-success','name'=>'btn_add','value'=>$i18n->getKey('button.add')));	
 
 if ($request->isPost()) {
   // Validate user input.

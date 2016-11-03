@@ -50,14 +50,14 @@
         {/foreach}
         {/if}
       </table>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="form-group">
+      <div class="col-sm-12"><form><input class="btn btn-success" " type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add_user}"></form></div>
+      </div>
+    </div>
+  </div>
 
-      <table>
-        <tr>
-          <td align="center"><br>
-            <form><input class="btn btn-success" " type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add_user}"></form>
-          </td>
-        </tr>
-      </table>
 
 {if $inactive_users}
 <table class="table table-responsive table-striped table-hover table-bordered">
@@ -97,13 +97,15 @@
   {/foreach}
 </table>
 
-<table>
-  <tr>
-    <td align="center" height="50">
-      <form><input type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add_user}"></form>
-    </td>
-  </tr>
-</table>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="form-group">
+      <div class="col-sm-12"><form><input type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add_user}"></form></div>
+      </div>
+    </div>
+  </div>
+
+
 {/if}
 {else}
 <table class="table table-responsive table-striped table-hover table-bordered">

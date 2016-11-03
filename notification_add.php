@@ -50,17 +50,18 @@ if ($request->isPost()) {
 }
 
 $form = new Form('notificationForm');
+$form->addFormStyle(array('class'=>'form-horizontal'));
 $form->addInput(array('type'=>'combobox',
   'name'=>'fav_report',
-  'style'=>'width: 250px;',
+  'class'=>'form-control',
   'value'=>$cl_fav_report,
   'data'=>$fav_reports,
   'datakeys'=>array('id','name'),
   'empty'=>array(''=>$i18n->getKey('dropdown.select'))
 ));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'cron_spec','style'=>'width: 250px;','value'=>$cl_cron_spec));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','style'=>'width: 250px;','value'=>$cl_email));
-$form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'cron_spec','class'=>'form-control','value'=>$cl_cron_spec));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','class'=>'form-control','value'=>$cl_email));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-success','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
 
 if ($request->isPost()) {
   // Validate user input.

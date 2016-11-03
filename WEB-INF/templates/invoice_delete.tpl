@@ -15,7 +15,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-      <div class="col-sm-9 col-sm-offset-3">{$forms.invoiceDeleteForm.btn_delete.control}&nbsp;{$forms.invoiceDeleteForm.btn_cancel.control}</div>
+      <div class="col-sm-12">{$forms.invoiceDeleteForm.btn_delete.control}&nbsp;{$forms.invoiceDeleteForm.btn_cancel.control}</div>
       </div>
     </div>
   </div>
