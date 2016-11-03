@@ -57,14 +57,15 @@ if ($request->isPost()) {
 }
 
 $form = new Form('taskForm');
+$form->addFormStyle(array('class'=>'form-horizontal'));
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_task_id));
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','style'=>'width: 250px;','value'=>$cl_name));
-$form->addInput(array('type'=>'textarea','name'=>'description','style'=>'width: 250px; height: 40px;','value'=>$cl_description));
-$form->addInput(array('type'=>'combobox','name'=>'status','value'=>$cl_status,
+$form->addInput(array('type'=>'text','maxlength'=>'100','class'=>'form-control','name'=>'name','value'=>$cl_name));
+$form->addInput(array('type'=>'textarea','class'=>'form-control','name'=>'description','value'=>$cl_description));
+$form->addInput(array('type'=>'combobox','class'=>'form-control','name'=>'status','value'=>$cl_status,
   'data'=>array(ACTIVE=>$i18n->getKey('dropdown.status_active'),INACTIVE=>$i18n->getKey('dropdown.status_inactive'))));
 $form->addInput(array('type'=>'checkboxgroup','name'=>'projects','layout'=>'H','data'=>$projects,'datakeys'=>array('id','name'),'value'=>$cl_projects));
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
-$form->addInput(array('type'=>'submit','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-success','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-warning','name'=>'btn_copy','value'=>$i18n->getKey('button.copy')));
 
 if ($request->isPost()) {
   // Validate user input.
