@@ -36,7 +36,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="http://www.mstsolutions.com/" class="navbar-brand" target="_blank">MST Time Tracker</a>
+          <a class="navbar-brand" target="_blank">MST Time Tracker</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

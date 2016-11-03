@@ -11,11 +11,11 @@
         {/if}
         <thead>
           <tr>
-            <th width="35%">{$i18n.label.person_name}</th>
-            <th width="35%">{$i18n.label.login}</th>
-            <th width="10%">{$i18n.form.users.role}</th>
-            <th width="10%">{$i18n.label.edit}</th>
-            <th width="10%">{$i18n.label.delete}</th>
+            <th>{$i18n.label.person_name}</th>
+            <th>{$i18n.label.login}</th>
+            <th>{$i18n.form.users.role}</th>
+            <th>{$i18n.label.edit}</th>
+            <th>{$i18n.label.delete}</th>
           </tr>
         </thead>
         {if $active_users}
@@ -50,25 +50,25 @@
         {/foreach}
         {/if}
       </table>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="form-group">
+      <div class="col-sm-12"><form><input class="btn btn-success" " type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add_user}"></form></div>
+      </div>
+    </div>
+  </div>
 
-      <table width="100%">
-        <tr>
-          <td align="center"><br>
-            <form><input class="btn btn-success" " type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add_user}"></form>
-          </td>
-        </tr>
-      </table>
 
 {if $inactive_users}
 <table class="table table-responsive table-striped table-hover table-bordered">
   <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.inactive_users}</td></tr>
   <thead>
     <tr>
-      <th width="35%">{$i18n.label.person_name}</th>
-      <th width="35%">{$i18n.label.login}</th>
-      <th width="10%">{$i18n.form.users.role}</th>
-      <th width="10%">{$i18n.label.edit}</th>
-      <th width="10%">{$i18n.label.delete}</th>
+      <th>{$i18n.label.person_name}</th>
+      <th>{$i18n.label.login}</th>
+      <th>{$i18n.form.users.role}</th>
+      <th>{$i18n.label.edit}</th>
+      <th>{$i18n.label.delete}</th>
     </tr>
   </thead>
   {foreach $inactive_users as $u}
@@ -97,20 +97,22 @@
   {/foreach}
 </table>
 
-<table width="100%">
-  <tr>
-    <td align="center" height="50">
-      <form><input type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add_user}"></form>
-    </td>
-  </tr>
-</table>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="form-group">
+      <div class="col-sm-12"><form><input type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add_user}"></form></div>
+      </div>
+    </div>
+  </div>
+
+
 {/if}
 {else}
 <table class="table table-responsive table-striped table-hover table-bordered">
   <thead>
   <tr>
-    <th width="35%">{$i18n.label.person_name}</th>
-    <th width="35%">{$i18n.label.login}</th>
+    <th>{$i18n.label.person_name}</th>
+    <th>{$i18n.label.login}</th>
     <th>{$i18n.form.users.role}</th>
   </tr>
   </thead>

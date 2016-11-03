@@ -37,7 +37,7 @@ if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('no')) {
 }
 
 $form = new Form('notificationsForm');
-
+$form->addFormStyle(array('class'=>'form-horizontal'));
 if ($request->isPost()) {
   if ($request->getParameter('btn_add')) {
     // The Add button clicked. Redirect to notification_add.php page.
@@ -45,7 +45,7 @@ if ($request->isPost()) {
     exit();
   }
 } else {
-  $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
+  $form->addInput(array('type'=>'submit','class'=>'btn btn-success','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
   $notifications = ttTeamHelper::getNotifications($user->team_id);
 }
 

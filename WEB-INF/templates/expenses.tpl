@@ -123,18 +123,18 @@ function get_date() {
       <tr>
   {if $user->isPluginEnabled('cl')}
 
-        <th width="20%" >{$i18n.label.client}</th>
+        <th>{$i18n.label.client}</th>
   {/if}
   {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-        <th >{$i18n.label.project}</th>
+        <th>{$i18n.label.project}</th>
   {/if}
-        <th >{$i18n.label.item}</th>
-        <th width="5%">{$i18n.label.cost}</th>
-        <th width="5%" >{$i18n.label.edit}</th>
+        <th>{$i18n.label.item}</th>
+        <th>{$i18n.label.cost}</th>
+        <th>{$i18n.label.edit}</th>
       </tr>
       </thead>
   {foreach $expense_items as $item}
-      <tr bgcolor="{cycle values="#f5f5f5,#ccccce"}">
+      <tr>
     {if $user->isPluginEnabled('cl')}
         <td valign='top'>{$item.client|escape:'html'}</td>
     {/if}
@@ -147,7 +147,7 @@ function get_date() {
       </tr>
   {/foreach}
     </table>
-    <table border="0" cellpadding="3" cellspacing="1" width="100%">
+    <table border="0" cellpadding="3" cellspacing="1" >
       <tr>
         <td nowrap align="right">{$i18n.label.day_total}: {$user->currency|escape:'html'} {$day_total}</td>
       </tr>
