@@ -271,7 +271,9 @@ function setNow(formField) {
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-        <div class="col-sm-9 col-sm-offset-3">{$forms.timeRecordForm.btn_save.control} {$forms.timeRecordForm.btn_copy.control} {$forms.timeRecordForm.btn_delete.control}</div>
+        <div class="col-sm-9 col-sm-offset-3">{$forms.timeRecordForm.btn_save.control} {$forms.timeRecordForm.btn_copy.control} {$forms.timeRecordForm.btn_delete.control}
+        <a class="btn btn-info" href="time.php">Back</a>
+        </div>
       </div>
     </div>
   </div>

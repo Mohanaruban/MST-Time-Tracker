@@ -14,17 +14,17 @@
       </tr>
       {foreach $subtotals as $subtotal}
       <tr class="warning">
-        <td class="cellLeftAlignedSubtotal">{if $subtotal['name']}{$subtotal['name']|escape:'html'}{else}&nbsp;{/if}</td>
-        {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$subtotal['time']}</td>{/if}
-        {if $bean->getAttribute('chcost')}<td class="cellRightAlignedSubtotal">{if $user->canManageTeam() || $user->isClient()}{$subtotal['cost']}{else}{$subtotal['expenses']}{/if}</td>{/if}
+        <td>{if $subtotal['name']}{$subtotal['name']|escape:'html'}{else}&nbsp;{/if}</td>
+        {if $bean->getAttribute('chduration')}<td>{$subtotal['time']}</td>{/if}
+        {if $bean->getAttribute('chcost')}<td>{if $user->canManageTeam() || $user->isClient()}{$subtotal['cost']}{else}{$subtotal['expenses']}{/if}</td>{/if}
       </tr>
       {/foreach}
       <!-- print totals -->
       <tr><td>&nbsp;</td></tr>
       <tr class="info">
-        <td class="cellLeftAlignedSubtotal">{$i18n.label.total}</td>
-        {if $bean->getAttribute('chduration')}<td nowrap class="cellRightAlignedSubtotal">{$totals['time']}</td>{/if}
-        {if $bean->getAttribute('chcost')}<td nowrap class="cellRightAlignedSubtotal">{$user->currency|escape:'html'} {if $user->canManageTeam() || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>{/if}
+        <td>{$i18n.label.total}</td>
+        {if $bean->getAttribute('chduration')}<td nowrap>{$totals['time']}</td>{/if}
+        {if $bean->getAttribute('chcost')}<td nowrap>{$user->currency|escape:'html'} {if $user->canManageTeam() || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>{/if}
       </tr>
       {else}
       <!-- normal report -->
@@ -51,17 +51,17 @@
       {$cur_grouped_by = $item.grouped_by}
       {if $cur_grouped_by != $prev_grouped_by && !$first_pass}
       <tr class="warning">
-        <td class="cellLeftAlignedSubtotal">{$i18n.label.subtotal}
-          {if $user->canManageTeam() || $user->isClient()}<td class="cellLeftAlignedSubtotal">{if $group_by == 'user'}{$subtotals[$prev_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
-          {if $bean->getAttribute('chclient')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'client'}{$subtotals[$prev_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
-          {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'project'}{$subtotals[$prev_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
-          {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'task'}{$subtotals[$prev_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
-          {if $bean->getAttribute('chcf_1')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'cf_1'}{$subtotals[$prev_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
+        <td>{$i18n.label.subtotal}
+          {if $user->canManageTeam() || $user->isClient()}<td>{if $group_by == 'user'}{$subtotals[$prev_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
+          {if $bean->getAttribute('chclient')}<td>{if $group_by == 'client'}{$subtotals[$prev_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
+          {if $bean->getAttribute('chproject')}<td>{if $group_by == 'project'}{$subtotals[$prev_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
+          {if $bean->getAttribute('chtask')}<td>{if $group_by == 'task'}{$subtotals[$prev_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
+          {if $bean->getAttribute('chcf_1')}<td>{if $group_by == 'cf_1'}{$subtotals[$prev_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
           {if $bean->getAttribute('chstart')}<td></td>{/if}
           {if $bean->getAttribute('chfinish')}<td></td>{/if}
-          {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$subtotals[$prev_grouped_by]['time']}</td>{/if}
+          {if $bean->getAttribute('chduration')}<td>{$subtotals[$prev_grouped_by]['time']}</td>{/if}
           {if $bean->getAttribute('chnote')}<td></td>{/if}
-          {if $bean->getAttribute('chcost')}<td class="cellRightAlignedSubtotal">{if $user->canManageTeam() || $user->isClient()}{$subtotals[$prev_grouped_by]['cost']}{else}{$subtotals[$prev_grouped_by]['expenses']}{/if}</td>{/if}
+          {if $bean->getAttribute('chcost')}<td>{if $user->canManageTeam() || $user->isClient()}{$subtotals[$prev_grouped_by]['cost']}{else}{$subtotals[$prev_grouped_by]['expenses']}{/if}</td>{/if}
           {if $bean->getAttribute('chinvoice')}<td></td>{/if}
         </tr>
         <tr><td>&nbsp;</td></tr>
@@ -72,20 +72,20 @@
         {if $cur_date != $prev_date}
         {if $report_row_class == 'rowReportItem'} {$report_row_class = 'rowReportItemAlt'} {else} {$report_row_class = 'rowReportItem'} {/if}
         {/if}
-        <tr class="{$report_row_class}">
-          <td class="cellLeftAligned">{$item.date}</td>
-          {if $user->canManageTeam() || $user->isClient()}<td class="cellLeftAligned">{$item.user|escape:'html'}</td>{/if}
-          {if $bean->getAttribute('chclient')}<td class="cellLeftAligned">{$item.client|escape:'html'}</td>{/if}
-          {if $bean->getAttribute('chproject')}<td class="cellLeftAligned">{$item.project|escape:'html'}</td>{/if}
-          {if $bean->getAttribute('chtask')}<td class="cellLeftAligned">{$item.task|escape:'html'}</td>{/if}
-          {if $bean->getAttribute('chcf_1')}<td class="cellLeftAligned">{$item.cf_1|escape:'html'}</td>{/if}
-          {if $bean->getAttribute('chstart')}<td nowrap class="cellRightAligned">{$item.start}</td>{/if}
-          {if $bean->getAttribute('chfinish')}<td nowrap class="cellRightAligned">{$item.finish}</td>{/if}
-          {if $bean->getAttribute('chduration')}<td class="cellRightAligned">{$item.duration}</td>{/if}
-          {if $bean->getAttribute('chnote')}<td class="cellLeftAligned">{$item.note|escape:'html'}</td>{/if}
-          {if $bean->getAttribute('chcost')}<td class="cellRightAligned">{if $user->canManageTeam() || $user->isClient()}{$item.cost}{else}{$item.expense}{/if}</td>{/if}
+        <tr>
+          <td>{$item.date}</td>
+          {if $user->canManageTeam() || $user->isClient()}<td>{$item.user|escape:'html'}</td>{/if}
+          {if $bean->getAttribute('chclient')}<td>{$item.client|escape:'html'}</td>{/if}
+          {if $bean->getAttribute('chproject')}<td>{$item.project|escape:'html'}</td>{/if}
+          {if $bean->getAttribute('chtask')}<td>{$item.task|escape:'html'}</td>{/if}
+          {if $bean->getAttribute('chcf_1')}<td>{$item.cf_1|escape:'html'}</td>{/if}
+          {if $bean->getAttribute('chstart')}<td>{$item.start}</td>{/if}
+          {if $bean->getAttribute('chfinish')}<td>{$item.finish}</td>{/if}
+          {if $bean->getAttribute('chduration')}<td>{$item.duration}</td>{/if}
+          {if $bean->getAttribute('chnote')}<td>{$item.note|escape:'html'}</td>{/if}
+          {if $bean->getAttribute('chcost')}<td>{if $user->canManageTeam() || $user->isClient()}{$item.cost}{else}{$item.expense}{/if}</td>{/if}
           {if $bean->getAttribute('chinvoice')}
-          <td class="cellRightAligned">{$item.invoice|escape:'html'}</td>
+          <td>{$item.invoice|escape:'html'}</td>
           {if $use_checkboxes}
           {if 1 == $item.type}<td bgcolor="white"><input type="checkbox" name="log_id_{$item.id}"></td>{/if}
           {if 2 == $item.type}<td bgcolor="white"><input type="checkbox" name="item_id_{$item.id}"></td>{/if}
@@ -98,24 +98,24 @@
         <!-- print a terminating subtotal -->
         {if $print_subtotals}
         <tr class="warning">
-          <td class="cellLeftAlignedSubtotal">{$i18n.label.subtotal}
-            {if $user->canManageTeam() || $user->isClient()}<td class="cellLeftAlignedSubtotal">{if $group_by == 'user'}{$subtotals[$cur_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
-            {if $bean->getAttribute('chclient')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'client'}{$subtotals[$cur_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
-            {if $bean->getAttribute('chproject')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'project'}{$subtotals[$cur_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
-            {if $bean->getAttribute('chtask')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'task'}{$subtotals[$cur_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
-            {if $bean->getAttribute('chcf_1')}<td class="cellLeftAlignedSubtotal">{if $group_by == 'cf_1'}{$subtotals[$cur_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
+          <td>{$i18n.label.subtotal}
+            {if $user->canManageTeam() || $user->isClient()}<td>{if $group_by == 'user'}{$subtotals[$cur_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
+            {if $bean->getAttribute('chclient')}<td>{if $group_by == 'client'}{$subtotals[$cur_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
+            {if $bean->getAttribute('chproject')}<td>{if $group_by == 'project'}{$subtotals[$cur_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
+            {if $bean->getAttribute('chtask')}<td>{if $group_by == 'task'}{$subtotals[$cur_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
+            {if $bean->getAttribute('chcf_1')}<td>{if $group_by == 'cf_1'}{$subtotals[$cur_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
             {if $bean->getAttribute('chstart')}<td></td>{/if}
             {if $bean->getAttribute('chfinish')}<td></td>{/if}
-            {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$subtotals[$cur_grouped_by]['time']}</td>{/if}
+            {if $bean->getAttribute('chduration')}<td>{$subtotals[$cur_grouped_by]['time']}</td>{/if}
             {if $bean->getAttribute('chnote')}<td></td>{/if}
-            {if $bean->getAttribute('chcost')}<td class="cellRightAlignedSubtotal">{if $user->canManageTeam() || $user->isClient()}{$subtotals[$cur_grouped_by]['cost']}{else}{$subtotals[$cur_grouped_by]['expenses']}{/if}</td>{/if}
+            {if $bean->getAttribute('chcost')}<td>{if $user->canManageTeam() || $user->isClient()}{$subtotals[$cur_grouped_by]['cost']}{else}{$subtotals[$cur_grouped_by]['expenses']}{/if}</td>{/if}
             {if $bean->getAttribute('chinvoice')}<td></td>{/if}
           </tr>
           {/if}
           <!-- print totals -->
           <tr><td>&nbsp;</td></tr>
           <tr class="info">
-            <td class="cellLeftAlignedSubtotal">{$i18n.label.total}</td>
+            <td>{$i18n.label.total}</td>
             {if $user->canManageTeam() || $user->isClient()}<td></td>{/if}
             {if $bean->getAttribute('chclient')}<td></td>{/if}
             {if $bean->getAttribute('chproject')}<td></td>{/if}
@@ -123,9 +123,9 @@
             {if $bean->getAttribute('chcf_1')}<td></td>{/if}
             {if $bean->getAttribute('chstart')}<td></td>{/if}
             {if $bean->getAttribute('chfinish')}<td></td>{/if}
-            {if $bean->getAttribute('chduration')}<td class="cellRightAlignedSubtotal">{$totals['time']}</td>{/if}
+            {if $bean->getAttribute('chduration')}<td>{$totals['time']}</td>{/if}
             {if $bean->getAttribute('chnote')}<td></td>{/if}
-            {if $bean->getAttribute('chcost')}<td nowrap class="cellRightAlignedSubtotal">{$user->currency|escape:'html'} {if $user->canManageTeam() || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>{/if}
+            {if $bean->getAttribute('chcost')}<td nowrap>{$user->currency|escape:'html'} {if $user->canManageTeam() || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>{/if}
             {if $bean->getAttribute('chinvoice')}<td></td>{/if}
           </tr>
           {/if}
@@ -151,7 +151,7 @@
   <div class="row">
     <div class="col-md-12 text-center">
       <input type="button" class="btn btn-success" onclick="chLocation('report_send.php');" value="{$i18n.button.send_by_email}"/>
-      {if file_exists('WEB-INF/lib/tcpdf')}<a class="btn btn-info" href="topdf.php">Export as PDF</a>{/if} <a class="btn btn-warning" href="tofile.php?type=xml">Export as XML</a> <a class="btn btn-primary" href="tofile.php?type=csv">Export as CSV</a><br/><br/>
+      {if file_exists('WEB-INF/lib/tcpdf')}<a class="btn btn-info" href="topdf.php">Export as PDF</a>{/if} <a class="btn btn-warning" href="tofile.php?type=xml">Export as XML</a> <a class="btn btn-primary" href="tofile.php?type=csv">Export as CSV</a> <a class="btn btn-info" href="reports.php">Back to reports</a><br/><br/>
     </div>
   </div>
 </div>

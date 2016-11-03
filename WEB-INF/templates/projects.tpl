@@ -72,11 +72,13 @@
   </div>
   {/if}
   {else}
-  <table class="table table-responsive">
-    <tr>
-      <td>{$i18n.label.thing_name}</td>
-      <td>{$i18n.label.description}</td>
-    </tr>
+  <table class="table table-responsive table-striped table-hover table-bordered">
+    <thead>
+      <tr>
+      <th>{$i18n.label.thing_name}</th>
+      <th>{$i18n.label.description}</th>
+      </tr>
+    </thead>
     {if $active_projects}
     {foreach $active_projects as $project}
     <tr>

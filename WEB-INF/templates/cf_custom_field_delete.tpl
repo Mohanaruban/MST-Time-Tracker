@@ -3,14 +3,14 @@
 {if $user->canManageTeam()}
 <div class="row">
     <div class="col-sm-12">
-      <div class="col-md-12 control-label text-center">
+      <div class="col-md-12">
           <p class="h3"> Are you sure to delete custom field <i>{$field|escape:'html'}</i>?</p><br/><br/>
         </div>
     </div>
 
     <div class="col-md-12">
       <div class="form-group">
-        <div class="col-sm-12 text-center">{$forms.fieldDeleteForm.btn_delete.control}&nbsp;&nbsp;{$forms.fieldDeleteForm.btn_cancel.control}</div>
+        <div class="col-sm-12">{$forms.fieldDeleteForm.btn_delete.control}&nbsp;&nbsp;{$forms.fieldDeleteForm.btn_cancel.control}</div>
       </div>
     </div>
   </div>

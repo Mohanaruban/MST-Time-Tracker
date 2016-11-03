@@ -39,6 +39,7 @@
      <div class="form-group">
       <div class="col-md-12 text-center">
         {$forms.projectForm.btn_save.control} {$forms.projectForm.btn_copy.control}
+        <a class="btn btn-info" href="projects.php">Back</a>
       </div>
     </div>
     

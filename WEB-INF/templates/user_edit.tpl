@@ -115,7 +115,9 @@ window.onload = function() {
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <div class="col-sm-9 col-sm-offset-3">{$forms.userForm.btn_submit.control}</div>
+          <div class="col-sm-9 col-sm-offset-3">{$forms.userForm.btn_submit.control} 
+          <a class="btn btn-info" href="users.php">Back</a>
+          </div>
         </div>
       </div>
     </div>
