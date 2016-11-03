@@ -29,6 +29,16 @@ function handleClientControl() {
   else
     clientControl.style.visibility = "hidden";
 }
+
+window.onload = function() {
+  handleClientControl();
+  var tableInputElement = document.getElementById('projectTable').getElementsByTagName('input');
+  for(var i = 1; i < tableInputElement.length; i++) {
+    if(tableInputElement[i].type.toLowerCase() == 'text') {
+      tableInputElement[i].className = 'form-control';
+    }
+  }
+}
 </script>
 
 <div class="col-md-8 col-md-offset-2 text-center">

@@ -158,52 +158,105 @@ function handlePluginCheckboxes() {
       </script>
 
       <div class="form-group">
-
-        <!--<td colspan="2" class="sectionHeader">{$i18n.form.profile.plugins}</td> -->
-
-        <div class="col-sm-9 sectionHeader">{$i18n.form.profile.plugins}</div>
+        <hr/>
+        <div class="col-sm-12"><span class="h4">{$i18n.form.profile.plugins}</span></div>
+        <hr/>
       </div>
 
       <div class="form-group">
         <label class="col-sm-3 control-label" for="charts">{$i18n.title.charts}</label>
-        <div class="col-sm-9 text-left">{$forms.profileForm.charts.control}</div>
+        <div class="col-sm-7 col-sm-offset-1 text-left">
+          <div class="col-sm-12">
+            <div class="checkbox">{$forms.profileForm.charts.control}</div>
+          </div>
+        </div>
       </div>
 
 
       <div class="form-group">
-        <label class="col-sm-3 control-label" for="clients">{$i18n.title.clients}</label> {$forms.profileForm.client_required.control} <span id="required_label"><label for="client_required">{$i18n.label.required}</label></span>
-        <div class="col-sm-9 text-left">{$forms.profileForm.clients.control}</div>
+        <label class="col-sm-3 control-label" for="clients">{$i18n.title.clients}</label>
+        <div class="col-sm-7 col-sm-offset-1 text-left">
+          <div class="checkbox">
+            <div class="col-sm-2">
+              {$forms.profileForm.clients.control}
+            </div>
+            <div class="col-sm-10">
+              {$forms.profileForm.client_required.control} <span id="required_label"><label for="client_required">{$i18n.label.required}</label></span>
+            </div>
+          </div>
+        </div>
       </div>
 
 
       <div class="form-group">
         <label class="col-sm-3 control-label" for="invoices">{$i18n.title.invoices}</label>
-        <div class="col-sm-9 text-left">{$forms.profileForm.invoices.control}</div>
+        <div class="col-sm-7 col-sm-offset-1 text-left">
+          <div class="col-sm-12">
+            <div class="checkbox">{$forms.profileForm.invoices.control}</div>
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
-        <label class="col-sm-3 control-label" for="custom_fields">{$i18n.label.custom_fields}</label> <span id="cf_config"><a href="cf_custom_fields.php">{$i18n.label.configure}</a></span>
-        <div class="col-sm-9 text-left">{$forms.profileForm.custom_fields.control}</div>
+        <label class="col-sm-3 control-label" for="custom_fields">{$i18n.label.custom_fields}</label>
+        <div class="col-sm-7 col-sm-offset-1 text-left">
+          <div class="checkbox">
+            <div class="col-sm-2">{$forms.profileForm.custom_fields.control}</div>
+            <div class="col-sm-10">
+              <span id="cf_config"><a href="cf_custom_fields.php">{$i18n.label.configure}</a></span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
-        <label class="col-sm-3 control-label" for="expenses">{$i18n.title.expenses}</label> {$forms.profileForm.tax_expenses.control} <span id="tax_label"><label for="tax_expenses">{$i18n.label.tax}</label></span>
-        <div class="col-sm-9 text-left">{$forms.profileForm.expenses.control}</div>
+        <label class="col-sm-3 control-label" for="expenses">{$i18n.title.expenses}</label>
+        <div class="col-sm-7 col-sm-offset-1 text-left">
+          <div class="checkbox">
+            <div class="col-sm-2">
+              {$forms.profileForm.expenses.control}
+            </div>
+            <div class="col-sm-10">
+              {$forms.profileForm.tax_expenses.control} <span id="tax_label"><label for="tax_expenses">{$i18n.label.tax}</label></span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
-        <label class="col-sm-3 control-label" for="notifications">{$i18n.title.notifications}</label> <span id="notifications_config"><a href="notifications.php">{$i18n.label.configure}</a></span>
-        <div class="col-sm-9 text-left">{$forms.profileForm.notifications.control}</div>
+        <label class="col-sm-3 control-label" for="notifications">{$i18n.title.notifications}</label>
+        <div class="col-sm-7 col-sm-offset-1 text-left">
+          <div class="checkbox">
+            <div class="col-sm-2">{$forms.profileForm.notifications.control}</div>
+            <div class="col-sm-10">
+              <span id="notifications_config"><a href="notifications.php">{$i18n.label.configure}</a></span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
-        <label class="col-sm-3 control-label" for="locking">{$i18n.title.locking}</label> <span id="locking_config"><a href="locking.php">{$i18n.label.configure}</a></span>
-        <div class="col-sm-9 text-left">{$forms.profileForm.locking.control}</div>
+        <label class="col-sm-3 control-label" for="locking">{$i18n.title.locking}</label>
+        <div class="col-sm-7 col-sm-offset-1 text-left">
+          <div class="checkbox">
+            <div class="col-sm-2">{$forms.profileForm.locking.control}</div>
+            <div class="col-sm-10">
+              <span id="locking_config"><a href="locking.php">{$i18n.label.configure}</a></span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
-        <label class="col-sm-3 control-label" for="quotas">{$i18n.label.monthly_quotas}</label> <span id="quotas_config"><a href="quotas.php">{$i18n.label.configure}</a></span>
-        <div class="col-sm-9 text-left">{$forms.profileForm.quotas.control}</div>
+        <label class="col-sm-3 control-label" for="quotas">{$i18n.title.monthly_quotas}</label>
+        <div class="col-sm-7 col-sm-offset-1 text-left">
+          <div class="checkbox">
+            <div class="col-sm-2">{$forms.profileForm.quotas.control}</div>
+            <div class="col-sm-10">
+              <span id="quotas_config"><a href="quotas.php">{$i18n.label.configure}</a></span>
+            </div>
+          </div>
+        </div>
       </div>
       {/if}
     </div>
