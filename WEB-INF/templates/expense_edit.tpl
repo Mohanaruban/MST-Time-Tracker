@@ -90,7 +90,7 @@ function get_date() {
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.cost}</label>
-        <div class="col-sm-9">{$forms.expenseItemForm.cost.control} {$user->currency|escape:'html'}</div>
+        <div class="col-sm-9">{$forms.expenseItemForm.cost.control}<span class="pull-right" style="margin-top: -30px;">{$user->currency|escape:'html'}</span></div>
       </div>
 
       <div class="form-group">
