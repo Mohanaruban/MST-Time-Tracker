@@ -1,22 +1,18 @@
+<div class="col-sm-8 col-sm-offset-2 text-center">
 {$forms.fieldDeleteForm.open}
-<table cellspacing="4" cellpadding="7" border="0">
-  <tr>
-    <td>
 {if $user->canManageTeam()}
-      <table cellspacing="0" cellpadding="0" border="0">
-        <tr>
-          <td colspan="2" align="center"><b>{$field|escape:'html'}</b></td>
-        </tr>
-        <tr>
-          <td colspan="2" align="center">&nbsp;</td>
-        </tr>
-        <tr>
-          <td align="right">{$forms.fieldDeleteForm.btn_delete.control}&nbsp;</td>
-          <td align="left">&nbsp;{$forms.fieldDeleteForm.btn_cancel.control}</td>
-        </tr>
-      </table>
+<div class="row">
+    <div class="col-sm-12">
+      <div class="col-md-12">
+          <p class="h3"> Are you sure to delete custom field <i>{$field|escape:'html'}</i>?</p><br/><br/>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <div class="col-sm-12">{$forms.fieldDeleteForm.btn_delete.control}&nbsp;&nbsp;{$forms.fieldDeleteForm.btn_cancel.control}</div>
+      </div>
+    </div>
+  </div>
 {/if}
-    </td>
-  </tr>
-</table>
 {$forms.fieldDeleteForm.close}

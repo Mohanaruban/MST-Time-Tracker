@@ -39,8 +39,9 @@ if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('lk')) {
 $cl_lock_spec = $request->isPost() ? $request->getParameter('lock_spec') : $user->lock_spec;
 
 $form = new Form('lockingForm');
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'lock_spec','style'=>'width: 250px;','value'=>$cl_lock_spec));
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+$form->addFormStyle(array('class'=>'form-horizontal'));
+$form->addInput(array('type'=>'text','class'=>'form-control','maxlength'=>'100','name'=>'lock_spec','value'=>$cl_lock_spec));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-success','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
 if ($request->isPost()) {
   // Validate user input.

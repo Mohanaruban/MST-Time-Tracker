@@ -42,10 +42,11 @@ if (false === $cl_name)
   $err->add($i18n->getKey('error.db'));
 
 $form = new Form('optionEditForm');
+$form->addFormStyle(array('class'=>'form-horizontal'));
 if ($err->no()) {
-  $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name));
+  $form->addInput(array('type'=>'text','maxlength'=>'100','class'=>'form-control','name'=>'name','value'=>$cl_name));
   $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$cl_id));
-  $form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+  $form->addInput(array('type'=>'submit','class'=>'btn btn-success','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 }
 
 if ($request->isPost()) {

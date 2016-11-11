@@ -1,20 +1,20 @@
-{$forms.lockingForm.open}
-<table cellspacing="4" cellpadding="7" border="0">
-  <tr>
-    <td>
-      <table cellspacing="1" cellpadding="2" border="0">
-        <tr>
-          <td align="right">{$i18n.label.cron_schedule}:</td>
-          <td>{$forms.lockingForm.lock_spec.control} <a href="https://www.anuko.com/lp/tt_6.htm" target="_blank">{$i18n.label.what_is_it}</a></td>
-        </tr>
-        <tr>
-          <td colspan="2">&nbsp;</td>
-        </tr>
-        <tr>
-          <td colspan="2" height="50" align="center">{$forms.lockingForm.btn_save.control}</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-{$forms.lockingForm.close}
+<div class="col-sm-8 col-sm-offset-2 text-center">
+  {$forms.lockingForm.open}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.cron_schedule}</label>
+        <div class="col-sm-9">{$forms.lockingForm.lock_spec.control}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+      <div class="col-sm-12 text-center">{$forms.lockingForm.btn_save.control}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {$forms.lockingForm.close}
+</div>

@@ -129,15 +129,15 @@ function handlePluginCheckboxes() {
         <div class="col-sm-9">{$forms.profileForm.start_week.control}</div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.tracking_mode}</label>
+        <label class="col-sm-3 control-label">{$i18n.form.profile.tracking_mode}</label>
         <div class="col-sm-9">{$forms.profileForm.tracking_mode.control}</div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.record_type}</label>
+        <label class="col-sm-3 control-label">{$i18n.form.profile.record_type}</label>
         <div class="col-sm-9">{$forms.profileForm.record_type.control}</div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.uncompleted_indicators}</label>
+        <label class="col-sm-3 control-label">{$i18n.form.profile.uncompleted_indicators}</label>
         <div class="col-sm-9">{$forms.profileForm.uncompleted_indicators.control}</div>
       </div>
 

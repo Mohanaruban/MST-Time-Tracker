@@ -39,7 +39,7 @@ if (!ttAccessCheck(right_manage_team) || !$user->isPluginEnabled('cf')) {
 $id = $request->getParameter('id');
 
 $form = new Form('fieldDeleteForm');
-
+$form->addFormStyle(array('class'=>'form-horizontal'));
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
     // Delete button pressed.
@@ -62,8 +62,8 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$id));
-    $form->addInput(array('type'=>'submit','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
-    $form->addInput(array('type'=>'submit','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
+    $form->addInput(array('type'=>'submit','class'=>'btn btn-danger','name'=>'btn_delete','value'=>$i18n->getKey('label.delete')));
+    $form->addInput(array('type'=>'submit','class'=>'btn btn-warning','name'=>'btn_cancel','value'=>$i18n->getKey('button.cancel')));
   }
 }
 

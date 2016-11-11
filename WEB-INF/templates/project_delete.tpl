@@ -4,12 +4,12 @@
     <div class="col-sm-12">
 
       <div class="form-group">
-        <div class="col-md-12 control-label">
+        <div class="col-md-12">
           <p class="h3"> Are you sure to delete <i>{$project_to_delete|escape:'html'}</i> project?</p><br/><br/>
         </div>
 
           <div class="form-group">
-            <div class="col-md-12 text-center">
+            <div class="col-md-12">
               {$forms.projectDeleteForm.btn_delete.control}&nbsp; &nbsp;{$forms.projectDeleteForm.btn_cancel.control}
             </div>
           </div>

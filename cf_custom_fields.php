@@ -45,7 +45,7 @@ if ($request->isPost()) {
     exit();
   }
 } else {
-  $form->addInput(array('type'=>'submit','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
+  $form->addInput(array('type'=>'submit','class'=>'btn btn-success','name'=>'btn_add','value'=>$i18n->getKey('button.add')));
 
   $fields = CustomFields::getFields();
   // At this time only one custom field is supported. Disable the Add button if we already have one or more custom fields.

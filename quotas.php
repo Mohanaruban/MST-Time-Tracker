@@ -97,15 +97,16 @@ if ($request->isPost()){
 $monthsData = $quota->get($selectedYear);
 
 $form = new Form('monthlyQuotasForm');
-$form->addInput(array('type'=>'text', 'name'=>'workdayHours', 'value'=>$user->workday_hours, 'style'=>'width:50px'));
-$form->addInput(array('type'=>'combobox','name'=>'year','data'=>$years,'datakeys'=>array('id','name'),'value'=>$selectedYear,'onchange'=>'yearChange(this.value);'));
+$form->addFormStyle(array('class'=>'form-horizontal'));
+$form->addInput(array('type'=>'text','class'=>'form-control','name'=>'workdayHours', 'value'=>$user->workday_hours));
+$form->addInput(array('type'=>'combobox','class'=>'form-control','name'=>'year','data'=>$years,'datakeys'=>array('id','name'),'value'=>$selectedYear,'onchange'=>'yearChange(this.value);'));
 for ($i=0; $i < count($months); $i++) { 
   $value = "";
   if (array_key_exists($i+1, $monthsData)){
     $value = $monthsData[$i+1];
   }
   $name = $months[$i];
-  $form->addInput(array('type'=>'text','name'=>$name,'maxlength'=>3,'value'=> $value,'style'=>'width:50px'));
+  $form->addInput(array('type'=>'text', 'class'=>'form-control','name'=>$name,'maxlength'=>3,'value'=> $value));
 }
 
 $smarty->assign('months', $months);
