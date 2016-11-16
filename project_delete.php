@@ -42,6 +42,9 @@ if (!$user->isAdmin()) {
 
 $cl_project_id = (int)$request->getParameter('id');
 $project = ttProjectHelper::get($cl_project_id);
+if($user->isAdmin()) {
+$project = ttProjectHelper::getAdmin();
+}
 $project_to_delete = $project['name'];
 
 $form = new Form('projectDeleteForm');
@@ -52,6 +55,17 @@ $form->addInput(array('type'=>'submit','name'=>'btn_cancel','class'=>'btn btn-wa
 
 if ($request->isPost()) {
   if ($request->getParameter('btn_delete')) {
+    
+    if($user->isAdmin()) {
+       if(ttProjectHelper::getAdmin($cl_project_id)) {
+          if (ttProjectHelper::delete($cl_project_id)) {
+            header('Location: projects.php');
+            exit();
+          } else
+            $err->add($i18n->getKey('error.db'));
+        }
+    }
+
     if(ttProjectHelper::get($cl_project_id)) {
       if (ttProjectHelper::delete($cl_project_id)) {
         header('Location: projects.php');

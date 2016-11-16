@@ -32,6 +32,21 @@ import('ttTeamHelper');
 class ttUserHelper {
 	
   // The getUserDetails function returns user details.
+  static function getUserDetailsAdmin() {
+    $result = array();
+    $mdb2 = getConnection();
+
+    $sql =  "select * from tt_users";
+    $res = $mdb2->query($sql);
+    
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      return $val;
+    }
+    return false;
+  }
+
+  // The getUserDetails function returns user details.
   static function getUserDetails($user_id) {
     $result = array();
     $mdb2 = getConnection();

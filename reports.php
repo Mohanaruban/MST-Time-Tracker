@@ -37,9 +37,11 @@ import('ttFavReportHelper');
 import('ttClientHelper');
 
 // Access check.
+if(!$user->isAdmin()) {
 if (!ttAccessCheck(right_view_reports)) {
   header('Location: access_denied.php');
   exit();
+}
 }
 
 // Use custom fields plugin if it is enabled.

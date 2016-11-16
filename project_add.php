@@ -36,16 +36,16 @@ if(!$user->isAdmin()) {
     header('Location: access_denied.php');
     exit();
 }
-// if (!ttAccessCheck(right_manage_team) || (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode)) {
-//   header('Location: access_denied.php');
-//   exit();
-// }
+if (!ttAccessCheck(right_manage_team)) {
+  header('Location: access_denied.php');
+  exit();
+}
 
 $users = ttTeamHelper::getActiveUsers();
-if($user->isAdmin()) {
-  $users = "";
-  $users = ttTeamHelper::getActiveUsersAdmin();
-}
+// if($user->isAdmin()) {
+//   $users = "";
+//   $users = ttTeamHelper::getActiveUsersAdmin();
+// }
 foreach ($users as $user_item)
   $all_users[$user_item['id']] = $user_item['name'];
 
@@ -78,7 +78,6 @@ if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
   if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
-echo $err->no();
   if ($err->no()) {
     if (!ttProjectHelper::getProjectByName($cl_name)) {
       if (ttProjectHelper::insert(array(
@@ -88,12 +87,14 @@ echo $err->no();
         'users' => $cl_users,
         'tasks' => $cl_tasks,
         'status' => ACTIVE))) {
-          header('Location: projects.php');
+         header('Location: projects.php');
           exit();
         } else
           $err->add($i18n->getKey('error.db'));
+          echo "error database";
     } else
       $err->add($i18n->getKey('error.project_exists'));
+      echo "error exists project";
   }
 } // isPost
 
