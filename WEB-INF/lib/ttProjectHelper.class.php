@@ -118,6 +118,23 @@ class ttProjectHelper {
   
   
   // get - gets details of the project identified by its id. 
+  static function getAdmin($id)
+  {
+    global $user;
+ 
+    $mdb2 = getConnection();
+
+    $sql = "select id, name, description, status, tasks from tt_projects where id = $id and (status = 0 or status = 1)";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+    if ($val && $val['id'])
+        return $val;
+    }
+    return false;
+  }
+
+  // get - gets details of the project identified by its id. 
   static function get($id)
   {
     global $user;
@@ -211,6 +228,10 @@ class ttProjectHelper {
 
     // Bind the project to users.
     $active_users = ttTeamHelper::getActiveUsers(array('getAllFields'=>true));
+    if($user->isAdmin()) {
+      $active_users = "";
+      $active_users = ttTeamHelper::getActiveUsersAdmin(array('getAllFields'=>true));
+    }
     foreach ($active_users as $u) {
       if(in_array($u['id'], $users)) {
         $sql = "insert into tt_user_project_binds (project_id, user_id, status, rate) values(
@@ -239,14 +260,12 @@ class ttProjectHelper {
   static function update($fields)
   {
     $mdb2 = getConnection();
-    
     $project_id = $fields['id']; // Project we are updating.
     $name = $fields['name']; // Project name.
     $description = $fields['description']; // Project description.
     $users_to_bind = $fields['users']; // Users to bind with project.
     $tasks_to_bind = $fields['tasks']; // Tasks to bind with project.
     $status = $fields['status']; // Project status.
-    
     // Update records in tt_user_project_binds table.
     $sql = "select user_id, status from tt_user_project_binds where project_id = $project_id";
     $all_users = array();
@@ -304,7 +323,7 @@ class ttProjectHelper {
         return false;
     }    
     foreach ($task_binds_to_add as $task_id) {
-      $sql = "insert into tt_project_task_binds (project_id, task_id) values($project_id, $task_id)";
+      echo $sql = "insert into tt_project_task_binds (project_id, task_id) values($project_id, $task_id)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;

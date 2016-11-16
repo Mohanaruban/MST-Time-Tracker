@@ -39,6 +39,12 @@ if (!ttAccessCheck(right_data_entry)) {
 
 // Get users.
 $active_users = ttTeamHelper::getActiveUsers(array('getAllFields'=>true));
+if($user->isAdmin()) {
+	$active_users = "";
+	$active_users = ttTeamHelper::getActiveUsersAdmin(array('getAllFields'=>true));
+	$can_delete_manager = (1 == count($active_users));
+  $inactive_users = ttTeamHelper::getInactiveUsersAdmin(true);
+}
 if($user->canManageTeam()) {
   $can_delete_manager = (1 == count($active_users));
   $inactive_users = ttTeamHelper::getInactiveUsers($user->team_id, true);

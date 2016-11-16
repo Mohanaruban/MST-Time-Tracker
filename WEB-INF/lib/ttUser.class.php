@@ -109,7 +109,9 @@ class ttUser {
       }
 
       // Set user rights.
-      if ($this->role == ROLE_USER) {
+      if ($this->role == ROLE_SITE_ADMIN) {
+        $this->rights = right_administer_site|right_data_entry|right_manage_team;
+      } elseif ($this->role == ROLE_USER) {
         $this->rights = right_data_entry|right_view_charts|right_view_reports;
       } elseif ($this->role == ROLE_CLIENT) {
         $this->rights = right_view_reports|right_view_invoices; // TODO: how about right_view_charts, too?
@@ -117,8 +119,6 @@ class ttUser {
         $this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team;
       } elseif ($this->role == ROLE_MANAGER) {
         $this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team|right_assign_roles|right_export_team;
-      } elseif ($this->role == ROLE_SITE_ADMIN) {
-        $this->rights = right_administer_site;
       }
     }
   }
@@ -150,7 +150,7 @@ class ttUser {
 
   // canManageTeam - determines whether current user is manager or co-manager.
   function canManageTeam() {
-    return (right_manage_team & $this->role);
+    return ((right_manage_team & $this->role) | (right_administer_site & $this->role));
   }
 
   // isPluginEnabled checks whether a plugin is enabled for user.

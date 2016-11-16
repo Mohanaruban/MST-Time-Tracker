@@ -47,17 +47,25 @@ $user_id = (int) $request->getParameter('id');
 $user_details = ttUserHelper::getUserDetails($user_id);
 
 // Security checks.
-$ok_to_go = $user->canManageTeam(); // Are we authorized for user management?
-if ($ok_to_go) $ok_to_go = $ok_to_go && $user_details; // Are we editing a real user?
-if ($ok_to_go) $ok_to_go = $ok_to_go && ($user->team_id == $user_details['team_id']); // User belongs to our team?
-if ($ok_to_go && $user->isCoManager() && (ROLE_COMANAGER == $user_details['role']))
-  $ok_to_go = ($user->id == $user_details['id']); // Comanager is not allowed to edit other comanagers.
-if ($ok_to_go && $user->isCoManager() && (ROLE_MANAGER == $user_details['role']))
-  $ok_to_go = false; // Comanager is not allowed to edit a manager.
-if (!$ok_to_go) {
-  die ($i18n->getKey('error.sys'));
-}
 
+if(!$user->isAdmin()) {
+    header('Location: access_denied.php'); // Admin only have editing permission
+  exit();
+}
+// if (!$user->canManageTeam() && !$user->isAdmin()) {
+//   header('Location: access_denied.php'); // Admin only have editing permission
+//   exit();
+// $ok_to_go = $user->canManageTeam(); // Are we authorized for user management?
+// if ($ok_to_go) $ok_to_go = $ok_to_go && $user_details; // Are we editing a real user?
+// if ($ok_to_go) $ok_to_go = $ok_to_go && ($user->team_id == $user_details['team_id']); // User belongs to our team?
+// if ($ok_to_go && $user->isCoManager() && (ROLE_COMANAGER == $user_details['role']))
+//   $ok_to_go = ($user->id == $user_details['id']); // Comanager is not allowed to edit other comanagers.
+// if ($ok_to_go && $user->isCoManager() && (ROLE_MANAGER == $user_details['role']))
+//   $ok_to_go = false; // Comanager is not allowed to edit a manager.
+// if (!$ok_to_go) {
+//   die ($i18n->getKey('error.sys'));
+// }
+// }
 if ($user->isPluginEnabled('cl'))
   $clients = ttTeamHelper::getActiveClients($user->team_id);
 
@@ -114,7 +122,7 @@ if (!$auth->isPasswordExternal()) {
 $form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control', 'name'=>'email','value'=>$cl_email));
 
 $roles[ROLE_USER] = $i18n->getKey('label.user');
-$roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');
+$roles[ROLE_MANAGER] = $i18n->getKey('form.users.manager');
 if ($user->isPluginEnabled('cl'))
   $roles[ROLE_CLIENT] = $i18n->getKey('label.client');
 $form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()', 'class'=>'form-control', 'name'=>'role','value'=>$cl_role,'data'=>$roles));

@@ -98,6 +98,37 @@ class ttTeamHelper {
     return $user_list;
   }
 
+// The getActiveUsers obtains all active users in a given team.
+  static function getActiveUsersAdmin($options = null) {
+    global $user;
+    $mdb2 = getConnection();
+
+    if (isset($options['getAllFields']))
+      $sql = "select * from tt_users where status = 1 and team_id > 0 order by name";
+    else
+      $sql = "select id, name from tt_users where status = 1 and team_id > 0 order by name";
+    $res = $mdb2->query($sql);
+    $user_list = array();
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    while ($val = $res->fetchRow()) {
+      $user_list[] = $val;
+    }
+
+    if (isset($options['putSelfFirst'])) {
+      // Put own entry at the front.
+      $cnt = count($user_list);
+      for($i = 0; $i < $cnt; $i++) {
+        if ($user_list[$i]['id'] == $user->id) {
+          $self = $user_list[$i]; // Found self.
+          array_unshift($user_list, $self); // Put own entry at the front.
+          array_splice($user_list, $i+1, 1); // Remove duplicate.
+        }
+      }
+    }
+    return $user_list;
+  }
+
   // The getUsers obtains all active and inactive (but not deleted) users in a given team.
   static function getUsers() {
     global $user;
@@ -134,6 +165,25 @@ class ttTeamHelper {
     return false;
   }
 
+// The getInactiveUsers obtains all inactive users in a given team.
+  static function getInactiveUsersAdmin($all_fields = false) {
+    $mdb2 = getConnection();
+
+    if ($all_fields)
+      $sql = "select * from tt_users where status = 0 and team_id > 0 order by name";
+    else
+      $sql = "select id, name from tt_users where status = 0 and team_id > 0 order by name";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+      return $result;
+    }
+    return false;
+  }
+
   // The getAllUsers obtains all users in a given team.
   static function getAllUsers($team_id, $all_fields = false) {
     $mdb2 = getConnection();
@@ -153,6 +203,24 @@ class ttTeamHelper {
     return false;
   }
 
+ // getActiveProjects - returns an array of active projects for team.
+  static function getActiveProjectsAdmin()
+  {
+    $result = array();
+    $mdb2 = getConnection();
+
+    $sql = "select id, name, description, tasks from tt_projects
+      where status = 1 order by name";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
   // getActiveProjects - returns an array of active projects for team.
   static function getActiveProjects($team_id)
   {
@@ -161,6 +229,24 @@ class ttTeamHelper {
 
     $sql = "select id, name, description, tasks from tt_projects
       where team_id = $team_id and status = 1 order by name";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
+// getInactiveProjects - returns an array of inactive projects for team.
+  static function getInactiveProjectsAdmin()
+  {
+    $result = array();
+    $mdb2 = getConnection();
+
+    $sql = "select id, name, description, tasks from tt_projects
+      where status = 0 order by name";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {

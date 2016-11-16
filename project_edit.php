@@ -32,14 +32,24 @@ import('ttProjectHelper');
 import('ttTeamHelper');
 
 // Access check.
+if(!$user->isAdmin()) {
+    header('Location: access_denied.php');
+    exit();
+}
 if (!ttAccessCheck(right_manage_team) || (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode)) {
-  header('Location: access_denied.php');
-  exit();
+  if((!$user->isAdmin() && !ttAccessCheck(right_data_entry))) {
+    header('Location: access_denied.php');
+    exit();
+  }
 }
 
 $cl_project_id = (int)$request->getParameter('id');
 
 $users = ttTeamHelper::getActiveUsers();
+if($user->isAdmin()) {
+  $users = "";
+  $users = ttTeamHelper::getActiveUsersAdmin();
+}
 foreach ($users as $user_item)
   $all_users[$user_item['id']] = $user_item['name'];
 
@@ -55,6 +65,9 @@ if ($request->isPost()) {
   $cl_tasks = $request->getParameter('tasks', array());
 } else {
   $project = ttProjectHelper::get($cl_project_id);
+  if($user->isAdmin()) {
+    $project = ttProjectHelper::getAdmin($cl_project_id);
+  }
   $cl_name = $project['name'];
   $cl_description = $project['description'];
   $cl_status = $project['status'];

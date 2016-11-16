@@ -356,6 +356,7 @@ $i18n_key_words = array(
 'form.users.role' => 'Role',
 'form.users.manager' => 'Manager',
 'form.users.comanager' => 'Co-manager',
+'form.users.admin' => 'Admin',
 'form.users.rate' => 'Rate',
 'form.users.default_rate' => 'Default hourly rate',
 
