@@ -48,10 +48,10 @@ $user_details = ttUserHelper::getUserDetails($user_id);
 
 // Security checks.
 
-if(!$user->isAdmin()) {
-    header('Location: access_denied.php'); // Admin only have editing permission
-  exit();
-}
+// if(!$user->isAdmin()) {
+//     header('Location: access_denied.php'); // Admin only have editing permission
+//   exit();
+// }
 // if (!$user->canManageTeam() && !$user->isAdmin()) {
 //   header('Location: access_denied.php'); // Admin only have editing permission
 //   exit();
@@ -70,6 +70,9 @@ if ($user->isPluginEnabled('cl'))
   $clients = ttTeamHelper::getActiveClients($user->team_id);
 
 $projects = ttTeamHelper::getActiveProjects($user->team_id);
+if($user->isAdmin()) {
+  $projects = ttTeamHelper::getActiveProjectsAdmin();
+}
 $assigned_projects = array();
 
 if ($request->isPost()) {
@@ -85,6 +88,7 @@ if ($request->isPost()) {
   $cl_status = $request->getParameter('status');
   $cl_rate = $request->getParameter('rate');
   $cl_projects = $request->getParameter('projects');
+
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
       if (ttValidFloat($request->getParameter('rate_'.$p), true)) {
@@ -97,18 +101,24 @@ if ($request->isPost()) {
     }
   }
 } else {
+
   $cl_name = $user_details['name'];
   $cl_login = $user_details['login'];
   $cl_email = $user_details['email'];
   $cl_rate = str_replace('.', $user->decimal_mark, $user_details['rate']);
   $cl_role = $user_details['role'];
+  echo $cl_role;
   $cl_client_id = $user_details['client_id'];
   $cl_status = $user_details['status'];
   $cl_projects = array();
   $assigned_projects = ttProjectHelper::getAssignedProjects($user_id);
+  if($user->isAdmin()) {
+  $assigned_projects = ttProjectHelper::getAssignedProjectsAdmin($user_id);
+  }
   foreach($assigned_projects as $p) {
     $cl_projects[] = $p['id'];
   }
+  print_r($cl_projects);
 }
 
 $form = new Form('userForm');

@@ -53,6 +53,27 @@ class ttProjectHelper {
     return $result;
   }
 
+    // getAssignedProjects - returns an array of assigned projects.
+  static function getAssignedProjectsAdmin($user_id)
+  {
+    global $user;
+    
+    $result = array();
+    $mdb2 = getConnection();
+    
+    // Do a query with inner join to get assigned projects.
+    $sql = "select p.id, p.name, p.tasks, upb.rate from tt_projects p
+      inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.status = 1)
+      where p.status = 1 order by p.name";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
   // getRates - returns an array of project rates for user, including deassigned and deactivated projects.
   static function getRates($user_id)
   {
