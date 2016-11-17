@@ -53,6 +53,27 @@ class ttProjectHelper {
     return $result;
   }
 
+    // getAssignedProjects - returns an array of assigned projects.
+  static function getAssignedProjectsAdmin($user_id)
+  {
+    global $user;
+    
+    $result = array();
+    $mdb2 = getConnection();
+    
+    // Do a query with inner join to get assigned projects.
+    $sql = "select p.id, p.name, p.tasks, upb.rate from tt_projects p
+      inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.status = 1)
+      where p.status = 1 order by p.name";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
   // getRates - returns an array of project rates for user, including deassigned and deactivated projects.
   static function getRates($user_id)
   {
@@ -74,6 +95,26 @@ class ttProjectHelper {
     return $result;
   }
   
+  // getProjects - returns an array of active and inactive projects in a team.
+  static function getProjectsAdmin()
+  {
+    global $user;
+        
+    $result = array();
+    $mdb2 = getConnection();
+    
+    $sql = "select id, name, tasks from tt_projects
+      where (status = 0 or status = 1) order by name";   
+        
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
   // getProjects - returns an array of active and inactive projects in a team.
   static function getProjects()
   {
@@ -117,6 +158,23 @@ class ttProjectHelper {
   }
   
   
+  // get - gets details of the project identified by its id. 
+  static function getAdmin($id)
+  {
+    global $user;
+ 
+    $mdb2 = getConnection();
+
+    $sql = "select id, name, description, status, tasks from tt_projects where id = $id and (status = 0 or status = 1)";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+    if ($val && $val['id'])
+        return $val;
+    }
+    return false;
+  }
+
   // get - gets details of the project identified by its id. 
   static function get($id)
   {
@@ -239,14 +297,12 @@ class ttProjectHelper {
   static function update($fields)
   {
     $mdb2 = getConnection();
-    
     $project_id = $fields['id']; // Project we are updating.
     $name = $fields['name']; // Project name.
     $description = $fields['description']; // Project description.
     $users_to_bind = $fields['users']; // Users to bind with project.
     $tasks_to_bind = $fields['tasks']; // Tasks to bind with project.
     $status = $fields['status']; // Project status.
-    
     // Update records in tt_user_project_binds table.
     $sql = "select user_id, status from tt_user_project_binds where project_id = $project_id";
     $all_users = array();

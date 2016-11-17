@@ -88,7 +88,7 @@ window.onload = function() {
         <label class="col-sm-3 control-label">{$i18n.label.email}</label>
         <div class="col-sm-9">{$forms.userForm.email.control}</div>
       </div>
-      {if $user->isManager() && ($user->id != $user_id)}
+      {if ($user->isManager() && ($user->id != $user_id)) || ($user->isAdmin())}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.form.users.role}</label>
         <div class="col-sm-9">{$forms.userForm.role.control} {$forms.userForm.client.control}</div>
@@ -105,7 +105,7 @@ window.onload = function() {
         <label class="col-sm-3 control-label">{$i18n.form.users.default_rate}&nbsp;(0{$user->decimal_mark}00)</label>
         <div class="col-sm-9">{$forms.userForm.rate.control}</div>
       </div>
-      {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+      {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isAdmin())}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.projects}</label>
         <div class="col-sm-9">{$forms.userForm.projects.control}</div>

@@ -29,19 +29,23 @@
 require_once('initialize.php');
 import('form.Form');
 import('ttTeamHelper');
-
 // Access check.
 if (!ttAccessCheck(right_data_entry) || (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode)) {
-  header('Location: access_denied.php');
-  exit();
+	if((!$user->isAdmin() && !ttAccessCheck(right_data_entry))) {
+		header('Location: access_denied.php');
+		exit();
+	}
 }
 
-if($user->canManageTeam()) {
+if($user->isAdmin()) {
+  $active_projects = ttTeamHelper::getActiveProjectsAdmin();
+  $inactive_projects = ttTeamHelper::getInactiveProjectsAdmin();
+}elseif($user->canManageTeam()) {
   $active_projects = ttTeamHelper::getActiveProjects($user->team_id);
   $inactive_projects = ttTeamHelper::getInactiveProjects($user->team_id);
-} else
+} else {
   $active_projects = $user->getAssignedProjects();
-
+}
 $smarty->assign('active_projects', $active_projects);
 $smarty->assign('inactive_projects', $inactive_projects);
 $smarty->assign('title', $i18n->getKey('title.projects'));

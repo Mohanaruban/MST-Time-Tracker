@@ -182,7 +182,7 @@ function handleCheckboxes() {
                 </div>
                 {/if}
 
-                {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+                {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isAdmin())}
                 <div class="form-group">
                   <div class="col-sm-12">
                     <label class="col-sm-3 control-label">{$i18n.label.project}</label>

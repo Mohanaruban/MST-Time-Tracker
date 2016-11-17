@@ -31,10 +31,14 @@ import('form.Form');
 import('ttUserHelper');
 
 // Access check.
-if (!ttAccessCheck(right_manage_team)) {
+if (!$user->isAdmin()) {
   header('Location: access_denied.php');
   exit();
 }
+// if (!ttAccessCheck(right_manage_team)) {
+//   header('Location: access_denied.php');
+//   exit();
+// }
 
 // Get user id we are deleting from the request.
 // A cast to int is for safety against manipulation of request parameter (sql injection). 
@@ -42,7 +46,10 @@ $user_id = (int) $request->getParameter('id');
 
 // We need user name and login to display.
 $user_details = ttUserHelper::getUserDetails($user_id);
-
+if($user->isAdmin()) {
+  $user_details = "";
+  $user_details = ttUserHelper::getUserDetailsAdmin();
+}
 // Security checks.
 $ok_to_go = $user->canManageTeam(); // Are we authorized for user deletes?
 if ($ok_to_go) $ok_to_go = $ok_to_go && $user_details; // Are we deleting a real user?

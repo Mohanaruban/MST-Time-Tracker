@@ -44,9 +44,12 @@
           <ul class="nav navbar-nav">
             {if $user->isAdmin()}
             <li {if $title=="Teams"}class="active"{/if}><a class="mainMenu" href="admin_teams.php">{$i18n.menu.teams}</a></li>
-            <li {if $title=="Options"}class="active"{/if}><a class="mainMenu" href="admin_options.php">{$i18n.menu.options}</a></li>
+            <li {if $title=="Reports"}class="active"{/if}><a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a></li>
+            <li {if $title=="Projects"}class="active"{/if}><a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a></li>
+            <li {if $title=="Users"}class="active"{/if}><a class="mainMenu" href="users.php">{$i18n.menu.users}</a></li>
+           <!--  <li {if $title=="Exporting Team Data"}class="active"{/if}><a class="mainMenu" href="export.php">{$i18n.menu.export}</a></li> -->
             {else}
-            {if !$user->isClient()}
+            {if !$user->isManager()}
             <li {if $title=="Time"}class="active"{/if}>
               <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
             </li>
@@ -83,9 +86,6 @@
             <li {if $title=="Clients"}class="active"{/if}><a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a></li>
             {/if}
 
-            {if $user->isManager()}
-            <li {if $title=="Exporting Team Data"}class="active"{/if}><a class="mainMenu" href="export.php">{$i18n.menu.export}</a></li>
-            {/if}
             {/if}
           </ul>
           {/if}
@@ -96,7 +96,9 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in as {$user->name|escape:'html'}{if $user->isAdmin()} {$i18n.label.role_admin}{elseif $user->isManager()} {$i18n.label.role_manager}{elseif $user->canManageTeam()} {$i18n.label.role_comanager}{/if}
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  {if !$user->isAdmin()}
+                  {if $user->isAdmin()}
+                  <li><a href="admin_options.php">{$i18n.menu.options}</a></li>
+                  {else}
                   <li><a href="profile_edit.php">Edit Profile</a></li>
                   <li class="divider visible-md visible-lg visible-sm"></li>
                   {/if}

@@ -47,21 +47,32 @@ $user_id = (int) $request->getParameter('id');
 $user_details = ttUserHelper::getUserDetails($user_id);
 
 // Security checks.
-$ok_to_go = $user->canManageTeam(); // Are we authorized for user management?
-if ($ok_to_go) $ok_to_go = $ok_to_go && $user_details; // Are we editing a real user?
-if ($ok_to_go) $ok_to_go = $ok_to_go && ($user->team_id == $user_details['team_id']); // User belongs to our team?
-if ($ok_to_go && $user->isCoManager() && (ROLE_COMANAGER == $user_details['role']))
-  $ok_to_go = ($user->id == $user_details['id']); // Comanager is not allowed to edit other comanagers.
-if ($ok_to_go && $user->isCoManager() && (ROLE_MANAGER == $user_details['role']))
-  $ok_to_go = false; // Comanager is not allowed to edit a manager.
-if (!$ok_to_go) {
-  die ($i18n->getKey('error.sys'));
-}
 
+// if(!$user->isAdmin()) {
+//     header('Location: access_denied.php'); // Admin only have editing permission
+//   exit();
+// }
+// if (!$user->canManageTeam() && !$user->isAdmin()) {
+//   header('Location: access_denied.php'); // Admin only have editing permission
+//   exit();
+// $ok_to_go = $user->canManageTeam(); // Are we authorized for user management?
+// if ($ok_to_go) $ok_to_go = $ok_to_go && $user_details; // Are we editing a real user?
+// if ($ok_to_go) $ok_to_go = $ok_to_go && ($user->team_id == $user_details['team_id']); // User belongs to our team?
+// if ($ok_to_go && $user->isCoManager() && (ROLE_COMANAGER == $user_details['role']))
+//   $ok_to_go = ($user->id == $user_details['id']); // Comanager is not allowed to edit other comanagers.
+// if ($ok_to_go && $user->isCoManager() && (ROLE_MANAGER == $user_details['role']))
+//   $ok_to_go = false; // Comanager is not allowed to edit a manager.
+// if (!$ok_to_go) {
+//   die ($i18n->getKey('error.sys'));
+// }
+// }
 if ($user->isPluginEnabled('cl'))
   $clients = ttTeamHelper::getActiveClients($user->team_id);
-
+// echo $user->team_id;
 $projects = ttTeamHelper::getActiveProjects($user->team_id);
+if($user->isAdmin()) {
+  $projects = ttTeamHelper::getActiveProjectsAdmin(13);
+}
 $assigned_projects = array();
 
 if ($request->isPost()) {
@@ -77,6 +88,7 @@ if ($request->isPost()) {
   $cl_status = $request->getParameter('status');
   $cl_rate = $request->getParameter('rate');
   $cl_projects = $request->getParameter('projects');
+
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
       if (ttValidFloat($request->getParameter('rate_'.$p), true)) {
@@ -98,6 +110,9 @@ if ($request->isPost()) {
   $cl_status = $user_details['status'];
   $cl_projects = array();
   $assigned_projects = ttProjectHelper::getAssignedProjects($user_id);
+  if($user->isAdmin()) {
+  $assigned_projects = ttProjectHelper::getAssignedProjectsAdmin($user_id);
+  }
   foreach($assigned_projects as $p) {
     $cl_projects[] = $p['id'];
   }
@@ -114,7 +129,7 @@ if (!$auth->isPasswordExternal()) {
 $form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control', 'name'=>'email','value'=>$cl_email));
 
 $roles[ROLE_USER] = $i18n->getKey('label.user');
-$roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');
+$roles[ROLE_MANAGER] = $i18n->getKey('form.users.manager');
 if ($user->isPluginEnabled('cl'))
   $roles[ROLE_CLIENT] = $i18n->getKey('label.client');
 $form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()', 'class'=>'form-control', 'name'=>'role','value'=>$cl_role,'data'=>$roles));
@@ -164,6 +179,7 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$user_id));
 $form->addInput(array('type'=>'submit', 'class'=>'btn btn-success', 'name'=>'btn_submit','value'=>$i18n->getKey('button.save')));
 
 if ($request->isPost()) {
+  // echo "ssssssssss";
   // Validate user input.
   if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
   if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
@@ -175,11 +191,9 @@ if ($request->isPost()) {
   }
   if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.users.default_rate'));
-
   if ($err->no()) {
     $existing_user = ttUserHelper::getUserByLogin($cl_login);
     if (!$existing_user || ($user_id == $existing_user['id'])) {
-
       $fields = array(
         'name' => $cl_name,
         'login' => $cl_login,
@@ -192,7 +206,7 @@ if ($request->isPost()) {
         $fields['role'] = $cl_role;
         $fields['client_id'] = $cl_client_id;
       }
-
+    
       if (ttUserHelper::update($user_id, $fields)) {
 
         // If our own login changed, set new one in cookie to remember it.
