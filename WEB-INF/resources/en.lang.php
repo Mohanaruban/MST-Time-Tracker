@@ -127,6 +127,7 @@ $i18n_key_words = array(
 'label.manager_login' => 'Manager login',
 'label.person_name' => 'Name',
 'label.thing_name' => 'Name',
+'label.manager_list' => 'Team name',
 'label.login' => 'Login',
 'label.password' => 'Password',
 'label.confirm_password' => 'Confirm password',

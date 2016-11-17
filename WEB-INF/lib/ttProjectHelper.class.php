@@ -96,6 +96,26 @@ class ttProjectHelper {
   }
   
   // getProjects - returns an array of active and inactive projects in a team.
+  static function getProjectsAdmin()
+  {
+    global $user;
+        
+    $result = array();
+    $mdb2 = getConnection();
+    
+    $sql = "select id, name, tasks from tt_projects
+      where (status = 0 or status = 1) order by name";   
+        
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
+  // getProjects - returns an array of active and inactive projects in a team.
   static function getProjects()
   {
   	global $user;
@@ -249,10 +269,6 @@ class ttProjectHelper {
 
     // Bind the project to users.
     $active_users = ttTeamHelper::getActiveUsers(array('getAllFields'=>true));
-    if($user->isAdmin()) {
-      $active_users = "";
-      $active_users = ttTeamHelper::getActiveUsersAdmin(array('getAllFields'=>true));
-    }
     foreach ($active_users as $u) {
       if(in_array($u['id'], $users)) {
         $sql = "insert into tt_user_project_binds (project_id, user_id, status, rate) values(
@@ -344,7 +360,7 @@ class ttProjectHelper {
         return false;
     }    
     foreach ($task_binds_to_add as $task_id) {
-      echo $sql = "insert into tt_project_task_binds (project_id, task_id) values($project_id, $task_id)";
+      $sql = "insert into tt_project_task_binds (project_id, task_id) values($project_id, $task_id)";
       $affected = $mdb2->exec($sql);
       if (is_a($affected, 'PEAR_Error'))
         return false;

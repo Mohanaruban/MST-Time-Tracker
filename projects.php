@@ -40,14 +40,12 @@ if (!ttAccessCheck(right_data_entry) || (MODE_PROJECTS != $user->tracking_mode &
 if($user->isAdmin()) {
   $active_projects = ttTeamHelper::getActiveProjectsAdmin();
   $inactive_projects = ttTeamHelper::getInactiveProjectsAdmin();
-}
-if($user->canManageTeam()) {
+}elseif($user->canManageTeam()) {
   $active_projects = ttTeamHelper::getActiveProjects($user->team_id);
   $inactive_projects = ttTeamHelper::getInactiveProjects($user->team_id);
 } else {
   $active_projects = $user->getAssignedProjects();
 }
-
 $smarty->assign('active_projects', $active_projects);
 $smarty->assign('inactive_projects', $inactive_projects);
 $smarty->assign('title', $i18n->getKey('title.projects'));

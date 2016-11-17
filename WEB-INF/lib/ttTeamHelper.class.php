@@ -67,6 +67,18 @@ class ttTeamHelper {
     return $user_list;
   }
 
+  
+  static function getManagerList() {
+    $mdb2 = getConnection();
+    $sql = "SELECT name,id FROM `tt_teams` where status = 1 ORDER BY `id` ASC";
+    $res = $mdb2->query($sql);
+    $manager_list = array();
+    while ($val = $res->fetchRow()) {
+      $manager_list[] = $val;
+    }
+    return $manager_list;
+  }
+
   // The getActiveUsers obtains all active users in a given team.
   static function getActiveUsers($options = null) {
     global $user;
@@ -104,9 +116,9 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     if (isset($options['getAllFields']))
-      $sql = "select * from tt_users where status = 1 and team_id > 0 order by name";
+      $sql = "select * from tt_users where status = 1 order by name";
     else
-      $sql = "select id, name from tt_users where status = 1 and team_id > 0 order by name";
+      $sql = "select id, name from tt_users where status = 1 order by name";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
@@ -128,6 +140,24 @@ class ttTeamHelper {
     }
     return $user_list;
   }
+
+ // The getUsers obtains all active and inactive (but not deleted) users in a given team.
+  static function getUsersAdmin() {
+    global $user;
+    $mdb2 = getConnection();
+
+    $sql = "select id, name from tt_users where (status = 1 or status = 0) and team_id > 0 and role != 324 order by name";
+    $res = $mdb2->query($sql);
+    $user_list = array();
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    while ($val = $res->fetchRow()) {
+      $user_list[] = $val;
+    }
+
+    return $user_list;
+  }
+
 
   // The getUsers obtains all active and inactive (but not deleted) users in a given team.
   static function getUsers() {
@@ -209,8 +239,7 @@ class ttTeamHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, tasks from tt_projects
-      where status = 1 order by name";
+    $sql = "select id, name, description, tasks from tt_projects where status = 1 order by name";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {

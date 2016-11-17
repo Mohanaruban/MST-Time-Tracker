@@ -217,9 +217,9 @@ class ttUserHelper {
       // otherwise de-activate the bind (set its status to inactive). This will keep the bind
       // and its rate in database for reporting.
 
-      $all_projects = ttTeamHelper::getAllProjects($user->team_id);
+      $all_projects = ttTeamHelper::getAllProjects(13);
       $assigned_projects = isset($fields['projects']) ? $fields['projects'] : array();
-      
+
       foreach($all_projects as $p) {
         // Determine if a project is assigned.
         $assigned = false;

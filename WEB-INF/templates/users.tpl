@@ -171,7 +171,7 @@
 
 {/if}
 {else}
-{'Good'}
+
 <table class="table table-responsive table-striped table-hover table-bordered">
   <thead>
   <tr>

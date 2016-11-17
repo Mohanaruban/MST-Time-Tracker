@@ -68,10 +68,10 @@ $user_details = ttUserHelper::getUserDetails($user_id);
 // }
 if ($user->isPluginEnabled('cl'))
   $clients = ttTeamHelper::getActiveClients($user->team_id);
-
+// echo $user->team_id;
 $projects = ttTeamHelper::getActiveProjects($user->team_id);
 if($user->isAdmin()) {
-  $projects = ttTeamHelper::getActiveProjectsAdmin();
+  $projects = ttTeamHelper::getActiveProjectsAdmin(13);
 }
 $assigned_projects = array();
 
@@ -101,13 +101,11 @@ if ($request->isPost()) {
     }
   }
 } else {
-
   $cl_name = $user_details['name'];
   $cl_login = $user_details['login'];
   $cl_email = $user_details['email'];
   $cl_rate = str_replace('.', $user->decimal_mark, $user_details['rate']);
   $cl_role = $user_details['role'];
-  echo $cl_role;
   $cl_client_id = $user_details['client_id'];
   $cl_status = $user_details['status'];
   $cl_projects = array();
@@ -118,7 +116,6 @@ if ($request->isPost()) {
   foreach($assigned_projects as $p) {
     $cl_projects[] = $p['id'];
   }
-  print_r($cl_projects);
 }
 
 $form = new Form('userForm');
@@ -182,6 +179,7 @@ $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$user_id));
 $form->addInput(array('type'=>'submit', 'class'=>'btn btn-success', 'name'=>'btn_submit','value'=>$i18n->getKey('button.save')));
 
 if ($request->isPost()) {
+  // echo "ssssssssss";
   // Validate user input.
   if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
   if (!ttValidString($cl_login)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.login'));
@@ -193,11 +191,9 @@ if ($request->isPost()) {
   }
   if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.users.default_rate'));
-
   if ($err->no()) {
     $existing_user = ttUserHelper::getUserByLogin($cl_login);
     if (!$existing_user || ($user_id == $existing_user['id'])) {
-
       $fields = array(
         'name' => $cl_name,
         'login' => $cl_login,
@@ -210,7 +206,7 @@ if ($request->isPost()) {
         $fields['role'] = $cl_role;
         $fields['client_id'] = $cl_client_id;
       }
-
+    
       if (ttUserHelper::update($user_id, $fields)) {
 
         // If our own login changed, set new one in cookie to remember it.

@@ -36,14 +36,11 @@ import('ttProjectHelper');
 import('ttFavReportHelper');
 import('ttClientHelper');
 
-// Access check.
-if(!$user->isAdmin()) {
+
 if (!ttAccessCheck(right_view_reports)) {
   header('Location: access_denied.php');
   exit();
 }
-}
-
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
@@ -93,8 +90,12 @@ if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['ty
 }
 
 // Add controls for projects and tasks.
-if ($user->canManageTeam()) {
+if ($user->canManageTeam() || $user->isAdmin()) {
+  if($user->isAdmin()) {
+    $project_list = ttProjectHelper::getProjectsAdmin();
+  }else {
   $project_list = ttProjectHelper::getProjects(); // Manager and co-managers can run reports on all active and inactive projects.
+  } 
 } elseif ($user->isClient()) {
   $project_list = ttProjectHelper::getProjectsForClient();
 } else {
@@ -140,6 +141,9 @@ if ($user->canManageTeam() || $user->isClient()) {
   // Prepare user and assigned projects arrays.
   if ($user->canManageTeam())
     $users = ttTeamHelper::getUsers(); // Active and inactive users for managers.
+    if($user->isAdmin()) {
+      $users = ttTeamHelper::getUsersAdmin();
+    }
   elseif ($user->isClient())
     $users = ttTeamHelper::getUsersForClient(); // Active and inactive users for clients.
 

@@ -46,10 +46,10 @@ if (!ttAccessCheck(right_manage_team) || (MODE_PROJECTS != $user->tracking_mode 
 $cl_project_id = (int)$request->getParameter('id');
 
 $users = ttTeamHelper::getActiveUsers();
-if($user->isAdmin()) {
-  $users = "";
-  $users = ttTeamHelper::getActiveUsersAdmin();
-}
+// if($user->isAdmin()) {
+//   $users = "";
+//   $users = ttTeamHelper::getActiveUsersAdmin();
+// }
 foreach ($users as $user_item)
   $all_users[$user_item['id']] = $user_item['name'];
 

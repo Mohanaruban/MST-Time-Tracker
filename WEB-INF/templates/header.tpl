@@ -44,10 +44,12 @@
           <ul class="nav navbar-nav">
             {if $user->isAdmin()}
             <li {if $title=="Teams"}class="active"{/if}><a class="mainMenu" href="admin_teams.php">{$i18n.menu.teams}</a></li>
+            <li {if $title=="Reports"}class="active"{/if}><a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a></li>
             <li {if $title=="Projects"}class="active"{/if}><a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a></li>
             <li {if $title=="Users"}class="active"{/if}><a class="mainMenu" href="users.php">{$i18n.menu.users}</a></li>
+           <!--  <li {if $title=="Exporting Team Data"}class="active"{/if}><a class="mainMenu" href="export.php">{$i18n.menu.export}</a></li> -->
             {else}
-            {if !$user->isClient()}
+            {if !$user->isManager()}
             <li {if $title=="Time"}class="active"{/if}>
               <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
             </li>
@@ -84,9 +86,6 @@
             <li {if $title=="Clients"}class="active"{/if}><a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a></li>
             {/if}
 
-            {if $user->isManager()}
-            <li {if $title=="Exporting Team Data"}class="active"{/if}><a class="mainMenu" href="export.php">{$i18n.menu.export}</a></li>
-            {/if}
             {/if}
           </ul>
           {/if}
