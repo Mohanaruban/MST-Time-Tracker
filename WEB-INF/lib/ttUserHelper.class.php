@@ -32,11 +32,11 @@ import('ttTeamHelper');
 class ttUserHelper {
 	
   // The getUserDetails function returns user details.
-  static function getUserDetailsAdmin() {
+  static function getUserDetailsAdmin($user_id) {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql =  "select * from tt_users";
+    $sql =  "select * from tt_users where id = $user_id";
     $res = $mdb2->query($sql);
     
     if (!is_a($res, 'PEAR_Error')) {
@@ -217,7 +217,7 @@ class ttUserHelper {
       // otherwise de-activate the bind (set its status to inactive). This will keep the bind
       // and its rate in database for reporting.
 
-      $all_projects = ttTeamHelper::getAllProjects(13);
+      $all_projects = ttTeamHelper::getAllProjects($user->team_id);
       $assigned_projects = isset($fields['projects']) ? $fields['projects'] : array();
 
       foreach($all_projects as $p) {

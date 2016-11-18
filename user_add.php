@@ -71,6 +71,8 @@ if ($request->isPost()) {
       } else
         $err->add($i18n->getKey('error.field'), 'rate_'.$p);
     }
+    print_r($p);
+    exit;
   }
 }
 

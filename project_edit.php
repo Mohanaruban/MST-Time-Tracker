@@ -42,7 +42,7 @@ if (!ttAccessCheck(right_manage_team) || (MODE_PROJECTS != $user->tracking_mode 
     exit();
   }
 }
-
+echo $user->team_id;
 $cl_project_id = (int)$request->getParameter('id');
 
 $users = ttTeamHelper::getActiveUsers();

@@ -54,7 +54,7 @@ class ttProjectHelper {
   }
 
     // getAssignedProjects - returns an array of assigned projects.
-  static function getAssignedProjectsAdmin($user_id)
+  static function getAssignedProjectsAdmin($user_id, $teamid)
   {
     global $user;
     
@@ -63,8 +63,8 @@ class ttProjectHelper {
     
     // Do a query with inner join to get assigned projects.
     $sql = "select p.id, p.name, p.tasks, upb.rate from tt_projects p
-      inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.status = 1)
-      where p.status = 1 order by p.name";
+      inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.project_id = p.id and upb.status = 1)
+      where p.team_id = $teamid and p.status = 1 order by p.name";
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {
       while ($val = $res->fetchRow()) {
