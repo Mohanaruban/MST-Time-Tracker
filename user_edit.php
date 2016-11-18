@@ -69,7 +69,7 @@ $user_details = ttUserHelper::getUserDetails($user_id);
 if ($user->isPluginEnabled('cl'))
   $clients = ttTeamHelper::getActiveClients($user->team_id);
 $projects = ttTeamHelper::getActiveProjects($user->team_id);
-if($user->isAdmin()) {
+if($user->isAdmin()) { 
   $teamid = "";
   $getTeamID = ttTeamHelper::getTeamIDAdmin($user_id);
   foreach ($getTeamID as $id) {
