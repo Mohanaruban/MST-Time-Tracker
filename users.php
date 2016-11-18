@@ -36,7 +36,6 @@ if (!ttAccessCheck(right_data_entry)) {
   header('Location: access_denied.php');
   exit();
 }
-
 // Get users.
 $active_users = ttTeamHelper::getActiveUsers(array('getAllFields'=>true));
 if($user->isAdmin()) {

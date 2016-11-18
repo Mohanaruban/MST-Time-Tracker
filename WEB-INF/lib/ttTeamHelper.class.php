@@ -46,6 +46,20 @@ class ttTeamHelper {
     return false;
   }
 
+  //Get team id for users
+  static function getTeamIDAdmin($user_id) {
+      $mdb2 = getConnection();
+
+      $sql = "select team_id from tt_users where id = $user_id";
+      $res = $mdb2->query($sql);
+      $manager_list = array();
+      while ($val = $res->fetchRow()) {
+        $team_id[] = $val;
+      }
+      return $team_id;
+
+  }
+
   // The getUsersForClient obtains all active and inactive users in a team that are relevant to a client.
   static function getUsersForClient() {
     global $user;
@@ -233,13 +247,32 @@ class ttTeamHelper {
     return false;
   }
 
- // getActiveProjects - returns an array of active projects for team.
-  static function getActiveProjectsAdmin()
+
+// getActiveProjects - returns an array of active projects for team.
+  static function getActiveProjectsUserEditAdmin($user_id, $teamid)
   {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select id, name, description, tasks from tt_projects where status = 1 order by name";
+     $sql = "select p.id, p.name, p.tasks,p.description from tt_projects p inner join tt_user_project_binds upb on (upb.user_id = $user_id and upb.status = 1 and upb.project_id = p.id) where p.team_id = $teamid and p.status = 1 order by p.name ";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
+ // getActiveProjects - returns an array of active projects for team.
+  static function getActiveProjectsAdmin($team_id)
+  {
+    $result = array();
+    $mdb2 = getConnection();
+
+     $sql = "select id, name, description, tasks from tt_projects
+      where status = 1 order by name";
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
