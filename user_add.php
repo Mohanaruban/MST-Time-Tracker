@@ -48,6 +48,7 @@ if ($user->isPluginEnabled('cl'))
 
 $assigned_projects = array();
 if ($request->isPost()) {
+  $cl_teamid = trim($request->getParameter('manager_list'));
   $cl_name = trim($request->getParameter('name'));
   $cl_login = trim($request->getParameter('login'));
   if (!$auth->isPasswordExternal()) {
@@ -75,6 +76,17 @@ if ($request->isPost()) {
 
 $form = new Form('userForm');
 $form->addFormStyle(array('class'=>'form-horizontal'));
+
+// Dropdown for projects assigned to user.
+  $get_manager = ttTeamHelper::getManagerList();
+  $form->addInput(array('type'=>'combobox',
+    'class'=>'form-control',
+    'onchange'=>'fillTaskDropdown(this.value);',
+    'name'=>'manager_list',
+    'value'=>"",
+    'data'=>$get_manager,
+    'datakeys'=>array('id','name'),
+    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name,'class'=>'form-control','placeholder'=>'Enter Name'));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','value'=>$cl_login,'class'=>'form-control','placeholder'=>'Enter Login Name'));
@@ -153,7 +165,8 @@ if ($request->isPost()) {
         'login' => $cl_login,
         'password' => $cl_password1,
         'rate' => $cl_rate,
-        'team_id' => $user->team_id,
+        // 'team_id' => $user->team_id,
+        'team_id' => $cl_teamid,
         'role' => $cl_role,
         'client_id' => $cl_client_id,
         'projects' => $assigned_projects,
@@ -172,5 +185,6 @@ $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
 $smarty->assign('title', $i18n->getKey('title.add_user'));
+$smarty->assign('teamid', $get_manager);
 $smarty->assign('content_page_name', 'user_add.tpl');
 $smarty->display('index.tpl');

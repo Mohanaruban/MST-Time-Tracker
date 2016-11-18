@@ -320,6 +320,7 @@ class ttProjectHelper {
     }
     // Insert records.
     $users_to_add = array_diff($users_to_bind, $all_users); // Users missing from tt_user_project_binds, that we need to insert.
+
     if(count($users_to_add) > 0) {
       $sql = "select id, rate from tt_users where id in (".join(', ', $users_to_add).")";
       $res = $mdb2->query($sql);
