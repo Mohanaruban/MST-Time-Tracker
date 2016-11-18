@@ -46,10 +46,10 @@ if (!ttAccessCheck(right_manage_team) || (MODE_PROJECTS != $user->tracking_mode 
 $cl_project_id = (int)$request->getParameter('id');
 
 $users = ttTeamHelper::getActiveUsers();
-// if($user->isAdmin()) {
-//   $users = "";
-//   $users = ttTeamHelper::getActiveUsersAdmin();
-// }
+if($user->isAdmin()) {
+  $users = "";
+  $users = ttTeamHelper::getActiveUsersAdmin();
+}
 foreach ($users as $user_item)
   $all_users[$user_item['id']] = $user_item['name'];
 
@@ -100,7 +100,6 @@ if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.thing_name'));
   if (!ttValidString($cl_description, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.description'));
-
   if ($err->no()) {
     if ($request->getParameter('btn_save')) {
       $existing_project = ttProjectHelper::getProjectByName($cl_name);

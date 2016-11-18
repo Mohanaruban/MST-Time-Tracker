@@ -47,6 +47,12 @@ window.onload = function() {
 <div class="row">
     <div class="col-sm-12">
       <div class="form-group">
+      {if $user->isAdmin()}
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.manager_list}*</label>
+        <div class="col-sm-9">{$forms.userForm.manager_list.control}</div>
+      </div>
+      {/if}
         <label class="col-sm-3 control-label">{$i18n.label.person_name} (*)</label>
         <div class="col-sm-9">{$forms.userForm.name.control}</div>
       </div>

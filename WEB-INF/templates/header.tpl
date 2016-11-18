@@ -61,6 +61,8 @@
 
             <li {if $title=="Reports"}class="active"{/if}><a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a></li>
             
+            <li {if $title=="Projects"}class="active"{/if}><a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a></li>
+            
             {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
             <li {if $title=="Invoice"}class="active"{/if}><a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a></li>
             {/if}
