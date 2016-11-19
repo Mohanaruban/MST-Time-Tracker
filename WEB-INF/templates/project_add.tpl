@@ -19,7 +19,7 @@
       </div>
 
       
-      <div class="form-group">
+    <!--   <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.users}</label>
         <div class="col-sm-9">{$forms.projectForm.users.control}</div>
       </div>
@@ -31,7 +31,7 @@
         <div class="col-sm-9">{$forms.projectForm.tasks.control}</div>
       </div>
 
-      {/if}
+      {/if} -->
      
     </div>
   </div>

@@ -42,13 +42,18 @@ if (!ttAccessCheck(right_manage_team) || (MODE_PROJECTS != $user->tracking_mode 
     exit();
   }
 }
-echo $user->team_id;
 $cl_project_id = (int)$request->getParameter('id');
+
+$get_teamid = ttTeamHelper::getTeamid_projectEdit($cl_project_id);
+
+foreach ($get_teamid as $teamid) {
+  $Projectteamid = $teamid['team_id'];
+}
 
 $users = ttTeamHelper::getActiveUsers();
 if($user->isAdmin()) {
   $users = "";
-  $users = ttTeamHelper::getActiveUsersAdmin();
+  $users = ttTeamHelper::getActiveUsersAdmin($Projectteamid);
 }
 foreach ($users as $user_item)
   $all_users[$user_item['id']] = $user_item['name'];
@@ -68,6 +73,7 @@ if ($request->isPost()) {
   if($user->isAdmin()) {
     $project = ttProjectHelper::getAdmin($cl_project_id);
   }
+  $cl_projectid = $project['id'];
   $cl_name = $project['name'];
   $cl_description = $project['description'];
   $cl_status = $project['status'];
@@ -82,6 +88,8 @@ if ($request->isPost()) {
 
   $cl_tasks = explode(',', $project['tasks']);
 }
+
+
 
 $form = new Form('projectForm');
 $form->addFormStyle(array('class'=>'form-horizontal'));

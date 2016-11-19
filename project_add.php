@@ -41,11 +41,11 @@ if (!ttAccessCheck(right_manage_team)) {
   exit();
 }
 
-$users = ttTeamHelper::getActiveUsers();
-if($user->isAdmin()) {
-  $users = "";
-  $users = ttTeamHelper::getActiveUsersAdmin();
-}
+// $users = ttTeamHelper::getActiveUsers();
+// if($user->isAdmin()) {
+//   $users = "";
+//   $users = ttTeamHelper::getActiveUsersAdmin();
+// }
 foreach ($users as $user_item)
   $all_users[$user_item['id']] = $user_item['name'];
 
