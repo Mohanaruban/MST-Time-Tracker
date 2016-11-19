@@ -93,6 +93,17 @@ class ttTeamHelper {
     return $manager_list;
   }
 
+  static function getTeamid_projectEdit($cl_project_id) {
+    $mdb2 = getConnection();
+    $sql = "SELECT team_id FROM `tt_projects` where id = $cl_project_id and status = 1 ORDER BY `id` ASC ";
+    $res = $mdb2->query($sql);
+    $teamid = array();
+    while ($val = $res->fetchRow()) {
+      $teamid[] = $val;
+    }
+    return $teamid;
+  }
+
   // The getActiveUsers obtains all active users in a given team.
   static function getActiveUsers($options = null) {
     global $user;
@@ -125,14 +136,14 @@ class ttTeamHelper {
   }
 
 // The getActiveUsers obtains all active users in a given team.
-  static function getActiveUsersAdmin($options = null) {
+  static function getActiveUsersAdmin($teamid, $options = null) {
     global $user;
     $mdb2 = getConnection();
 
-    if (isset($options['getAllFields']))
-      $sql = "select * from tt_users where status = 1 order by name";
+if (isset($options['getAllFields']))
+      $sql = "select * from tt_users where team_id = $teamid and status = 1 order by name";
     else
-      $sql = "select id, name from tt_users where status = 1 order by name";
+      $sql = "select id, name from tt_users where team_id = $teamid and status = 1 order by name";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
