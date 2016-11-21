@@ -69,6 +69,9 @@ $user_details = ttUserHelper::getUserDetails($user_id);
 if ($user->isPluginEnabled('cl'))
   $clients = ttTeamHelper::getActiveClients($user->team_id);
 $projects = ttTeamHelper::getActiveProjects($user->team_id);
+if($user->isManager()) {
+$projects = ttProjectHelper::getAssignedProjects($user_id);
+}
 if($user->isAdmin()) { 
   $teamid = "";
   $getTeamID = ttTeamHelper::getTeamIDAdmin($user_id);
@@ -119,7 +122,9 @@ if ($request->isPost()) {
   $assigned_projects = ttProjectHelper::getAssignedProjects($user_id);
   if($user->isAdmin()) {
   $assigned_projects = ttProjectHelper::getAssignedProjectsAdmin($user_id,$teamid);
-  echo $teamid;
+  }
+  if($user->isManager()) {
+  $assigned_projects = ttProjectHelper::getProjectsManager($user_id);
   }
   foreach($assigned_projects as $p) {
     $cl_projects[] = $p['id'];
@@ -128,6 +133,7 @@ if ($request->isPost()) {
 
 $form = new Form('userForm');
 $form->addFormStyle(array('class'=>'form-horizontal'));
+
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name', 'class'=>'form-control','value'=>$cl_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login', 'class'=>'form-control','value'=>$cl_login));
 if (!$auth->isPasswordExternal()) {
@@ -185,7 +191,6 @@ $form->addInputElement($table);
 
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$user_id));
 $form->addInput(array('type'=>'submit', 'class'=>'btn btn-success', 'name'=>'btn_submit','value'=>$i18n->getKey('button.save')));
-
 if ($request->isPost()) {
   // Validate user input.
   if (!ttValidString($cl_name)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.person_name'));
