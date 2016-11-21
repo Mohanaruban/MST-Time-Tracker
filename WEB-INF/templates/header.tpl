@@ -45,6 +45,9 @@
             {if $user->isAdmin()}
             <li {if $title=="Teams"}class="active"{/if}><a class="mainMenu" href="admin_teams.php">{$i18n.menu.teams}</a></li>
             <li {if $title=="Reports"}class="active"{/if}><a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a></li>
+            
+            <li {if $title=="Charts"}class="active"{/if}><a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a></li>
+           
             <li {if $title=="Projects"}class="active"{/if}><a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a></li>
             <li {if $title=="Users"}class="active"{/if}><a class="mainMenu" href="users.php">{$i18n.menu.users}</a></li>
            <!--  <li {if $title=="Exporting Team Data"}class="active"{/if}><a class="mainMenu" href="export.php">{$i18n.menu.export}</a></li> -->

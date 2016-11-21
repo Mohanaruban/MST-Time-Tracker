@@ -39,8 +39,10 @@ import('ttTeamHelper');
 
 // Access check.
 if (!ttAccessCheck(right_view_charts) || !$user->isPluginEnabled('ch')) {
+  if(!$user->isAdmin()) {
   header('Location: access_denied.php');
   exit();
+}
 }
 
 // Initialize and store date in session.
