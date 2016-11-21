@@ -136,7 +136,38 @@ class ttTeamHelper {
   }
 
 // The getActiveUsers obtains all active users in a given team.
-  static function getActiveUsersAdmin($teamid, $options = null) {
+  static function getActiveUsersAdmin($options = null) {
+    global $user;
+    $mdb2 = getConnection();
+
+    if (isset($options['getAllFields']))
+      $sql = "select * from tt_users where status = 1 order by name";
+    else
+      $sql = "select id, name from tt_users where status = 1 order by name";
+    $res = $mdb2->query($sql);
+    $user_list = array();
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    while ($val = $res->fetchRow()) {
+      $user_list[] = $val;
+    }
+
+    if (isset($options['putSelfFirst'])) {
+      // Put own entry at the front.
+      $cnt = count($user_list);
+      for($i = 0; $i < $cnt; $i++) {
+        if ($user_list[$i]['id'] == $user->id) {
+          $self = $user_list[$i]; // Found self.
+          array_unshift($user_list, $self); // Put own entry at the front.
+          array_splice($user_list, $i+1, 1); // Remove duplicate.
+        }
+      }
+    }
+    return $user_list;
+  }
+
+  // The getActiveUsers obtains all active users in a given team.
+  static function getActiveUsersAdminProjectedit($teamid, $options = null) {
     global $user;
     $mdb2 = getConnection();
 

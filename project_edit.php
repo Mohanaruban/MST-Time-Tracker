@@ -53,7 +53,7 @@ foreach ($get_teamid as $teamid) {
 $users = ttTeamHelper::getActiveUsers();
 if($user->isAdmin()) {
   $users = "";
-  $users = ttTeamHelper::getActiveUsersAdmin($Projectteamid);
+  $users = ttTeamHelper::getActiveUsersAdminProjectedit($Projectteamid);
 }
 foreach ($users as $user_item)
   $all_users[$user_item['id']] = $user_item['name'];
