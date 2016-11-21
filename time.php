@@ -100,13 +100,20 @@ $_SESSION['project'] = $cl_project;
 $cl_task = $request->getParameter('task', ($request->getMethod()=='POST'? null : @$_SESSION['task']));
 $_SESSION['task'] = $cl_task;
 
+
+
 // Elements of timeRecordForm.
 $form = new Form('timeRecordForm');
-
 $form->addFormStyle(array('class'=>'form-horizontal'));
 
 if ($user->canManageTeam()) {
   $user_list = ttTeamHelper::getActiveUsers(array('putSelfFirst'=>true));
+  if($user->isManager()) {
+    echo "Manager";
+    $user_list = ttTeamHelper::getActiveUsersTimeTab(array('putSelfFirst'=>true));
+  }else {
+    echo "Not Manager";
+  }
   if (count($user_list) > 1) {
     $form->addInput(array('type'=>'combobox',
       'class'=>'form-control',

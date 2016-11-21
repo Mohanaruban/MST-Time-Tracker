@@ -40,7 +40,9 @@ if (!ttAccessCheck(right_data_entry) || (MODE_PROJECTS != $user->tracking_mode &
 if($user->isAdmin()) {
   $active_projects = ttTeamHelper::getActiveProjectsAdmin();
   $inactive_projects = ttTeamHelper::getInactiveProjectsAdmin();
-}elseif($user->canManageTeam()) {
+}elseif($user->isManager()) {
+  $active_projects = ttTeamHelper::getActiveProjectsManager($user->id);
+} elseif($user->canManageTeam()) {
   $active_projects = ttTeamHelper::getActiveProjects($user->team_id);
   $inactive_projects = ttTeamHelper::getInactiveProjects($user->team_id);
 } else {

@@ -166,6 +166,69 @@ class ttTeamHelper {
     return $user_list;
   }
 
+// The getActiveUsers obtains all active users in a given team.
+  static function getActiveUsersManager($user_id, $options = null) {
+    global $user;
+    $mdb2 = getConnection();
+
+    $sql = "select p.id, p.name, p.tasks FROM tt_user_project_binds upb inner join tt_projects p on upb.project_id = p.id where upb.user_id = $user_id and (p.status = 0 or p.status = 1) order by p.name";   
+        
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    $user_list = array();
+    foreach ($result as $projectid) {
+       $getprojectid = $projectid['id'];
+      if (isset($options['getAllFields']))
+      $sql = "select * FROM tt_user_project_binds upb inner join tt_users u on upb.user_id = u.id WHERE upb.project_id = $getprojectid";
+     else
+       $sql = "select u.id, u.name FROM tt_user_project_binds upb inner join tt_users u on upb.user_id = u.id WHERE upb.project_id = $getprojectid";
+      $res = $mdb2->query($sql);
+      
+      while ($val = $res->fetchRow()) {
+        $user_list[$val['user_id']] = $val;
+      }
+    }
+    return $user_list;
+  }
+
+
+
+  // The getActiveUsers obtains all active users in a given team.
+  static function getActiveUsersTimeTab($options = null) {
+    global $user;
+    $mdb2 = getConnection();
+
+    if (isset($options['getAllFields']))
+      $sql = "select * from tt_users where team_id = $user->team_id and id = $user_id and status = 1 order by name";
+    else
+      $sql = "select id, name from tt_users where team_id = $user->team_id and and id = $user_id and status = 1 order by name";
+    $res = $mdb2->query($sql);
+    $user_list = array();
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    while ($val = $res->fetchRow()) {
+      $user_list[] = $val;
+    }
+
+    if (isset($options['putSelfFirst'])) {
+      // Put own entry at the front.
+      $cnt = count($user_list);
+      for($i = 0; $i < $cnt; $i++) {
+        if ($user_list[$i]['id'] == $user->id) {
+          $self = $user_list[$i]; // Found self.
+          array_unshift($user_list, $self); // Put own entry at the front.
+          array_splice($user_list, $i+1, 1); // Remove duplicate.
+        }
+      }
+    }
+    return $user_list;
+  }
+
+
   // The getActiveUsers obtains all active users in a given team.
   static function getActiveUsersAdminProjectedit($teamid, $options = null) {
     global $user;
@@ -202,7 +265,7 @@ if (isset($options['getAllFields']))
     global $user;
     $mdb2 = getConnection();
 
-    $sql = "select id, name from tt_users where (status = 1 or status = 0) and team_id > 0 and role != 324 order by name";
+    $sql = "select id, name from tt_users where (status = 1 or status = 0) and team_id > 0 order by name";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
@@ -325,6 +388,25 @@ if (isset($options['getAllFields']))
     return $result;
   }
 
+// getInactiveProjects - returns an array of inactive projects for team.
+  static function getActiveProjectsManager($user_id)
+  {
+    $result = array();
+    $mdb2 = getConnection();
+
+    $sql = "select p.id, p.name, p.tasks FROM tt_user_project_binds upb inner join tt_projects p on upb.project_id = p.id where upb.user_id = $user_id and (p.status = 0 or p.status = 1) order by p.name";
+    
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
+
   // getActiveProjects - returns an array of active projects for team.
   static function getActiveProjects($team_id)
   {
@@ -351,6 +433,24 @@ if (isset($options['getAllFields']))
 
     $sql = "select id, name, description, tasks from tt_projects
       where status = 0 order by name";
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
+// getInactiveProjects - returns an array of inactive projects for team.
+  static function getInactiveProjectsManager($user_id)
+  {
+    $result = array();
+    $mdb2 = getConnection();
+
+    $sql = "select p.id, p.name, p.tasks FROM tt_user_project_binds upb inner join tt_projects p on upb.project_id = p.id where upb.user_id = $user_id and (p.status = 0 or p.status = 1) order by p.name";
+
     $res = $mdb2->query($sql);
     $result = array();
     if (!is_a($res, 'PEAR_Error')) {
