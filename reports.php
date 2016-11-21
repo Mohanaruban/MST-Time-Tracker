@@ -90,10 +90,12 @@ if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['ty
 }
 
 // Add controls for projects and tasks.
-if ($user->canManageTeam() || $user->isAdmin()) {
+if ($user->canManageTeam() || $user->isAdmin() || $user->isManager()) {
   if($user->isAdmin()) {
     $project_list = ttProjectHelper::getProjectsAdmin();
-  }else {
+  } elseif($user->isManager()) {
+    $project_list = ttProjectHelper::getProjectsManager($user->id);
+  } else {
   $project_list = ttProjectHelper::getProjects(); // Manager and co-managers can run reports on all active and inactive projects.
   } 
 } elseif ($user->isClient()) {
@@ -143,6 +145,9 @@ if ($user->canManageTeam() || $user->isClient()) {
     $users = ttTeamHelper::getUsers(); // Active and inactive users for managers.
     if($user->isAdmin()) {
       $users = ttTeamHelper::getUsersAdmin();
+    }
+    if($user->isManager()) {
+      $users = ttTeamHelper::getActiveUsersManager($user->id, array('getAllFields'=>true));
     }
   elseif ($user->isClient())
     $users = ttTeamHelper::getUsersForClient(); // Active and inactive users for clients.

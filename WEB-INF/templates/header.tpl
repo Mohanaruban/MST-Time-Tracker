@@ -49,11 +49,9 @@
             <li {if $title=="Users"}class="active"{/if}><a class="mainMenu" href="users.php">{$i18n.menu.users}</a></li>
            <!--  <li {if $title=="Exporting Team Data"}class="active"{/if}><a class="mainMenu" href="export.php">{$i18n.menu.export}</a></li> -->
             {else}
-            {if !$user->isManager()}
             <li {if $title=="Time"}class="active"{/if}>
               <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
             </li>
-            {/if}
             
             {if $user->isPluginEnabled('ex') && !$user->isClient()}
             <li {if $title=="Expenses"}class="active"{/if}><a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a></li>
@@ -80,7 +78,7 @@
             <li {if $title=="Tasks"}class="active"{/if}><a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a></li>
             {/if}
 
-            {if !$user->isClient()}
+            {if $user->isClient() || $user->isAdmin() || $user->isManager()}
             <li {if $title=="Users"}class="active"{/if}><a class="mainMenu" href="users.php">{$i18n.menu.users}</a></li>
             {/if}
 

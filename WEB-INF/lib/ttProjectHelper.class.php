@@ -115,6 +115,25 @@ class ttProjectHelper {
     return $result;
   }
 
+    // getProjects - returns an array of active and inactive projects in a team.
+  static function getProjectsManager($user_id)
+  {
+    global $user;
+        
+    $result = array();
+    $mdb2 = getConnection();
+
+    $sql = "SELECT p.id, p.name, p.tasks FROM tt_user_project_binds upb inner join tt_projects p on upb.project_id = p.id where upb.user_id = $user_id and (p.status = 0 or p.status = 1) order by p.name";   
+        
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
   // getProjects - returns an array of active and inactive projects in a team.
   static function getProjects()
   {
