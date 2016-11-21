@@ -110,7 +110,7 @@ class ttUser {
 
       // Set user rights.
       if ($this->role == ROLE_SITE_ADMIN) {
-        $this->rights = right_administer_site|right_data_entry|right_manage_team|right_assign_roles|right_view_reports;
+        $this->rights = right_administer_site|right_data_entry|right_manage_team|right_assign_roles|right_view_reports|right_view_charts;
       } elseif ($this->role == ROLE_USER) {
         $this->rights = right_data_entry|right_view_charts|right_view_reports;
       } elseif ($this->role == ROLE_CLIENT) {

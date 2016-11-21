@@ -42,6 +42,7 @@ if($user->isAdmin()) {
   $inactive_projects = ttTeamHelper::getInactiveProjectsAdmin();
 }elseif($user->isManager()) {
   $active_projects = ttTeamHelper::getActiveProjectsManager($user->id);
+  //$inactive_projects = ttTeamHelper::getInactiveProjectsManager($user->id);
 } elseif($user->canManageTeam()) {
   $active_projects = ttTeamHelper::getActiveProjects($user->team_id);
   $inactive_projects = ttTeamHelper::getInactiveProjects($user->team_id);

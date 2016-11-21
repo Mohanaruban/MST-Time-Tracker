@@ -186,7 +186,9 @@ $table->setData($projects);
 $table->setKeyField('id');
 $table->setValue($cl_projects);
 $table->addColumn(new TableColumn('name', $i18n->getKey('label.project'), new NameCellRenderer()));
+if($user->isAdmin()) {
 $table->addColumn(new TableColumn('p_rate', $i18n->getKey('form.users.rate'), new RateCellRenderer()));
+}
 $form->addInputElement($table);
 
 $form->addInput(array('type'=>'hidden','name'=>'id','value'=>$user_id));
