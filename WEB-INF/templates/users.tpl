@@ -5,8 +5,6 @@
   <div class="row">
     <div class="col-sm-12">
       {if $user->canManageTeam() && $user->isAdmin()}
-      
-
        <table class="table table-responsive table-striped table-hover table-bordered">
         {if $inactive_users}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.active_users}</td></tr>
@@ -77,8 +75,10 @@
             <th>{$i18n.label.person_name}</th>
             <th>{$i18n.label.login}</th>
             <th>{$i18n.form.users.role}</th>
-<!--             <th>{$i18n.label.edit}</th>
-            <th>{$i18n.label.delete}</th> -->
+            {if $user->isManager()}
+            <th>{$i18n.label.view}</th>
+            {/if}
+            <!-- <th>{$i18n.label.delete}</th> -->
           </tr>
         </thead>
         {if $active_users}
@@ -99,6 +99,10 @@
           <td>{$i18n.label.client}</td>
           {elseif $smarty.const.ROLE_USER == $u.role}
           <td>{$i18n.label.user}</td>
+          {/if}
+          {if $user->isManager()} 
+          <!-- Manager can edit everybody. -->
+          <td><a href="user_edit.php?id={$u.id}">{$i18n.label.view}</a></td>
           {/if}
           <!-- {if $user->isManager()} -->
           <!-- Manager can edit everybody. -->
@@ -168,10 +172,8 @@
     </div>
   </div>
 
-
 {/if}
 {else}
-
 <table class="table table-responsive table-striped table-hover table-bordered">
   <thead>
   <tr>

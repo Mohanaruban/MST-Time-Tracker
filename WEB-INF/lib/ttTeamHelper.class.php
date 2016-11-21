@@ -141,9 +141,9 @@ class ttTeamHelper {
     $mdb2 = getConnection();
 
     if (isset($options['getAllFields']))
-      $sql = "select * from tt_users where status = 1 order by name";
+      $sql = "select * from tt_users where status = 1 and team_id > 0 order by name";
     else
-      $sql = "select id, name from tt_users where status = 1 order by name";
+      $sql = "select id, name from tt_users where status = 1 and team_id > 0 order by name";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))

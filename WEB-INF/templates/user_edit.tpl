@@ -66,6 +66,7 @@ window.onload = function() {
   {$forms.userForm.open}
   <div class="row">
     <div class="col-sm-12">
+    {if $user->isAdmin()}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.person_name} (*)</label>
         <div class="col-sm-9">{$forms.userForm.name.control}</div>
@@ -105,13 +106,17 @@ window.onload = function() {
         <label class="col-sm-3 control-label">{$i18n.form.users.default_rate}&nbsp;(0{$user->decimal_mark}00)</label>
         <div class="col-sm-9">{$forms.userForm.rate.control}</div>
       </div>
+      {/if}
       {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isAdmin())}
       <div class="form-group">
+      {if $user->isAdmin()}
         <label class="col-sm-3 control-label">{$i18n.label.projects}</label>
+      {/if}
         <div class="col-sm-9">{$forms.userForm.projects.control}</div>
       </div>
       {/if}
     </div>
+    {if $user->isAdmin()}
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
@@ -121,6 +126,7 @@ window.onload = function() {
         </div>
       </div>
     </div>
+    {/if}
   </div>
   {$forms.userForm.close}
 </div>

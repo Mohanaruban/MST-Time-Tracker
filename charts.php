@@ -129,6 +129,9 @@ $chart_form->addFormStyle(array('class'=>'form-horizontal'));
 // User dropdown. Changes the user "on behalf" of whom we are working. 
 if ($user->canManageTeam()) {
   $user_list = ttTeamHelper::getActiveUsers(array('putSelfFirst'=>true));
+  if($user->isManager()) {
+    $user_list = ttTeamHelper::getActiveUsersManager($user->id, array('getAllFields'=>true));
+  }
   if (count($user_list) > 1) {
     $chart_form->addInput(array('type'=>'combobox',
       'onchange'=>'this.form.submit();',
@@ -141,7 +144,21 @@ if ($user->canManageTeam()) {
     $smarty->assign('on_behalf_control', 1);
   }
 }
-
+// User dropdown. Changes the user "on behalf" of whom we are working. 
+if ($user->isAdmin()) {
+  $user_list = ttTeamHelper::getActiveUsersAdmin(array('putSelfFirst'=>true));
+  if (count($user_list) > 1) {
+    $chart_form->addInput(array('type'=>'combobox',
+      'onchange'=>'this.form.submit();',
+      'name'=>'onBehalfUser',
+      'value'=>$on_behalf_id,
+      'data'=>$user_list,
+      'datakeys'=>array('id','name'),
+      'class'=>'form-control'
+    ));
+    $smarty->assign('on_behalf_control', 1);
+  }
+}
 // Chart interval options.
 $intervals = array();
 $intervals[INTERVAL_THIS_DAY] = $i18n->getKey('dropdown.this_day');
