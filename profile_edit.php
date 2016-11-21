@@ -76,7 +76,8 @@ if ($request->isPost()) {
   $cl_name = $user->name;
   $cl_login = $user->login;
   $cl_email = $user->email;
-  if ($user->canManageTeam()) {
+  // if ($user->canManageTeam()) {
+     if ($user->isAdmin()) {
     $cl_team = $user->team;
     $cl_address = $user->address;
     $cl_currency = ($user->currency == ''? CURRENCY_DEFAULT : $user->currency);
@@ -113,7 +114,8 @@ if (!$auth->isPasswordExternal()) {
   $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password2','aspassword'=>true,'value'=>$cl_password2,'class'=>'form-control'));
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email,'enable'=>$can_change_login,'class'=>'form-control'));
-if ($user->canManageTeam()) {
+// if ($user->canManageTeam()) {
+if ($user->isAdmin()) {
   $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team,'class'=>'form-control','placeholder'=>'Enter Team Name'));
   $form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','class'=>'form-control','cols'=>'55','rows'=>'4','value'=>$cl_address));
   $form->addInput(array('type'=>'text','maxlength'=>'7','name'=>'currency','value'=>$cl_currency,'class'=>'form-control'));
@@ -208,7 +210,8 @@ if ($request->isPost()) {
       $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
   }
   if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
-  if ($user->canManageTeam()) {
+  // if ($user->canManageTeam()) {
+  if ($user->isAdmin()) {
     if (!ttValidString($cl_team, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
     if (!ttValidString($cl_address, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.address'));
     if (!ttValidString($cl_currency, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.currency'));
@@ -217,8 +220,8 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     $update_result = true;
-    if ($user->canManageTeam()) {
-
+    // if ($user->canManageTeam()) {
+ if ($user->isAdmin()) {
       // Prepare plugins string.
       if ($cl_charts)
         $plugins .= ',ch';

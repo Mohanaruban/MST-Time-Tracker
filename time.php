@@ -30,6 +30,7 @@ require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
 import('ttTeamHelper');
+import('ttProjectHelper');
 import('ttClientHelper');
 import('ttTimeHelper');
 import('DateAndTime');
@@ -109,10 +110,7 @@ $form->addFormStyle(array('class'=>'form-horizontal'));
 if ($user->canManageTeam()) {
   $user_list = ttTeamHelper::getActiveUsers(array('putSelfFirst'=>true));
   if($user->isManager()) {
-    echo "Manager";
     $user_list = ttTeamHelper::getActiveUsersTimeTab(array('putSelfFirst'=>true));
-  }else {
-    echo "Not Manager";
   }
   if (count($user_list) > 1) {
     $form->addInput(array('type'=>'combobox',
@@ -142,7 +140,9 @@ if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
 
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
   // Dropdown for projects assigned to user.
-  $project_list = $user->getAssignedProjects();
+  //$project_list = $user->getAssignedProjects();
+  $project_list = ttProjectHelper::getProjectsManager($user->id);
+  print_r($project_list);
   $form->addInput(array('type'=>'combobox',
     'class'=>'form-control',
     'onchange'=>'fillTaskDropdown(this.value);',
