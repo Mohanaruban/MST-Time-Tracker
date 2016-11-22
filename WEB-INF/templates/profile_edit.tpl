@@ -105,7 +105,7 @@ function handlePluginCheckboxes() {
         <label class="col-sm-3 control-label">{$i18n.label.team_name}</label>
         <div class="col-sm-9">{$forms.profileForm.team_name.control}</div>
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.currency}</label>
         <div class="col-sm-9">{$forms.profileForm.currency.control}</div>
       </div>
@@ -156,7 +156,7 @@ function handlePluginCheckboxes() {
           example.innerHTML = "<i>3"+mark+"14</i>";
         }
         adjustDecimalPreview();
-      </script>
+      </script> -->
 
       <div class="form-group">
         <hr/>
@@ -174,7 +174,7 @@ function handlePluginCheckboxes() {
       </div>
 
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label class="col-sm-3 control-label" for="clients">{$i18n.title.clients}</label>
         <div class="col-sm-7 col-sm-offset-1 text-left">
           <div class="checkbox">
@@ -258,7 +258,7 @@ function handlePluginCheckboxes() {
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       {/if}
     </div>
   </div>
