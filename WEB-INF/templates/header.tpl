@@ -44,7 +44,7 @@
           {if $authenticated}
           <ul class="nav navbar-nav">
             {if $user->isAdmin()}
-            <li {if $title=="Teams"}class="active"{/if}><a class="mainMenu" href="admin_teams.php">{$i18n.menu.teams}</a></li>
+            <!-- <li {if $title=="Teams"}class="active"{/if}><a class="mainMenu" href="admin_teams.php">{$i18n.menu.teams}</a></li> -->
             {if $user->isPluginEnabled('ex') && !$user->isClient()}
             <li {if $title=="Expenses"}class="active"{/if}><a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a></li>
             {/if}
@@ -94,7 +94,7 @@
             || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isPluginEnabled('cl'))}
             <li {if $title=="Charts"}class="active"{/if}><a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a></li>
             {/if} -->
-            <li {if $title=="Charts"}class="active"{/if}><a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a></li>
+            <!-- <li {if $title=="Charts"}class="active"{/if}><a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a></li> -->
 
             {if !$user->isClient() && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
             <li {if $title=="Projects"}class="active"{/if}><a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a></li>
