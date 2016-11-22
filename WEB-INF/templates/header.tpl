@@ -94,8 +94,9 @@
             || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isPluginEnabled('cl'))}
             <li {if $title=="Charts"}class="active"{/if}><a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a></li>
             {/if} -->
-            <!-- <li {if $title=="Charts"}class="active"{/if}><a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a></li> -->
-
+            {if $user->isManager()}
+            <li {if $title=="Charts"}class="active"{/if}><a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a></li>
+            {/if}
             {if !$user->isClient() && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
             <li {if $title=="Projects"}class="active"{/if}><a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a></li>
             {/if}
