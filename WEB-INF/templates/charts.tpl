@@ -18,22 +18,49 @@
         </div>
       </div>
       {/if}
+      {if $user->isAdmin() || $user->isManager()}
       <div class="col-md-12">
         <div class="form-group">
           <label class="col-sm-3 control-label">{$i18n.form.charts.interval}</label>
           <div class="col-sm-9">{$forms.chartForm.interval.control}</div>
         </div>
       </div>
+      {/if}
+      {if !$user->isAdmin()}
+      {if !$user->isManager()}
+      <div class="row">
+    <div class="col-md-12">
+      {section name=i loop=$totals}
+      {if $smarty.section.i.index <= 12}
+      <div class="col-md-12">
+      <label style="color: {$totals[i].color_html}" class="h4">&#9632;</label> {$totals[i].name|escape:'html'}
+      </div>
+      {/if}
+      {/section}<br/>
+      <img src="{$img_file_name}" border="0"/>
     </div>
+  </div>
+  {/if}
+      {/if}
+    </div>
+    {if $user->isAdmin() || $user->isManager()}
     <div class="col-sm-6">
       <div class="form-group">
         <div class="col-sm-9 col-sm-offset-3">{$forms.chartForm.date.control}</div>
       </div>
     </div>
   </div>
+  {else}
+    <div class="col-sm-6">
+      <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3" style="padding-top: 60px;">{$forms.chartForm.date.control}</div>
+      </div>
+    </div>
+  </div>
+  {/if}
 
   <div class="clearfix"></div>
-
+{if $user->isAdmin() || $user->isManager()}
   <div class="row">
     <div class="col-md-12">
       {section name=i loop=$totals}
@@ -46,5 +73,6 @@
       <img src="{$img_file_name}" border="0"/>
     </div>
   </div>
+  {/if}
   {$forms.chartForm.close}
 </div> 
