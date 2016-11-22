@@ -132,6 +132,9 @@ if ($user->canManageTeam()) {
   if($user->isManager()) {
     $user_list = ttTeamHelper::getActiveUsersManager($user->id, array('getAllFields'=>true));
   }
+  if($user->isAdmin()) {
+$user_list = ttTeamHelper::getActiveUsersAdmin($user->id, array('getAllFields'=>true));
+  }
   if (count($user_list) > 1) {
     $chart_form->addInput(array('type'=>'combobox',
       'onchange'=>'this.form.submit();',

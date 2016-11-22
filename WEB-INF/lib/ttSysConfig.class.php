@@ -41,6 +41,7 @@ class ttSysConfig {
   // Constructor.
   function __construct($u_id) {
     $this->u_id = $u_id;
+    
     $this->mdb2 = getConnection();
   }
 

@@ -31,14 +31,18 @@ import('form.Form');
 import('ttUserHelper');
 
 // Access check.
+// if (!$user->isAdmin()) {
+//   header('Location: access_denied.php');
+//   exit();
+// }
+if (!ttAccessCheck(right_manage_team)) {
+  header('Location: access_denied.php');
+  exit();
 if (!$user->isAdmin()) {
   header('Location: access_denied.php');
   exit();
 }
-// if (!ttAccessCheck(right_manage_team)) {
-//   header('Location: access_denied.php');
-//   exit();
-// }
+ }
 
 // Get user id we are deleting from the request.
 // A cast to int is for safety against manipulation of request parameter (sql injection). 

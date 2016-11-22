@@ -31,14 +31,18 @@ import('form.Form');
 import('ttProjectHelper');
 
 // Access check.
+// if (!$user->isAdmin()) {
+//   header('Location: access_denied.php');
+//   exit();
+// }
+if (!ttAccessCheck(right_manage_team) || (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode)) {
+  header('Location: access_denied.php');
+  exit();
 if (!$user->isAdmin()) {
   header('Location: access_denied.php');
   exit();
 }
-// if (!ttAccessCheck(right_manage_team) || (MODE_PROJECTS != $user->tracking_mode && MODE_PROJECTS_AND_TASKS != $user->tracking_mode)) {
-//   header('Location: access_denied.php');
-//   exit();
-// }
+}
 
 $cl_project_id = (int)$request->getParameter('id');
 $project = ttProjectHelper::get($cl_project_id);
