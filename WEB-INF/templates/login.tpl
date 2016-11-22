@@ -8,7 +8,7 @@
 </script>
 
 <div class="col-md-5 col-md-offset-4 text-center">
-  <div class="panel panel-default">
+  <div class="panel-login panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Login Information</h3>
     </div>
