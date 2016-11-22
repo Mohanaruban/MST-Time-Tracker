@@ -261,6 +261,101 @@ class ttUserHelper {
     return true;
   }
  
+
+  // update - updates a user in database.
+  static function updateAdmin($user_id, $fields) {
+    global $user;
+    $mdb2 = getConnection();
+    
+    // Check parameters.
+    if (!$user_id || !isset($fields['login']))
+      return false;
+
+    // Prepare query parts.
+    if (isset($fields['password']))
+      $pass_part = ', password = md5('.$mdb2->quote($fields['password']).')';
+    if (right_assign_roles & $user->rights) {
+      if (isset($fields['role'])) {
+        $role = (int) $fields['role'];
+        $role_part = ", role = $role";
+      }
+      if (array_key_exists('client_id', $fields)) // Could be NULL.
+        $client_part = ", client_id = ".$mdb2->quote($fields['client_id']);
+    }
+      
+    if (array_key_exists('rate', $fields)) {
+      $rate = str_replace(',', '.', isset($fields['rate']) ? $fields['rate'] : 0);
+      if($rate == '') $rate = 0;
+      $rate_part = ", rate = ".$mdb2->quote($rate); 
+    }
+    
+    if (isset($fields['status'])) {
+      $status = (int) $fields['status']; 
+      $status_part = ", status = $status";
+    }
+    
+    // $sql = "update tt_users set login = ".$mdb2->quote($fields['login']).
+    //   "$pass_part, name = ".$mdb2->quote($fields['name']).
+    //   "$role_part $client_part $rate_part $status_part, email = ".$mdb2->quote($fields['email']).
+    //   " where id = $user_id";
+
+    $sql = "update tt_users set login = ".$mdb2->quote($fields['login'])."$pass_part, name = ".$mdb2->quote($fields['name'])."$role_part $client_part $rate_part $status_part, email = ".$mdb2->quote($fields['email']).", team_id = ".$mdb2->quote($fields['team_id'])." where id = $user_id";
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) return false;
+    
+    if (array_key_exists('projects', $fields)) {
+      // Deal with project assignments.
+      // Note: we cannot simply delete old project binds and insert new ones because it screws up reporting
+      // (when looking for cost while entries for de-assigned projects exist).
+      // Therefore, we must iterate through all projects and only delete the binds when no time entries are present,
+      // otherwise de-activate the bind (set its status to inactive). This will keep the bind
+      // and its rate in database for reporting.
+
+      $all_projects = ttTeamHelper::getAllProjects($user->team_id);
+      $assigned_projects = isset($fields['projects']) ? $fields['projects'] : array();
+
+      foreach($all_projects as $p) {
+        // Determine if a project is assigned.
+        $assigned = false;
+        $project_id = $p['id'];
+        $rate = '0.00';
+        if (count($assigned_projects) > 0) {
+          foreach ($assigned_projects as $ap) {
+            if ($project_id == $ap['id']) {
+              $assigned = true;
+              if ($ap['rate']) {
+                $rate = $ap['rate'];
+                $rate = str_replace(",",".",$rate);
+              }
+              break;
+            }
+          }
+        }
+
+        if (!$assigned) {
+          ttUserHelper::deleteBind($user_id, $project_id);
+        } else {
+          // Here we need to either update or insert new tt_user_project_binds record.
+          // Determine if a record exists.
+          $sql = "select id from tt_user_project_binds where user_id = $user_id and project_id = $project_id";
+          $res = $mdb2->query($sql);
+          if (is_a($res, 'PEAR_Error')) die ($res->getMessage());
+          if ($val = $res->fetchRow()) {
+            // Record exists. Update it.
+            $sql = "update tt_user_project_binds set status = 1, rate = $rate where id = ".$val['id'];
+            $affected = $mdb2->exec($sql);
+            if (is_a($affected, 'PEAR_Error')) die ($affected->getMessage());
+          } else {
+            // Record does not exist. Insert it.
+            ttUserHelper::insertBind($user_id, $project_id, $rate, 1);
+          }
+        }
+      }
+    }
+    return true;
+  }
+
+
   // markDeleted - marks user and its associated things as deleted.
   static function markDeleted($user_id) {
   	$mdb2 = getConnection();

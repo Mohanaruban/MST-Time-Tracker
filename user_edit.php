@@ -86,6 +86,7 @@ $projects = ttTeamHelper::getActiveProjectsUserEditAdmin($user_id, $teamid);
 
 $assigned_projects = array();
 if ($request->isPost()) {
+  $cl_teamid = trim($request->getParameter('manager_list'));
   $cl_name = trim($request->getParameter('name'));
   $cl_login = trim($request->getParameter('login'));
   if (!$auth->isPasswordExternal()) {
@@ -133,6 +134,18 @@ if ($request->isPost()) {
 
 $form = new Form('userForm');
 $form->addFormStyle(array('class'=>'form-horizontal'));
+
+// Dropdown for projects assigned to user.
+  $get_manager = ttTeamHelper::getManagerList();
+  $form->addInput(array('type'=>'combobox',
+    'class'=>'form-control',
+    'onchange'=>'fillTaskDropdown(this.value);',
+    'name'=>'manager_list',
+    'value'=>"",
+    'data'=>$get_manager,
+    'datakeys'=>array('id','name'),
+    //'empty'=>array(''=>$i18n->getKey('dropdown.select'))
+    ));
 
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name', 'class'=>'form-control','value'=>$cl_name));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login', 'class'=>'form-control','value'=>$cl_login));
@@ -211,6 +224,7 @@ if ($request->isPost()) {
     if (!$existing_user || ($user_id == $existing_user['id'])) {
 
       $fields = array(
+        'team_id' => $cl_teamid,
         'name' => $cl_name,
         'login' => $cl_login,
         'password' => $cl_password1,
@@ -223,7 +237,7 @@ if ($request->isPost()) {
         $fields['client_id'] = $cl_client_id;
       }
 
-      if (ttUserHelper::update($user_id, $fields)) {
+      if (ttUserHelper::updateAdmin($user_id, $fields)) {
 
         // If our own login changed, set new one in cookie to remember it.
         if (($user_id == $user->id) && ($user->login != $cl_login)) {
@@ -263,6 +277,7 @@ $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
 $smarty->assign('user_id', $user_id);
+$smarty->assign('teamid', $get_manager);
 $smarty->assign('title', $i18n->getKey('title.edit_user'));
 $smarty->assign('content_page_name', 'user_edit.tpl');
 $smarty->display('index.tpl');

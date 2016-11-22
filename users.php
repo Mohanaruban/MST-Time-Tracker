@@ -44,7 +44,6 @@ if($user->isAdmin()) {
 	$can_delete_manager = (1 == count($active_users));
   $inactive_users = ttTeamHelper::getInactiveUsersAdmin(true);
 }
-
 if($user->isManager()) {
    $active_users = "";
    $active_users = ttTeamHelper::getActiveUsersManager($user->id, array('getAllFields'=>true));

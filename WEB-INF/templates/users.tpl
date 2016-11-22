@@ -65,7 +65,6 @@
 
       {else}
       {if $user->canManageTeam() && !$user->isAdmin()}
-
       <table class="table table-responsive table-striped table-hover table-bordered">
         {if $inactive_users}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.active_users}</td></tr>

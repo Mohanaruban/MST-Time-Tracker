@@ -77,7 +77,8 @@ $form->addFormStyle(array('class'=>'form-horizontal'));
     'value'=>"",
     'data'=>$get_manager,
     'datakeys'=>array('id','name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+    //'empty'=>array(''=>$i18n->getKey('dropdown.select'))
+    ));
 
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'project_name','class'=>'form-control','value'=>$cl_name));
 $form->addInput(array('type'=>'textarea','name'=>'description','class'=>'form-control','value'=>$cl_description));
