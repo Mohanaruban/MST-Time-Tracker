@@ -5548,6 +5548,15 @@ button.list-group-item-danger.active:focus {
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05)
 }
+.panel-login {
+	margin-top: 50px;
+    margin-bottom: 21px;
+    background-color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05)
+}
 .panel-body {
     padding: 15px
 }
@@ -5574,7 +5583,7 @@ button.list-group-item-danger.active:focus {
     color: inherit
 }
 .panel-footer {
-	
+
     position: absolute;
     padding: 10px 15px;
     background-color: #ecf0f1;
