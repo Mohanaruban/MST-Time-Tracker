@@ -44,50 +44,72 @@
           <ul class="nav navbar-nav">
             {if $user->isAdmin()}
             <li {if $title=="Teams"}class="active"{/if}><a class="mainMenu" href="admin_teams.php">{$i18n.menu.teams}</a></li>
-            <li {if $title=="Reports"}class="active"{/if}><a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a></li>
-            
-            <li {if $title=="Charts"}class="active"{/if}><a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a></li>
-           
-            <li {if $title=="Projects"}class="active"{/if}><a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a></li>
-            <li {if $title=="Users"}class="active"{/if}><a class="mainMenu" href="users.php">{$i18n.menu.users}</a></li>
-           <!--  <li {if $title=="Exporting Team Data"}class="active"{/if}><a class="mainMenu" href="export.php">{$i18n.menu.export}</a></li> -->
-            {else}
-            <li {if $title=="Time"}class="active"{/if}>
-              <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
-            </li>
-            
             {if $user->isPluginEnabled('ex') && !$user->isClient()}
             <li {if $title=="Expenses"}class="active"{/if}><a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a></li>
             {/if}
-
             <li {if $title=="Reports"}class="active"{/if}><a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a></li>
             
-<!--             <li {if $title=="Projects"}class="active"{/if}><a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a></li> -->
-            
+            <li {if $title=="Charts"}class="active"{/if}><a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a></li>
+
+<!--             {if ($user->isPluginEnabled('ch'))}
+            <li {if $title=="Charts"}class="active"{/if}><a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a></li>
+            {/if} -->
+           
+            <li {if $title=="Projects"}class="active"{/if}><a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a></li>
+
             {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
             <li {if $title=="Invoice"}class="active"{/if}><a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a></li>
-            {/if}
-
-            {if ($user->isPluginEnabled('ch') && !$user->isClient()) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode
-            || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isPluginEnabled('cl'))}
-            <li {if $title=="Charts"}class="active"{/if}><a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a></li>
-            {/if}
-
-            {if !$user->isClient() && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
-            <li {if $title=="Projects"}class="active"{/if}><a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a></li>
             {/if}
 
             {if $user->canManageTeam() && ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
             <li {if $title=="Tasks"}class="active"{/if}><a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a></li>
             {/if}
 
+            <li {if $title=="Users"}class="active"{/if}><a class="mainMenu" href="users.php">{$i18n.menu.users}</a></li>
+
+                        {if $user->canManageTeam() && $user->isPluginEnabled('cl')}
+            <li {if $title=="Clients"}class="active"{/if}><a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a></li>
+            {/if}
+
+           <!--  <li {if $title=="Exporting Team Data"}class="active"{/if}><a class="mainMenu" href="export.php">{$i18n.menu.export}</a></li> -->
+            {else}
+            <li {if $title=="Time"}class="active"{/if}>
+              <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
+            </li>
+            
+<!--             {if $user->isPluginEnabled('ex') && !$user->isClient()}
+            <li {if $title=="Expenses"}class="active"{/if}><a class="mainMenu" href="expenses.php">{$i18n.menu.expenses}</a></li>
+            {/if} -->
+
+            <li {if $title=="Reports"}class="active"{/if}><a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a></li>
+            
+<!--             <li {if $title=="Projects"}class="active"{/if}><a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a></li> -->
+            
+<!--             {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
+            <li {if $title=="Invoice"}class="active"{/if}><a class="mainMenu" href="invoices.php">{$i18n.title.invoices}</a></li>
+            {/if} -->
+
+<!--             {if ($user->isPluginEnabled('ch') && !$user->isClient()) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode
+            || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isPluginEnabled('cl'))}
+            <li {if $title=="Charts"}class="active"{/if}><a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a></li>
+            {/if} -->
+            <li {if $title=="Charts"}class="active"{/if}><a class="mainMenu" href="charts.php">{$i18n.menu.charts}</a></li>
+
+            {if !$user->isClient() && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+            <li {if $title=="Projects"}class="active"{/if}><a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a></li>
+            {/if}
+
+<!--             {if $user->canManageTeam() && ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+            <li {if $title=="Tasks"}class="active"{/if}><a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a></li>
+            {/if} -->
+
             {if $user->isClient() || $user->isAdmin() || $user->isManager()}
             <li {if $title=="Users"}class="active"{/if}><a class="mainMenu" href="users.php">{$i18n.menu.users}</a></li>
             {/if}
 
-            {if $user->canManageTeam() && $user->isPluginEnabled('cl')}
+<!--             {if $user->canManageTeam() && $user->isPluginEnabled('cl')}
             <li {if $title=="Clients"}class="active"{/if}><a class="mainMenu" href="clients.php">{$i18n.menu.clients}</a></li>
-            {/if}
+            {/if} -->
 
             {/if}
           </ul>
