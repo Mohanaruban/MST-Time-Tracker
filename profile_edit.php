@@ -276,11 +276,11 @@ if ($request->isPost()) {
 //       exit();
 // }
 // }
-    // if ($update_result) {
-    //   header('Location: time.php');
-    //   exit();
-    // } else 
-    //   $err->add($i18n->getKey('error.db'));
+    if ($update_result) {
+      header('Location: time.php');
+      exit();
+    } else 
+      $err->add($i18n->getKey('error.db'));
   }
 } // isPost
 

@@ -354,7 +354,7 @@ function get_time() {
               <input type='hidden' name='record_id' value='{$record.id}'>
               <input type='hidden' name='browser_date' value=''>
               <input type='hidden' name='browser_time' value=''>
-              <input type='submit' id='btn_stop' name='btn_stop' onclick='browser_date.value=get_date();browser_time.value=get_time()' value='{$i18n.button.stop}'>
+              <!-- <input type='submit' id='btn_stop' name='btn_stop' onclick='browser_date.value=get_date();browser_time.value=get_time()' value='{$i18n.button.stop}'> -->
               {/if}
               {/if}
             </td>

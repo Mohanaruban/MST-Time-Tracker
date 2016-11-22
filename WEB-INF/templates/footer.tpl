@@ -3,7 +3,7 @@
 </div>
     <footer>
       <div class="container">
-        <p class="text-muted">Copyright (c) 2016-2017 MST Solutions Private Limited</p>
+        <center><p class="text-muted" style="padding-top: 20px;">Copyright © 2016 MetaSoftTech Solutions, L.L.C. All rights reserved.</p></center>
       </div>
     </footer>
 </body>
