@@ -140,6 +140,7 @@
         </div>
       </nav>
 
+{if $authenticated}
       {if $title}
       <div class="breadcrumb">
         <h5>
@@ -148,6 +149,7 @@
           <span class="text-primary">{$title}</span>        
         </h5>
       </div>
+      {/if}
       {/if}
       <div class="container">
         <div class="row">
