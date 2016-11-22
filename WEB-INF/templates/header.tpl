@@ -6,6 +6,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link href="{$smarty.const.DEFAULT_CSS}" rel="stylesheet" type="text/css">
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="css/footer.css" rel="stylesheet" type="text/css">
   {if $i18n.language.rtl}
   <link href="{$smarty.const.RTL_CSS}" rel="stylesheet" type="text/css">
   {/if}
