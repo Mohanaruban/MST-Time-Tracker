@@ -100,7 +100,8 @@
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   {if $user->isAdmin()}
-                  <li><a href="admin_options.php">{$i18n.menu.options}</a></li>
+                  <li><a href="profile_edit.php">Edit Profile</a></li>
+                  <!-- <li><a href="admin_options.php">{$i18n.menu.options}</a></li> -->
                   {else}
                   <li><a href="profile_edit.php">Edit Profile</a></li>
                   <li class="divider visible-md visible-lg visible-sm"></li>

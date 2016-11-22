@@ -142,7 +142,6 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
   // Dropdown for projects assigned to user.
   //$project_list = $user->getAssignedProjects();
   $project_list = ttProjectHelper::getProjectsManager($user->id);
-  print_r($project_list);
   $form->addInput(array('type'=>'combobox',
     'class'=>'form-control',
     'onchange'=>'fillTaskDropdown(this.value);',

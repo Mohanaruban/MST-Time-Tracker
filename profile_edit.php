@@ -37,7 +37,7 @@ if (!ttAccessCheck(right_data_entry|right_view_reports)) {
 }
 
 if (!defined('CURRENCY_DEFAULT')) define('CURRENCY_DEFAULT', '$');
-$can_change_login = $user->canManageTeam();
+$can_change_login = $user->isAdmin();
 
 if ($request->isPost()) {
   $cl_name = trim($request->getParameter('name'));
@@ -48,7 +48,7 @@ if ($request->isPost()) {
   }
   $cl_email = trim($request->getParameter('email'));
 
-  if ($user->canManageTeam()) {
+  if ($user->isAdmin()) {
     $cl_team = trim($request->getParameter('team_name'));
     $cl_address = trim($request->getParameter('address'));
     $cl_currency = trim($request->getParameter('currency'));
@@ -76,8 +76,7 @@ if ($request->isPost()) {
   $cl_name = $user->name;
   $cl_login = $user->login;
   $cl_email = $user->email;
-  // if ($user->canManageTeam()) {
-     if ($user->isAdmin()) {
+  if ($user->isAdmin()) {
     $cl_team = $user->team;
     $cl_address = $user->address;
     $cl_currency = ($user->currency == ''? CURRENCY_DEFAULT : $user->currency);
@@ -114,7 +113,6 @@ if (!$auth->isPasswordExternal()) {
   $form->addInput(array('type'=>'text','maxlength'=>'30','name'=>'password2','aspassword'=>true,'value'=>$cl_password2,'class'=>'form-control'));
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email,'enable'=>$can_change_login,'class'=>'form-control'));
-// if ($user->canManageTeam()) {
 if ($user->isAdmin()) {
   $form->addInput(array('type'=>'text','maxlength'=>'200','name'=>'team_name','value'=>$cl_team,'class'=>'form-control','placeholder'=>'Enter Team Name'));
   $form->addInput(array('type'=>'textarea','name'=>'address','maxlength'=>'255','class'=>'form-control','cols'=>'55','rows'=>'4','value'=>$cl_address));
@@ -210,7 +208,6 @@ if ($request->isPost()) {
       $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
   }
   if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
-  // if ($user->canManageTeam()) {
   if ($user->isAdmin()) {
     if (!ttValidString($cl_team, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.team_name'));
     if (!ttValidString($cl_address, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.address'));
@@ -220,8 +217,8 @@ if ($request->isPost()) {
 
   if ($err->no()) {
     $update_result = true;
-    // if ($user->canManageTeam()) {
- if ($user->isAdmin()) {
+    if ($user->isAdmin()) {
+
       // Prepare plugins string.
       if ($cl_charts)
         $plugins .= ',ch';
@@ -244,7 +241,6 @@ if ($request->isPost()) {
       if ($cl_quotas)
         $plugins .= ',mq';
       $plugins = trim($plugins, ',');
-
       $update_result = ttTeamHelper::update($user->team_id, array(
         'name' => $cl_team,
         'address' => $cl_address,
@@ -267,11 +263,24 @@ if ($request->isPost()) {
         'email' => $cl_email,
         'status' => ACTIVE));
     }
-    if ($update_result) {
-      header('Location: time.php');
-      exit();
-    } else
-      $err->add($i18n->getKey('error.db'));
+// if($user->isAdmin()) {
+//   echo $user->id;
+//   exit;
+// if (ttUserHelper::update($user->id, array(
+//       'name' => $cl_name,
+//       'login' => $cl_login,
+//       'password' => $cl_password1,
+//       'email' => $cl_email,
+//       'status' => ACTIVE))) {
+//       header('Location: admin_teams.php');
+//       exit();
+// }
+// }
+    // if ($update_result) {
+    //   header('Location: time.php');
+    //   exit();
+    // } else 
+    //   $err->add($i18n->getKey('error.db'));
   }
 } // isPost
 

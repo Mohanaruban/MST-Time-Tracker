@@ -98,9 +98,9 @@ function handlePluginCheckboxes() {
         <label class="col-sm-3 control-label">{$i18n.label.email}</label>
         <div class="col-sm-9">{$forms.profileForm.email.control}</div>
       </div>
-      <!-- {if $user->canManageTeam()} -->
-{if $user->isAdmin()}
-{'Admin'}
+      
+      {if $user->isAdmin()}
+
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.team_name}</label>
         <div class="col-sm-9">{$forms.profileForm.team_name.control}</div>
@@ -274,4 +274,3 @@ function handlePluginCheckboxes() {
   </div>
   {$forms.profileForm.close}
 </div>
-{/if}
