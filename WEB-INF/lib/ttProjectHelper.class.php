@@ -123,7 +123,7 @@ class ttProjectHelper {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select p.id, p.name, p.tasks FROM tt_user_project_binds upb inner join tt_projects p on upb.project_id = p.id where upb.user_id = $user_id and (p.status = 0 or p.status = 1) order by p.name";   
+    $sql = "select p.id, p.name, p.tasks FROM tt_user_project_binds upb inner join tt_projects p on upb.project_id = p.id where upb.user_id = $user_id and p.status = 1 order by p.name";   
         
     $res = $mdb2->query($sql);
     if (!is_a($res, 'PEAR_Error')) {

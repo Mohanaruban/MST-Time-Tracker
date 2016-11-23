@@ -133,7 +133,7 @@
                   <li><a href="logout.php">{$i18n.menu.logout}</a></li>
                 </ul>
                 {else}
-                <a href="login.php">{$i18n.menu.login}</a>
+                <!-- <a href="login.php">{$i18n.menu.login}</a> -->
                 {/if}
               </li>
             </ul>
