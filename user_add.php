@@ -71,8 +71,6 @@ if ($request->isPost()) {
       } else
         $err->add($i18n->getKey('error.field'), 'rate_'.$p);
     }
-    print_r($p);
-    exit;
   }
 }
 
@@ -98,10 +96,12 @@ if (!$auth->isPasswordExternal()) {
 }
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email,'class'=>'form-control','placeholder'=>'Enter Email'));
 
+// $roles[ROLE_USER] = $i18n->getKey('label.user');
+// $roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');
 $roles[ROLE_USER] = $i18n->getKey('label.user');
-$roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');
-if ($user->isPluginEnabled('cl'))
-  $roles[ROLE_CLIENT] = $i18n->getKey('label.client');
+$roles[ROLE_MANAGER] = $i18n->getKey('form.users.manager');
+// if ($user->isPluginEnabled('cl'))
+//   $roles[ROLE_CLIENT] = $i18n->getKey('label.client');
 $form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()', 'class'=>'form-control', 'name'=>'role','value'=>$cl_role,'data'=>$roles));
 if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'combobox', 'class'=>'form-control', 'name'=>'client','value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->getKey('dropdown.select'))));

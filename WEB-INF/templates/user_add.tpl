@@ -74,17 +74,17 @@ window.onload = function() {
         <label class="col-sm-3 control-label">{$i18n.label.email}</label>
         <div class="col-sm-9">{$forms.userForm.email.control}</div>
       </div>
-{if $user->isManager()}
+{if $user->isAdmin()}
 
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.form.users.role}</label>
         <div class="col-sm-9">{$forms.userForm.role.control} {$forms.userForm.client.control}</div>
       </div>
 {/if}
-      <div class="form-group">
+<!--       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.form.users.default_rate}&nbsp;(0{$user->decimal_mark}00)</label>
         <div class="col-sm-9">{$forms.userForm.rate.control}</div>
-      </div>
+      </div> -->
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
 
       <div class="form-group">

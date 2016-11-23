@@ -165,7 +165,7 @@ function handlePluginCheckboxes() {
       </div>
 
       <div class="form-group">
-        <label class="col-sm-3 control-label" for="charts">{$i18n.title.charts}</label>
+        <label class="col-sm-3 control-label" for="charts">{$i18n.title.charts} (Manager)</label>
         <div class="col-sm-7 col-sm-offset-1 text-left">
           <div class="col-sm-12">
             <div class="checkbox">{$forms.profileForm.charts.control}</div>
