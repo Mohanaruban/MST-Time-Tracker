@@ -135,6 +135,26 @@ class ttTeamHelper {
     return $user_list;
   }
 
+  // The getActiveUsers obtains all active users in a given team.
+  static function getActiveProjectView($options = null) {
+    global $user;
+    $mdb2 = getConnection();
+
+    if (isset($options['getAllFields']))
+      $sql = "select u.name,u.login,u.role, GROUP_CONCAT(p.name SEPARATOR '<br>') as projects from tt_users u inner join tt_user_project_binds upb on u.id = upb.user_id inner join tt_projects p on upb.project_id = p.id where u.status = 1 and u.role != 1024 group by u.name order by u.name";
+    else
+      $sql = "select u.name,u.login,u.role, GROUP_CONCAT(p.name SEPARATOR '<br>') as projects from tt_users u inner join tt_user_project_binds upb on u.id = upb.user_id inner join tt_projects p on upb.project_id = p.id where u.status = 1 and u.role != 1024 group by u.name order by u.name";
+
+    $res = $mdb2->query($sql);
+    $user_list = array();
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    while ($val = $res->fetchRow()) {
+      $user_list[] = $val;
+    }
+return $user_list;
+}
+
 // The getActiveUsers obtains all active users in a given team.
   static function getActiveUsersAdmin($options = null) {
     global $user;

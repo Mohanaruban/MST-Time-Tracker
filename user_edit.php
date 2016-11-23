@@ -35,9 +35,17 @@ import('form.Table');
 import('form.TableColumn');
 
 // Access check.
-if (!ttAccessCheck(right_manage_team)) {
+// if (!ttAccessCheck(right_manage_team)) {
+//   header('Location: access_denied.php');
+//   exit();
+// }
+
+// Access check.
+if (ttAccessCheck(right_data_entry)) {
+  if(!$user->isAdmin() && !$user->isManager()) {
   header('Location: access_denied.php');
   exit();
+}
 }
 
 // Get user id we are editing from the request.
@@ -99,6 +107,7 @@ if ($request->isPost()) {
   $cl_status = $request->getParameter('status');
   $cl_rate = $request->getParameter('rate');
   $cl_projects = $request->getParameter('projects');
+  $cl_projectList = $request->getParameter('projectList');
 
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
@@ -190,6 +199,7 @@ class RateCellRenderer extends DefaultCellRenderer {
     return $this->toString();
   }
 }
+
 // Create projects table.
 $table = new Table('projects');
 $table->setIAScript('setRate');
@@ -278,6 +288,7 @@ $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
 $smarty->assign('user_id', $user_id);
 $smarty->assign('teamid', $get_manager);
+$smarty->assign('projectList',$projects);
 $smarty->assign('title', $i18n->getKey('title.edit_user'));
 $smarty->assign('content_page_name', 'user_edit.tpl');
 $smarty->display('index.tpl');

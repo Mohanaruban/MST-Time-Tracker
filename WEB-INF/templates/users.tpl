@@ -101,7 +101,8 @@
           {/if}
           {if $user->isManager()} 
           <!-- Manager can edit everybody. -->
-          <td><a href="user_edit.php?id={$u.id}">{$i18n.label.view}</a></td>
+          <!-- <td><a href="user_edit.php?id={$u.id}">{$i18n.label.view}</a></td> -->
+          <td>{$u.projects}</td>
           {/if}
           <!-- {if $user->isManager()} -->
           <!-- Manager can edit everybody. -->

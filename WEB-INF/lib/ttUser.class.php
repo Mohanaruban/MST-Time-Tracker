@@ -112,13 +112,13 @@ class ttUser {
       if ($this->role == ROLE_SITE_ADMIN) {
         $this->rights = right_administer_site|right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team|right_assign_roles|right_export_team;
       } elseif ($this->role == ROLE_USER) {
-        $this->rights = right_data_entry|right_view_charts|right_view_reports|right_manage_team;
+        $this->rights = right_data_entry|right_view_reports;
       } elseif ($this->role == ROLE_CLIENT) {
         $this->rights = right_view_reports|right_view_invoices; // TODO: how about right_view_charts, too?
       } elseif ($this->role == ROLE_COMANAGER) {
         $this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team;
       } elseif ($this->role == ROLE_MANAGER) {
-        $this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_manage_team|right_assign_roles|right_export_team;
+        $this->rights = right_data_entry|right_view_charts|right_view_reports|right_view_invoices|right_assign_roles|right_export_team;
       }
     }
   }

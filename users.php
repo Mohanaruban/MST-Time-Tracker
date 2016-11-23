@@ -32,9 +32,11 @@ import('ttTeamHelper');
 import('ttTimeHelper');
 
 // Access check.
-if (!ttAccessCheck(right_data_entry)) {
+if (ttAccessCheck(right_data_entry)) {
+  if(!$user->isAdmin() && !$user->isManager()) {
   header('Location: access_denied.php');
   exit();
+}
 }
 // Get users.
 $active_users = ttTeamHelper::getActiveUsers(array('getAllFields'=>true));
@@ -43,10 +45,13 @@ if($user->isAdmin()) {
 	$active_users = ttTeamHelper::getActiveUsersAdmin(array('getAllFields'=>true));
 	$can_delete_manager = (1 == count($active_users));
   $inactive_users = ttTeamHelper::getInactiveUsersAdmin(true);
+
+  
 }
 if($user->isManager()) {
    $active_users = "";
-   $active_users = ttTeamHelper::getActiveUsersManager($user->id, array('getAllFields'=>true));
+   //$active_users = ttTeamHelper::getActiveUsersManager($user->id, array('getAllFields'=>true));
+   $active_users = ttTeamHelper::getActiveProjectView($user->id, array('getAllFields'=>true));
   // $can_delete_manager = (1 == count($active_users));
   // $inactive_users = ttTeamHelper::getInactiveUsersManager(true);
 }
