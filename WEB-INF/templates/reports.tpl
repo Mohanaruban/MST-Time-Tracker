@@ -311,7 +311,7 @@ function handleCheckboxes() {
                     <div class="col-md-12">
                       <label class="col-sm-3 control-label">{$i18n.form.reports.save_as_favorite}</label>
                       <div class="col-sm-8">{$forms.reportForm.new_fav_report.control}
-                        <span class="pull-right" style="margin-top: -30px;">{$forms.reportForm.btn_save.control}</span>
+                        <span class="pull-down" style="margin-top: -30px; padding-left: 90%;">{$forms.reportForm.btn_save.control}</span>
                       </div>
                     </div>
                   </div>

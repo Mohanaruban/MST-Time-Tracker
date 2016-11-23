@@ -102,6 +102,13 @@ window.onload = function() {
       </div>
       {/if}
       {* Prohibit deactivating team manager. Deactivating others is ok. *}
+{if $user->canManageTeam() && !($user->isManager() && $user->id == $user_id)}
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.status}</label>
+        <div class="col-sm-9">{$forms.userForm.status.control}</div>
+      </div>
+      {/if}
+      
      <!--  {if $user->canManageTeam() && !($user->isManager() && $user->id == $user_id)}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.status}</label>
@@ -111,8 +118,8 @@ window.onload = function() {
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.form.users.default_rate}&nbsp;(0{$user->decimal_mark}00)</label>
         <div class="col-sm-9">{$forms.userForm.rate.control}</div>
-      </div>
-      {/if} -->
+      </div>-->
+      {/if} 
       {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isAdmin())}
       <div class="form-group">
       {if $user->isAdmin()}
