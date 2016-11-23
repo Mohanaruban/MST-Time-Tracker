@@ -159,6 +159,7 @@ $i18n_key_words = array(
 'label.total_hours' => 'Total hours',
 'label.total_cost' => 'Total cost',
 'label.view' => 'View',
+'label.projectview' => 'Project List',
 'label.edit' => 'Edit',
 'label.delete' => 'Delete',
 'label.configure' => 'Configure',
