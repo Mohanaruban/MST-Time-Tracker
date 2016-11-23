@@ -145,8 +145,14 @@
       {if $title}
       <div class="breadcrumb">
         <h5>
-          {if $user->team}<span class="text-muted">{$user->team|escape:'html'} / </span>{/if}
+          <!-- {if $user->team}<span class="text-muted">{$user->team|escape:'html'} / </span>{/if} -->
+          
           {if $user->isAdmin()}<span class="text-muted">Administrator / </span>{/if}
+          {if $user->isManager()}<span class="text-muted">Manager / </span>{/if}
+          {if !$user->isAdmin() && !$user->isManager()}
+<span class="text-muted">User / </span>
+          {/if}
+
           <span class="text-primary">{$title}</span>        
         </h5>
       </div>
