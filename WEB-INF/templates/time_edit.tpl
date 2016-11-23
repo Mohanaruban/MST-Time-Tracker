@@ -241,11 +241,11 @@ function setNow(formField) {
       {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
       <div class="form-group">
         <label class="col-sm-2 control-label">{$i18n.label.start}</label>
-        <div class="col-sm-10">{$forms.timeRecordForm.start.control}&nbsp;<span class="pull-right" style="margin-top: -30px;"><input onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}" class="btn btn-primary btn-xs"></span></div>
+        <div class="col-sm-10">{$forms.timeRecordForm.start.control}&nbsp;<span class="pull-down" style="margin-top: -30px;padding-left: 90%;"><input onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}" class="btn btn-primary btn-xs"></span></div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">{$i18n.label.finish}</label>
-        <div class="col-sm-10">{$forms.timeRecordForm.finish.control}&nbsp;<span class="pull-right" style="margin-top: -30px;"><input onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}" class="btn btn-primary btn-xs"></span></div>
+        <div class="col-sm-10">{$forms.timeRecordForm.finish.control}&nbsp;<span class="pull-down" style="margin-top: -30px;padding-left: 90%;"><input onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}" class="btn btn-primary btn-xs"></span></div>
       </div>
       {/if}
 
