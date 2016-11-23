@@ -288,12 +288,12 @@ $i18n_key_words = array(
 
 // Login form. See example at https://timetracker.anuko.com/login.php.
 'form.login.forgot_password' => 'Forgot password?',
-'form.login.about' =>'Anuko <a href="https://www.anuko.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
+'form.login.about' =>'MST <a href="https://www.mstsolutions.com/lp/tt_2.htm" target="_blank">Time Tracker</a> is a simple, easy to use, open source time tracking system.',
 
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Password reset request sent by email.',
-'form.reset_password.email_subject' => 'Anuko Time Tracker password reset request',
-'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your Anuko Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nAnuko Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.anuko.com for more information.\n\n",
+'form.reset_password.email_subject' => 'MST Time Tracker password reset request',
+'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your MST Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nMST Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.mstsolutions.com for more information.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Type new password and click on Save.',
@@ -382,7 +382,7 @@ $i18n_key_words = array(
 'form.import.success' => 'Import completed successfully.',
 
 // Teams form. See example at https://timetracker.anuko.com/admin_teams.php (login as admin first).
-'form.teams.hint' =>  'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another Anuko Time Tracker server (no login collisions are allowed).',
+'form.teams.hint' =>  'Create a new team by creating a new team manager account.<br>You can also import team data from an xml file from another MST Time Tracker server (no login collisions are allowed).',
 
 // Profile form. See example at https://timetracker.anuko.com/profile_edit.php.
 'form.profile.12_hours' => '12 hours',
@@ -406,7 +406,7 @@ $i18n_key_words = array(
 'form.mail.cc' => 'Cc',
 'form.mail.subject' => 'Subject',
 'form.mail.report_subject' => 'Time Tracker Report',
-'form.mail.footer' => 'Anuko Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.anuko.com">www.anuko.com</a> for more information.',
+'form.mail.footer' => 'MST Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.mstsolutions.com">www.mstsolutions.com</a> for more information.',
 'form.mail.report_sent' => 'Report sent.',
 'form.mail.invoice_sent' => 'Invoice sent.',
 
