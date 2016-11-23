@@ -59,10 +59,11 @@ $cl_password1 = $request->getParameter('password1');
 $cl_password2 = $request->getParameter('password2');
 
 $form = new Form('newPasswordForm');
-$form->addInput(array('type'=>'text','maxlength'=>'120','name'=>'password1','aspassword'=>true,'value'=>$cl_password1));
-$form->addInput(array('type'=>'text','maxlength'=>'120','name'=>'password2','aspassword'=>true,'value'=>$cl_password2));
+$form->addFormStyle(array('class'=>'form-horizontal'));
+$form->addInput(array('type'=>'text','maxlength'=>'120','name'=>'password1','class'=>'form-control','aspassword'=>true,'value'=>$cl_password1));
+$form->addInput(array('type'=>'text','maxlength'=>'120','name'=>'password2','class'=>'form-control','aspassword'=>true,'value'=>$cl_password2));
 $form->addInput(array('type'=>'hidden','name'=>'ref','value'=>$cl_ref));
-$form->addInput(array('type'=>'submit','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+$form->addInput(array('type'=>'submit','class'=>'btn btn-success','name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
 if ($request->isPost()) {
   // Validate user input.

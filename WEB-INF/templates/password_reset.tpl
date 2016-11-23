@@ -1,27 +1,42 @@
+<div class="col-md-5 col-md-offset-4 text-center">
+  <div class="panel-login panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Reset Password</h3>
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-12">
 {$forms.resetPasswordForm.open}
-<table cellspacing="4" cellpadding="7" border="0">
-  <tr>
-    <td>
+ 
+
+      
 {if $result_message}
-      <table cellspacing="4" cellpadding="7" border="0" width="100%">
-        <tr><td align="center"><font color="red"><b>{$result_message}</b></font></td></tr>
-      </table>
+<div class="form-group">
+     <label class="control-label"><font color="red"><b>{$result_message}</b></font>
+
+     </label>
+      </div>
 {else}
-      <table>
-        <tr>
-          <td align="right">{$i18n.label.login}:</td>
-          <td colspan="3">{$forms.resetPasswordForm.login.control}</td>
-        </tr>
-        <tr>
-          <td colspan="4">&nbsp;</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="3" align="center">{$forms.resetPasswordForm.btn_submit.control}</td>
-        </tr>
-      </table>
+      <div class="form-group">
+        <label class="control-label">Login ID</label>
+       <div class="col-sm-12">
+        {$forms.resetPasswordForm.login.control}
+</div>
+
+       </div>
+
+     
+        <div class="form-group">
+          <div class="col-md-12 text-center">
+          {$forms.resetPasswordForm.btn_submit.control}
+       </div>
+       </div>
+      
+   
+      
 {/if}
-    </td>
-  </tr>
-</table>
+</div>
+</div>
+   
 {$forms.resetPasswordForm.close}
+</div>
+</div>
