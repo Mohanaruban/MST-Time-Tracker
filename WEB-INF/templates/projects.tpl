@@ -71,6 +71,13 @@
     </div>
   </div> -->
   {/if}
+        <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <div class="col-sm-12 text-center"><form><input class="btn btn-success" type="button" onclick="chLocation('project_add.php');" value="{$i18n.button.add_project}"></form></div>
+      </div>
+    </div>
+  </div>
 {else}
 <table class="table table-responsive table-striped table-hover table-bordered">
         {if $inactive_projects}
@@ -117,13 +124,7 @@
   </div>
   {/if}
   {/if}
-    <div class="row">
-    <div class="col-md-12">
-      <div class="form-group">
-        <div class="col-sm-12 text-center"><form><input class="btn btn-success" type="button" onclick="chLocation('project_add.php');" value="{$i18n.button.add_project}"></form></div>
-      </div>
-    </div>
-  </div>
+
 </div>
 </div>
 </div>
