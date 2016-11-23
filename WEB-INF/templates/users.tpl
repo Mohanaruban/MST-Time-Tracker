@@ -75,7 +75,7 @@
             <th>{$i18n.label.login}</th>
             <th>{$i18n.form.users.role}</th>
             {if $user->isManager()}
-            <th>{$i18n.label.view}</th>
+            <th>{$i18n.label.projectview}</th>
             {/if}
             <!-- <th>{$i18n.label.delete}</th> -->
           </tr>

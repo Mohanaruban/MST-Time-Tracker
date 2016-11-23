@@ -262,11 +262,11 @@ function get_time() {
       {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
       <div class="form-group">
         <label class="col-md-3 control-label">{$i18n.label.start}</label>
-        <div class="col-md-9">{$forms.timeRecordForm.start.control}<span class="pull-right" style="margin-top: -30px;"><input class="btn btn-primary btn-xs" onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></span></div>
+        <div class="col-md-9">{$forms.timeRecordForm.start.control}<span class="pull-down" style="margin-top: -30px; padding-left: 80%;"><input class="btn btn-primary btn-xs" onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></span></div>
       </div>
       <div class="form-group">
         <label class="col-md-3 control-label">{$i18n.label.finish}</label>
-        <div class="col-md-9">{$forms.timeRecordForm.finish.control}<span class="pull-right" style="margin-top: -30px;"><input class="btn btn-primary btn-xs" onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></span></div>
+        <div class="col-md-9">{$forms.timeRecordForm.finish.control}<span class="pull-down" style="margin-top: -30px; padding-left: 80%;"><input class="btn btn-primary btn-xs" onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></span></div>
       </div>
       {/if}
 
