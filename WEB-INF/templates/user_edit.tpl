@@ -117,11 +117,14 @@ window.onload = function() {
       <div class="form-group">
       {if $user->isAdmin()}
         <label class="col-sm-3 control-label">{$i18n.label.projects}</label>
+        <label class="col-sm-9 text-left" style="padding: 13px;">{implode("<br><br> ",array_column($projectList, 'name'))}</label>
       {/if}
-        <div class="col-sm-9">{$forms.userForm.projects.control}</div>
       </div>
       {/if}
     </div>
+
+
+
     {if $user->isAdmin()}
     <div class="row">
       <div class="col-md-12">
