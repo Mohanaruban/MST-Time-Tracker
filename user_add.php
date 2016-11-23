@@ -86,7 +86,8 @@ $form->addFormStyle(array('class'=>'form-horizontal'));
     'value'=>"",
     'data'=>$get_manager,
     'datakeys'=>array('id','name'),
-    'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
+    //'empty'=>array(''=>$i18n->getKey('dropdown.select'))
+    ));
 
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name,'class'=>'form-control','placeholder'=>'Enter Name'));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','value'=>$cl_login,'class'=>'form-control','placeholder'=>'Enter Login Name'));
@@ -142,7 +143,7 @@ $table->setData($projects);
 $table->setKeyField('id');
 $table->setValue($cl_projects);
 $table->addColumn(new TableColumn('name', $i18n->getKey('label.project'), new NameCellRenderer()));
-$table->addColumn(new TableColumn('p_rate', $i18n->getKey('form.users.rate'), new RateCellRenderer()));
+//$table->addColumn(new TableColumn('p_rate', $i18n->getKey('form.users.rate'), new RateCellRenderer()));
 $form->addInputElement($table);
 
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','class'=>'btn btn-success','value'=>$i18n->getKey('button.submit')));
