@@ -293,7 +293,7 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Password reset request sent by email.',
 'form.reset_password.email_subject' => 'MST Time Tracker password reset request',
-'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your MST Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nMST Time Tracker is a simple, easy to use, open source time tracking system. Visit https://www.mstsolutions.com for more information.\n\n",
+'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your MST Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\n<a href='http://www.mstsolutions.com/''>MetaSoftTech Solutions, L.L.C.</a>\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Type new password and click on Save.',
@@ -405,8 +405,8 @@ $i18n_key_words = array(
 'form.mail.to' => 'To',
 'form.mail.cc' => 'Cc',
 'form.mail.subject' => 'Subject',
-'form.mail.report_subject' => 'Time Tracker Report',
-'form.mail.footer' => 'MST Time Tracker is a simple, easy to use, open source<br>time tracking system. Visit <a href="https://www.mstsolutions.com">www.mstsolutions.com</a> for more information.',
+'form.mail.report_subject' => 'MST Time Tracker Report',
+'form.mail.footer' => 'MetaSoftTech Solutions, L.L.C. <a href="https://www.mstsolutions.com">MetaSoftTech Solutions</a>',
 'form.mail.report_sent' => 'Report sent.',
 'form.mail.invoice_sent' => 'Invoice sent.',
 
