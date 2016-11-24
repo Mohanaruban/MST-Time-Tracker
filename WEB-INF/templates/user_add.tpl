@@ -41,7 +41,7 @@ window.onload = function() {
 }
 </script>
 
-<div class="col-md-8 col-md-offset-2 text-center">
+<div class="col-md-12 text-center">
 {$forms.userForm.open}
 
 <div class="row">
@@ -49,36 +49,43 @@ window.onload = function() {
       {if $user->isAdmin()}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.manager_list}*</label>
-        <div class="col-sm-9">{$forms.userForm.manager_list.control}</div>
+        <div class="col-sm-7">{$forms.userForm.manager_list.control}</div>
+        <div class="clo-sm-2"></div>
       </div>
       {/if}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.person_name} (*)</label>
-        <div class="col-sm-9">{$forms.userForm.name.control}</div>
+        <div class="col-sm-7">{$forms.userForm.name.control}</div>
+        <div class="clo-sm-2"></div>
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.login} (*)</label>
-        <div class="col-sm-9">{$forms.userForm.login.control}</div>
+        <div class="col-sm-7">{$forms.userForm.login.control}</div>
+        <div class="clo-sm-2"></div>
       </div>
 {if !$auth_external}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.password} (*)</label>
-        <div class="col-sm-9">{$forms.userForm.pas1.control}</div>
+        <div class="col-sm-7">{$forms.userForm.pas1.control}</div>
+        <div class="clo-sm-2"></div>
       </div>
           <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.confirm_password} (*)</label>
-        <div class="col-sm-9">{$forms.userForm.pas2.control}</div>
+        <div class="col-sm-7">{$forms.userForm.pas2.control}</div>
+        <div class="clo-sm-2"></div>
       </div>
 {/if}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.email}</label>
-        <div class="col-sm-9">{$forms.userForm.email.control}</div>
+        <div class="col-sm-7">{$forms.userForm.email.control}</div>
+        <div class="clo-sm-2"></div>
       </div>
 {if $user->isAdmin()}
 
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.form.users.role}</label>
-        <div class="col-sm-9">{$forms.userForm.role.control} {$forms.userForm.client.control}</div>
+        <div class="col-sm-7">{$forms.userForm.role.control} {$forms.userForm.client.control}</div>
+        <div class="clo-sm-2"></div>
       </div>
 {/if}
 <!--       <div class="form-group">
@@ -89,14 +96,15 @@ window.onload = function() {
 
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.projects}</label>
-        <div class="col-sm-9">{$forms.userForm.projects.control}</div>
+        <div class="col-sm-5">{$forms.userForm.projects.control}</div>
+        <div class="col-sm-4"></div>
       </div>
 {/if}
 
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-      <div class="col-sm-9 col-sm-offset-3">{$forms.userForm.btn_submit.control}</div>
+      <div class="col-sm-12">{$forms.userForm.btn_submit.control}</div>
       </div>
     </div>
   </div>

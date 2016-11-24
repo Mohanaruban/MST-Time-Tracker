@@ -1,21 +1,24 @@
-<div class="col-sm-6 col-sm-offset-3 text-center">
+<div class="col-sm-12 text-center">
 {$forms.projectForm.open}
   <div class="row">
     <div class="col-sm-12">
       
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.manager_list}*</label>
-        <div class="col-sm-9">{$forms.projectForm.manager_list.control}</div>
+        <div class="col-sm-7">{$forms.projectForm.manager_list.control}</div>
+        <div class="col-md-2"></div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.thing_name}*</label>
-        <div class="col-sm-9">{$forms.projectForm.project_name.control}</div>
+        <div class="col-sm-7">{$forms.projectForm.project_name.control}</div>
+        <div class="col-md-2"></div>
       </div>
       
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.description}</label>
-        <div class="col-sm-9">{$forms.projectForm.description.control}</div>
+        <div class="col-sm-7">{$forms.projectForm.description.control}</div>
+        <div class="col-md-2"></div>
       </div>
 
       

@@ -64,7 +64,7 @@ function handlePluginCheckboxes() {
 </script>
 
 
-<div class="col-sm-6 col-sm-offset-3 text-center">
+<div class="col-sm-12 text-center">
   {$forms.profileForm.open}
 
   {if $user->canManageTeam()}
@@ -75,35 +75,41 @@ function handlePluginCheckboxes() {
 
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.person_name}*</label>
-        <div class="col-sm-9">{$forms.profileForm.name.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.name.control}</div>
+        <div class="col-md-2"></div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.login}*</label>
-        <div class="col-sm-9">{$forms.profileForm.login.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.login.control}</div>
+        <div class="col-md-2"></div>
       </div>
       {if !$auth_external}
 
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.password}*</label>
-        <div class="col-sm-9">{$forms.profileForm.password1.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.password1.control}</div>
+        <div class="col-md-2"></div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.confirm_password}*</label>
-        <div class="col-sm-9">{$forms.profileForm.password2.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.password2.control}</div>
+        <div class="col-md-2"></div>
       </div>
       {/if}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.email}</label>
-        <div class="col-sm-9">{$forms.profileForm.email.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.email.control}</div>
+        <div class="col-md-2"></div>
       </div>
       
       {if $user->isAdmin()}
 
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.team_name}</label>
-        <div class="col-sm-9">{$forms.profileForm.team_name.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.team_name.control}</div>
+        <div class="col-md-2"></div>
       </div>
       <!-- <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.currency}</label>

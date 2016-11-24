@@ -1,7 +1,7 @@
 <script>
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
-<div class="col-sm-8 col-sm-offset-2">
+<div class="col-sm-12">
   <div class="row">
     <div class="col-sm-12">
       {if $user->canManageTeam() && $user->isAdmin()}
@@ -38,7 +38,7 @@
     </div>
   </div> -->
 </div>
-<div class="col-sm-8 col-sm-offset-2">
+<div class="col-sm-12">
   {if $inactive_projects}
   <div class="row">
     <div class="col-sm-12">
@@ -101,7 +101,7 @@
     </div>
   </div>
 </div>
-<div class="col-sm-8 col-sm-offset-2">
+<div class="col-sm-12">
   {if $inactive_projects}
   <div class="row">
     <div class="col-sm-12">

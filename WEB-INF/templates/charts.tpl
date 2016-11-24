@@ -1,7 +1,7 @@
-<div class="col-sm-8 col-sm-offset-2 text-center">
+<div class="col-sm-12 text-center">
   {$forms.chartForm.open}
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-7">
       {if $on_behalf_control}
       <div class="col-sm-12">
         <div class="form-group">
@@ -25,9 +25,9 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-5">
       <div class="form-group">
-        <div class="col-sm-9 col-sm-offset-3">{$forms.chartForm.date.control}</div>
+        <div class="col-sm-12">{$forms.chartForm.date.control}</div>
       </div>
     </div>
   </div>
