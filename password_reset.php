@@ -102,7 +102,7 @@ if ($request->isPost()) {
 
       $cl_subject = $user_i18n->getKey('form.reset_password.email_subject');
       if (APP_NAME)
-        $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/'.APP_NAME.'/password_change.php?ref='.$temp_ref;
+        $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/password_change.php?ref='.$temp_ref;
       else
         $pass_edit_url = $http.'://'.$_SERVER['HTTP_HOST'].'/password_change.php?ref='.$temp_ref;
 
