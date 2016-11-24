@@ -1,9 +1,0 @@
-config.php
-WEB-INF/templates_c/*.*
-WEB-INF/lib/tcpdf/
-nbproject/
-upload/
-.vscode/
-Thumbs.db
-*.DS_Store
-*~
