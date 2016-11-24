@@ -141,7 +141,8 @@ if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
   // Dropdown for projects assigned to user.
   //$project_list = $user->getAssignedProjects();
-  $project_list = ttProjectHelper::getProjectsManager($user->id);
+  //$project_list = ttProjectHelper::getProjectsManager($user->id);
+  $project_list = ttProjectHelper::getAssignedProjects($user->id);
   $form->addInput(array('type'=>'combobox',
     'class'=>'form-control',
     'onchange'=>'fillTaskDropdown(this.value);',
