@@ -255,9 +255,9 @@ return $user_list;
     $mdb2 = getConnection();
 
 if (isset($options['getAllFields']))
-      $sql = "select * from tt_users where team_id = $teamid and status = 1 order by name";
+      $sql = "select * from tt_users where team_id = $teamid and status = 1 and role != 1024 order by name";
     else
-      $sql = "select id, name from tt_users where team_id = $teamid and status = 1 order by name";
+      $sql = "select id, name from tt_users where team_id = $teamid and status = 1 and role != 1024 order by name";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
@@ -285,7 +285,7 @@ if (isset($options['getAllFields']))
     global $user;
     $mdb2 = getConnection();
 
-    $sql = "select id, name from tt_users where (status = 1 or status = 0) and team_id > 0 order by name";
+    $sql = "select id, name from tt_users where (status = 1 or status = 0) and team_id > 0 and  role != 1024 order by name";
     $res = $mdb2->query($sql);
     $user_list = array();
     if (is_a($res, 'PEAR_Error'))
