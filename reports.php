@@ -101,7 +101,8 @@ if ($user->canManageTeam() || $user->isAdmin() || $user->isManager()) {
 } elseif ($user->isClient()) {
   $project_list = ttProjectHelper::getProjectsForClient();
 } else {
-  $project_list = ttProjectHelper::getAssignedProjects($user->id);	
+  //$project_list = ttProjectHelper::getAssignedProjects($user->id);	
+  $project_list = ttProjectHelper::getProjectsManager($user->id);
 }
 $form->addInput(array('type'=>'combobox',
   'class'=>'form-control',

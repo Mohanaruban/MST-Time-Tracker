@@ -46,6 +46,8 @@ if ($user->isPluginEnabled('cf')) {
 // Report settings are stored in session bean before we get here.
 $bean = new ActionForm('reportBean', new Form('reportForm'), $request);
 
+$totals = ttReportHelper::getTotals($bean);
+
 // This file handles 2 types of export to a file:
 // 1) xml
 // 2) csv
@@ -63,7 +65,7 @@ else
   $items = ttReportHelper::getItems($bean);
 
 // Build a string to use as filename for the files being downloaded.
-$filename = strtolower($i18n->getKey('title.report')).'_'.$bean->mValues['start_date'].'_'.$bean->mValues['end_date'];
+$filename = strtolower($i18n->getKey('title.reports')).'_'.$totals['start_date'].'_'.$totals['end_date'];
 
 header('Pragma: public'); // This is needed for IE8 to download files over https.
 header('Content-Type: text/html; charset=utf-8');

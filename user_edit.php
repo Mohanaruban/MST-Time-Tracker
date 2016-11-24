@@ -223,6 +223,9 @@ if ($request->isPost()) {
   if (!$auth->isPasswordExternal() && ($cl_password1 || $cl_password2)) {
     if (!ttValidString($cl_password1)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.password'));
     if (!ttValidString($cl_password2)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.confirm_password'));
+    if(strlen($cl_password1)<6){
+  $err->add($i18n->getKey('error.min_length'), $i18n->getKey('label.password'));
+}
     if ($cl_password1 !== $cl_password2)
       $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
   }
