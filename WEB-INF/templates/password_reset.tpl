@@ -1,4 +1,6 @@
-<div class="col-md-5 col-md-offset-4 text-center">
+<div class="col-md-12">
+<div class="col-md-3"></div>
+<div class="col-md-6 text-center">
   <div class="panel-login panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Reset Password</h3>
@@ -39,4 +41,6 @@
    
 {$forms.resetPasswordForm.close}
 </div>
+</div>
+<div class="col-md-3"></div>
 </div>

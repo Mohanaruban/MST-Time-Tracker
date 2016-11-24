@@ -1,7 +1,7 @@
 <script>
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
-<div class="col-sm-8 col-sm-offset-2 text-center">
+<div class="col-sm-12 text-center">
   {$forms.reportForm.open}
   <div class="row">
     <table class="table table-responsive table-striped table-hover table-bordered">

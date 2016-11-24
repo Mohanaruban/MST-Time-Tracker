@@ -212,10 +212,10 @@ function get_time() {
   }
 </style>
 
-<div class="col-sm-8 col-sm-offset-2 text-center">
+<div class="col-sm-12 text-center">
   {$forms.timeRecordForm.open}
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-7">
 
       {if $on_behalf_control}
       <div class="form-group">
@@ -262,11 +262,11 @@ function get_time() {
       {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
       <div class="form-group">
         <label class="col-md-3 control-label">{$i18n.label.start}</label>
-        <div class="col-md-9">{$forms.timeRecordForm.start.control}<span class="pull-down" style="margin-top: -30px; padding-left: 80%;"><input class="btn btn-primary btn-xs" onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></span></div>
+        <div class="col-md-9">{$forms.timeRecordForm.start.control}<span class="pull-down" style="float:right;"><input class="btn btn-primary btn-xs" onclick="setNow('start');" type="button" tabindex="-1" value="{$i18n.button.now}"></span></div>
       </div>
       <div class="form-group">
         <label class="col-md-3 control-label">{$i18n.label.finish}</label>
-        <div class="col-md-9">{$forms.timeRecordForm.finish.control}<span class="pull-down" style="margin-top: -30px; padding-left: 80%;"><input class="btn btn-primary btn-xs" onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></span></div>
+        <div class="col-md-9">{$forms.timeRecordForm.finish.control}<span class="pull-down" style="float:right;"><input class="btn btn-primary btn-xs" onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></span></div>
       </div>
       {/if}
 
@@ -278,13 +278,13 @@ function get_time() {
       {/if}
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-5">
       {$forms.timeRecordForm.date.control}
     </div>
   </div>
   
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-7">
       <div class="form-group">
         <label class="col-md-3 control-label">{$i18n.label.note}</label>
         <div class="col-md-9">{$forms.timeRecordForm.note.control}</div>
@@ -302,7 +302,7 @@ function get_time() {
 
 <div class="col-xs-12" style="height:30px;"></div>
 
-<div class="col-sm-8 col-sm-offset-2">
+<div class="col-sm-12">
   <div class="row">
     <div class="col-sm-12">
       {if $time_records}
