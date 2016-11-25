@@ -71,7 +71,7 @@ $i18n_key_words = array(
 'error.db' => 'Database error.',
 'error.field' => 'Incorrect "{0}" data.',
 'error.empty' => 'Field "{0}" is empty.',
-'error.min_length' => 'Field "{0}" Password length should be minimum 6 characters"',
+'error.min_length' => 'Field "{0}" Password length should be minimum 6 characters',
 'error.not_equal' => 'Field "{0}" is not equal to field "{1}".',
 'error.interval' => 'Field "{0}" must be greater than "{1}".',
 'error.project' => 'Select project.',
@@ -128,7 +128,7 @@ $i18n_key_words = array(
 'label.manager_login' => 'Manager login',
 'label.person_name' => 'Name',
 'label.thing_name' => 'Name',
-'label.manager_list' => 'Comapany name',
+'label.manager_list' => 'Company name',
 'label.login' => 'Login',
 'label.password' => 'Password',
 'label.confirm_password' => 'Confirm password',
@@ -294,7 +294,7 @@ $i18n_key_words = array(
 // Resetting Password form. See example at https://timetracker.anuko.com/password_reset.php.
 'form.reset_password.message' => 'Password reset request sent by email.',
 'form.reset_password.email_subject' => 'MST Time Tracker password reset request',
-'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your MST Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\n<a href='http://www.mstsolutions.com/''>MetaSoftTech Solutions, L.L.C.</a>\n\n",
+'form.reset_password.email_body' => "Dear User,\n\nSomeone, possibly you, requested your MST Time Tracker password reset. Please visit this link if you want to reset your password.\n\n%s\n\nMetaSoftTech Solutions, L.L.C.\n\n",
 
 // Changing Password form. See example at https://timetracker.anuko.com/password_change.php?ref=1.
 'form.change_password.tip' => 'Type new password and click on Save.',
@@ -407,7 +407,7 @@ $i18n_key_words = array(
 'form.mail.cc' => 'Cc',
 'form.mail.subject' => 'Subject',
 'form.mail.report_subject' => 'MST Time Tracker Report',
-'form.mail.footer' => 'MetaSoftTech Solutions, L.L.C. <a href="https://www.mstsolutions.com">MetaSoftTech Solutions</a>',
+'form.mail.footer' => 'MetaSoftTech Solutions, L.L.C. <a href="http://www.mstsolutions.com">MetaSoftTech Solutions</a>',
 'form.mail.report_sent' => 'Report sent.',
 'form.mail.invoice_sent' => 'Invoice sent.',
 

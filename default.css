@@ -40,7 +40,7 @@ html {
 body {
   font-size: 10pt;
   font-family: verdana;
-  background-color: white;
+  background-color: transparent !important;
 }
 
 table { font-size: 10pt; font-family: verdana; }

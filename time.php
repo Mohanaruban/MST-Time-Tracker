@@ -260,11 +260,7 @@ if ($request->isPost()) {
           $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.duration'));
       }
     } else {
-      if ($cl_duration == 0) {
-          $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
-          $err->add($i18n->getKey('error.field'), "Duration must greater than 0");
-      } 
-      if (!ttTimeHelper::isValidDuration($cl_duration))
+       if (!ttTimeHelper::isValidDuration($cl_duration))
         $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
     }
     if (!ttValidString($cl_note, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.note'));
