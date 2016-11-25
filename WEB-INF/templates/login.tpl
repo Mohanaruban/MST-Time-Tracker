@@ -8,7 +8,7 @@
 </script>
 <style>
   html {
-    background-image: url("./images/homebg/18.jpg") !important;
+    background-image: url("../images/homebg/18.jpg") !important;
     background-size:cover; 
   }
 

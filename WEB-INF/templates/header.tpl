@@ -38,7 +38,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="http://www.mstsolutions.com/" target="_blank"><img src="./images/mst-logo.png" alt="MST Solutions" style="width: 144px;
+          <a class="navbar-brand" href="http://www.mstsolutions.com/" target="_blank"><img src="../images/mst-logo.png" alt="MST Solutions" style="width: 144px;
   "><span style="font-size: 15px; float: right; padding-top: 2px; color: white;">Time Tracker</span></a>
         </div>
 
