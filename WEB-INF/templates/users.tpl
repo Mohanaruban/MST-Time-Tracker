@@ -93,7 +93,7 @@
   </tr>
   {/foreach}
 </table>
-{/if}
+
       <div class="row">
         <div class="col-md-12 text-center">
           <div class="form-group">
@@ -101,6 +101,8 @@
           </div>
         </div>
       </div>
+{/if}
+
       {else}
       {if $user->canManageTeam() && !$user->isAdmin()}
       <table class="table table-responsive table-striped table-hover table-bordered">
