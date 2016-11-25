@@ -13,7 +13,7 @@
         {if $bean->getAttribute('chcost')}<td width="5%">{$i18n.label.cost}</td>{/if}
       </tr>
       {foreach $subtotals as $subtotal}
-      <tr class="warning">
+      <tr class="table-total-group">
         <td>{if $subtotal['name']}{$subtotal['name']|escape:'html'}{else}&nbsp;{/if}</td>
         {if $bean->getAttribute('chduration')}<td>{$subtotal['time']}</td>{/if}
         {if $bean->getAttribute('chcost')}<td>{if $user->canManageTeam() || $user->isClient()}{$subtotal['cost']}{else}{$subtotal['expenses']}{/if}</td>{/if}
@@ -21,7 +21,7 @@
       {/foreach}
       <!-- print totals -->
       <tr><td>&nbsp;</td></tr>
-      <tr class="info">
+      <tr class="table-total">
         <td>{$i18n.label.total}</td>
         {if $bean->getAttribute('chduration')}<td nowrap>{$totals['time']}</td>{/if}
         {if $bean->getAttribute('chcost')}<td nowrap>{$user->currency|escape:'html'} {if $user->canManageTeam() || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>{/if}
@@ -114,7 +114,7 @@
           {/if}
           <!-- print totals -->
           <tr><td>&nbsp;</td></tr>
-          <tr class="info">
+          <tr class="info table-total">
             <td>{$i18n.label.total}</td>
             {if $user->canManageTeam() || $user->isClient()}<td></td>{/if}
             {if $bean->getAttribute('chclient')}<td></td>{/if}

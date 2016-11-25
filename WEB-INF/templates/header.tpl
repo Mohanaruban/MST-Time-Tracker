@@ -7,6 +7,7 @@
   <link href="{$smarty.const.DEFAULT_CSS}" rel="stylesheet" type="text/css">
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/footer.css" rel="stylesheet" type="text/css">
+  <link href="css/custom.css" rel="stylesheet" type="text/css">
   {if $i18n.language.rtl}
   <link href="{$smarty.const.RTL_CSS}" rel="stylesheet" type="text/css">
   {/if}
@@ -28,7 +29,7 @@
 
   {assign var="tab_width" value="700"}
   <div class="wrapper">
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -37,7 +38,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="http://www.mstsolutions.com/" target="_blank"><img src="../images/mst-logo.png" alt="MST Solutions" style="width: 144px;
+          <a class="navbar-brand" href="http://www.mstsolutions.com/" target="_blank"><img src="./images/mst-logo.png" alt="MST Solutions" style="width: 144px;
   "><span style="font-size: 15px; float: right; padding-top: 2px; color: white;">Time Tracker</span></a>
         </div>
 
