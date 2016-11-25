@@ -1,6 +1,6 @@
 html {
   position: relative;
-  min-height: 100%;
+  min-height: 100%;  
 }
 body {
   /* Margin bottom by footer height */
@@ -12,5 +12,28 @@ footer {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
-  background-color: #f5f5f5;
+  /*background-color: #f5f5f5;*/
+}
+
+.text-muted {
+  color: #545758 !important;
+}
+
+html {
+  background-image: url("../images/homebg/18_pages.jpg");
+  background-size:cover; 
+}
+
+table {
+  background-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.navbar-brand {    
+  padding: 8.5px 15px !important;
+}
+
+.alert-danger {
+  background-color: rgba(255, 255, 255, 0) !important;
+  border-color: #000 !important;
+  color: #ff0000 !important;
 }

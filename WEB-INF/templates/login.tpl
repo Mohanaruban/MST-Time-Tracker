@@ -6,9 +6,19 @@
   }
 //-->
 </script>
+<style>
+  html {
+    background-image: url("../images/homebg/18.jpg") !important;
+    background-size:cover; 
+  }
+
+  .text-muted {
+    color: #ffffff !important;
+  }
+</style>
 <div class="col-md-12">
-<div class="col-md-3"></div>
-<div class="col-md-6 text-center">
+<div class="col-md-7"></div>
+<div class="col-md-5 text-center">
   <div class="panel-login panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Login Information</h3>
@@ -24,5 +34,5 @@
     </div>
   </div>
 </div>
-<div class="col-md-3"></div>
+<!-- <div class="col-md-3"></div> -->
 </div>

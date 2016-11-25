@@ -12,4 +12,4 @@
     {$forms.loginForm.btn_login.control}
     {$forms.loginForm.btn_reset.control}
 </div>
-<a href='password_reset.php' class="text-muted">{$i18n.form.login.forgot_password}</a>
+<a href='password_reset.php' class="text-muted" style="color:#545758 !important;">{$i18n.form.login.forgot_password}</a>
