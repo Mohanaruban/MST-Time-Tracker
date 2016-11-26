@@ -61,11 +61,11 @@
   <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.inactive_users}</td></tr>
   <thead>
     <tr>
-      <th width="35%">{$i18n.label.person_name}</th>
-      <th width="35%">{$i18n.label.login}</th>
-      <th width="10%">{$i18n.form.users.role}</th>
-      <th width="10%">{$i18n.label.edit}</th>
-      <th width="10%">{$i18n.label.delete}</th>
+      <th>{$i18n.label.person_name}</th>
+      <th>{$i18n.label.login}</th>
+      <th>{$i18n.form.users.role}</th>
+      <th>{$i18n.label.edit}</th>
+      <th>{$i18n.label.delete}</th>
     </tr>
   </thead>
   {foreach $inactive_users as $u}
@@ -166,7 +166,7 @@
   </div> -->
 
 
-{if $inactive_users}
+<!-- {if $inactive_users}
 <table class="table table-responsive table-striped table-hover table-bordered">
   <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.inactive_users}</td></tr>
   <thead>
@@ -191,13 +191,13 @@
     {elseif $smarty.const.ROLE_USER == $u.role}
     <td>{$i18n.label.user}</td>
     {/if}
-    {if $user->isManager()}
+    {if $user->isManager()} -->
     <!-- Manager can edit everybody. -->
-    <td><a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a></td>
+    <!-- <td><a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a></td>
     <td>{if $smarty.const.ROLE_MANAGER != $u.role || $can_delete_manager}<a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a>{/if}</td>
-    {else}
+    {else} -->
     <!--  Comanager can edit self and clients or users but not manager and other comanagers. -->
-    <td>{if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a>{/if}</td>
+    <!-- <td>{if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a>{/if}</td>
     <td>{if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a>{/if}</td>
     {/if}
   </tr>
@@ -212,7 +212,7 @@
     </div>
   </div>
 
-{/if}
+{/if} -->
 {else}
 <table class="table table-responsive table-striped table-hover table-bordered">
   <thead>

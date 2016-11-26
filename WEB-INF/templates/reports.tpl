@@ -146,7 +146,11 @@ function handleCheckboxes() {
   totalsOnlyCheckbox.disabled = false;
 }
 </script>
-
+<style>
+  table {
+    background-color: transparent !important;
+  }
+</style>
 <div class="col-sm-12 text-center">
   {$forms.reportForm.open}
   <div class="row">
