@@ -145,6 +145,8 @@ function handleCheckboxes() {
   } else
   totalsOnlyCheckbox.disabled = false;
 }
+
+
 </script>
 <style>
   table {
@@ -156,8 +158,8 @@ function handleCheckboxes() {
   <div class="row">
     <div class="col-sm-12">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#NewReport" class="btn btn-primary btn-lg" data-toggle="tab" aria-expanded="true">Generate fresh report</a></li>
-        <li class=""><a href="#FavoriteReport" class="btn btn-primary btn-lg" data-toggle="tab" aria-expanded="false">Generate from favorite</a></li>
+        <li class="active"><a href="#NewReport" class="btn-lg" data-toggle="tab" aria-expanded="true">Generate fresh report</a></li>
+        <li class=""><a href="#FavoriteReport" class="btn-lg" data-toggle="tab" aria-expanded="false">Generate from favorite</a></li>
       </ul>
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active in" id="NewReport">
