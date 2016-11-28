@@ -51,8 +51,6 @@
         </tr>
         {/foreach}
         {/if}
-
-
       </table>
 
 
@@ -93,7 +91,7 @@
   </tr>
   {/foreach}
 </table>
-
+{/if}
       <div class="row">
         <div class="col-md-12 text-center">
           <div class="form-group">
@@ -101,8 +99,6 @@
           </div>
         </div>
       </div>
-{/if}
-
       {else}
       {if $user->canManageTeam() && !$user->isAdmin()}
       <table class="table table-responsive table-striped table-hover table-bordered">
@@ -157,6 +153,34 @@
         {/foreach}
         {/if}
       </table>
+
+      {if $inactive_users}
+<table class="table table-responsive table-striped table-hover table-bordered">
+  <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.inactive_users}</td></tr>
+  <thead>
+    <tr>
+      <th>{$i18n.label.person_name}</th>
+      <th>{$i18n.label.login}</th>
+      <th>{$i18n.form.users.role}</th>
+    </tr>
+  </thead>
+  {foreach $inactive_users as $u}
+  <tr>
+    <td>{$u.name|escape:'html'}</td>
+    <td>{$u.login|escape:'html'}</td>
+    {if $smarty.const.ROLE_MANAGER == $u.role}
+    <td>{$i18n.form.users.manager}</td>
+    {elseif $smarty.const.ROLE_COMANAGER == $u.role}
+    <td>{$i18n.form.users.comanager}</td>
+    {elseif $smarty.const.ROLE_CLIENT == $u.role}
+    <td>{$i18n.label.client}</td>
+    {elseif $smarty.const.ROLE_USER == $u.role}
+    <td>{$i18n.label.user}</td>
+    {/if}
+  </tr>
+  {/foreach}
+</table>
+{/if}
 <!--   <div class="row">
     <div class="col-md-12 text-center">
       <div class="form-group">

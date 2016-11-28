@@ -68,6 +68,7 @@ $form->addInput(array('type'=>'submit','class'=>'btn btn-danger','name'=>'btn_de
 
 // Dropdown for clients if the clients plugin is enabled.
 if ($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) {
+  echo $user->team_id;
   if ($user->canManageTeam() || ($user->isClient() && !$user->client_id))
     $client_list = ttClientHelper::getClients($user->team_id);
   else
@@ -90,7 +91,8 @@ if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['ty
 }
 
 // Add controls for projects and tasks.
-if ($user->canManageTeam() || $user->isAdmin() || $user->isManager()) {
+if (($user->canManageTeam() || $user->isAdmin() || $user->isManager()) && !$user->isPluginEnabled('cl')) {
+  echo "if";
   if($user->isAdmin()) {
     $project_list = ttProjectHelper::getProjectsAdmin();
   } elseif($user->isManager()) {
@@ -99,8 +101,10 @@ if ($user->canManageTeam() || $user->isAdmin() || $user->isManager()) {
   $project_list = ttProjectHelper::getProjects(); // Manager and co-managers can run reports on all active and inactive projects.
   } 
 } elseif ($user->isClient()) {
+  echo "elseif";
   $project_list = ttProjectHelper::getProjectsForClient();
 } else {
+  echo "else";
   //$project_list = ttProjectHelper::getAssignedProjects($user->id);	
   $project_list = ttProjectHelper::getProjectsManager($user->id);
 }
@@ -215,6 +219,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
   $group_by_options['project'] = $i18n->getKey('form.reports.group_by_project');
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $group_by_options['task'] = $i18n->getKey('form.reports.group_by_task');
+  $group_by_options['user_project'] = "user_project";
 if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
   $group_by_options['cf_1'] = $custom_fields->fields[0]['label'];
 }
