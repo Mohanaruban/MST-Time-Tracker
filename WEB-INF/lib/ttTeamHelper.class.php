@@ -46,6 +46,18 @@ class ttTeamHelper {
     return false;
   }
 
+
+static function getManagerListReport() {
+        $mdb2 = getConnection();
+
+      $sql = "select u.id,u.team_id, u.name, GROUP_CONCAT(p.id SEPARATOR ',') as projects from tt_users u left join tt_user_project_binds upb on u.id = upb.user_id left join tt_projects p on upb.project_id = p.id where u.status = 1 and u.role = 324 group by u.name order by u.name";
+      $res = $mdb2->query($sql);
+      $manager_list = array();
+      while ($val = $res->fetchRow()) {
+        $team_id[] = $val;
+      }
+      return $team_id;
+}
   //Get team id for users
   static function getTeamIDAdmin($user_id) {
       $mdb2 = getConnection();
@@ -571,6 +583,28 @@ if (isset($options['getAllFields']))
     }
     return false;
   }
+
+  // The getActiveClients returns an array of active clients for team.
+  static function reports_generate_manager_project($uid, $all_fields = false)
+  {
+    $result = array();
+    $mdb2 = getConnection();
+
+    if ($all_fields)
+      $sql = "SELECT p.id,p.name FROM tt_user_project_binds upb inner join tt_projects p on upb.project_id = p.id inner join tt_users u on upb.user_id = u.id where u.role = 324 and upb.user_id = $uid ";
+    else
+      $sql = "SELECT p.id,p.name FROM tt_user_project_binds upb inner join tt_projects p on upb.project_id = p.id inner join tt_users u on upb.user_id = u.id where u.role = 324 and upb.user_id = $uid ";
+
+    $res = $mdb2->query($sql);
+    $result = array();
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    return $result;
+  }
+
 
   // The getActiveClients returns an array of active clients for team.
   static function getActiveClients($team_id, $all_fields = false)

@@ -17,6 +17,69 @@ project_property = project_prefix + {$project.id};
 obj_tasks[project_property] = "{$project.tasks}";
 {/foreach}
 
+//Added by Ruban
+project_ids = new Array();
+{foreach $client_list as $client}
+  project_ids[{$client.id}] = "{$client.projects}";
+{/foreach}
+
+project_ids = new Array();
+{foreach $manager_list as $client}
+  project_ids[{$client.id}] = "{$client.projects}";
+{/foreach}
+// Prepare an array of project names.
+project_names = new Array();
+{foreach $project_list as $project}
+  project_names[{$project.id}] = "{$project.name|escape:'javascript'}";
+{/foreach}
+// We'll use this array to populate project dropdown when client is not selected.
+var idx = 0;
+projects = new Array();
+{foreach $project_list as $project}
+  projects[idx] = new Array("{$project.id}", "{$project.name|escape:'javascript'}");
+  idx++;
+{/foreach}
+
+// Mandatory top option for project dropdown.
+empty_label_project = '{$i18n.dropdown.select|escape:'javascript'}';
+
+function fillProjectDropdown(id) {
+  var str_ids = project_ids[id];
+  var dropdown = document.getElementById("project");
+  // Determine previously selected item.
+  var selected_item = dropdown.options[dropdown.selectedIndex].value;
+  // Remove existing content.
+  dropdown.length = 0;
+  // Add mandatory top option.
+  dropdown.options[0] = new Option(empty_label_project, '', true);
+
+  // Populate project dropdown.
+  if (!id) {
+    // If we are here, client is not selected.
+    var len = projects.length;
+    for (var i = 0; i < len; i++) {
+      dropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
+      if (dropdown.options[i+1].value == selected_item)
+        dropdown.options[i+1].selected = true;
+    }
+  } else if (str_ids) {
+    var ids = new Array();
+    ids = str_ids.split(",");
+    var len = ids.length;
+
+    for (var i = 0; i < len; i++) {
+      var p_id = ids[i];
+      dropdown.options[i+1] = new Option(project_names[p_id], p_id);
+      if (dropdown.options[i+1].value == selected_item)
+        dropdown.options[i+1].selected = true;
+    }
+  }
+}
+function getproject(project_id) {
+alert('sdshj');
+}
+
+
 // Prepare an array of task names.
 // Format: task_names[0] = Array(100, 'Coding'), task_names[1] = Array(302, 'Debugging'), etc...
 // First element = task_id, second element = task name.
@@ -80,6 +143,7 @@ function fillTaskDropdown(project_id) {
     }
   }
 
+
   // If a previously selected item is still in dropdown - select it.
   if (dropdown.options.length > 0) {
     for (var i = 0; i < dropdown.options.length; i++) {
@@ -112,10 +176,14 @@ function selectAssignedUsers(project_id) {
   for (var i = 0; i < document.reportForm.elements.length; i++) {
     if ((document.reportForm.elements[i].type == 'checkbox') && (document.reportForm.elements[i].name == 'users[]')) {
       user_id = document.reportForm.elements[i].value;
-      if (project_id)
-        document.reportForm.elements[i].checked = false;
-      else
-        document.reportForm.elements[i].checked = true;
+      if (project_id) {
+        document.reportForm.elements[i].style.visibility = "hidden";
+            document.reportForm.elements[i].checked = false;
+      }
+      else {
+        document.reportForm.elements[i].style.visibility = "visible";
+            document.reportForm.elements[i].checked = true;
+      }
 
       if(assigned_projects[user_id] != undefined)
         len = assigned_projects[user_id].length;
@@ -125,6 +193,7 @@ function selectAssignedUsers(project_id) {
       if (project_id != '')
         for (var j = 0; j < len; j++) {
           if (project_id == assigned_projects[user_id][j]) {
+            document.reportForm.elements[i].style.visibility = "visible";
             document.reportForm.elements[i].checked = true;
             break;
           }
@@ -168,6 +237,7 @@ function handleCheckboxes() {
               <div class="col-md-12">
 
                 {if (($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) || ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN))}
+                {if !$user->isManager() && !$user->isAdmin()}
                 <div class="form-group">
                   <div class="col-sm-12">
                     <label class="col-sm-3 control-label">{if $user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)}{$i18n.label.client}{/if}
@@ -177,6 +247,7 @@ function handleCheckboxes() {
                     </div>
                   </div>
                 </div>
+                {/if}
                 <div class="form-group">
                   <div class="col-sm-12">
                     <label class="col-sm-3 control-label">{if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN)}{$i18n.label.option}{/if}
@@ -187,7 +258,17 @@ function handleCheckboxes() {
                   </div>
                 </div>
                 {/if}
+      {if $user->isAdmin()}
 
+                      <div class="form-group">
+                  <div class="col-sm-12">
+                    <label class="col-sm-3 control-label">{$i18n.label.manager_names}</label>
+                    <div class="col-sm-8">
+                      {$forms.reportForm.manager.control}
+                    </div>
+                  </div>
+                </div>
+      {/if}
                 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isAdmin())}
                 <div class="form-group">
                   <div class="col-sm-12">
