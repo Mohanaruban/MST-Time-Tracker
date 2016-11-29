@@ -15,7 +15,7 @@
       {foreach $subtotals as $subtotal}
       <tr class="table-total-group">
         <td>{if $subtotal['name']}{$subtotal['name']|escape:'html'}{else}&nbsp;{/if}</td>
-        {if $bean->getAttribute('chduration')}<td>{$subtotal['time']}</td>{/if}
+        {if $bean->getAttribute('chduration')}<td>{$subtotal['time']}&nbsp;({$subtotal['util']}%)</td>{/if}
         {if $bean->getAttribute('chcost')}<td>{if $user->canManageTeam() || $user->isClient()}{$subtotal['cost']}{else}{$subtotal['expenses']}{/if}</td>{/if}
       </tr>
       {/foreach}
@@ -59,7 +59,7 @@
           {if $bean->getAttribute('chcf_1')}<td>{if $group_by == 'cf_1'}{$subtotals[$prev_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
           {if $bean->getAttribute('chstart')}<td></td>{/if}
           {if $bean->getAttribute('chfinish')}<td></td>{/if}
-          {if $bean->getAttribute('chduration')}<td>{$subtotals[$prev_grouped_by]['time']}</td>{/if}
+          {if $bean->getAttribute('chduration')}<td>{$subtotals[$prev_grouped_by]['time']}{$subtotals[$prev_grouped_by]['util']}</td>{/if}
           {if $bean->getAttribute('chnote')}<td></td>{/if}
           {if $bean->getAttribute('chcost')}<td>{if $user->canManageTeam() || $user->isClient()}{$subtotals[$prev_grouped_by]['cost']}{else}{$subtotals[$prev_grouped_by]['expenses']}{/if}</td>{/if}
           {if $bean->getAttribute('chinvoice')}<td></td>{/if}
