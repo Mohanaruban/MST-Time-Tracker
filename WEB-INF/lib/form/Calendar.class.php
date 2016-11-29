@@ -117,9 +117,9 @@ class Calendar extends FormElement {
       $prevmonth = date ( "m", $prev );
       $prevdate = strftime(DB_DATEFORMAT, $prev );
 
-      $str = $this->_genStyles();
+       $str = $this->_genStyles();
 
-      $str .= '<table cellpadding="0" cellspacing="0" border="0" width="100%">
+      $str .= '<table cellpadding="0" cellspacing="0" border="0" class="calendar-custom" width="100%">
           <tr><td align="center"><div class="CalendarHeader">'.
           //'<a href="?date='.$prevyear.'">&lt;&lt;</a> '.
           '<a href="?date='.$prevdate.'" tabindex="-1">&lt;&lt;&lt;</a>  '.
@@ -130,10 +130,10 @@ class Calendar extends FormElement {
           </table>';
 
       $str .= '<center>
-          <table border="0" cellpadding="1" cellspacing="1" width="100%">
+          <table border="0" cellpadding="1" cellspacing="1" class="calendar-custom" width="100%">
           <tr>';
 
-      $str .= "<tr>";
+      $str .= "<tr>"; 
 
       $weekend_start = 6 - $this->weekStartDay;      // Saturday by default.
       $weekend_end = (7 - $this->weekStartDay) % 7;  // Sunday by default.

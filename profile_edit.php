@@ -280,7 +280,7 @@ if ($request->isPost()) {
 // }
 // }
     if ($update_result) {
-      header('Location: time.php');
+      header('Location: reports.php');
       exit();
     } else 
       $err->add($i18n->getKey('error.db'));

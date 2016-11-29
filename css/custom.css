@@ -12,6 +12,10 @@ table {
   /*border: 5px solid #ecf0f1 !important;*/
 }
 
+table:not(.calendar-custom) tr td a {
+  color: #2c3e50 !important;
+  text-decoration: none;
+} 
 
 thead th {
     background-color: #1778bd !important; 

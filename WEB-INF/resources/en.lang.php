@@ -144,6 +144,7 @@ $i18n_key_words = array(
 'label.invoice' => 'Invoice',
 'label.project' => 'Project',
 'label.projects' => 'Projects',
+'label.manager_names' => 'Manager',
 'label.task' => 'Task',
 'label.tasks' => 'Tasks',
 'label.description' => 'Description',

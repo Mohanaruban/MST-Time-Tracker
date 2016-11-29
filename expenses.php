@@ -32,9 +32,10 @@ import('ttUserHelper');
 import('ttTeamHelper');
 import('DateAndTime');
 import('ttExpenseHelper');
+import('ttProjectHelper');
 
 // Access check.
-if (!ttAccessCheck(right_data_entry) || !$user->isPluginEnabled('ex')) {
+if ((!ttAccessCheck(right_data_entry) || !$user->isPluginEnabled('ex')) || !$user->isAdmin()) {
   header('Location: access_denied.php');
   exit();
 }
@@ -90,7 +91,8 @@ if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
 
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
   // Dropdown for projects assigned to user.
-  $project_list = $user->getAssignedProjects();
+  //$project_list = $user->getAssignedProjects();
+  $project_list = ttProjectHelper::getProjectsExpenseAdmin();
   $form->addInput(array('type'=>'combobox',
     // 'onchange'=>'fillTaskDropdown(this.value);',
     'name'=>'project',

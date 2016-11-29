@@ -15,9 +15,6 @@
             <th align="center">{$i18n.label.start}</th>
             <th align="center">{$i18n.label.finish}</th>
             {/if}
-            {if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
-            <th align="center">{$i18n.label.duration}</th>
-            {/if}
             <th align="center">{$i18n.label.note}</th>
           </tr>
         </thead>

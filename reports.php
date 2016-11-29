@@ -41,6 +41,15 @@ if (!ttAccessCheck(right_view_reports)) {
   header('Location: access_denied.php');
   exit();
 }
+
+$cl_client = $request->getParameter('client', ($request->getMethod()=='POST' ? null : @$_SESSION['client']));
+$_SESSION['client'] = $cl_client;
+$cl_manager = $request->getParameter('manager', ($request->getMethod()=='POST' ? null : @$_SESSION['manager']));
+$_SESSION['manager'] = $cl_manager;
+$cl_project = $request->getParameter('project', ($request->getMethod()=='POST' ? null : @$_SESSION['project']));
+$_SESSION['project'] = $cl_project;
+
+
 // Use custom fields plugin if it is enabled.
 if ($user->isPluginEnabled('cf')) {
   require_once('plugins/CustomFields.class.php');
@@ -73,12 +82,16 @@ if ($user->isPluginEnabled('cl') && !($user->isClient() && $user->client_id)) {
   else
     $client_list = ttClientHelper::getClientsForUser();
   $form->addInput(array('type'=>'combobox',
+    'onchange'=>'fillProjectDropdown(this.value);',
     'class'=>'form-control',
     'name'=>'client',
     'data'=>$client_list,
     'datakeys'=>array('id', 'name'),
     'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 }
+
+
+
 
 // If we have a TYPE_DROPDOWN custom field - add control to select an option.
 if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
@@ -106,11 +119,68 @@ if ($user->canManageTeam() || $user->isAdmin() || $user->isManager()) {
 }
 $form->addInput(array('type'=>'combobox',
   'class'=>'form-control',
-  'onchange'=>'fillTaskDropdown(this.value);selectAssignedUsers(this.value);',
+  'onchange'=>'selectAssignedUsers(this.value)',
   'name'=>'project',
+  'value'=>$cl_project,
   'data'=>$project_list,
   'datakeys'=>array('id','name'),
   'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
+
+
+  // if ($user->isPluginEnabled('cl')) {
+  //   $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
+  //   // We need an array of assigned project ids to do some trimming. 
+  //   foreach($project_list as $project)
+  //     $projects_assigned_to_user[] = $project['id'];
+
+  //   // Build a client list out of active clients. Use only clients that are relevant to user.
+  //   // Also trim their associated project list to only assigned projects (to user).
+  //   foreach($active_clients as $client) {
+  //     $projects_assigned_to_client = explode(',', $client['projects']);
+  //     $intersection = array_intersect($projects_assigned_to_client, $projects_assigned_to_user);
+  //     if ($intersection) {
+  //       $client['projects'] = implode(',', $intersection);
+  //       $client_list[] = $client;
+  //     }
+  //   }
+  //   $form->addInput(array('type'=>'combobox',
+  //     'onchange'=>'fillProjectDropdown(this.value);',
+  //     'name'=>'client',
+  //     'class'=>'form-control',
+  //     'value'=>$cl_client,
+  //     'data'=>$client_list,
+  //     'datakeys'=>array('id', 'name'),
+  //     'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
+  // }
+
+
+
+
+//$manager_list = ttTeamHelper::getManagerListReport();
+    $manager_lists = ttTeamHelper::getManagerListReport();
+    // We need an array of assigned project ids to do some trimming. 
+    foreach($project_list as $project)
+      $projects_assigned_to_user[] = $project['id'];
+
+    // Build a client list out of active clients. Use only clients that are relevant to user.
+    // Also trim their associated project list to only assigned projects (to user).
+    foreach($manager_lists as $manager) {
+      $projects_assigned_to_client = explode(',', $manager['projects']);
+      $intersection = array_intersect($projects_assigned_to_client, $projects_assigned_to_user);
+      if ($intersection) {
+        $manager['projects'] = implode(',', $intersection);
+        $manager_list[] = $manager;
+      }
+    }
+    $form->addInput(array('type'=>'combobox',
+      'onchange'=>'selectAssignedUsers(this.value); fillProjectDropdown(this.value);',
+      'name'=>'manager',
+      'class'=>'form-control',
+      'value'=>$cl_manager,
+      'data'=>$manager_list,
+      'datakeys'=>array('id', 'name'),
+      'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
+
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
   $task_list = ttTeamHelper::getActiveTasks($user->team_id);
   $form->addInput(array('type'=>'combobox',
@@ -215,6 +285,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
   $group_by_options['project'] = $i18n->getKey('form.reports.group_by_project');
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode)
   $group_by_options['task'] = $i18n->getKey('form.reports.group_by_task');
+  //$group_by_options['user_project'] = "user_project";
 if ($custom_fields && $custom_fields->fields[0] && $custom_fields->fields[0]['type'] == CustomFields::TYPE_DROPDOWN) {
   $group_by_options['cf_1'] = $custom_fields->fields[0]['label'];
 }
@@ -326,7 +397,8 @@ if ($request->isPost()) {
     }
   }
 } // isPost
-
+$smarty->assign('client_list', $client_list);
+$smarty->assign('manager_list', $manager_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
 $smarty->assign('assigned_projects', $assigned_projects);
