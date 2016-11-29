@@ -173,13 +173,14 @@ $form->addInput(array('type'=>'combobox',
       }
     }
     $form->addInput(array('type'=>'combobox',
-      'onchange'=>'selectAssignedUsers(this.value); fillProjectDropdown(this.value);',
+      'onchange'=>'fillProjectDropdown(this.value);',
       'name'=>'manager',
       'class'=>'form-control',
       'value'=>$cl_manager,
       'data'=>$manager_list,
       'datakeys'=>array('id', 'name'),
-      'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
+      'empty'=>array(''=>$i18n->getKey('dropdown.all'))
+      ));
 
 if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
   $task_list = ttTeamHelper::getActiveTasks($user->team_id);
