@@ -756,15 +756,11 @@ while ($val = $res->fetchRow()) {
       $days = ttReportHelper::getTotals($bean);
       $tot = $days['total_days'];
       $persnt_util = ($time / ($tot * 8)) * 100;
+      $persnt_util = round($persnt_util,2);
 
-      echo "time".$time;
-      echo "tot=  ".$tot;
-      echo "persnt= ". $persnt_util;
       $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time,'util'=>$persnt_util);
 
     }else {
-
-
       $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time);
     }
 
@@ -928,7 +924,6 @@ static function getTotals($bean)
     }
   } else
   $sql = "select count(DISTINCT(DATE_FORMAT(date,'%Y-%m-%d'))) as tot,sum(time_to_sec(l.duration)) as time, null as cost, null as expenses from tt_log l $where";
-//echo "qry= ".$sql;
 // If we have expenses, query becomes a bit more complex.
   if ($bean->getAttribute('chcost') && $user->isPluginEnabled('ex')) {
     $where = ttReportHelper::getExpenseWhere($bean);

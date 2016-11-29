@@ -11,21 +11,24 @@
         <td>{$group_by_header|escape:'html'}</td>
         {if $bean->getAttribute('chduration')}<td width="5%">{$i18n.label.duration}</td>{/if}
         {if $bean->getAttribute('chcost')}<td width="5%">{$i18n.label.cost}</td>{/if}
+        {if $group_by == 'user'} <td>Utilization</td>{/if}
       </tr>
       {foreach $subtotals as $subtotal}
       <tr class="table-total-group">
         <td>{if $subtotal['name']}{$subtotal['name']|escape:'html'}{else}&nbsp;{/if}</td>
-        {if $bean->getAttribute('chduration')}<td>{$subtotal['time']}&nbsp;({$subtotal['util']}%)</td>{/if}
+        {if $bean->getAttribute('chduration')}<td>{$subtotal['time']}{if $group_by == 'user'} </td><td>{$subtotal['util']}%{/if}</td>{/if}
         {if $bean->getAttribute('chcost')}<td>{if $user->canManageTeam() || $user->isClient()}{$subtotal['cost']}{else}{$subtotal['expenses']}{/if}</td>{/if}
       </tr>
       {/foreach}
       <!-- print totals -->
+      {if $group_by != 'user'}
       <tr><td>&nbsp;</td></tr>
       <tr class="table-total">
         <td>{$i18n.label.total}</td>
         {if $bean->getAttribute('chduration')}<td nowrap>{$totals['time']}</td>{/if}
         {if $bean->getAttribute('chcost')}<td nowrap>{$user->currency|escape:'html'} {if $user->canManageTeam() || $user->isClient()}{$totals['cost']}{else}{$totals['expenses']}{/if}</td>{/if}
       </tr>
+      {/if}
       {else}
       <!-- normal report -->
       <thead>
@@ -59,7 +62,7 @@
           {if $bean->getAttribute('chcf_1')}<td>{if $group_by == 'cf_1'}{$subtotals[$prev_grouped_by]['name']|escape:'html'}</td>{/if}{/if}
           {if $bean->getAttribute('chstart')}<td></td>{/if}
           {if $bean->getAttribute('chfinish')}<td></td>{/if}
-          {if $bean->getAttribute('chduration')}<td>{$subtotals[$prev_grouped_by]['time']}{$subtotals[$prev_grouped_by]['util']}</td>{/if}
+          {if $bean->getAttribute('chduration')}<td>{$subtotals[$prev_grouped_by]['time']}</td>{/if}
           {if $bean->getAttribute('chnote')}<td></td>{/if}
           {if $bean->getAttribute('chcost')}<td>{if $user->canManageTeam() || $user->isClient()}{$subtotals[$prev_grouped_by]['cost']}{else}{$subtotals[$prev_grouped_by]['expenses']}{/if}</td>{/if}
           {if $bean->getAttribute('chinvoice')}<td></td>{/if}
