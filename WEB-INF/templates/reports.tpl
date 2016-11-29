@@ -75,10 +75,6 @@ function fillProjectDropdown(id) {
     }
   }
 }
-function getproject(project_id) {
-alert('sdshj');
-}
-
 
 // Prepare an array of task names.
 // Format: task_names[0] = Array(100, 'Coding'), task_names[1] = Array(302, 'Debugging'), etc...

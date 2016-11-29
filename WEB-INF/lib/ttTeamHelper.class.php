@@ -48,6 +48,7 @@ class ttTeamHelper {
 
 
 static function getManagerListReport() {
+  $team_id = array();
         $mdb2 = getConnection();
 
       $sql = "select u.id,u.team_id, u.name, GROUP_CONCAT(p.id SEPARATOR ',') as projects from tt_users u left join tt_user_project_binds upb on u.id = upb.user_id left join tt_projects p on upb.project_id = p.id where u.status = 1 and u.role = 324 group by u.name order by u.name";
