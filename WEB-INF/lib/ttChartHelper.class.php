@@ -98,7 +98,7 @@ class ttChartHelper {
 	}
 	// Add a string representation of time + percentage to names. Example: "Time Tracker (1:15 - 6%)".
 	foreach ($result as &$one_val) {
-	  $percent = round(100*$one_val['time']/$total).'%';
+	  $percent = round(100*$one_val['time']/$total,2).'%';
       $one_val['name'] .= ' ('.sec_to_time_fmt_hm($one_val['time']).' - '.$percent.')';
 	}
 	    
