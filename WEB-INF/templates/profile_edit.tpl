@@ -113,39 +113,48 @@ function handlePluginCheckboxes() {
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.currency}</label>
-        <div class="col-sm-9">{$forms.profileForm.currency.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.currency.control}</div>
+        <div class="col-md-2"></div>
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.language}</label>
-        <div class="col-sm-9">{$forms.profileForm.lang.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.lang.control}</div>
+        <div class="col-md-2"></div>
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.decimal_mark} <font id="decimal_preview" color="#777777">&nbsp;</font></label>
-        <div class="col-sm-9">{$forms.profileForm.decimal_mark.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.decimal_mark.control}</div>
+        <div class="col-md-2"></div>
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.date_format} <font id="date_format_preview" color="#777777">&nbsp;</font></label>
-        <div class="col-sm-9">{$forms.profileForm.format_date.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.format_date.control}</div>
+        <div class="col-md-2"></div>
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.time_format} <font id="time_format_preview" color="#777777">&nbsp;</font></label>
-        <div class="col-sm-9">{$forms.profileForm.format_time.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.format_time.control}</div>
+        <div class="col-md-2"></div>
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.week_start}</label>
-        <div class="col-sm-9">{$forms.profileForm.start_week.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.start_week.control}</div>
+        <div class="col-md-2"></div>
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.form.profile.tracking_mode}</label>
-        <div class="col-sm-9">{$forms.profileForm.tracking_mode.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.tracking_mode.control}</div>
+        <div class="col-md-2"></div>
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.form.profile.record_type}</label>
-        <div class="col-sm-9">{$forms.profileForm.record_type.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.record_type.control}</div>
+        <div class="col-md-2"></div>
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.form.profile.uncompleted_indicators}</label>
-        <div class="col-sm-9">{$forms.profileForm.uncompleted_indicators.control}</div>
+        <div class="col-sm-7">{$forms.profileForm.uncompleted_indicators.control}</div>
+        <div class="col-md-2"></div>
       </div>
 
 

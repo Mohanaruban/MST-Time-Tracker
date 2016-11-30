@@ -256,12 +256,7 @@ if ($request->isPost()) {
           $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.start'));
           $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.finish'));
         }
-        if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
-          $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.duration'));
       }
-    } else {
-       if (!ttTimeHelper::isValidDuration($cl_duration))
-        $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
     }
     if (!ttValidString($cl_note, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.note'));
     // Finished validating user input.
