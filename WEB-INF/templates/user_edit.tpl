@@ -68,10 +68,10 @@ window.onload = function() {
     <div class="col-sm-12">
     {if $user->isAdmin()}
 
-      <div class="form-group">
+     <!--  <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.manager_list}*</label>
         <div class="col-sm-9">{$forms.userForm.manager_list.control}</div>
-      </div>
+      </div> -->
 
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.person_name} (*)</label>
