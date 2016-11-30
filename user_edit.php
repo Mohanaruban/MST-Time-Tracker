@@ -229,7 +229,11 @@ if ($request->isPost()) {
     if ($cl_password1 !== $cl_password2)
       $err->add($i18n->getKey('error.not_equal'), $i18n->getKey('label.password'), $i18n->getKey('label.confirm_password'));
   }
-  if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+  // if (!ttValidEmail($cl_email, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.email'));
+  $user_email = ttUserHelper::getmailvalidate($cl_email);
+  if(!$user_email) {
+    $err->add($i18n->getKey('error.mstmail'), $i18n->getKey('label.email'));
+  }
   if (!ttValidFloat($cl_rate, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('form.users.default_rate'));
 
   if ($err->no()) {

@@ -72,6 +72,7 @@ $i18n_key_words = array(
 'error.field' => 'Incorrect "{0}" data.',
 'error.empty' => 'Field "{0}" is empty.',
 'error.min_length' => 'Field "{0}" Password length should be minimum 6 characters',
+'error.mstmail' => 'Field "{0}" - Invalid email',
 'error.not_equal' => 'Field "{0}" is not equal to field "{1}".',
 'error.interval' => 'Field "{0}" must be greater than "{1}".',
 'error.project' => 'Select project.',

@@ -30,7 +30,21 @@ import('ttTeamHelper');
 
 // Class ttUserHelper contains helper functions for operations with users.
 class ttUserHelper {
-	
+
+static function getmailvalidate($cl_email) {
+    $result = array();
+    $mdb2 = getConnection();
+
+    $sql =  "select email from tt_mstmail where email = ".$mdb2->quote($cl_email);
+    $res = $mdb2->query($sql);
+    
+    if (!is_a($res, 'PEAR_Error')) {
+      $val = $res->fetchRow();
+      return $val;
+    }
+    return false;
+  }
+
   // The getUserDetails function returns user details.
   static function getUserDetailsAdmin($user_id) {
     $result = array();
