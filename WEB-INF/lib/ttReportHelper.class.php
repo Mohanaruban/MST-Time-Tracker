@@ -66,7 +66,7 @@ class ttReportHelper {
       $user_list_part = " and l.user_id = ".$user->id;
 
 // Prepare sql query part for where.
-    if ($bean->getAttribute('period'))
+    if ($bean->getAttribute('period')) 
       $period = new Period($bean->getAttribute('period'), new DateAndTime($user->date_format));
     else {
       $period = new Period();
