@@ -127,31 +127,31 @@ $form->addInput(array('type'=>'combobox',
   'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
 
 
-  // if ($user->isPluginEnabled('cl')) {
-  //   $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
-  //   // We need an array of assigned project ids to do some trimming. 
-  //   foreach($project_list as $project)
-  //     $projects_assigned_to_user[] = $project['id'];
+  if ($user->isPluginEnabled('cl')) {
+    $active_clients = ttTeamHelper::getActiveClients($user->team_id, true);
+    // We need an array of assigned project ids to do some trimming. 
+    foreach($project_list as $project)
+      $projects_assigned_to_user[] = $project['id'];
 
-  //   // Build a client list out of active clients. Use only clients that are relevant to user.
-  //   // Also trim their associated project list to only assigned projects (to user).
-  //   foreach($active_clients as $client) {
-  //     $projects_assigned_to_client = explode(',', $client['projects']);
-  //     $intersection = array_intersect($projects_assigned_to_client, $projects_assigned_to_user);
-  //     if ($intersection) {
-  //       $client['projects'] = implode(',', $intersection);
-  //       $client_list[] = $client;
-  //     }
-  //   }
-  //   $form->addInput(array('type'=>'combobox',
-  //     'onchange'=>'fillProjectDropdown(this.value);',
-  //     'name'=>'client',
-  //     'class'=>'form-control',
-  //     'value'=>$cl_client,
-  //     'data'=>$client_list,
-  //     'datakeys'=>array('id', 'name'),
-  //     'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
-  // }
+    // Build a client list out of active clients. Use only clients that are relevant to user.
+    // Also trim their associated project list to only assigned projects (to user).
+    foreach($active_clients as $client) {
+      $projects_assigned_to_client = explode(',', $client['projects']);
+      $intersection = array_intersect($projects_assigned_to_client, $projects_assigned_to_user);
+      if ($intersection) {
+        $client['projects'] = implode(',', $intersection);
+        $client_list[] = $client;
+      }
+    }
+    $form->addInput(array('type'=>'combobox',
+      'onchange'=>'fillProjectDropdown(this.value);',
+      'name'=>'client',
+      'class'=>'form-control',
+      'value'=>$cl_client,
+      'data'=>$client_list,
+      'datakeys'=>array('id', 'name'),
+      'empty'=>array(''=>$i18n->getKey('dropdown.all'))));
+  }
 
 
 

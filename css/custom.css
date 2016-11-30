@@ -130,3 +130,7 @@ color: #ffffff !important;
 
   background-color: rgba(0, 0, 0, 0) !important;
 }
+
+.report-table>thead>tr>th {
+  text-align: center;
+}

@@ -678,7 +678,7 @@ static function getSubtotals($bean) {
     if (MODE_TIME == $user->tracking_mode) {
       if ($group_by_option != 'user')
         $left_join = 'left join tt_users u on (l.user_id = u.id)';
-      $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time, 
+      $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time,
       sum(cast(l.billable * coalesce(u.rate, 0) * time_to_sec(l.duration)/3600 as decimal(10, 2))) as cost,
       null as expenses from tt_log l
       $group_join $left_join $where group by $group_field";
@@ -692,7 +692,7 @@ static function getSubtotals($bean) {
     }
   } else {
 
-    $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time, null as expenses from tt_log l
+    $sql = "select $group_field as group_field, sum(time_to_sec(l.duration)) as time, GROUP_CONCAT(DISTINCT project_id) as project_ids, null as expenses from tt_log l
     $group_join $where group by $group_field";
   }
 // By now we have sql for time items.
@@ -755,10 +755,16 @@ while ($val = $res->fetchRow()) {
     if ($group_by_option == 'user') {
       $days = ttReportHelper::getTotals($bean);
       $tot = $days['total_days'];
-      $persnt_util = ($time / ($tot * 8)) * 100;
-      $persnt_util = round($persnt_util,2);
+      $percent_util = ($time / ($tot * 8)) * 100;
+      $percent_util = round($percent_util,2);
 
-      $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time,'util'=>$persnt_util);
+      $sql_for_projects = "select GROUP_CONCAT(name SEPARATOR ', ') as projects from tt_projects where id in (".$val['project_ids'].")";
+
+      $res_for_projects = $mdb2->query($sql_for_projects);
+
+      $projects = $res_for_projects->fetchRow()['projects'];
+
+      $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time,'util'=>$percent_util, 'projects'=>$projects);
 
     }else {
       $subtotals[$val['group_field']] = array('name'=>$val['group_field'],'time'=>$time);

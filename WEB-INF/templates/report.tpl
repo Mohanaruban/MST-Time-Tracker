@@ -4,19 +4,38 @@
 <div class="col-sm-12 text-center">
   {$forms.reportForm.open}
   <div class="row">
-    <table class="table table-responsive table-striped table-hover table-bordered">
+    <table class="table table-responsive table-hover table-bordered report-table">
       <!-- totals only report -->
       {if $bean->getAttribute('chtotalsonly')}
+      <thead>
       <tr>
-        <td>{$group_by_header|escape:'html'}</td>
-        {if $bean->getAttribute('chduration')}<td width="5%">{$i18n.label.duration}</td>{/if}
-        {if $bean->getAttribute('chcost')}<td width="5%">{$i18n.label.cost}</td>{/if}
-        {if $group_by == 'user'} <td>Utilization</td>{/if}
+        <th>{$group_by_header|escape:'html'}</th>
+        {if $group_by == 'user'} 
+          <th>Projects</th>
+        {/if}
+        {if $bean->getAttribute('chduration')}
+          <th>{$i18n.label.duration}</th>
+        {/if}
+        {if $bean->getAttribute('chcost')}
+          <th>{$i18n.label.cost}</th>
+        {/if}
+        {if $group_by == 'user'} 
+          <th>Utilization</th>
+        {/if}
       </tr>
+      </thead>
       {foreach $subtotals as $subtotal}
       <tr class="table-total-group">
         <td>{if $subtotal['name']}{$subtotal['name']|escape:'html'}{else}&nbsp;{/if}</td>
-        {if $bean->getAttribute('chduration')}<td>{$subtotal['time']}{if $group_by == 'user'} </td><td>{$subtotal['util']}%{/if}</td>{/if}
+        {if $group_by == 'user'} 
+        <td>{$subtotal['projects']}</td>
+        {/if}
+        {if $bean->getAttribute('chduration')}
+          <td>{$subtotal['time']}</td>
+        {/if}
+        {if $group_by == 'user'} 
+        <td>{$subtotal['util']}%</td>
+        {/if}
         {if $bean->getAttribute('chcost')}<td>{if $user->canManageTeam() || $user->isClient()}{$subtotal['cost']}{else}{$subtotal['expenses']}{/if}</td>{/if}
       </tr>
       {/foreach}
@@ -39,11 +58,11 @@
         {if $bean->getAttribute('chproject')}<th>{$i18n.label.project}</th>{/if}
         {if $bean->getAttribute('chtask')}<th>{$i18n.label.task}</th>{/if}
         {if $bean->getAttribute('chcf_1')}<th>{$custom_fields->fields[0]['label']|escape:'html'}</th>{/if}
-        {if $bean->getAttribute('chstart')}<th width="5%">{$i18n.label.start}</th>{/if}
-        {if $bean->getAttribute('chfinish')}<th width="5%">{$i18n.label.finish}</th>{/if}
-        {if $bean->getAttribute('chduration')}<th width="5%">{$i18n.label.duration}</th>{/if}
+        {if $bean->getAttribute('chstart')}<th>{$i18n.label.start}</th>{/if}
+        {if $bean->getAttribute('chfinish')}<th>{$i18n.label.finish}</th>{/if}
+        {if $bean->getAttribute('chduration')}<th>{$i18n.label.duration}</th>{/if}
         {if $bean->getAttribute('chnote')}<th>{$i18n.label.note}</th>{/if}
-        {if $bean->getAttribute('chcost')}<th width="5%">{$i18n.label.cost}</th>{/if}
+        {if $bean->getAttribute('chcost')}<th>{$i18n.label.cost}</th>{/if}
         {if $bean->getAttribute('chinvoice')}<th>{$i18n.label.invoice}</th>{/if}
       </tr>
       </thead>
