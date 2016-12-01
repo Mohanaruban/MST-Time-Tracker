@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-sm-12">
       {if $user->canManageTeam() && $user->isAdmin()}
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
         {if $inactive_projects}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.projects.active_projects}</td></tr>
         {/if}
@@ -42,7 +42,7 @@
   {if $inactive_projects}
   <div class="row">
     <div class="col-sm-12">
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.projects.inactive_projects}</td></tr>
         <thead>
           <tr>
@@ -79,7 +79,7 @@
     </div>
   </div>
 {else}
-<table class="table table-responsive table-striped table-hover table-bordered">
+<table class="table table-responsive table-hover table-bordered">
         {if $inactive_projects}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.projects.active_projects}</td></tr>
         {/if}
@@ -105,7 +105,7 @@
   {if $inactive_projects}
   <div class="row">
     <div class="col-sm-12">
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.projects.inactive_projects}</td></tr>
         <thead>
           <tr>

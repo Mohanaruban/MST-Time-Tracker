@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-sm-12">
       {if $user->canManageTeam() && $user->isAdmin()}
-       <table class="table table-responsive table-striped table-hover table-bordered">
+       <table class="table table-responsive table-hover table-bordered">
         {if $inactive_users}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.active_users}</td></tr>
         {/if}
@@ -55,7 +55,7 @@
 
 
 {if $inactive_users}
-<table class="table table-responsive table-striped table-hover table-bordered">
+<table class="table table-responsive table-hover table-bordered">
   <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.inactive_users}</td></tr>
   <thead>
     <tr>
@@ -101,7 +101,7 @@
       </div>
       {else}
       {if $user->canManageTeam() && !$user->isAdmin()}
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
         {if $inactive_users}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.active_users}</td></tr>
         {/if}
@@ -144,7 +144,7 @@
       </table>
 
       {if $inactive_users}
-<table class="table table-responsive table-striped table-hover table-bordered">
+<table class="table table-responsive table-hover table-bordered">
   <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.inactive_users}</td></tr>
   <thead>
     <tr>
@@ -180,7 +180,7 @@
 
 
 <!-- {if $inactive_users}
-<table class="table table-responsive table-striped table-hover table-bordered">
+<table class="table table-responsive table-hover table-bordered">
   <tr><td class="sectionHeaderNoBorder">{$i18n.form.users.inactive_users}</td></tr>
   <thead>
     <tr>
@@ -227,7 +227,7 @@
 
 {/if} -->
 {else}
-<table class="table table-responsive table-striped table-hover table-bordered">
+<table class="table table-responsive table-hover table-bordered">
   <thead>
   <tr>
     <th>{$i18n.label.person_name}</th>

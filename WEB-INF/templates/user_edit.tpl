@@ -67,8 +67,8 @@ window.onload = function() {
   <div class="row">
     <div class="col-sm-12">
     {if $user->isAdmin()}
-
-     <!--  <div class="form-group">
+{$forms.userForm.manager_list.control}
+      <!-- <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.manager_list}*</label>
         <div class="col-sm-9">{$forms.userForm.manager_list.control}</div>
       </div> -->
@@ -119,13 +119,17 @@ window.onload = function() {
         <label class="col-sm-3 control-label">{$i18n.form.users.default_rate}&nbsp;(0{$user->decimal_mark}00)</label>
         <div class="col-sm-9">{$forms.userForm.rate.control}</div>
       </div>-->
-      {/if} 
-      {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isAdmin())}
+      {/if}
+            <div class="form-group">
+        <label class="col-sm-3 control-label">{$i18n.label.projects}</label>
+        <div class="col-sm-9">{$forms.userForm.projects.control}</div>
+      </div>
+     <!--  {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isAdmin())}
       <div class="form-group">
       {if $user->isAdmin()}
         <label class="col-sm-3 control-label">{$i18n.label.projects}</label>
         <label class="col-sm-9 text-left" style="padding: 13px;">{implode("<br><br> ",array_column($projectList, 'name'))}</label>
-      {/if}
+      {/if} -->
       </div>
       {/if}
     </div>
