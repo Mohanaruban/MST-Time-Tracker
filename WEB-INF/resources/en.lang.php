@@ -70,6 +70,7 @@ $i18n_key_words = array(
 'error.sys' => 'System error.',
 'error.db' => 'Database error.',
 'error.field' => 'Incorrect "{0}" data.',
+'error.durationZero' => 'Duration ',
 'error.empty' => 'Field "{0}" is empty.',
 'error.min_length' => 'Field "{0}" Password length should be minimum 6 characters',
 'error.mstmail' => 'Field "{0}" - Invalid email',
@@ -200,6 +201,7 @@ $i18n_key_words = array(
 'label.fav_report' => 'Favorite report',
 'label.cron_schedule' => 'Cron schedule',
 'label.what_is_it' => 'What is it?',
+'label.durationerror' => ' - must be greater than Zero.',
 
 // Form titles.
 'title.login' => 'Login',
