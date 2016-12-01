@@ -168,33 +168,6 @@ static function getManagerListReport() {
 return $user_list;
 }
 
-  static function getActiveUserProjectManagerView($user_id, $options = null) {
-    global $user;
-    $mdb2 = getConnection();
-    $sql = "select GROUP_CONCAT(user_id SEPARATOR ',') as projectlist from tt_user_project_binds where project_id in (select GROUP_CONCAT(project_id SEPARATOR ',') from tt_user_project_binds where user_id = $user_id and status = 1)";
-
-    $res = $mdb2->query($sql);
-    $project_list = array();
-    if (is_a($res, 'PEAR_Error'))
-      return false;
-    while ($val = $res->fetchRow()) {
-      $project_list[] = $val;
-    }
-    $managerUserList = $project_list[0]['projectlist'];
-    if(isset($managerUserList)) {
-$sql1 = "select u.name,u.login,u.role, GROUP_CONCAT(p.name SEPARATOR '<br>') as projects from tt_users u inner join tt_user_project_binds upb on u.id = upb.user_id inner join tt_projects p on upb.project_id = p.id where u.status = 1 and u.id in ($managerUserList) and u.role != 1024 and upb.status = 1 group by u.name order by u.name";
-    $res1 = $mdb2->query($sql1);
-    $user_list = array();
-    if (is_a($res1, 'PEAR_Error'))
-      return false;
-    while ($val1 = $res1->fetchRow()) {
-      $user_list[] = $val1;
-    }
-
-}
-return $user_list;
-}
-
 // The getActiveUsers obtains all active users in a given team.
   static function getActiveUsersAdmin($options = null) {
     global $user;
@@ -255,7 +228,47 @@ return $user_list;
     return $user_list;
   }
 
+  static function getActiveUsersManagerUserpage($user_id, $options = null) {
+    global $user;
+    $mdb2 = getConnection();
 
+    $sql = "select p.id, p.name, p.tasks FROM tt_user_project_binds upb inner join tt_projects p on upb.project_id = p.id where upb.user_id = $user_id and (p.status = 0 or p.status = 1) order by p.name";   
+        
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      while ($val = $res->fetchRow()) {
+        $result[] = $val;
+      }
+    }
+    $user_list1 = array();
+    foreach ($result as $projectid) {
+       $getprojectid = $projectid['id'];
+      if (isset($options['getAllFields']))
+      $sql = "select * FROM tt_user_project_binds upb inner join tt_users u on upb.user_id = u.id WHERE upb.project_id = $getprojectid";
+     else
+       $sql = "select u.id, u.name FROM tt_user_project_binds upb inner join tt_users u on upb.user_id = u.id WHERE upb.project_id = $getprojectid";
+      $res = $mdb2->query($sql);
+      
+      while ($val = $res->fetchRow()) {
+        $user_list1[$val['user_id']] = $val;
+      }
+    }
+    $get = array();
+    foreach ($user_list1 as $value) {
+      $get[] = $value['id'];
+    }
+    $users = implode(",", $get);
+    $sql = "select u.name,u.login,u.role, GROUP_CONCAT(p.name SEPARATOR '<br>') as projects from tt_users u inner join tt_user_project_binds upb on u.id = upb.user_id inner join tt_projects p on upb.project_id = p.id where u.id in ($users) and u.status = 1 and u.role != 1024 and upb.status = 1 group by u.name order by u.name";
+        $res = $mdb2->query($sql);
+    $user_list = array();
+    if (is_a($res, 'PEAR_Error'))
+      return false;
+    while ($val = $res->fetchRow()) {
+      $user_list[] = $val;
+    }
+
+    return $user_list;
+  }
 
   // The getActiveUsers obtains all active users in a given team.
   static function getActiveUsersTimeTab($options = null) {
@@ -454,7 +467,7 @@ if (isset($options['getAllFields']))
     $result = array();
     $mdb2 = getConnection();
 
-    $sql = "select p.id, p.name, p.description, p.tasks FROM tt_user_project_binds upb inner join tt_projects p on upb.project_id = p.id where upb.user_id = $user_id and upb.status = 1 order by p.name";
+    $sql = "select p.id, p.name, p.description, p.tasks FROM tt_user_project_binds upb inner join tt_projects p on upb.project_id = p.id where upb.user_id = $user_id and (p.status = 0 or p.status = 1) order by p.name";
     
     $res = $mdb2->query($sql);
     $result = array();

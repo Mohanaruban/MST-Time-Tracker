@@ -50,8 +50,9 @@ if($user->isAdmin()) {
 }
 if($user->isManager()) {
    $active_users = "";
+   //$active_users = ttTeamHelper::getActiveUsersManager($user->id, array('getAllFields'=>true));
+   $active_users = ttTeamHelper::getActiveUsersManagerUserpage($user->id, array('getAllFields'=>true));
    //$active_users = ttTeamHelper::getActiveProjectView($user->id, array('getAllFields'=>true));
-   $active_users = ttTeamHelper::getActiveUserProjectManagerView($user->id, array('getAllFields'=>true));
 }
 
 if($user->canManageTeam()) {
