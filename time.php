@@ -35,6 +35,8 @@ import('ttClientHelper');
 import('ttTimeHelper');
 import('DateAndTime');
 
+      unset($_SESSION['behalf_id']);
+      unset($_SESSION['behalf_name']);
 // This is a now removed check whether user browser supports cookies.
 // if (!isset($_COOKIE['tt_PHPSESSID'])) {
   // This test gives a false-positive if user goes directly to this page
