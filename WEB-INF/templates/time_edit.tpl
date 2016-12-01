@@ -248,6 +248,14 @@ function setNow(formField) {
         <div class="col-sm-10">{$forms.timeRecordForm.finish.control}&nbsp;<span class="pull-down" style="margin-top: -30px;padding-left: 90%;"><input onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}" class="btn btn-primary btn-xs"></span></div>
       </div>
       {/if}
+
+      {if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{$i18n.label.duration}</label>
+        <div class="col-sm-10">{$forms.timeRecordForm.duration.control}&nbsp;{$i18n.form.time.duration_format}</div>
+      </div>
+      {/if}
+      
       <div class="form-group">
         <label class="col-sm-2 control-label">{$i18n.label.date}</label>
         <div class="col-sm-10">{$forms.timeRecordForm.date.control}</div>
