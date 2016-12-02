@@ -203,7 +203,7 @@ class RateCellRenderer extends DefaultCellRenderer {
 // Create projects table.
 $table = new Table('projects');
 $table->setIAScript('setRate');
-$table->setTableOptions(array('class'=>'table table-responsive table-striped table-hover table-bordered text-left', 'id'=>"projectTable"));
+$table->setTableOptions(array('class'=>'table table-responsive table-hover table-bordered text-left', 'id'=>"projectTable"));
 $table->setRowOptions(array('valign'=>'top'));
 $table->setData($projects);
 $table->setKeyField('id');
@@ -292,7 +292,7 @@ $smarty->assign('rates', $rates);
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="document.userForm.name.focus();handleClientControl();"');
+$smarty->assign('onload', 'onLoad="document.userForm.name.focus();"');
 $smarty->assign('user_id', $user_id);
 $smarty->assign('teamid', $get_manager);
 $smarty->assign('projectList',$projects);

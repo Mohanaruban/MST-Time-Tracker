@@ -2,43 +2,34 @@
 // The setDefaultRate function sets / unsets default rate for a project
 // when a corresponding checkbox is ticked.
 function setDefaultRate(element) {
-  var default_rate = document.userForm.rate.value;
-  if (default_rate == '') {
-    // No default rate, nothing to do!
-    return;
-  }
-  // Iterate through elements of the form to find and set the project rate. 
-  for (var i = 0; i < userForm.elements.length; i++) {
-    if ((userForm.elements[i].type == 'text') && (userForm.elements[i].name == ('rate_'+element.value))) {
-      if (element.checked) {
-        userForm.elements[i].value = default_rate;
-      } else {
-        userForm.elements[i].value = '';
-      }
-      break; // Element is found and set, nothing more to do, break out of the loop.
-    }
-  }
+  // var default_rate = document.userForm.rate.value;
+  // if (default_rate == '') {
+  //   // No default rate, nothing to do!
+  //   return;
+  // }
+  // // Iterate through elements of the form to find and set the project rate. 
+  // for (var i = 0; i < userForm.elements.length; i++) {
+  //   if ((userForm.elements[i].type == 'text') && (userForm.elements[i].name == ('rate_'+element.value))) {
+  //     if (element.checked) {
+  //       userForm.elements[i].value = default_rate;
+  //     } else {
+  //       userForm.elements[i].value = '';
+  //     }
+  //     break; // Element is found and set, nothing more to do, break out of the loop.
+  //   }
+  // }
 }
 
 // handleClientControl - controls visibility of the client dropdown depending on the selected user role.
 // We need to show it only when the "Client" user role is selected.
 function handleClientControl() {
   var clientControl = document.getElementById("client");
-  if ("16" == document.getElementById("role").value)
-    clientControl.style.visibility = "visible";
-  else
-    clientControl.style.visibility = "hidden";
+  // if ("16" == document.getElementById("role").value)
+  //   clientControl.style.visibility = "visible";
+  // else
+  //   clientControl.style.visibility = "hidden";
 }
 
-window.onload = function() {
-  handleClientControl();
-  var tableInputElement = document.getElementById('projectTable').getElementsByTagName('input');
-  for(var i = 1; i < tableInputElement.length; i++) {
-    if(tableInputElement[i].type.toLowerCase() == 'text') {
-      tableInputElement[i].className = 'form-control';
-    }
-  }
-}
 </script>
 
 <div class="col-md-12 text-center">
