@@ -2,7 +2,7 @@
 {$forms.expenseItemForm.open}
   <div class="row">
     <div class="col-sm-12">
-  <table class="table table-responsive table-striped table-hover table-bordered">
+  <table class="table table-responsive table-hover table-bordered">
   <tr>
   <thead>
 {if $user->isPluginEnabled('cl')}
