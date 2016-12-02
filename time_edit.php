@@ -225,7 +225,7 @@ if ($request->isPost()) {
     if (!$cl_task) $err->add($i18n->getKey('error.task'));
   }
   if($cl_duration) {
-      if (preg_match('/[\'^£$%&*:;()}{@#~?><>,|=_+¬-]/', $cl_duration) || !is_numeric($cl_duration))
+      if (preg_match('/[\'^£$%&*:;.()}{@#~?><>,|=_+¬-]/', $cl_duration) || !is_numeric($cl_duration))
       $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
     }
   if (!$cl_duration) {
