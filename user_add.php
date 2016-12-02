@@ -79,17 +79,18 @@ $form->addFormStyle(array('class'=>'form-horizontal'));
 
 // Dropdown for projects assigned to user.
   $get_manager = ttTeamHelper::getManagerList();
-  $form->addInput(array('type'=>'combobox',
-    'class'=>'form-control',
-    'onchange'=>'fillTaskDropdown(this.value);',
-    'name'=>'manager_list',
-    'value'=>"",
-    'data'=>$get_manager,
-    'datakeys'=>array('id','name'),
-    //'empty'=>array(''=>$i18n->getKey('dropdown.select'))
-    ));
+  // $form->addInput(array('type'=>'hidden',
+  //   'class'=>'form-control',
+  //   'onchange'=>'fillTaskDropdown(this.value);',
+  //   'name'=>'manager_list',
+  //   'value'=>"",
+  //   'data'=>$get_manager,
+  //   'datakeys'=>array('id','name'),
+  //   //'empty'=>array(''=>$i18n->getKey('dropdown.select'))
+  //   ));
 
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'name','value'=>$cl_name,'class'=>'form-control','placeholder'=>'Enter Name'));
+$form->addInput(array('type'=>'hidden','name'=>'manager_list','value'=>'1'));
 $form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'login','value'=>$cl_login,'class'=>'form-control','placeholder'=>'Enter Login Name'));
 if (!$auth->isPasswordExternal()) {
   $form->addInput(array('type'=>'text','maxlength'=>'30', 'class'=>'form-control', 'name'=>'pas1','aspassword'=>true,'value'=>$cl_password1));

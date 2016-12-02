@@ -217,6 +217,15 @@ function handleCheckboxes() {
   table {
     background-color: transparent !important;
   }
+  a {
+    color: #95a5a6;
+    text-decoration: none
+}
+a:hover,
+a:focus {
+    color: #1778bd;
+    text-decoration: underline
+}
 </style>
 <div class="col-sm-12 text-center">
   {$forms.reportForm.open}

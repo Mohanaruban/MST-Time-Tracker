@@ -51,9 +51,8 @@ if($user->isAdmin()) {
 if($user->isManager()) {
    $active_users = "";
    //$active_users = ttTeamHelper::getActiveUsersManager($user->id, array('getAllFields'=>true));
-   $active_users = ttTeamHelper::getActiveProjectView($user->id, array('getAllFields'=>true));
-  // $can_delete_manager = (1 == count($active_users));
-  // $inactive_users = ttTeamHelper::getInactiveUsersManager(true);
+   $active_users = ttTeamHelper::getActiveUsersManagerUserpage($user->id, array('getAllFields'=>true));
+   //$active_users = ttTeamHelper::getActiveProjectView($user->id, array('getAllFields'=>true));
 }
 
 if($user->canManageTeam()) {

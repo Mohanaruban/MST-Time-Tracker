@@ -21,6 +21,15 @@ thead th {
     background-color: #1778bd !important; 
     color: white !important;
 }
+a:not(.btn-lg,.calendar-custom) {
+    color: #ffffff !important;
+    text-decoration: none
+}
+a:hover,
+a:focus {
+    color: #1778bd !important;
+    text-decoration: underline
+}
 .table>thead>tr>td.warning,
 .table>tbody>tr>td.warning,
 .table>tfoot>tr>td.warning,

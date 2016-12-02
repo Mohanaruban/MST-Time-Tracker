@@ -210,6 +210,15 @@ function get_time() {
   .not_billable td {
     color: #ff6666;
   }
+  a {
+    color: #1778bd;
+    text-decoration: none
+}
+a:hover,
+a:focus {
+    color: #2c3e50;
+    text-decoration: underline
+}
 </style>
 
 <div class="col-sm-12 text-center">
@@ -267,6 +276,12 @@ function get_time() {
       <div class="form-group">
         <label class="col-md-3 control-label">{$i18n.label.finish}</label>
         <div class="col-md-9">{$forms.timeRecordForm.finish.control}<span class="pull-down" style="float:right;"><input class="btn btn-primary btn-xs" onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></span></div>
+      </div>
+      {/if}
+           {if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+      <div class="form-group">
+        <label class="col-md-3 control-label">{$i18n.label.duration}</label>
+        <div class="col-md-9">{$forms.timeRecordForm.duration.control}&nbsp;{$i18n.form.time.duration_format}</div>
       </div>
       {/if}
     </div>

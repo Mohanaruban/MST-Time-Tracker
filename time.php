@@ -25,7 +25,6 @@
 // | Contributors:
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
-
 require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
@@ -35,6 +34,8 @@ import('ttClientHelper');
 import('ttTimeHelper');
 import('DateAndTime');
 
+//echo "ruban<br>".$_SESSION['behalf_id']."<br>".$_SESSION['behalf_name'];
+    
 // This is a now removed check whether user browser supports cookies.
 // if (!isset($_COOKIE['tt_PHPSESSID'])) {
   // This test gives a false-positive if user goes directly to this page
@@ -47,7 +48,6 @@ if (!ttAccessCheck(right_data_entry)) {
   header('Location: access_denied.php');
   exit();
 }
-
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
 $selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date);
@@ -68,7 +68,8 @@ if ($user->isPluginEnabled('mq')){
   require_once('plugins/MonthlyQuota.class.php');
   $quota = new MonthlyQuota();
   $month_quota = $quota->get($selected_date->mYear, $selected_date->mMonth);
-  $month_total = ttTimeHelper::getTimeForMonth($user->getActiveUser(), $selected_date);
+  //$month_total = ttTimeHelper::getTimeForMonth($user->getActiveUser(), $selected_date);
+  $month_total = ttTimeHelper::getTimeForMonth($user->id, $selected_date);
   $minutes_left = ttTimeHelper::toMinutes($month_quota) - ttTimeHelper::toMinutes($month_total);
   
   $smarty->assign('month_total', $month_total);
@@ -141,7 +142,12 @@ if (MODE_TIME == $user->tracking_mode && $user->isPluginEnabled('cl')) {
 if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
   // Dropdown for projects assigned to user.
   //$project_list = $user->getAssignedProjects();
-  $project_list = ttProjectHelper::getProjectsManager($user->id);
+  if($user->isManager()) { 
+    $project_list = ttProjectHelper::getProjectsManager($user->id);
+  }
+  if(!$user->isAdmin() && !$user->isManager()) {
+    $project_list = $user->getAssignedProjects();
+  }
   $form->addInput(array('type'=>'combobox',
     'class'=>'form-control',
     'onchange'=>'fillTaskDropdown(this.value);',
@@ -228,7 +234,6 @@ if ($custom_fields && $custom_fields->fields[0]) {
 // Submit.
 if ($request->isPost()) {
   if ($request->getParameter('btn_submit')) {
-
     // Validate user input.
     if ($user->isPluginEnabled('cl') && $user->isPluginEnabled('cm') && !$cl_client)
       $err->add($i18n->getKey('error.client'));
@@ -241,23 +246,49 @@ if ($request->isPost()) {
     if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
       if (!$cl_task) $err->add($i18n->getKey('error.task'));
     }
-    if (strlen($cl_duration) == 0) {
-      if ($cl_start || $cl_finish) {
-        if (!ttTimeHelper::isValidTime($cl_start))
-          $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start'));
-        if ($cl_finish) {
-          if (!ttTimeHelper::isValidTime($cl_finish))
-            $err->add($i18n->getKey('error.field'), $i18n->getKey('label.finish'));
-          if (!ttTimeHelper::isValidInterval($cl_start, $cl_finish))
-            $err->add($i18n->getKey('error.interval'), $i18n->getKey('label.finish'), $i18n->getKey('label.start'));
-        }
-      } else {
-        if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
-          $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.start'));
-          $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.finish'));
-        }
-      }
+    // if (strlen($cl_duration) == 0) {
+    //   if ($cl_start || $cl_finish) {
+    //     if (!ttTimeHelper::isValidTime($cl_start))
+    //       $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start'));
+    //     if ($cl_finish) {
+    //       if (!ttTimeHelper::isValidTime($cl_finish))
+    //         $err->add($i18n->getKey('error.field'), $i18n->getKey('label.finish'));
+    //       if (!ttTimeHelper::isValidInterval($cl_start, $cl_finish))
+    //         $err->add($i18n->getKey('error.interval'), $i18n->getKey('label.finish'), $i18n->getKey('label.start'));
+    //     }
+    //   } else {
+    //     if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
+    //       $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.start'));
+    //       $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.finish'));
+    //     }
+    //   }
+    // }
+    if($cl_duration) {
+      if ((preg_match('/[\'^£$%&*:;()}{@#~?><>,|=_+¬-]/', $cl_duration)) || !is_numeric($cl_duration)) 
+      $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
     }
+      if (!$cl_duration) {
+    if ('0' == $cl_duration || '' == $cl_duration)
+      $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+    elseif ($cl_start || $cl_finish) {
+      if (!ttTimeHelper::isValidTime($cl_start))
+        $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start'));
+      if ($cl_finish) {
+        if (!ttTimeHelper::isValidTime($cl_finish))
+          $err->add($i18n->getKey('error.field'), $i18n->getKey('label.finish'));
+        if (!ttTimeHelper::isValidInterval($cl_start, $cl_finish))
+          $err->add($i18n->getKey('error.interval'), $i18n->getKey('label.finish'), $i18n->getKey('label.start'));
+      }
+    } else {
+      if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
+        $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.start'));
+        $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.finish'));
+      }
+     
+    }
+  }
+
+
     if (!ttValidString($cl_note, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.note'));
     // Finished validating user input.
 
@@ -274,21 +305,22 @@ if ($request->isPost()) {
 
     // Prohibit creating another uncompleted record.
     if ($err->no()) {
-      if (($not_completed_rec = ttTimeHelper::getUncompleted($user->getActiveUser())) && (($cl_finish == '') && ($cl_duration == '')))
+      //if (($not_completed_rec = ttTimeHelper::getUncompleted($user->getActiveUser())) && (($cl_finish == '') && ($cl_duration == '')))
+      if (($not_completed_rec = ttTimeHelper::getUncompleted($user->id)) && (($cl_finish == '') && ($cl_duration == '')))
         $err->add($i18n->getKey('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->getKey('error.goto_uncompleted')."</a>");
     }
-
     // Prohibit creating an overlapping record.
     if ($err->no()) {
-      if (ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $cl_start, $cl_finish))
+      //if (ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $cl_start, $cl_finish))
+      if (ttTimeHelper::overlaps($user->id, $cl_date, $cl_start, $cl_finish))
         $err->add($i18n->getKey('error.overlap'));
     }
-
     // Insert record.
     if ($err->no()) {
       $id = ttTimeHelper::insert(array(
         'date' => $cl_date,
-        'user_id' => $user->getActiveUser(),
+        //'user_id' => $user->getActiveUser(),
+        'user_id' => $user->id,
         'client' => $cl_client,
         'project' => $cl_project,
         'task' => $cl_task,
@@ -315,18 +347,24 @@ if ($request->isPost()) {
   } elseif ($request->getParameter('btn_stop')) {
     // Stop button pressed to finish an uncompleted record.
     $record_id = $request->getParameter('record_id');
-    $record = ttTimeHelper::getRecord($record_id, $user->getActiveUser());
+    //$record = ttTimeHelper::getRecord($record_id, $user->getActiveUser());
+    $record = ttTimeHelper::getRecord($record_id, $user->id);
     $browser_date = $request->getParameter('browser_date');
     $browser_time = $request->getParameter('browser_time');
 
     // Can we complete this record?
-    if ($record['date'] == $browser_date                                // closing today's record
+    // if ($record['date'] == $browser_date                                // closing today's record
+    //   && ttTimeHelper::isValidInterval($record['start'], $browser_time) // finish time is greater than start time
+    //   && !ttTimeHelper::overlaps($user->getActiveUser(), $browser_date, $record['start'], $browser_time)) 
+if ($record['date'] == $browser_date                                // closing today's record
       && ttTimeHelper::isValidInterval($record['start'], $browser_time) // finish time is greater than start time
-      && !ttTimeHelper::overlaps($user->getActiveUser(), $browser_date, $record['start'], $browser_time)) { // no overlap
+      && !ttTimeHelper::overlaps($user->id, $browser_date, $record['start'], $browser_time))
+    { // no overlap
       $res = ttTimeHelper::update(array(
           'id'=>$record['id'],
           'date'=>$record['date'],
-          'user_id'=>$user->getActiveUser(),
+          //'user_id'=>$user->getActiveUser(),
+          'user_id'=>$user->id,
           'client'=>$record['client_id'],
           'project'=>$record['project_id'],
           'task'=>$record['task_id'],
@@ -357,11 +395,14 @@ if ($request->isPost()) {
   }
 } // isPost
 
-$week_total = ttTimeHelper::getTimeForWeek($user->getActiveUser(), $selected_date);
+//$week_total = ttTimeHelper::getTimeForWeek($user->getActiveUser(), $selected_date);
+$week_total = ttTimeHelper::getTimeForWeek($user->id, $selected_date);
 
 $smarty->assign('week_total', $week_total);
-$smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getActiveUser(), $cl_date));
-$smarty->assign('time_records', ttTimeHelper::getRecords($user->getActiveUser(), $cl_date));
+// $smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->getActiveUser(), $cl_date));
+// $smarty->assign('time_records', ttTimeHelper::getRecords($user->getActiveUser(), $cl_date));
+$smarty->assign('day_total', ttTimeHelper::getTimeForDay($user->id, $cl_date));
+$smarty->assign('time_records', ttTimeHelper::getRecords($user->id, $cl_date));
 $smarty->assign('client_list', $client_list);
 $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);

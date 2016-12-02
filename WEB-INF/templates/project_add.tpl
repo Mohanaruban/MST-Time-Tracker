@@ -2,13 +2,7 @@
 {$forms.projectForm.open}
   <div class="row">
     <div class="col-sm-12">
-      
-<!--       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.manager_list}*</label>
-        <div class="col-sm-7">{$forms.projectForm.manager_list.control}</div>
-        <div class="col-md-2"></div>
-      </div> -->
-
+{$forms.projectForm.manager_list.control}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.thing_name}*</label>
         <div class="col-sm-7">{$forms.projectForm.project_name.control}</div>
