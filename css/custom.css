@@ -20,6 +20,7 @@ table:not(.calendar-custom) tr td a {
 thead th {
     background-color: #1778bd !important; 
     color: white !important;
+    text-align: center;
 }
 a:not(.btn-lg,.calendar-custom) {
     color: #ffffff !important;
