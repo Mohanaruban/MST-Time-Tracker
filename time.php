@@ -25,7 +25,6 @@
 // | Contributors:
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
-
 require_once('initialize.php');
 import('form.Form');
 import('ttUserHelper');
@@ -35,8 +34,8 @@ import('ttClientHelper');
 import('ttTimeHelper');
 import('DateAndTime');
 
-      unset($_SESSION['behalf_id']);
-      unset($_SESSION['behalf_name']);
+//echo "ruban<br>".$_SESSION['behalf_id']."<br>".$_SESSION['behalf_name'];
+    
 // This is a now removed check whether user browser supports cookies.
 // if (!isset($_COOKIE['tt_PHPSESSID'])) {
   // This test gives a false-positive if user goes directly to this page
@@ -49,7 +48,6 @@ if (!ttAccessCheck(right_data_entry)) {
   header('Location: access_denied.php');
   exit();
 }
-
 // Initialize and store date in session.
 $cl_date = $request->getParameter('date', @$_SESSION['date']);
 $selected_date = new DateAndTime(DB_DATEFORMAT, $cl_date);
@@ -154,7 +152,7 @@ if (MODE_PROJECTS == $user->tracking_mode || MODE_PROJECTS_AND_TASKS == $user->t
     'class'=>'form-control',
     'onchange'=>'fillTaskDropdown(this.value);',
     'name'=>'project',
-    //'value'=>$cl_project,
+    'value'=>$cl_project,
     'data'=>$project_list,
     'datakeys'=>array('id','name'),
     'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
@@ -248,23 +246,49 @@ if ($request->isPost()) {
     if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
       if (!$cl_task) $err->add($i18n->getKey('error.task'));
     }
-    if (strlen($cl_duration) == 0) {
-      if ($cl_start || $cl_finish) {
-        if (!ttTimeHelper::isValidTime($cl_start))
-          $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start'));
-        if ($cl_finish) {
-          if (!ttTimeHelper::isValidTime($cl_finish))
-            $err->add($i18n->getKey('error.field'), $i18n->getKey('label.finish'));
-          if (!ttTimeHelper::isValidInterval($cl_start, $cl_finish))
-            $err->add($i18n->getKey('error.interval'), $i18n->getKey('label.finish'), $i18n->getKey('label.start'));
-        }
-      } else {
-        if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
-          $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.start'));
-          $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.finish'));
-        }
-      }
+    // if (strlen($cl_duration) == 0) {
+    //   if ($cl_start || $cl_finish) {
+    //     if (!ttTimeHelper::isValidTime($cl_start))
+    //       $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start'));
+    //     if ($cl_finish) {
+    //       if (!ttTimeHelper::isValidTime($cl_finish))
+    //         $err->add($i18n->getKey('error.field'), $i18n->getKey('label.finish'));
+    //       if (!ttTimeHelper::isValidInterval($cl_start, $cl_finish))
+    //         $err->add($i18n->getKey('error.interval'), $i18n->getKey('label.finish'), $i18n->getKey('label.start'));
+    //     }
+    //   } else {
+    //     if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
+    //       $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.start'));
+    //       $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.finish'));
+    //     }
+    //   }
+    // }
+    if($cl_duration) {
+      if ((preg_match('/[\'^£$%&*:;()}{@#~?><>,|=_+¬-]/', $cl_duration)) || !is_numeric($cl_duration)) 
+      $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
     }
+      if (!$cl_duration) {
+    if ('0' == $cl_duration || '' == $cl_duration)
+      $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+    elseif ($cl_start || $cl_finish) {
+      if (!ttTimeHelper::isValidTime($cl_start))
+        $err->add($i18n->getKey('error.field'), $i18n->getKey('label.start'));
+      if ($cl_finish) {
+        if (!ttTimeHelper::isValidTime($cl_finish))
+          $err->add($i18n->getKey('error.field'), $i18n->getKey('label.finish'));
+        if (!ttTimeHelper::isValidInterval($cl_start, $cl_finish))
+          $err->add($i18n->getKey('error.interval'), $i18n->getKey('label.finish'), $i18n->getKey('label.start'));
+      }
+    } else {
+      if ((TYPE_START_FINISH == $user->record_type) || (TYPE_ALL == $user->record_type)) {
+        $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.start'));
+        $err->add($i18n->getKey('error.empty'), $i18n->getKey('label.finish'));
+      }
+     
+    }
+  }
+
+
     if (!ttValidString($cl_note, true)) $err->add($i18n->getKey('error.field'), $i18n->getKey('label.note'));
     // Finished validating user input.
 
@@ -285,7 +309,6 @@ if ($request->isPost()) {
       if (($not_completed_rec = ttTimeHelper::getUncompleted($user->id)) && (($cl_finish == '') && ($cl_duration == '')))
         $err->add($i18n->getKey('error.uncompleted_exists')." <a href = 'time_edit.php?id=".$not_completed_rec['id']."'>".$i18n->getKey('error.goto_uncompleted')."</a>");
     }
-
     // Prohibit creating an overlapping record.
     if ($err->no()) {
       //if (ttTimeHelper::overlaps($user->getActiveUser(), $cl_date, $cl_start, $cl_finish))
