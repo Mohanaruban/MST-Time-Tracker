@@ -732,6 +732,28 @@ if ($bean->getAttribute('chcost') && $user->isPluginEnabled('ex')) { // if ex(pe
   $sql = "select group_field, sum(time) as time, sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t group by group_field";
 }
 
+function getWorkingDaysCount($from, $to) {
+    $workingDays = [1, 2, 3, 4, 5]; 
+    // Optional for holidays
+    // $holidayDays = ['*-12-25', '*-01-01'];
+    $holidayDays = [];
+
+    $from = new DateTime($from);
+    $to = new DateTime($to);
+    $to->modify('+1 day');
+    $interval = new DateInterval('P1D');
+    $periods = new DatePeriod($from, $interval, $to);
+
+    $days = 0;
+    foreach ($periods as $period) {
+        if (!in_array($period->format('N'), $workingDays)) continue;
+        if (in_array($period->format('Y-m-d'), $holidayDays)) continue;
+        if (in_array($period->format('*-m-d'), $holidayDays)) continue;
+        $days++;
+    }
+    return $days;
+}
+
 // Execute query.
 $res = $mdb2->query($sql);
 if (is_a($res, 'PEAR_Error')) die($res->getMessage());
@@ -971,7 +993,7 @@ static function getTotals($bean)
   $totals['time'] = $total_time;
   $totals['cost'] = $total_cost;
   $totals['expenses'] = $total_expenses;
-  $totals['total_days'] = $total_days;
+  $totals['total_days'] = getWorkingDaysCount($totals['start_date'], $totals['end_date']);
 
   return $totals;
 }

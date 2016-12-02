@@ -52,15 +52,6 @@ function handleClientControl() {
     clientControl.style.visibility = "hidden";
 }
 
-window.onload = function() {
-  handleClientControl();
-  var tableInputElement = document.getElementById('projectTable').getElementsByTagName('input');
-  for(var i = 1; i < tableInputElement.length; i++) {
-    if(tableInputElement[i].type.toLowerCase() == 'text') {
-      tableInputElement[i].className = 'form-control';
-    }
-  }
-}
 </script>
 <div class="col-sm-8 col-sm-offset-2 text-center">
   {$forms.userForm.open}
