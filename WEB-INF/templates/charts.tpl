@@ -1,3 +1,14 @@
+<style>
+a {
+    color: #1778bd;
+    text-decoration: none
+}
+a:hover,
+a:focus {
+    color: #2c3e50;
+    text-decoration: underline
+}
+</style>
 <div class="col-sm-12 text-center">
   {$forms.chartForm.open}
   <div class="row">
