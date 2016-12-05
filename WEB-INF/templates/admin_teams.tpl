@@ -14,7 +14,7 @@
 <div class="col-sm-8 col-sm-offset-2">
   <div class="row">
     <div class="col-sm-12">
-     <table class="table table-responsive table-striped table-hover table-bordered">
+     <table class="table table-responsive table-hover table-bordered">
       <thead>
         <tr>
           <th width="3%" >{$i18n.label.id}</th>

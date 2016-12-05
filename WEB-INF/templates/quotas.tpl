@@ -24,7 +24,7 @@
     <div class="col-sm-12">
       <div class="form-group">
 
-        <table class="table table-responsive table-striped table-bordered">
+        <table class="table table-responsive table-bordered">
           <thead>
             <tr>
               <th>{$i18n.form.quota.month}</th>

@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-sm-12">
       {if $user->canManageTeam() || $user->isClient()}
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
         <thead>
           <tr>
             <th>{$i18n.label.invoice}</th>

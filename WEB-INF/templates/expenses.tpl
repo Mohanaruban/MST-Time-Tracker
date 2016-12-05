@@ -118,7 +118,7 @@ function get_date() {
 
 
 {if $expense_items}
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
       <thead>
       <tr>
   {if $user->isPluginEnabled('cl')}

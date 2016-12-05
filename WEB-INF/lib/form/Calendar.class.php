@@ -31,7 +31,7 @@ import('DateAndTime');
 
 class Calendar extends FormElement {
   var $holidays = array();
-  var $showHolidays = true;
+  var $showHolidays = false;
   var $weekStartDay = 0;
   
     var $mHeader = "padding: 5px; font-size: 8pt; color: #333333; background-color: #d9d9d9;";
@@ -122,9 +122,9 @@ class Calendar extends FormElement {
       $str .= '<table cellpadding="0" cellspacing="0" border="0" class="calendar-custom" width="100%">
           <tr><td align="center"><div class="CalendarHeader">'.
           //'<a href="?date='.$prevyear.'">&lt;&lt;</a> '.
-          '<a href="?date='.$prevdate.'" tabindex="-1">&lt;&lt;&lt;</a>  '.
+          '<a href="?date='.$prevdate.'" tabindex="-1">&#9194;</a>  '.
           $this->mMonthNames[$thismonth-1].'&nbsp;'.$thisyear.
-          '  <a href="?date='.$nextdate.'" tabindex="-1">&gt;&gt;&gt;</a>'.
+          '  <a href="?date='.$nextdate.'" tabindex="-1">&#9193;</a>'.
           //' <a href="?date='.$nextyear.'">&gt;&gt;</a>'.
           '</div></td></tr>
           </table>';
