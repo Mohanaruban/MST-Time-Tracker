@@ -111,7 +111,7 @@
             {if $user->canManageTeam() && !$user->isAdmin()}
             {if $inactive_users}
             <div class="text-center h4">
-              {$i18n.form.users.inactive_users}
+              {$i18n.form.users.active_users}
             </div>
             {/if}
             <table class="table table-responsive table-hover table-bordered">
