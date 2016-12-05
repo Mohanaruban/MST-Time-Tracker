@@ -252,7 +252,7 @@ function setNow(formField) {
       {if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
       <div class="form-group">
         <label class="col-sm-2 control-label">{$i18n.label.duration}</label>
-        <div class="col-sm-10">{$forms.timeRecordForm.duration.control}&nbsp;{$i18n.form.time.duration_format}</div>
+        <div class="col-sm-10">{$forms.timeRecordForm.duration.control}</div>
       </div>
       {/if}
       
