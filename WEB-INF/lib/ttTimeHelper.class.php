@@ -593,7 +593,7 @@ class ttTimeHelper {
 
     $sql = "select l.id as id, l.timestamp as timestamp, TIME_FORMAT(l.start, $sql_time_format) as start,
       TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
-      TIME_FORMAT(l.duration, '%k:%i') as duration,
+      TIME_FORMAT(l.duration, '%k') as duration,
       p.name as project_name, t.name as task_name, l.comment, l.client_id, l.project_id, l.task_id, l.invoice_id, l.billable, l.date
       from tt_log l
       left join tt_projects p on (p.id = l.project_id)
@@ -653,7 +653,7 @@ class ttTimeHelper {
 
     $sql = "select l.id as id, TIME_FORMAT(l.start, $sql_time_format) as start,
       TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), $sql_time_format) as finish,
-      TIME_FORMAT(l.duration, '%k:%i') as duration, p.name as project, t.name as task, l.comment, l.billable, l.invoice_id $client_field
+      TIME_FORMAT(l.duration, '%k') as duration, p.name as project, t.name as task, l.comment, l.billable, l.invoice_id $client_field
       from tt_log l
       $left_joins
       where l.date = '$date' and l.user_id = $user_id and l.status = 1
@@ -666,7 +666,6 @@ class ttTimeHelper {
         $result[] = $val;
       }
     } else return false;
-
     return $result;
   }
 

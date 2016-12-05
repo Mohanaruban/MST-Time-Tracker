@@ -145,7 +145,7 @@ function time_to_decimal($val) {
 
 function sec_to_time_fmt_hm($sec)
 {
-  return sprintf("%d:%02d", $sec / 3600, $sec % 3600 / 60);
+  return sprintf("%d", $sec / 3600, $sec % 3600 / 60);
 }
 
 function magic_quotes_off()

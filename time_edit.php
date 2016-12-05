@@ -224,8 +224,12 @@ if ($request->isPost()) {
   if (MODE_PROJECTS_AND_TASKS == $user->tracking_mode) {
     if (!$cl_task) $err->add($i18n->getKey('error.task'));
   }
+  if($cl_duration) {
+      if (preg_match('/[\'^£$%&*:;.()}{@#~?><>,|=_+¬-]/', $cl_duration) || !is_numeric($cl_duration))
+      $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+    }
   if (!$cl_duration) {
-    if ('0' == $cl_duration)
+    if ('0' == $cl_duration || '' == $cl_duration)
       $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
     elseif ($cl_start || $cl_finish) {
       if (!ttTimeHelper::isValidTime($cl_start))
