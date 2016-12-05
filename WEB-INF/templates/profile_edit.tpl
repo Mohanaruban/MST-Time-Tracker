@@ -105,7 +105,7 @@ function handlePluginCheckboxes() {
       </div>
       
       {if $user->isAdmin()}
-
+<!-- 
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.team_name}</label>
         <div class="col-sm-7">{$forms.profileForm.team_name.control}</div>
@@ -155,7 +155,7 @@ function handlePluginCheckboxes() {
         <label class="col-sm-3 control-label">{$i18n.form.profile.uncompleted_indicators}</label>
         <div class="col-sm-7">{$forms.profileForm.uncompleted_indicators.control}</div>
         <div class="col-md-2"></div>
-      </div>
+      </div> -->
 
 
 
@@ -179,7 +179,7 @@ function handlePluginCheckboxes() {
         <hr/>
       </div>
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label class="col-sm-3 control-label" for="charts">{$i18n.title.charts} (Manager)</label>
         <div class="col-sm-7 col-sm-offset-1 text-left">
           <div class="col-sm-12">
@@ -261,7 +261,7 @@ function handlePluginCheckboxes() {
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="form-group">
         <label class="col-sm-3 control-label" for="quotas">{$i18n.title.monthly_quotas}</label>
