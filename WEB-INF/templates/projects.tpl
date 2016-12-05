@@ -15,7 +15,7 @@
           <tr>
             <th>{$i18n.label.thing_name}</th>
             <th>{$i18n.label.description}</th>
-            <th>Action</th>
+            <th style="width: 200px">Actions</th>
           </tr>
         </thead>
         {if $active_projects}
@@ -46,7 +46,7 @@
           <tr>
             <th>{$i18n.label.thing_name}</th>
             <th>{$i18n.label.description}</th>
-            <th>Action</th>
+            <th style="width: 200px">Actions</th>
           </tr>
         </thead>
         {foreach $inactive_projects as $project}

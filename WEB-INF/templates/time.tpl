@@ -213,12 +213,12 @@ function get_time() {
   a {
     color: #1778bd;
     text-decoration: none
-}
-a:hover,
-a:focus {
+  }
+  a:hover,
+  a:focus {
     color: #2c3e50;
     text-decoration: underline
-}
+  }
 </style>
 
 <div class="col-sm-12 text-center">
@@ -278,31 +278,31 @@ a:focus {
         <div class="col-md-9">{$forms.timeRecordForm.finish.control}<span class="pull-down" style="float:right;"><input class="btn btn-primary btn-xs" onclick="setNow('finish');" type="button" tabindex="-1" value="{$i18n.button.now}"></span></div>
       </div>
       {/if}
-           {if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
+      {if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
       <div class="form-group">
         <label class="col-md-3 control-label">{$i18n.label.duration}</label>
         <div class="col-md-9">{$forms.timeRecordForm.duration.control}</div>
       </div>
       {/if}
+      <div class="form-group">
+        <label class="col-md-3 control-label">{$i18n.label.note}</label>
+        <div class="col-md-9">{$forms.timeRecordForm.note.control}</div>
+      </div>
     </div>
 
     <div class="col-md-5">
       {$forms.timeRecordForm.date.control}
     </div>
   </div>
-  
-  <div class="row">
-    <div class="col-md-7">
-      <div class="form-group">
-        <label class="col-md-3 control-label">{$i18n.label.note}</label>
-        <div class="col-md-9">{$forms.timeRecordForm.note.control}</div>
-      </div>
-    </div>
-  </div>
 
   <div class="row">
     <div class="col-sm-12 text-center">
-      {$forms.timeRecordForm.btn_submit.control}
+      <div class="col-md-7">
+        <div class="col-md-3"></div>
+        <div class="col-md-9">
+          {$forms.timeRecordForm.btn_submit.control}
+        </div>
+      </div>
     </div>
   </div>
   {$forms.timeRecordForm.close}
@@ -318,7 +318,7 @@ a:focus {
         <thead>
           <tr>
             {if $user->isPluginEnabled('cl')}
-            <th width="20%">{$i18n.label.client}</th>
+            <th>{$i18n.label.client}</th>
             {/if}
             {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
             <th>{$i18n.label.project}</th>
@@ -327,12 +327,12 @@ a:focus {
             <th>{$i18n.label.task}</th>
             {/if}
             {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
-            <th width="5%" align='right'>{$i18n.label.start}</th>
-            <th width="5%" align='right'>{$i18n.label.finish}</th>
+            <th align='right'>{$i18n.label.start}</th>
+            <th align='right'>{$i18n.label.finish}</th>
             {/if}
-            <th width="5%">{$i18n.label.duration}</th>
+            <th>{$i18n.label.duration}</th>
             <th>{$i18n.label.note}</th>
-            <th width="5%">{$i18n.label.edit}</th>
+            <th style="width: 100px">{$i18n.label.edit}</th>
           </tr>
         </thead>
         <tbody>
@@ -357,12 +357,11 @@ a:focus {
               {if $record.invoice_id}
               &nbsp;
               {else}
-              <a href='time_edit.php?id={$record.id}'>{$i18n.label.edit}</a>
+              <a class="btn btn-info btn-xs" href="time_edit.php?id={$record.id}">{$i18n.label.edit}</a>
               {if ($record.duration == '0:00' && $record.start <> '')}
               <input type='hidden' name='record_id' value='{$record.id}'>
               <input type='hidden' name='browser_date' value=''>
               <input type='hidden' name='browser_time' value=''>
-              <!-- <input type='submit' id='btn_stop' name='btn_stop' onclick='browser_date.value=get_date();browser_time.value=get_time()' value='{$i18n.button.stop}'> -->
               {/if}
               {/if}
             </td>

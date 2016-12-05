@@ -148,6 +148,10 @@ class Table extends FormElement {
           	$html .= " $k=\"$v\"";
           }
         }
+        // Add width for header if checkbox exists
+        if(preg_match("/<input type=\"checkbox\"/", $header)) {
+          $html .= " style='width:50px'";
+        }
         $html .= ">$header</th>\n";
       }
       $html .= "</tr></thead>\n";
