@@ -90,6 +90,11 @@ if ('xml' == $type) {
     foreach ($subtotals as $subtotal) {
       print "<row>\n";
       print "\t<".$group_by."><![CDATA[".$subtotal['name']."]]></".$group_by.">\n";
+
+      if(array_key_exists("projects",$subtotal)) {
+        print "\t<projects><![CDATA[".$subtotal['projects']."]]></projects>\n";
+      }
+
       if ($bean->getAttribute('chduration')) {
         $val = $subtotal['time'];
         if($val && defined('EXPORT_DECIMAL_DURATION') && isTrue(EXPORT_DECIMAL_DURATION))
@@ -104,6 +109,11 @@ if ('xml' == $type) {
           print $subtotal['expenses'];
         print "]]></cost>\n";
       }
+
+      if(array_key_exists("util",$subtotal)) {
+        print "\t<uilization><![CDATA[".$subtotal['util']."]]>%</uilization>\n";
+      }
+
       print "</row>\n";
     }
   } else {
@@ -166,25 +176,38 @@ if ('csv' == $type) {
 
     // Print headers.
     print '"'.$group_by_header.'"';
+    if ($group_by == 'user') print ',"Projects"';
     if ($bean->getAttribute('chduration')) print ',"'.$i18n->getKey('label.duration').'"';
     if ($bean->getAttribute('chcost')) print ',"'.$i18n->getKey('label.cost').'"';
+    if ($group_by == 'user') print ',"Utilization"';
     print "\n";
 
     // Print subtotals.
     foreach ($subtotals as $subtotal) {
       print '"'.$subtotal['name'].'"';
+
+      if(array_key_exists("projects",$subtotal)) {
+        print ',"'.$subtotal['projects'].'"';
+      }
+
       if ($bean->getAttribute('chduration')) {
         $val = $subtotal['time'];
         if($val && defined('EXPORT_DECIMAL_DURATION') && isTrue(EXPORT_DECIMAL_DURATION))
           $val = time_to_decimal($val);
         print ',"'.$val.'"';
       }
+
       if ($bean->getAttribute('chcost')) {
         if ($user->canManageTeam() || $user->isClient())
           print ',"'.$subtotal['cost'].'"';
         else
           print ',"'.$subtotal['expenses'].'"';
       }
+
+      if(array_key_exists("util",$subtotal)) {
+        print ',"'.$subtotal['util'].'%"';
+      }
+      
       print "\n";
     }
   } else {

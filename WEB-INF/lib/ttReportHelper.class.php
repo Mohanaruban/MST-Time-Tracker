@@ -79,7 +79,7 @@ class ttReportHelper {
     return $where;
   }
 
-static function getWorkingDaysCount($from, $to) {
+  static function getWorkingDaysCount($from, $to) {
     $workingDays = [1, 2, 3, 4, 5]; 
     // Optional for holidays
     // $holidayDays = ['*-12-25', '*-01-01'];
@@ -93,13 +93,13 @@ static function getWorkingDaysCount($from, $to) {
 
     $days = 0;
     foreach ($periods as $period) {
-        if (!in_array($period->format('N'), $workingDays)) continue;
-        if (in_array($period->format('Y-m-d'), $holidayDays)) continue;
-        if (in_array($period->format('*-m-d'), $holidayDays)) continue;
-        $days++;
+      if (!in_array($period->format('N'), $workingDays)) continue;
+      if (in_array($period->format('Y-m-d'), $holidayDays)) continue;
+      if (in_array($period->format('*-m-d'), $holidayDays)) continue;
+      $days++;
     }
     return $days;
-}
+  }
 
 // getFavWhere prepares a WHERE clause for a favorite report query.
   static function getFavWhere($report) {
