@@ -281,7 +281,7 @@ a:focus {
            {if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
       <div class="form-group">
         <label class="col-md-3 control-label">{$i18n.label.duration}</label>
-        <div class="col-md-9">{$forms.timeRecordForm.duration.control}&nbsp;{$i18n.form.time.duration_format}</div>
+        <div class="col-md-9">{$forms.timeRecordForm.duration.control}</div>
       </div>
       {/if}
     </div>
