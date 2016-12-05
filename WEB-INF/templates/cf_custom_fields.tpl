@@ -3,7 +3,7 @@
   {if $user->canManageTeam()}
   <div class="row">
     <div class="col-sm-12">
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
         <thead>
           <tr>
             <th>{$i18n.label.thing_name}</th>

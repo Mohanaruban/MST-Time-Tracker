@@ -9,7 +9,7 @@
 <table cellspacing="0" cellpadding="7" border="0" width="720">
   <tr>
     <td>
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
         <tr><td align="center"><b style="font-size: 15pt; font-family: Arial, Helvetica, sans-serif;">{$i18n.title.invoice} {$invoice_name|escape:'html'} </b></td></tr>
         <tr><td align='left'><b>{$i18n.label.date}:</b> {$invoice_date}</td></tr>
         <tr><td align='left'><b>{$i18n.label.client}:</b> {$client_name|escape:'html'}</td></tr>
@@ -20,7 +20,7 @@
   <tr>
     <td valign="top">
       {if $invoice_items}
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
       <thead>
         <tr>
           <th >{$i18n.label.date}</th>

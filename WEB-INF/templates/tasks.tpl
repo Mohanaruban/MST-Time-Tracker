@@ -5,7 +5,7 @@
 <div class="col-sm-8 col-sm-offset-2">
   <div class="row">
     <div class="col-sm-12">
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
         <thead>
           {if $inactive_tasks}
           <tr><td class="sectionHeaderNoBorder">{$i18n.form.tasks.active_tasks}</td></tr>
@@ -44,7 +44,7 @@
 <div class="col-sm-8 col-sm-offset-2">
   <div class="row">
     <div class="col-sm-12">
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
         <thead>
           <tr><th class="sectionHeaderNoBorder">{$i18n.form.tasks.inactive_tasks}</th></tr>
           <tr>
@@ -78,7 +78,7 @@
 {else}
 
 
-<table class="table table-responsive table-striped table-hover table-bordered">
+<table class="table table-responsive table-hover table-bordered">
   <thead>
     <tr>
       <th>{$i18n.label.thing_name}</th>

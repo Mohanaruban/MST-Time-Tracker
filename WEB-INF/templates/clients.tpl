@@ -5,7 +5,7 @@
   {if ($user->canManageTeam())}
   <div class="row">
     <div class="col-sm-12">
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
         {if $inactive_clients}
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.clients.active_clients}</td></tr>
         {/if}
@@ -36,7 +36,7 @@
   {if $inactive_clients}
   <div class="row">
     <div class="col-sm-12">
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.clients.inactive_clients}</td></tr>
         <thead>
           <tr>

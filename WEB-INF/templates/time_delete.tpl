@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-12">
       {$forms.timeRecordForm.open}
-      <table class="table table-responsive table-striped table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered">
         <thead>
           <tr>
             {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}

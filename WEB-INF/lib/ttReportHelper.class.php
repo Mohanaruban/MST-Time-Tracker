@@ -263,7 +263,7 @@ if ($bean->getAttribute('chfinish'))
   array_push($fields, "TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), '%k:%i') as finish");
 // Add duration.
 if ($bean->getAttribute('chduration'))
-  array_push($fields, "TIME_FORMAT(l.duration, '%k:%i') as duration");
+  array_push($fields, "TIME_FORMAT(l.duration, '%k') as duration");
 // Add note.
 if ($bean->getAttribute('chnote'))
   array_push($fields, 'l.comment as note');
@@ -469,7 +469,7 @@ if ($report['show_end'])
   array_push($fields, "TIME_FORMAT(sec_to_time(time_to_sec(l.start) + time_to_sec(l.duration)), '%k:%i') as finish");
 // Add duration.
 if ($report['show_duration'])
-  array_push($fields, "TIME_FORMAT(l.duration, '%k:%i') as duration");
+  array_push($fields, "TIME_FORMAT(l.duration, '%k') as duration");
 // Add note.
 if ($report['show_note'])
   array_push($fields, 'l.comment as note');
@@ -1136,13 +1136,13 @@ static function prepareReportBody($bean, $comment)
       $group_by_header = $i18n->getKey($key);
     }
 
-    $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
+    $body .= '<table border="0" cellpadding="4" cellspacing="0" class="table table-bordered table-responsive table-hover">';
     $body .= '<tr>';
     $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
     if ($bean->getAttribute('chduration'))
-      $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
+      $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.duration').'</td>';
     if ($bean->getAttribute('chcost'))
-      $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+      $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.cost').'</td>';
     $body .= '</tr>';
     foreach($subtotals as $subtotal) {
       $body .= '<tr style="'.$rowSubtotal.'">';
@@ -1181,7 +1181,7 @@ static function prepareReportBody($bean, $comment)
 // Regular report.
 
 // Print table header.
-    $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
+    $body .= '<table border="0" cellpadding="4" cellspacing="0" class="table table-bordered table-responsive table-hover">';
     $body .= '<tr>';
     $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.date').'</td>';
     if ($user->canManageTeam() || $user->isClient())
@@ -1195,15 +1195,15 @@ static function prepareReportBody($bean, $comment)
     if ($bean->getAttribute('chcf_1'))
       $body .= '<td style="'.$tableHeader.'">'.htmlspecialchars($custom_fields->fields[0]['label']).'</td>';
     if ($bean->getAttribute('chstart'))
-      $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.start').'</td>';
+      $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.start').'</td>';
     if ($bean->getAttribute('chfinish'))
-      $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.finish').'</td>';
+      $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.finish').'</td>';
     if ($bean->getAttribute('chduration'))
-      $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
+      $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.duration').'</td>';
     if ($bean->getAttribute('chnote'))
       $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.note').'</td>';
     if ($bean->getAttribute('chcost'))
-      $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+      $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.cost').'</td>';
     if ($bean->getAttribute('chinvoice'))
       $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.invoice').'</td>';
     $body .= '</tr>';
@@ -1394,13 +1394,13 @@ static function prepareFavReportBody($report)
       $group_by_header = $i18n->getKey($key);
     }
 
-    $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
+    $body .= '<table border="0" cellpadding="4" cellspacing="0" class="table table-bordered table-responsive table-hover">';
     $body .= '<tr>';
     $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
     if ($report['show_duration'])
-      $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
+      $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.duration').'</td>';
     if ($report['show_cost'])
-      $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+      $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.cost').'</td>';
     $body .= '</tr>';
     foreach($subtotals as $subtotal) {
       $body .= '<tr style="'.$rowSubtotal.'">';
@@ -1439,7 +1439,7 @@ static function prepareFavReportBody($report)
 // Regular report.
 
 // Print table header.
-    $body .= '<table border="0" cellpadding="4" cellspacing="0" width="100%">';
+    $body .= '<table border="0" cellpadding="4" cellspacing="0" class="table table-bordered table-responsive table-hover">';
     $body .= '<tr>';
     $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.date').'</td>';
     if ($user->canManageTeam() || $user->isClient())
@@ -1453,15 +1453,15 @@ static function prepareFavReportBody($report)
     if ($report['show_custom_field_1'])
       $body .= '<td style="'.$tableHeader.'">'.htmlspecialchars($custom_fields->fields[0]['label']).'</td>';
     if ($report['show_start'])
-      $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.start').'</td>';
+      $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.start').'</td>';
     if ($report['show_end'])
-      $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.finish').'</td>';
+      $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.finish').'</td>';
     if ($report['show_duration'])
-      $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.duration').'</td>';
+      $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.duration').'</td>';
     if ($report['show_note'])
       $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.note').'</td>';
     if ($report['show_cost'])
-      $body .= '<td style="'.$tableHeaderCentered.'" width="5%">'.$i18n->getKey('label.cost').'</td>';
+      $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.cost').'</td>';
     if ($report['show_invoice'])
       $body .= '<td style="'.$tableHeader.'">'.$i18n->getKey('label.invoice').'</td>';
     $body .= '</tr>';
