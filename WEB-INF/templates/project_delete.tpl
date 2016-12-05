@@ -5,7 +5,7 @@
 
       <div class="form-group">
         <div class="col-md-12">
-          <p class="h3"> Are you sure to delete <i>{$project_to_delete|escape:'html'}</i> project?</p><br/><br/>
+          <p class="h3"> Are you sure to delete project - <i>{$project_to_delete|escape:'html'}</i>?</p><br/><br/>
         </div>
 
           <div class="form-group">

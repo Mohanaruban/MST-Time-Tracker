@@ -52,8 +52,10 @@ $user_id = (int) $request->getParameter('id');
 $user_details = ttUserHelper::getUserDetails($user_id);
 if($user->isAdmin()) {
   $user_details = "";
-  $user_details = ttUserHelper::getUserDetailsAdmin();
+  $user_details = ttUserHelper::getUserDetailsAdmin($user_id);
 }
+$user_to_delete = $user_details['name'];
+
 // Security checks.
 // $ok_to_go = $user->canManageTeam(); // Are we authorized for user deletes?
 // if ($ok_to_go) $ok_to_go = $ok_to_go && $user_details; // Are we deleting a real user?
@@ -103,7 +105,7 @@ if ($request->isPost()) {
     exit();
   }
 } // isPost
-
+$smarty->assign('user_to_delete', $user_to_delete);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('title', $i18n->getKey('title.delete_user'));
 $smarty->assign('content_page_name', 'user_delete.tpl');
