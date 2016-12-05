@@ -45,7 +45,7 @@ if (!$user->isAdmin()) {
 $cl_project_id = (int)$request->getParameter('id');
 $project = ttProjectHelper::get($cl_project_id);
 if($user->isAdmin()) {
-$project = ttProjectHelper::getAdmin();
+$project = ttProjectHelper::getAdmin($cl_project_id);
 }
 $project_to_delete = $project['name'];
 
