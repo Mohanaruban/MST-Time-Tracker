@@ -176,9 +176,11 @@ class ttFavReportHelper {
           }
         }
       }
-      if ($all_users_selected)
-        $users = null;
-      else
+      // if ($all_users_selected)
+      //   $users = null;
+      // else
+      //   $users = join(',', $users_in_bean);
+
         $users = join(',', $users_in_bean);    	
  	}
 	if ($bean->getAttribute('start_date')) {

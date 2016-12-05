@@ -173,11 +173,11 @@ function selectAssignedUsers(project_id) {
     if ((document.reportForm.elements[i].type == 'checkbox') && (document.reportForm.elements[i].name == 'users[]')) {
       user_id = document.reportForm.elements[i].value;
       if (project_id) {
-        document.reportForm.elements[i].style.visibility = "hidden";
+        document.reportForm.elements[i].parentNode.style.display = "none";
             document.reportForm.elements[i].checked = false;
       }
       else {
-        document.reportForm.elements[i].style.visibility = "visible";
+        document.reportForm.elements[i].parentNode.style.display = "block";
             document.reportForm.elements[i].checked = true;
       }
 
@@ -189,7 +189,7 @@ function selectAssignedUsers(project_id) {
       if (project_id != '')
         for (var j = 0; j < len; j++) {
           if (project_id == assigned_projects[user_id][j]) {
-            document.reportForm.elements[i].style.visibility = "visible";
+            document.reportForm.elements[i].parentNode.style.display = "block";
             document.reportForm.elements[i].checked = true;
             break;
           }
@@ -344,39 +344,32 @@ a:focus {
                   <div class="form-group">
                     <div class="col-md-12">
                       <label class="col-sm-3 control-label">{$i18n.form.reports.show_fields}</label>
-                      <div class="col-sm-8">
-                        <table class="table">
+                      <div class="col-sm-8" style="margin-top: 10px;">
+                        <div class="row text-left">
                           {if $user->isPluginEnabled('cl') || $user->isPluginEnabled('iv')}
-                          <tr align="left">
                             {if $user->isPluginEnabled('cl')}
-                            <td width="25%"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></td>
+                            <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></div>
                             {/if}
                             {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
-                            <td width="25%"><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></td>
+                            <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></div>
                             {/if}
-                          </tr>
                           {/if}
-                          <tr align="left">
-                            <td width="25%">{if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<label>{$forms.reportForm.chproject.control}&nbsp;{$i18n.label.project}</label>{/if}</td>
-                            <td width="25%">{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<label>{$forms.reportForm.chstart.control}&nbsp;{$i18n.label.start}</label>{/if}</td>
-                            <td width="25%"><label>{$forms.reportForm.chduration.control}&nbsp;{$i18n.label.duration}</label></td>
+                            {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chproject.control}&nbsp;{$i18n.label.project}</label></div>{/if}
+                            {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chstart.control}&nbsp;{$i18n.label.start}</label></div>{/if}
+                            <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chduration.control}&nbsp;{$i18n.label.duration}</label></div>
                             <!-- {if ((($user->canManageTeam() || $user->isClient()) || $user->isPluginEnabled('ex')) && defined('COST_ON_REPORTS') && isTrue($smarty.const.COST_ON_REPORTS))}
-                            <td width="25%"><label>{$forms.reportForm.chcost.control}&nbsp;{$i18n.label.cost}</label></td>
+                            <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chcost.control}&nbsp;{$i18n.label.cost}</label></td>
                             {else}
                             <td></td>
                             {/if} -->
-                          </tr>
-                          <tr align="left">
-                            <td>{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<label>{$forms.reportForm.chtask.control}&nbsp;{$i18n.label.task}</label>{/if}</td>
-                            <td>{if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<label>{$forms.reportForm.chfinish.control}&nbsp;{$i18n.label.finish}</label>{/if}</td>
-                            <td><label>{$forms.reportForm.chnote.control}&nbsp;{$i18n.label.note}</label></td>
+                            {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chtask.control}&nbsp;{$i18n.label.task}</label></div>{/if}
+                            {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chfinish.control}&nbsp;{$i18n.label.finish}</label></div>{/if}
+                            <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chnote.control}&nbsp;{$i18n.label.note}</label></div>
                             {if ($custom_fields && $custom_fields->fields[0])}
-                            <td><label>{$forms.reportForm.chcf_1.control}&nbsp;{$custom_fields->fields[0]['label']|escape:'html'}</label></td>
+                            <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chcf_1.control}&nbsp;{$custom_fields->fields[0]['label']|escape:'html'}</label></div>
                             {else}
-                            <td></td>
                             {/if}
-                          </tr>
-                        </table>
+                        </div>
                       </div>
                     </div>
                   </div>
