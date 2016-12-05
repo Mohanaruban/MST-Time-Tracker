@@ -237,7 +237,7 @@ if ($user->canManageTeam() || $user->isClient()) {
   $form->addInput(array('type'=>'checkboxgroup',
     'name'=>'users',
     'data'=>$user_list,
-    'layout'=>'V',
+    'layout'=>'C',
     'groupin'=>$row_count));
 }
 
