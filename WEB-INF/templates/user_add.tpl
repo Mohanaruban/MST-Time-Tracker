@@ -32,7 +32,7 @@ function handleClientControl() {
 
 </script>
 
-<div class="col-md-12 text-center">
+<div class="col-sm-8 col-sm-offset-2 text-center">
 {$forms.userForm.open}
 
 <div class="row">
@@ -42,37 +42,31 @@ function handleClientControl() {
       {/if}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.person_name} (*)</label>
-        <div class="col-sm-7">{$forms.userForm.name.control}</div>
-        <div class="clo-sm-2"></div>
+        <div class="col-sm-9">{$forms.userForm.name.control}</div>
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.login} (*)</label>
-        <div class="col-sm-7">{$forms.userForm.login.control}</div>
-        <div class="clo-sm-2"></div>
+        <div class="col-sm-9">{$forms.userForm.login.control}</div>
       </div>
 {if !$auth_external}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.password} (*)</label>
-        <div class="col-sm-7">{$forms.userForm.pas1.control}</div>
-        <div class="clo-sm-2"></div>
+        <div class="col-sm-9">{$forms.userForm.pas1.control}</div>
       </div>
           <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.confirm_password} (*)</label>
-        <div class="col-sm-7">{$forms.userForm.pas2.control}</div>
-        <div class="clo-sm-2"></div>
+        <div class="col-sm-9">{$forms.userForm.pas2.control}</div>
       </div>
 {/if}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.email}</label>
-        <div class="col-sm-7">{$forms.userForm.email.control}</div>
-        <div class="clo-sm-2"></div>
+        <div class="col-sm-9">{$forms.userForm.email.control}</div>
       </div>
 {if $user->isAdmin()}
 
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.form.users.role}</label>
-        <div class="col-sm-7">{$forms.userForm.role.control} {$forms.userForm.client.control}</div>
-        <div class="clo-sm-2"></div>
+        <div class="col-sm-9">{$forms.userForm.role.control} {$forms.userForm.client.control}</div>
       </div>
 {/if}
 <!--       <div class="form-group">
@@ -83,8 +77,7 @@ function handleClientControl() {
 
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.projects}</label>
-        <div class="col-sm-5">{$forms.userForm.projects.control}</div>
-        <div class="col-sm-4"></div>
+        <div class="col-sm-9">{$forms.userForm.projects.control}</div>
       </div>
 {/if}
 

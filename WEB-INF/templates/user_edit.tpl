@@ -18,28 +18,28 @@ function getRate(project_id) {
       return project_rates[i][1];
     }
   }
-  var default_rate = document.userForm.rate.value;
-  return default_rate;
+  // var default_rate = document.userForm.rate.value;
+  // return default_rate;
 }
 
 // The setRate function sets / unsets user rate for a project when a corresponding checkbox is ticked.
 function setRate(element) {
-  var default_rate = document.userForm.rate.value;
-  if (default_rate == '') {
-    // No default rate, nothing to do!
-    return;
-  }
-  // Iterate through elements of the form to find and set the project rate. 
-  for (var i = 0; i < userForm.elements.length; i++) {
-    if ((userForm.elements[i].type == 'text') && (userForm.elements[i].name == ('rate_'+element.value))) {
-      if (element.checked) {
-        userForm.elements[i].value = getRate(element.value);
-      } else {
-        userForm.elements[i].value = '';
-      }
-      break; // Element is found and set, nothing more to do, break out of the loop.
-    }
-  }
+  // var default_rate = document.userForm.rate.value;
+//   if (default_rate == '') {
+//     // No default rate, nothing to do!
+//     return;
+//   }
+//   // Iterate through elements of the form to find and set the project rate. 
+//   for (var i = 0; i < userForm.elements.length; i++) {
+//     if ((userForm.elements[i].type == 'text') && (userForm.elements[i].name == ('rate_'+element.value))) {
+//       if (element.checked) {
+//         userForm.elements[i].value = getRate(element.value);
+//       } else {
+//         userForm.elements[i].value = '';
+//       }
+//       break; // Element is found and set, nothing more to do, break out of the loop.
+//     }
+//   }
 }
 
 // handleClientControl - controls visibility of the client dropdown depending on the selected user role.
@@ -57,8 +57,8 @@ function handleClientControl() {
   {$forms.userForm.open}
   <div class="row">
     <div class="col-sm-12">
-    {if $user->isAdmin()}
-{$forms.userForm.manager_list.control}
+      {if $user->isAdmin()}
+      {$forms.userForm.manager_list.control}
       <!-- <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.manager_list}*</label>
         <div class="col-sm-9">{$forms.userForm.manager_list.control}</div>
@@ -93,7 +93,7 @@ function handleClientControl() {
       </div>
       {/if}
       {* Prohibit deactivating team manager. Deactivating others is ok. *}
-{if $user->canManageTeam() && !($user->isManager() && $user->id == $user_id)}
+      {if $user->canManageTeam() && !($user->isManager() && $user->id == $user_id)}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.status}</label>
         <div class="col-sm-9">{$forms.userForm.status.control}</div>
@@ -111,7 +111,7 @@ function handleClientControl() {
         <div class="col-sm-9">{$forms.userForm.rate.control}</div>
       </div>-->
       {/if}
-            <div class="form-group">
+      <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.projects}</label>
         <div class="col-sm-9">{$forms.userForm.projects.control}</div>
       </div>
@@ -120,19 +120,17 @@ function handleClientControl() {
       {if $user->isAdmin()}
         <label class="col-sm-3 control-label">{$i18n.label.projects}</label>
         <label class="col-sm-9 text-left" style="padding: 13px;">{implode("<br><br> ",array_column($projectList, 'name'))}</label>
-      {/if} -->
+        {/if} -->
       </div>
       {/if}
     </div>
-
-
 
     {if $user->isAdmin()}
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
           <div class="col-sm-9 col-sm-offset-3">{$forms.userForm.btn_submit.control} 
-          <a class="btn btn-info" href="users.php">Back</a>
+            <a class="btn btn-info" href="users.php">Back</a>
           </div>
         </div>
       </div>
