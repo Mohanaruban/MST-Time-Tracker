@@ -74,26 +74,26 @@ function handlePluginCheckboxes() {
     <div class="col-sm-12">
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.person_name}*</label>
+        <label class="col-sm-3 control-label">{$i18n.label.person_name} <span class="requiredField">*</span></label>
         <div class="col-sm-7">{$forms.profileForm.name.control}</div>
         <div class="col-md-2"></div>
       </div>
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.login}*</label>
+        <label class="col-sm-3 control-label">{$i18n.label.login} <span class="requiredField">*</span></label>
         <div class="col-sm-7">{$forms.profileForm.login.control}</div>
         <div class="col-md-2"></div>
       </div>
       {if !$auth_external}
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.password}*</label>
+        <label class="col-sm-3 control-label">{$i18n.label.password} <span class="requiredField">*</span></label>
         <div class="col-sm-7">{$forms.profileForm.password1.control}</div>
         <div class="col-md-2"></div>
       </div>
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.confirm_password}*</label>
+        <label class="col-sm-3 control-label">{$i18n.label.confirm_password} <span class="requiredField">*</span></label>
         <div class="col-sm-7">{$forms.profileForm.password2.control}</div>
         <div class="col-md-2"></div>
       </div>

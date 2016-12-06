@@ -96,7 +96,7 @@ if (!$auth->isPasswordExternal()) {
   $form->addInput(array('type'=>'text','maxlength'=>'30', 'class'=>'form-control', 'name'=>'pas1','aspassword'=>true,'value'=>$cl_password1));
   $form->addInput(array('type'=>'text','maxlength'=>'30', 'class'=>'form-control', 'name'=>'pas2','aspassword'=>true,'value'=>$cl_password2));
 }
-$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email,'class'=>'form-control','placeholder'=>'Enter Email'));
+$form->addInput(array('type'=>'text','maxlength'=>'100','name'=>'email','value'=>$cl_email,'class'=>'form-control','placeholder'=>'Enter valid email with mstsolutions.com domain'));
 
 // $roles[ROLE_USER] = $i18n->getKey('label.user');
 // $roles[ROLE_COMANAGER] = $i18n->getKey('form.users.comanager');

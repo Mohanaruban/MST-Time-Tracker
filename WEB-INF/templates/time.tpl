@@ -235,7 +235,7 @@ function get_time() {
 
       {if $user->isPluginEnabled('cl')}
       <div class="form-group">
-        <label class="col-md-3 control-label">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}</label>
+        <label class="col-md-3 control-label">{$i18n.label.client}{if $user->isPluginEnabled('cm')} <span class="requiredField">*</span>{/if}</label>
         <div class="col-md-9">{$forms.timeRecordForm.client.control}</div>
       </div>
       {/if}
@@ -249,21 +249,21 @@ function get_time() {
 
       {if ($custom_fields && $custom_fields->fields[0])}
       <div class="form-group">
-        <label class="col-md-3 control-label">{$custom_fields->fields[0]['label']|escape:'html'}{if $custom_fields->fields[0]['required']} (*){/if}</label>
+        <label class="col-md-3 control-label">{$custom_fields->fields[0]['label']|escape:'html'}{if $custom_fields->fields[0]['required']} <span class="requiredField">*</span>{/if}</label>
         <div class="col-md-9">{$forms.timeRecordForm.cf_1.control}</div>
       </div>
       {/if}
 
       {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
       <div class="form-group">
-        <label class="col-md-3 control-label">{$i18n.label.project} (*)</label>
+        <label class="col-md-3 control-label">{$i18n.label.project} <span class="requiredField">*</span></label>
         <div class="col-md-9">{$forms.timeRecordForm.project.control}</div>
       </div>
       {/if}
 
       {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
       <div class="form-group">
-        <label class="col-md-3 control-label">{$i18n.label.task} (*)</label>
+        <label class="col-md-3 control-label">{$i18n.label.task} <span class="requiredField">*</span></label>
         <div class="col-md-9">{$forms.timeRecordForm.task.control}</div>
       </div>
       {/if}
@@ -280,8 +280,8 @@ function get_time() {
       {/if}
       {if (($smarty.const.TYPE_DURATION == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}
       <div class="form-group">
-        <label class="col-md-3 control-label">{$i18n.label.duration}</label>
-        <div class="col-md-9">{$forms.timeRecordForm.duration.control}&nbsp;{$i18n.form.time.duration_format}</div>
+        <label class="col-md-3 control-label">{$i18n.label.duration} <span class="requiredField">*</span></label>
+        <div class="col-md-9">{$forms.timeRecordForm.duration.control}</div>
       </div>
       {/if}
       <div class="form-group">

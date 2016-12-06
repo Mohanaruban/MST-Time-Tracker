@@ -81,23 +81,23 @@ function get_date() {
 {/if}
 {if $user->isPluginEnabled('cl')}
     <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.client}{if $user->isPluginEnabled('cm')} (*){/if}</label>
+        <label class="col-sm-3 control-label">{$i18n.label.client}{if $user->isPluginEnabled('cm')} <span class="requiredField">*</span>{/if}</label>
         <div class="col-sm-9">{$forms.expensesForm.client.control}</div>
     </div>
 {/if}
 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
     <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.project} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.project} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.expensesForm.project.control}</div>
     </div>
 {/if}
     <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.item} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.item} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.expensesForm.item_name.control}</div>
     </div>
 
             <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.cost} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.cost} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.expensesForm.cost.control}<span class="pull-right" style="margin-top: -30px;">{$user->currency|escape:'html'}</span></div>
     </div>
 

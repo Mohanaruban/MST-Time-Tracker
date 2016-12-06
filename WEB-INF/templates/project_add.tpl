@@ -4,7 +4,7 @@
     <div class="col-sm-12">
 {$forms.projectForm.manager_list.control}
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.thing_name}*</label>
+        <label class="col-sm-3 control-label">{$i18n.label.thing_name} <span class="requiredField">*</span></label>
         <div class="col-sm-7">{$forms.projectForm.project_name.control}</div>
         <div class="col-md-2"></div>
       </div>
@@ -46,7 +46,7 @@
     <td>
       <table cellspacing="1" cellpadding="2" border="0">
         <tr>
-          <td align="left">{$i18n.label.thing_name} (*):</td>
+          <td align="left">{$i18n.label.thing_name} <span class="requiredField">*</span>:</td>
           <td>{$forms.projectForm.project_name.control}</td>
         </tr>
         <tr>
