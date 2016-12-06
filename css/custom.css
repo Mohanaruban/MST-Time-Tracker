@@ -144,3 +144,7 @@ color: #ffffff !important;
 .report-table>thead>tr>th {
   text-align: center;
 }
+
+.requiredField {
+  color: red;
+}

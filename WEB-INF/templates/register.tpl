@@ -13,19 +13,19 @@
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
-          <td align="right" nowrap>{$i18n.label.manager_name} (*):</td>
+          <td align="right" nowrap>{$i18n.label.manager_name} <span class="requiredField">*</span>:</td>
           <td>{$forms.profileForm.manager_name.control}</td>
         </tr>
         <tr>
-          <td align="right" nowrap>{$i18n.label.manager_login} (*):</td>
+          <td align="right" nowrap>{$i18n.label.manager_login} <span class="requiredField">*</span>:</td>
           <td>{$forms.profileForm.manager_login.control}</td>
         </tr>
         <tr>
-          <td align="right" nowrap>{$i18n.label.password} (*):</td>
+          <td align="right" nowrap>{$i18n.label.password} <span class="requiredField">*</span>:</td>
           <td>{$forms.profileForm.password1.control}</td>
         </tr>
         <tr>
-          <td align="right" nowrap>{$i18n.label.confirm_password} (*):</td>
+          <td align="right" nowrap>{$i18n.label.confirm_password} <span class="requiredField">*</span>:</td>
           <td>{$forms.profileForm.password2.control}</td>
         </tr>
         <tr>

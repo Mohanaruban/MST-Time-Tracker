@@ -9,49 +9,6 @@ project_rates[idx] = new Array({$rate.id}, '{$rate.rate}');
 idx++;
 {/foreach}
 
-// getRate - returns a rate for the project. If rate was set for user previously we'll get this old rate
-// if project time entries for user exists. Otherwise return user default rate.
-function getRate(project_id) {
-  var length = project_rates.length;
-  for(var i = 0; i < length; i++) {
-    if(project_rates[i][0] == project_id) {
-      return project_rates[i][1];
-    }
-  }
-  // var default_rate = document.userForm.rate.value;
-  // return default_rate;
-}
-
-// The setRate function sets / unsets user rate for a project when a corresponding checkbox is ticked.
-function setRate(element) {
-  // var default_rate = document.userForm.rate.value;
-//   if (default_rate == '') {
-//     // No default rate, nothing to do!
-//     return;
-//   }
-//   // Iterate through elements of the form to find and set the project rate. 
-//   for (var i = 0; i < userForm.elements.length; i++) {
-//     if ((userForm.elements[i].type == 'text') && (userForm.elements[i].name == ('rate_'+element.value))) {
-//       if (element.checked) {
-//         userForm.elements[i].value = getRate(element.value);
-//       } else {
-//         userForm.elements[i].value = '';
-//       }
-//       break; // Element is found and set, nothing more to do, break out of the loop.
-//     }
-//   }
-}
-
-// handleClientControl - controls visibility of the client dropdown depending on the selected user role.
-// We need to show it only when the "Client" user role is selected.
-function handleClientControl() {
-  var clientControl = document.getElementById("client");
-  if ("16" == document.getElementById("role").value)
-    clientControl.style.visibility = "visible";
-  else
-    clientControl.style.visibility = "hidden";
-}
-
 </script>
 <div class="col-sm-8 col-sm-offset-2 text-center">
   {$forms.userForm.open}
@@ -65,25 +22,25 @@ function handleClientControl() {
       </div> -->
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.person_name} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.person_name} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.userForm.name.control}</div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.login} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.login} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.userForm.login.control}</div>
       </div>
       {if !$auth_external}
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.password} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.password} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.userForm.pas1.control}</div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.confirm_password} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.confirm_password} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.userForm.pas2.control}</div>
       </div>
       {/if}
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.email}</label>
+        <label class="col-sm-3 control-label">{$i18n.label.email} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.userForm.email.control}</div>
       </div>
       {if ($user->isManager() && ($user->id != $user_id)) || ($user->isAdmin())}

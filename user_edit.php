@@ -162,13 +162,13 @@ if (!$auth->isPasswordExternal()) {
   $form->addInput(array('type'=>'text','maxlength'=>'30', 'class'=>'form-control', 'name'=>'pas1','aspassword'=>true,'value'=>$cl_password1));
   $form->addInput(array('type'=>'text','maxlength'=>'30', 'class'=>'form-control', 'name'=>'pas2','aspassword'=>true,'value'=>$cl_password2));
 }
-$form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control', 'name'=>'email','value'=>$cl_email));
+$form->addInput(array('type'=>'text','maxlength'=>'100', 'class'=>'form-control', 'name'=>'email','placeholder'=>'Enter valid email with mstsolutions.com domain','value'=>$cl_email));
 
 $roles[ROLE_USER] = $i18n->getKey('label.user');
 $roles[ROLE_MANAGER] = $i18n->getKey('form.users.manager');
 if ($user->isPluginEnabled('cl'))
   $roles[ROLE_CLIENT] = $i18n->getKey('label.client');
-$form->addInput(array('type'=>'combobox','onchange'=>'handleClientControl()', 'class'=>'form-control', 'name'=>'role','value'=>$cl_role,'data'=>$roles));
+$form->addInput(array('type'=>'combobox', 'class'=>'form-control', 'name'=>'role','value'=>$cl_role,'data'=>$roles));
 if ($user->isPluginEnabled('cl'))
   $form->addInput(array('type'=>'combobox', 'class'=>'form-control', 'name'=>'client', 'value'=>$cl_client_id,'data'=>$clients,'datakeys'=>array('id', 'name'),'empty'=>array(''=>$i18n->getKey('dropdown.select'))));
 
@@ -202,7 +202,6 @@ class RateCellRenderer extends DefaultCellRenderer {
 
 // Create projects table.
 $table = new Table('projects');
-$table->setIAScript('setRate');
 $table->setTableOptions(array('class'=>'table table-responsive table-hover table-bordered', 'id'=>"projectTable"));
 $table->setRowOptions(array('valign'=>'top'));
 $table->setData($projects);
@@ -286,9 +285,6 @@ if ($request->isPost()) {
       $err->add($i18n->getKey('error.user_exists'));
   }
 } // isPost
-
-$rates = ttProjectHelper::getRates($user_id);
-$smarty->assign('rates', $rates);
 
 $smarty->assign('auth_external', $auth->isPasswordExternal());
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));

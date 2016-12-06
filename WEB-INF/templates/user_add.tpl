@@ -41,25 +41,25 @@ function handleClientControl() {
       {$forms.userForm.manager_list.control}
       {/if}
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.person_name} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.person_name} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.userForm.name.control}</div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.login} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.login} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.userForm.login.control}</div>
       </div>
 {if !$auth_external}
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.password} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.password} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.userForm.pas1.control}</div>
       </div>
           <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.confirm_password} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.confirm_password} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.userForm.pas2.control}</div>
       </div>
 {/if}
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.email}</label>
+        <label class="col-sm-3 control-label">{$i18n.label.email} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.userForm.email.control}</div>
       </div>
 {if $user->isAdmin()}
