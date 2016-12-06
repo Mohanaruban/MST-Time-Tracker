@@ -5,53 +5,53 @@ function handlePluginCheckboxes() {
   var invoicesCheckbox = document.getElementById("invoices");
   var requiredCheckbox = document.getElementById("client_required");
   var requiredLabel = document.getElementById("required_label");
-  if (clientsCheckbox.checked) {
-    requiredCheckbox.style.visibility = "visible";
-    requiredLabel.style.visibility = "visible";
-    invoicesCheckbox.disabled = false;
-  } else {
-    requiredCheckbox.checked = false;
-    requiredCheckbox.style.visibility = "hidden";
-    requiredLabel.style.visibility = "hidden";
-    invoicesCheckbox.checked = false;
-    invoicesCheckbox.disabled = true;
-  }
+  // if (clientsCheckbox.checked) {
+  //   requiredCheckbox.style.visibility = "visible";
+  //   requiredLabel.style.visibility = "visible";
+  //   invoicesCheckbox.disabled = false;
+  // } else {
+  //   requiredCheckbox.checked = false;
+  //   requiredCheckbox.style.visibility = "hidden";
+  //   requiredLabel.style.visibility = "hidden";
+  //   invoicesCheckbox.checked = false;
+  //   invoicesCheckbox.disabled = true;
+  // }
 
   var expensesCheckbox = document.getElementById("expenses");
   var taxCheckbox = document.getElementById("tax_expenses");
   var taxLabel = document.getElementById("tax_label");
-  if (expensesCheckbox.checked) {
-    taxCheckbox.style.visibility = "visible";
-    taxLabel.style.visibility = "visible";
-  } else {
-    taxCheckbox.checked = false;
-    taxCheckbox.style.visibility = "hidden";
-    taxLabel.style.visibility = "hidden";
-  }
+  // if (expensesCheckbox.checked) {
+  //   taxCheckbox.style.visibility = "visible";
+  //   taxLabel.style.visibility = "visible";
+  // } else {
+  //   taxCheckbox.checked = false;
+  //   taxCheckbox.style.visibility = "hidden";
+  //   taxLabel.style.visibility = "hidden";
+  // }
 
-  var customFieldsCheckbox = document.getElementById("custom_fields");
-  var configureLabel = document.getElementById("cf_config");
-  if (customFieldsCheckbox.checked) {
-    configureLabel.style.visibility = "visible";
-  } else {
-    configureLabel.style.visibility = "hidden";
-  }
+  // var customFieldsCheckbox = document.getElementById("custom_fields");
+  // var configureLabel = document.getElementById("cf_config");
+  // if (customFieldsCheckbox.checked) {
+  //   configureLabel.style.visibility = "visible";
+  // } else {
+  //   configureLabel.style.visibility = "hidden";
+  // }
 
   var notificationsCheckbox = document.getElementById("notifications");
   configureLabel = document.getElementById("notifications_config");
-  if (notificationsCheckbox.checked) {
-    configureLabel.style.visibility = "visible";
-  } else {
-    configureLabel.style.visibility = "hidden";
-  }
+  // if (notificationsCheckbox.checked) {
+  //   configureLabel.style.visibility = "visible";
+  // } else {
+  //   configureLabel.style.visibility = "hidden";
+  // }
 
   var lockingCheckbox = document.getElementById("locking");
   configureLabel = document.getElementById("locking_config");
-  if (lockingCheckbox.checked) {
-    configureLabel.style.visibility = "visible";
-  } else {
-    configureLabel.style.visibility = "hidden";
-  }
+  // if (lockingCheckbox.checked) {
+  //   configureLabel.style.visibility = "visible";
+  // } else {
+  //   configureLabel.style.visibility = "hidden";
+  // }
 
   var quotasCheckbox = document.getElementById("quotas");
   configureLabel = document.getElementById("quotas_config");
@@ -161,16 +161,16 @@ function handlePluginCheckboxes() {
 
       {* initialize preview text *}
       <script>
-        MakeFormatPreview("date_format_preview", document.getElementById("format_date"));
-        MakeFormatPreview("time_format_preview", document.getElementById("format_time"));
+        // MakeFormatPreview("date_format_preview", document.getElementById("format_date"));
+        // MakeFormatPreview("time_format_preview", document.getElementById("format_time"));
 
-        function adjustDecimalPreview()
-        {
-          var mark = document.getElementById("decimal_mark").value;
-          var example = document.getElementById("decimal_preview");
-          example.innerHTML = "<i>3"+mark+"14</i>";
-        }
-        adjustDecimalPreview();
+        // function adjustDecimalPreview()
+        // {
+        //   var mark = document.getElementById("decimal_mark").value;
+        //   var example = document.getElementById("decimal_preview");
+        //   example.innerHTML = "<i>3"+mark+"14</i>";
+        // }
+        //adjustDecimalPreview();
       </script>
 
       <div class="form-group">
