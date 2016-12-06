@@ -20,12 +20,13 @@
         <div class="col-sm-7">{$forms.projectForm.status.control}</div>
         <div class="col-md-2"></div>
       </div>
-
+      {if ($cl_status == 1)}
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.users}</label>
         <div class="col-sm-7">{$forms.projectForm.users.control}</div>
         <div class="col-md-2"></div>
       </div>
+      {/if}
       {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
 
       <div class="form-group">

@@ -147,6 +147,7 @@ if ($request->isPost()) {
   }
 } // isPost
 
+$smarty->assign('cl_status', $cl_status);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
 $smarty->assign('onload', 'onLoad="document.projectForm.name.focus()"');
 $smarty->assign('title', $i18n->getKey('title.edit_project'));

@@ -304,7 +304,8 @@ $i18n_key_words = array(
 'form.change_password.tip' => 'Type new password and click on Save.',
 
 // Time form. See example at https://timetracker.anuko.com/time.php.
-'form.time.duration_format' => '(hh:mm or 0.0h)',
+// 'form.time.duration_format' => '(hh:mm or 0.0h)',
+'form.time.duration_format' => 'Duration must be 1 to 24 hours',
 'form.time.billable' => 'Billable',
 'form.time.uncompleted' => 'Uncompleted',
 'form.time.remaining_quota' => 'Remaining quota',

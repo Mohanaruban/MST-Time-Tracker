@@ -105,13 +105,13 @@ function handlePluginCheckboxes() {
       </div>
       
       {if $user->isAdmin()}
-<!-- 
+
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.team_name}</label>
         <div class="col-sm-7">{$forms.profileForm.team_name.control}</div>
         <div class="col-md-2"></div>
       </div>
-      <div class="form-group">
+   <!--    <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.currency}</label>
         <div class="col-sm-7">{$forms.profileForm.currency.control}</div>
         <div class="col-md-2"></div>
