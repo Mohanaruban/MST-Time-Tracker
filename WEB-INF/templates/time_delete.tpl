@@ -16,7 +16,7 @@
             <th align="center">{$i18n.label.finish}</th>
             {/if}
             <th align="center">{$i18n.label.note}</th>
-             <th align="center">{$i18n.label.duration}</th>
+            <th align="center">{$i18n.label.duration}</th>
           </tr>
         </thead>
         <tbody>
@@ -40,15 +40,10 @@
           </tr>
         </tbody>
       </table>
-      <table width="100%">
-        <tr>
-          <td align="center">&nbsp;</td>
-        </tr>
-        <tr>
-          <td align="center">{$forms.timeRecordForm.delete_button.control}&nbsp;&nbsp;{$forms.timeRecordForm.cancel_button.control}</td>
-        </tr>
-      </table>
-      {$forms.timeRecordForm.close}
-    </div>
-  </div>
+      <div class="row text-center">
+       {$forms.timeRecordForm.delete_button.control}&nbsp;&nbsp;{$forms.timeRecordForm.cancel_button.control}</td>
+     </div>
+     {$forms.timeRecordForm.close}
+   </div>
+ </div>
 </div>

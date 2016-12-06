@@ -327,11 +327,11 @@ $i18n_key_words = array(
 'form.reports.show_fields' => 'Show fields',
 'form.reports.group_by' => 'Group by',
 'form.reports.group_by_no' => '--- no grouping ---',
-'form.reports.group_by_date' => 'date',
-'form.reports.group_by_user' => 'user',
-'form.reports.group_by_client' => 'client',
-'form.reports.group_by_project' => 'project',
-'form.reports.group_by_task' => 'task',
+'form.reports.group_by_date' => 'Date',
+'form.reports.group_by_user' => 'User',
+'form.reports.group_by_client' => 'Client',
+'form.reports.group_by_project' => 'Project',
+'form.reports.group_by_task' => 'Task',
 'form.reports.totals_only' => 'Totals only',
 
 // Report form. See example at https://timetracker.anuko.com/report.php
