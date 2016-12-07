@@ -184,7 +184,7 @@ if (!$user->canManageTeam() && defined('READONLY_START_FINISH') && isTrue(READON
   $form->getElement('finish')->setEnable(false);
 }
 if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
-  $form->addInput(array('type'=>'text','name'=>'duration','class'=>'form-control','placeholder'=>'Enter duration in hours (1-24)','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
+  $form->addInput(array('type'=>'text','name'=>'duration','class'=>'form-control','asnumber'=>true,'placeholder'=>'Enter duration in hours (1-24)','value'=>$cl_duration,'onchange'=>"formDisable('duration');"));
 $form->addInput(array('type'=>'datefield','name'=>'date','class'=>'form-control','maxlength'=>'20','value'=>$cl_date));
 $form->addInput(array('type'=>'textarea','name'=>'note','class'=>'form-control','value'=>$cl_note));
 // If we have custom fields - add controls for them.

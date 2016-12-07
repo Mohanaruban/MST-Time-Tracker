@@ -35,7 +35,7 @@ static function getmailvalidate($cl_email) {
     $result = array();
     $mdb2 = getConnection();
 
-    $sql =  "select email from tt_mstmail where email = ".$mdb2->quote($cl_email);
+    $sql =  "select trim(email) from tt_mstmail where email = ".$mdb2->quote($cl_email);
     $res = $mdb2->query($sql);
     
     if (!is_a($res, 'PEAR_Error')) {

@@ -31,6 +31,7 @@ import('form.FormElement');
 class TextField extends FormElement {
     var $mValue;
     var $mPassword	= false;
+    var $mNumber	= false;
     var $cClassName		= "TextField";
 
 	function __construct($name,$value="")
@@ -41,6 +42,9 @@ class TextField extends FormElement {
 	
 	function setAsPassword($name)	{ $this->mPassword = $name;	}
 	function getAsPassword()	{ return $this->mPassword; }
+
+	function setAsNumber($name)	{ $this->mNumber = $name;	}
+	function getAsNumber()	{ return $this->mNumber; }
 
 	function toStringControl()	{
 		if (!$this->isRenderable()) return "";
@@ -55,7 +59,15 @@ class TextField extends FormElement {
 		    if ($this->mId=="") $this->mId = $this->mName;
 		    
 			$html = "\n\t<input";
-			$html .= ( $this->mPassword ? " type=\"password\"" : " type=\"text\"");
+
+			if($this->mPassword) {
+				$html .= " type=\"password\"";
+			} else if($this->mNumber) {
+				$html .= " type=\"number\"";
+			} else {
+				$html .= " type=\"text\"";
+			}
+
 			$html .= " name=\"$this->mName\" id=\"$this->mId\"";
 			
 			if ($this->mSize!="")

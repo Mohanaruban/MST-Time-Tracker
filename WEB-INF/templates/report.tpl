@@ -52,7 +52,7 @@
       <!-- normal report -->
       <thead>
       <tr>
-        <th>{$i18n.label.date}</th>
+        <th style="width: 111px">{$i18n.label.date}</th>
         {if $user->canManageTeam() || $user->isClient()}<th>{$i18n.label.user}</th>{/if}
         {if $bean->getAttribute('chclient')}<th>{$i18n.label.client}</th>{/if}
         {if $bean->getAttribute('chproject')}<th>{$i18n.label.project}</th>{/if}
