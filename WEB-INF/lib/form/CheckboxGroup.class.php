@@ -121,6 +121,8 @@ class CheckboxGroup extends FormElement {
 								$html .= " checked=\"true\"";
 						}
 					}
+					if ($this->mOnChange!="")
+						$html .= " onchange=\"$this->mOnChange\"";
 					$html .= " value=\"".htmlspecialchars($optkey)."\">&nbsp;<label for=\"$this->mId"."_".$i."\">".htmlspecialchars($optval)."</label>";
 					$renderArray[$col][$row] = $html;
 
@@ -130,8 +132,11 @@ class CheckboxGroup extends FormElement {
 				}
 			}
 		}
-
-		$html = "\n\t<table class=\"table\" style=\"margin-bottom: -20px;\"><tr><td>\n";
+		if($this->mLayout=="C") {
+			$html = "\n\t<table class=\"table checkboxgroupStyle\"><tr class=\"checkboxgroupStyle\"><td>\n";
+		} else {
+			$html = "\n\t<table class=\"table\"><tr><td>\n";
+		}
 		$html .= '<a href="#" onclick="setAll'.$this->getName().'(true);return false;">'.$this->lSelAll.'</a>&nbsp;/&nbsp;<a href="#" onclick="setAll'.$this->getName().'(false);return false;">'.$this->lSelNone.'</a>';
 		$html .= "</td></tr>\n";
 		$html .= "<tr><td>";

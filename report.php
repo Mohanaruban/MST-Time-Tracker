@@ -49,6 +49,9 @@ $form = new Form('reportForm');
 
 // Report settings are stored in session bean before we get here from reports.php.
 $bean = new ActionForm('reportBean', $form, $request);
+// echo"<pre>";
+// print_r($bean->mValues);
+// exit;
 $client_id = $bean->getAttribute('client');
 if ($client_id && $bean->getAttribute('chinvoice') && ('no_grouping' == $bean->getAttribute('group_by')) && !$user->isClient()) {
   // Client is selected and we are displaying the invoice column.

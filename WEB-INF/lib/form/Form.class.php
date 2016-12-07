@@ -152,6 +152,7 @@ class Form {
 			    $el = new TextField($arguments["name"]);
 			    $el->setMaxLength(@$arguments["maxlength"]);
 			    if (isset($arguments["aspassword"])) $el->setAsPassword($arguments["aspassword"]);
+			    if (isset($arguments["asnumber"])) $el->setAsNumber($arguments["asnumber"]);
 			    break;
 			    
 			case "datefield":
@@ -159,7 +160,7 @@ class Form {
 			    $el = new DateField($arguments["name"]);
 				$el->setMaxLength("10");
 			    break;
-			    
+
 			case "floatfield":
 			    import('form.FloatField');
 			    $el = new FloatField($arguments["name"]);
@@ -196,6 +197,7 @@ class Form {
 			    $el->setData(@$arguments["data"]);
 			    $el->setDataDefault(@$arguments["empty"]);
 			    if (isset($arguments["datakeys"])) $el->setDataKeys($arguments["datakeys"]);
+			    if (isset($arguments["multiple"])) $el->setMultiple($arguments["multiple"]);
 			    break;
 			    
 			case "hidden":
