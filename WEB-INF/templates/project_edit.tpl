@@ -4,7 +4,7 @@
     <div class="col-sm-12">
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.thing_name}*</label>
+        <label class="col-sm-3 control-label">{$i18n.label.thing_name} <span class="requiredField">*</span></label>
         <div class="col-sm-7">{$forms.projectForm.project_name.control}</div>
         <div class="col-md-2"></div>
       </div>
@@ -20,12 +20,13 @@
         <div class="col-sm-7">{$forms.projectForm.status.control}</div>
         <div class="col-md-2"></div>
       </div>
-
+     
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.users}</label>
         <div class="col-sm-7">{$forms.projectForm.users.control}</div>
         <div class="col-md-2"></div>
       </div>
+
       {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
 
       <div class="form-group">

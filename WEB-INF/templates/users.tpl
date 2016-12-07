@@ -93,8 +93,8 @@
               {else}
               <!--  Comanager can edit self and clients or users but not manager and other comanagers. -->
               <td class="text-center">
-                {if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a class="btn btn-info btn-xs" href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a>{/if}
-                {if ($user->id == $u.id) || ($smarty.const.ROLE_CLIENT == $u.role) || ($smarty.const.ROLE_USER == $u.role)}<a class="btn btn-info btn-xs" href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a>{/if}</td>
+                <a class="btn btn-info btn-xs" href="user_edit.php?id={$u.id}">{$i18n.label.edit}</a>
+                <a class="btn btn-info btn-xs" href="user_delete.php?id={$u.id}">{$i18n.label.delete}</a></td>
                 {/if}
               </tr>
               {/foreach}

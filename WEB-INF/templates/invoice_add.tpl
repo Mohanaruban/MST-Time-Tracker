@@ -3,15 +3,15 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.form.invoice.number} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.form.invoice.number} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.invoiceForm.number.control}</div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.date} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.date} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.invoiceForm.date.control}</div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.client} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.client} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.invoiceForm.client.control}</div>
       </div>
       {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
@@ -21,11 +21,11 @@
       </div>
       {/if}
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.start_date} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.start_date} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.invoiceForm.start.control}</div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.end_date} (*)</label>
+        <label class="col-sm-3 control-label">{$i18n.label.end_date} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.invoiceForm.finish.control}</div>
       </div>
     </div>

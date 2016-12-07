@@ -5,12 +5,12 @@
     <div class="col-sm-12">
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.person_name}*</label>
+        <label class="col-sm-3 control-label">{$i18n.label.person_name} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.optionsForm.name.control}</div>
       </div>
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.login}*</label>
+        <label class="col-sm-3 control-label">{$i18n.label.login} <span class="requiredField">*</span></label>
         <div class="col-sm-9">{$forms.optionsForm.login.control}</div>
       </div>
 {if !$auth_external}

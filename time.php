@@ -208,7 +208,7 @@ if (!$user->canManageTeam() && defined('READONLY_START_FINISH') && isTrue(READON
   $form->getElement('finish')->setEnable(false);
 }
 if ((TYPE_DURATION == $user->record_type) || (TYPE_ALL == $user->record_type))
-  $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');",'class'=>'form-control','placeholder'=>'Enter Duration in Hours'));
+  $form->addInput(array('type'=>'text','name'=>'duration','value'=>$cl_duration,'onchange'=>"formDisable('duration');",'class'=>'form-control','placeholder'=>'Enter duration in hours (1-24)'));
 if (!defined('NOTE_INPUT_HEIGHT'))
 	define('NOTE_INPUT_HEIGHT', 40);
 $form->addInput(array('type'=>'textarea','name'=>'note','value'=>$cl_note, 'class'=>'form-control'));
@@ -265,6 +265,8 @@ if ($request->isPost()) {
     // }
     if($cl_duration) {
       if ((preg_match('/[\'^£$%&*:;.()}{@#~?><>,|=_+¬-]/', $cl_duration)) || !is_numeric($cl_duration)) 
+      $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
+      if ($cl_duration > 24) 
       $err->add($i18n->getKey('error.field'), $i18n->getKey('label.duration'));
     }
       if (!$cl_duration) {

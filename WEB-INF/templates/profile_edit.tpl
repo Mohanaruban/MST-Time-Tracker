@@ -5,53 +5,53 @@ function handlePluginCheckboxes() {
   var invoicesCheckbox = document.getElementById("invoices");
   var requiredCheckbox = document.getElementById("client_required");
   var requiredLabel = document.getElementById("required_label");
-  if (clientsCheckbox.checked) {
-    requiredCheckbox.style.visibility = "visible";
-    requiredLabel.style.visibility = "visible";
-    invoicesCheckbox.disabled = false;
-  } else {
-    requiredCheckbox.checked = false;
-    requiredCheckbox.style.visibility = "hidden";
-    requiredLabel.style.visibility = "hidden";
-    invoicesCheckbox.checked = false;
-    invoicesCheckbox.disabled = true;
-  }
+  // if (clientsCheckbox.checked) {
+  //   requiredCheckbox.style.visibility = "visible";
+  //   requiredLabel.style.visibility = "visible";
+  //   invoicesCheckbox.disabled = false;
+  // } else {
+  //   requiredCheckbox.checked = false;
+  //   requiredCheckbox.style.visibility = "hidden";
+  //   requiredLabel.style.visibility = "hidden";
+  //   invoicesCheckbox.checked = false;
+  //   invoicesCheckbox.disabled = true;
+  // }
 
   var expensesCheckbox = document.getElementById("expenses");
   var taxCheckbox = document.getElementById("tax_expenses");
   var taxLabel = document.getElementById("tax_label");
-  if (expensesCheckbox.checked) {
-    taxCheckbox.style.visibility = "visible";
-    taxLabel.style.visibility = "visible";
-  } else {
-    taxCheckbox.checked = false;
-    taxCheckbox.style.visibility = "hidden";
-    taxLabel.style.visibility = "hidden";
-  }
+  // if (expensesCheckbox.checked) {
+  //   taxCheckbox.style.visibility = "visible";
+  //   taxLabel.style.visibility = "visible";
+  // } else {
+  //   taxCheckbox.checked = false;
+  //   taxCheckbox.style.visibility = "hidden";
+  //   taxLabel.style.visibility = "hidden";
+  // }
 
-  var customFieldsCheckbox = document.getElementById("custom_fields");
-  var configureLabel = document.getElementById("cf_config");
-  if (customFieldsCheckbox.checked) {
-    configureLabel.style.visibility = "visible";
-  } else {
-    configureLabel.style.visibility = "hidden";
-  }
+  // var customFieldsCheckbox = document.getElementById("custom_fields");
+  // var configureLabel = document.getElementById("cf_config");
+  // if (customFieldsCheckbox.checked) {
+  //   configureLabel.style.visibility = "visible";
+  // } else {
+  //   configureLabel.style.visibility = "hidden";
+  // }
 
   var notificationsCheckbox = document.getElementById("notifications");
   configureLabel = document.getElementById("notifications_config");
-  if (notificationsCheckbox.checked) {
-    configureLabel.style.visibility = "visible";
-  } else {
-    configureLabel.style.visibility = "hidden";
-  }
+  // if (notificationsCheckbox.checked) {
+  //   configureLabel.style.visibility = "visible";
+  // } else {
+  //   configureLabel.style.visibility = "hidden";
+  // }
 
   var lockingCheckbox = document.getElementById("locking");
   configureLabel = document.getElementById("locking_config");
-  if (lockingCheckbox.checked) {
-    configureLabel.style.visibility = "visible";
-  } else {
-    configureLabel.style.visibility = "hidden";
-  }
+  // if (lockingCheckbox.checked) {
+  //   configureLabel.style.visibility = "visible";
+  // } else {
+  //   configureLabel.style.visibility = "hidden";
+  // }
 
   var quotasCheckbox = document.getElementById("quotas");
   configureLabel = document.getElementById("quotas_config");
@@ -74,26 +74,26 @@ function handlePluginCheckboxes() {
     <div class="col-sm-12">
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.person_name}*</label>
+        <label class="col-sm-3 control-label">{$i18n.label.person_name} <span class="requiredField">*</span></label>
         <div class="col-sm-7">{$forms.profileForm.name.control}</div>
         <div class="col-md-2"></div>
       </div>
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.login}*</label>
+        <label class="col-sm-3 control-label">{$i18n.label.login} <span class="requiredField">*</span></label>
         <div class="col-sm-7">{$forms.profileForm.login.control}</div>
         <div class="col-md-2"></div>
       </div>
       {if !$auth_external}
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.password}*</label>
+        <label class="col-sm-3 control-label">{$i18n.label.password} <span class="requiredField">*</span></label>
         <div class="col-sm-7">{$forms.profileForm.password1.control}</div>
         <div class="col-md-2"></div>
       </div>
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">{$i18n.label.confirm_password}*</label>
+        <label class="col-sm-3 control-label">{$i18n.label.confirm_password} <span class="requiredField">*</span></label>
         <div class="col-sm-7">{$forms.profileForm.password2.control}</div>
         <div class="col-md-2"></div>
       </div>
@@ -105,13 +105,13 @@ function handlePluginCheckboxes() {
       </div>
       
       {if $user->isAdmin()}
-<!-- 
+
       <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.team_name}</label>
         <div class="col-sm-7">{$forms.profileForm.team_name.control}</div>
         <div class="col-md-2"></div>
       </div>
-      <div class="form-group">
+   <!--    <div class="form-group">
         <label class="col-sm-3 control-label">{$i18n.label.currency}</label>
         <div class="col-sm-7">{$forms.profileForm.currency.control}</div>
         <div class="col-md-2"></div>
@@ -161,16 +161,16 @@ function handlePluginCheckboxes() {
 
       {* initialize preview text *}
       <script>
-        MakeFormatPreview("date_format_preview", document.getElementById("format_date"));
-        MakeFormatPreview("time_format_preview", document.getElementById("format_time"));
+        // MakeFormatPreview("date_format_preview", document.getElementById("format_date"));
+        // MakeFormatPreview("time_format_preview", document.getElementById("format_time"));
 
-        function adjustDecimalPreview()
-        {
-          var mark = document.getElementById("decimal_mark").value;
-          var example = document.getElementById("decimal_preview");
-          example.innerHTML = "<i>3"+mark+"14</i>";
-        }
-        adjustDecimalPreview();
+        // function adjustDecimalPreview()
+        // {
+        //   var mark = document.getElementById("decimal_mark").value;
+        //   var example = document.getElementById("decimal_preview");
+        //   example.innerHTML = "<i>3"+mark+"14</i>";
+        // }
+        //adjustDecimalPreview();
       </script>
 
       <div class="form-group">

@@ -108,7 +108,7 @@ static function getManagerListReport() {
 
   static function getTeamid_projectEdit($cl_project_id) {
     $mdb2 = getConnection();
-    $sql = "SELECT team_id FROM `tt_projects` where id = $cl_project_id and status = 1 ORDER BY `id` ASC ";
+    $sql = "SELECT team_id FROM `tt_projects` where id = $cl_project_id and (status = 1 or status = 0) ORDER BY `id` ASC ";
     $res = $mdb2->query($sql);
     $teamid = array();
     while ($val = $res->fetchRow()) {

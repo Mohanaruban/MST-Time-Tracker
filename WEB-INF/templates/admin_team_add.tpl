@@ -11,22 +11,22 @@
     </div>
 
     <div class="form-group">
-      <label class="col-sm-3 control-label">{$i18n.label.manager_name}*</label>
+      <label class="col-sm-3 control-label">{$i18n.label.manager_name} <span class="requiredField">*</span></label>
       <div class="col-sm-9">{$forms.teamForm.manager_name.control}</div>
     </div>
 
     <div class="form-group">
-      <label class="col-sm-3 control-label">{$i18n.label.manager_login}*</label>
+      <label class="col-sm-3 control-label">{$i18n.label.manager_login} <span class="requiredField">*</span></label>
       <div class="col-sm-9">{$forms.teamForm.manager_login.control}</div>
     </div>
 
     <div class="form-group">
-      <label class="col-sm-3 control-label">{$i18n.label.password}*</label>
+      <label class="col-sm-3 control-label">{$i18n.label.password} <span class="requiredField">*</span></label>
       <div class="col-sm-9">{$forms.teamForm.password1.control}</div>
     </div>
 
     <div class="form-group">
-      <label class="col-sm-3 control-label">{$i18n.label.confirm_password}*</label>
+      <label class="col-sm-3 control-label">{$i18n.label.confirm_password} <span class="requiredField">*</span></label>
       <div class="col-sm-9">{$forms.teamForm.password2.control}</div>
     </div>
 
@@ -62,7 +62,7 @@
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
-          <td align="right" nowrap>{$i18n.label.manager_name} (*):</td>
+          <td align="right" nowrap>{$i18n.label.manager_name} <span class="requiredField">*</span>:</td>
           <td>{$forms.teamForm.manager_name.control}</td>
         </tr>
         <tr>

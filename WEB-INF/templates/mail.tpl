@@ -5,7 +5,7 @@
 
       <div class="form-group">
         <div class="col-md-12">
-          <label class="col-sm-3 control-label">{$i18n.form.mail.from} (*)</label>
+          <label class="col-sm-3 control-label">{$i18n.form.mail.from} <span class="requiredField">*</span></label>
           <div class="col-sm-8 text-left">
             {$smarty.const.SENDER}
           </div>
@@ -14,7 +14,7 @@
       
       <div class="form-group">
         <div class="col-md-12">
-          <label class="col-sm-3 control-label">{$i18n.form.mail.to} (*)</label>
+          <label class="col-sm-3 control-label">{$i18n.form.mail.to} <span class="requiredField">*</span></label>
           <div class="col-sm-8">
             {$forms.mailForm.receiver.control}
           </div>
@@ -32,7 +32,7 @@
       
       <div class="form-group">
         <div class="col-md-12">
-          <label class="col-sm-3 control-label">{$i18n.form.mail.subject} (*)</label>
+          <label class="col-sm-3 control-label">{$i18n.form.mail.subject} <span class="requiredField">*</span></label>
           <div class="col-sm-8">
             {$forms.mailForm.subject.control}
           </div>
