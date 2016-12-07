@@ -150,7 +150,7 @@ class CheckboxGroup extends FormElement {
 			$html .= "\n\t<div class=\"row text-left\" style=\"margin-bottom: 15px;\">\n";
 			for ($i = 0; $i < $renderRows; $i++) {
 				for ($j = 0; $j < $renderCols; $j++) {
-					$html .= "\t<div class=\"col-md-4 col-sm-6\" style=\"margin-bottom: 5px;\">".(isset($renderArray[$j][$i])?$renderArray[$j][$i]:"&nbsp;")."</div>\n";
+					$html .= "\t<div class=\"col-sm-6\" style=\"margin-bottom: 5px;\">".(isset($renderArray[$j][$i])?$renderArray[$j][$i]:"&nbsp;")."</div>\n";
 				}
 			}
 			$html .= "</div>\n";
