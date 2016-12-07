@@ -20,58 +20,91 @@ obj_tasks[project_property] = "{$project.tasks}";
 //Added by Ruban
 project_ids = new Array();
 {foreach $client_list as $client}
-  project_ids[{$client.id}] = "{$client.projects}";
+project_ids[{$client.id}] = "{$client.projects}";
 {/foreach}
 
 project_ids = new Array();
 {foreach $manager_list as $client}
-  project_ids[{$client.id}] = "{$client.projects}";
+project_ids[{$client.id}] = "{$client.projects}";
 {/foreach}
 // Prepare an array of project names.
 project_names = new Array();
 {foreach $project_list as $project}
-  project_names[{$project.id}] = "{$project.name|escape:'javascript'}";
+project_names[{$project.id}] = "{$project.name|escape:'javascript'}";
 {/foreach}
 // We'll use this array to populate project dropdown when client is not selected.
 var idx = 0;
 projects = new Array();
 {foreach $project_list as $project}
-  projects[idx] = new Array("{$project.id}", "{$project.name|escape:'javascript'}");
-  idx++;
+projects[idx] = new Array("{$project.id}", "{$project.name|escape:'javascript'}");
+idx++;
 {/foreach}
 
 // Mandatory top option for project dropdown.
 empty_label_project = '{$i18n.dropdown.select|escape:'javascript'}';
 
-function fillProjectDropdown(id) {
-  var str_ids = project_ids[id];
-  var dropdown = document.getElementById("project");
-  // Determine previously selected item.
-  var selected_item = dropdown.options[dropdown.selectedIndex].value;
-  // Remove existing content.
-  dropdown.length = 0;
-  // Add mandatory top option.
-  dropdown.options[0] = new Option(empty_label_project, '', true);
+function selectAssignedProjects(manager_id) {
+  // var str_ids = project_ids[id];
+  // var dropdown = document.getElementById("project");
+  // // Determine previously selected item.
+  // var selected_item = dropdown.options[dropdown.selectedIndex].value;
+  // // Remove existing content.
+  // dropdown.length = 0;
+  // // Add mandatory top option.
+  // dropdown.options[0] = new Option(empty_label_project, '', true);
 
-  // Populate project dropdown.
-  if (!id) {
-    // If we are here, client is not selected.
-    var len = projects.length;
-    for (var i = 0; i < len; i++) {
-      dropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
-      if (dropdown.options[i+1].value == selected_item)
-        dropdown.options[i+1].selected = true;
-    }
-  } else if (str_ids) {
-    var ids = new Array();
-    ids = str_ids.split(",");
-    var len = ids.length;
+  // // Populate project dropdown.
+  // if (!id) {
+  //   // If we are here, client is not selected.
+  //   var len = projects.length;
+  //   for (var i = 0; i < len; i++) {
+  //     dropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
+  //     if (dropdown.options[i+1].value == selected_item)
+  //       dropdown.options[i+1].selected = true;
+  //   }
+  // } else if (str_ids) {
+  //   var ids = new Array();
+  //   ids = str_ids.split(",");
+  //   var len = ids.length;
 
-    for (var i = 0; i < len; i++) {
-      var p_id = ids[i];
-      dropdown.options[i+1] = new Option(project_names[p_id], p_id);
-      if (dropdown.options[i+1].value == selected_item)
-        dropdown.options[i+1].selected = true;
+  //   for (var i = 0; i < len; i++) {
+  //     var p_id = ids[i];
+  //     dropdown.options[i+1] = new Option(project_names[p_id], p_id);
+  //     if (dropdown.options[i+1].value == selected_item)
+  //       dropdown.options[i+1].selected = true;
+  //   }
+  // } 
+  
+  var project_id;
+  var len;
+
+  for (var i = 0; i < document.reportForm.elements.length; i++) {
+    if ((document.reportForm.elements[i].type == 'checkbox') && (document.reportForm.elements[i].name == 'project[]')) {
+      project_id = document.reportForm.elements[i].value;
+      if (manager_id) {
+        document.reportForm.elements[i].parentNode.style.display = "none";
+        document.reportForm.elements[i].checked = false;
+      }
+      else {
+        document.reportForm.elements[i].parentNode.style.display = "block";
+        document.reportForm.elements[i].checked = true;
+      }
+
+      if(project_ids[manager_id] != undefined) {
+        var ids = new Array();
+        ids = project_ids[manager_id].split(",");
+        var len = ids.length;
+      }
+
+      if (manager_id != '') {
+        for (var j = 0; j < len; j++) {
+          if (project_id == ids[j]) {
+            document.reportForm.elements[i].parentNode.style.display = "block";
+            document.reportForm.elements[i].checked = true;
+            break;
+          }
+        }
+      }
     }
   }
 }
@@ -165,30 +198,32 @@ assigned_projects[{$user_id}][{$idx}] = {$project_id};
 
 // selectAssignedUsers is called when a project is changed in project dropdown.
 // It selects users on the form who are assigned to this project.
-function selectAssignedUsers(project_id) {
+function selectAssignedUsers() {
   var user_id;
   var len;
+  var selected_projects = [];
+  for (var i = 0; i < document.reportForm.elements.length; i++) {
+    if ((document.reportForm.elements[i].type == 'checkbox') && (document.reportForm.elements[i].name == 'project[]')) {
+      if(document.reportForm.elements[i].checked) {
+        selected_projects.push(document.reportForm.elements[i].value);
+      }
+    }
+  }
 
   for (var i = 0; i < document.reportForm.elements.length; i++) {
     if ((document.reportForm.elements[i].type == 'checkbox') && (document.reportForm.elements[i].name == 'users[]')) {
       user_id = document.reportForm.elements[i].value;
-      if (project_id) {
-        document.reportForm.elements[i].parentNode.style.display = "none";
-            document.reportForm.elements[i].checked = false;
-      }
-      else {
-        document.reportForm.elements[i].parentNode.style.display = "block";
-            document.reportForm.elements[i].checked = true;
-      }
+      document.reportForm.elements[i].parentNode.style.display = "none";
+      document.reportForm.elements[i].checked = false;
 
       if(assigned_projects[user_id] != undefined)
         len = assigned_projects[user_id].length;
       else
         len = 0;
 
-      if (project_id != '')
+      if (selected_projects.length) {
         for (var j = 0; j < len; j++) {
-          if (project_id == assigned_projects[user_id][j]) {
+          if (selected_projects.indexOf(assigned_projects[user_id][j].toString()) > -1) {
             document.reportForm.elements[i].parentNode.style.display = "block";
             document.reportForm.elements[i].checked = true;
             break;
@@ -197,6 +232,7 @@ function selectAssignedUsers(project_id) {
       }
     }
   }
+}
 
 // handleCheckboxes - unmarks and disables the "Totals only" checkbox when
 // "no grouping" is selected in the associated dropdown.
@@ -220,12 +256,12 @@ function handleCheckboxes() {
   a {
     color: #95a5a6;
     text-decoration: none
-}
-a:hover,
-a:focus {
+  }
+  a:hover,
+  a:focus {
     color: #1778bd;
     text-decoration: underline
-}
+  }
 </style>
 <div class="col-sm-12 text-center">
   {$forms.reportForm.open}
@@ -263,9 +299,9 @@ a:focus {
                   </div>
                 </div>
                 {/if}
-      {if $user->isAdmin()}
+                {if $user->isAdmin()}
 
-                      <div class="form-group">
+                <div class="form-group">
                   <div class="col-sm-12">
                     <label class="col-sm-3 control-label">{$i18n.label.manager_names}</label>
                     <div class="col-sm-8">
@@ -273,7 +309,7 @@ a:focus {
                     </div>
                   </div>
                 </div>
-      {/if}
+                {/if}
                 {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode || $user->isAdmin())}
                 <div class="form-group">
                   <div class="col-sm-12">
@@ -285,7 +321,7 @@ a:focus {
                 </div>
                 {/if}
 
-                {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
+                <!-- {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
                 <div class="form-group">
                   <div class="col-sm-12">
                     <label class="col-sm-3 control-label">{if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
@@ -312,7 +348,7 @@ a:focus {
                       <div class="col-sm-8">{$forms.reportForm.invoice.control}</div>
                     </div>
                   </div>
-                  {/if}
+                  {/if} -->
 
                   {if $user->canManageTeam() || $user->isClient()}
                   <div class="form-group">
@@ -347,16 +383,16 @@ a:focus {
                       <div class="col-sm-8" style="margin-top: 10px;">
                         <div class="row text-left">
                           {if $user->isPluginEnabled('cl') || $user->isPluginEnabled('iv')}
-                            {if $user->isPluginEnabled('cl')}
-                            <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></div>
-                            {/if}
-                            {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
-                            <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></div>
-                            {/if}
+                          {if $user->isPluginEnabled('cl')}
+                          <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chclient.control}&nbsp;{$i18n.label.client}</label></div>
                           {/if}
-                            {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chproject.control}&nbsp;{$i18n.label.project}</label></div>{/if}
-                            {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chstart.control}&nbsp;{$i18n.label.start}</label></div>{/if}
-                            <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chduration.control}&nbsp;{$i18n.label.duration}</label></div>
+                          {if ($user->canManageTeam() || $user->isClient()) && $user->isPluginEnabled('iv')}
+                          <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chinvoice.control}&nbsp;{$i18n.label.invoice}</label></div>
+                          {/if}
+                          {/if}
+                          {if ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}<div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chproject.control}&nbsp;{$i18n.label.project}</label></div>{/if}
+                          {if (($smarty.const.TYPE_START_FINISH == $user->record_type) || ($smarty.const.TYPE_ALL == $user->record_type))}<div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chstart.control}&nbsp;{$i18n.label.start}</label></div>{/if}
+                          <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chduration.control}&nbsp;{$i18n.label.duration}</label></div>
                             <!-- {if ((($user->canManageTeam() || $user->isClient()) || $user->isPluginEnabled('ex')) && defined('COST_ON_REPORTS') && isTrue($smarty.const.COST_ON_REPORTS))}
                             <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chcost.control}&nbsp;{$i18n.label.cost}</label></td>
                             {else}
@@ -369,67 +405,67 @@ a:focus {
                             <div class="col-md-4 col-sm-6"><label>{$forms.reportForm.chcf_1.control}&nbsp;{$custom_fields->fields[0]['label']|escape:'html'}</label></div>
                             {else}
                             {/if}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-md-12">
+                        <label class="col-sm-3 control-label">{$i18n.form.reports.group_by}</label>
+                        <div class="col-sm-8">
+                          {$forms.reportForm.group_by.control}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-md-12">
+                        <label class="col-sm-3 control-label"></label>
+                        <div class="col-sm-8 text-left">
+                          {$forms.reportForm.chtotalsonly.control} {$i18n.form.reports.totals_only}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-md-12">
+                        <label class="col-sm-3 control-label">{$i18n.form.reports.save_as_favorite}</label>
+                        <div class="col-sm-8">{$forms.reportForm.new_fav_report.control}
+                          <span class="pull-down" style="float:right;">{$forms.reportForm.btn_save.control}</span>
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  <div class="form-group">
+                <div class="panel-footer">
+                  <div class="row">
                     <div class="col-md-12">
-                      <label class="col-sm-3 control-label">{$i18n.form.reports.group_by}</label>
-                      <div class="col-sm-8">
-                        {$forms.reportForm.group_by.control}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-md-12">
-                      <label class="col-sm-3 control-label"></label>
-                      <div class="col-sm-8 text-left">
-                        {$forms.reportForm.chtotalsonly.control} {$i18n.form.reports.totals_only}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-md-12">
-                      <label class="col-sm-3 control-label">{$i18n.form.reports.save_as_favorite}</label>
-                      <div class="col-sm-8">{$forms.reportForm.new_fav_report.control}
-                        <span class="pull-down" style="float:right;">{$forms.reportForm.btn_save.control}</span>
-                      </div>
+                      {$forms.reportForm.btn_generate.control}
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="panel-footer">
-                <div class="row">
-                  <div class="col-md-12">
-                    {$forms.reportForm.btn_generate.control}
-                  </div>
-                </div>
               </div>
-
             </div>
-          </div>
 
-          <div class="tab-pane fade" id="FavoriteReport">
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">{$i18n.label.fav_report}</label>
-                  <div class="col-sm-8">{$forms.reportForm.favorite_report.control}</div>
-                </div>
+            <div class="tab-pane fade" id="FavoriteReport">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">{$i18n.label.fav_report}</label>
+                    <div class="col-sm-8">{$forms.reportForm.favorite_report.control}</div>
+                  </div>
 
-                <div class="form-group">
-                  <div class="col-sm-12 text-center">{$forms.reportForm.btn_generate.control}&nbsp;{$forms.reportForm.btn_delete.control}</div>
+                  <div class="form-group">
+                    <div class="col-sm-12 text-center">{$forms.reportForm.btn_generate.control}&nbsp;{$forms.reportForm.btn_delete.control}</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {$forms.reportForm.close}
     </div>
-    {$forms.reportForm.close}
-  </div>

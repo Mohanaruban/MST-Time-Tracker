@@ -47,7 +47,7 @@ class ttReportHelper {
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and l.client_id = '.$user->client_id;
     if ($bean->getAttribute('option')) $dropdown_parts .= ' and l.id in(select log_id from tt_custom_field_log where status = 1 and option_id = '.$bean->getAttribute('option').')';
-    if ($bean->getAttribute('project')) $dropdown_parts .= ' and l.project_id = '.$bean->getAttribute('project');
+    if ($bean->getAttribute('project')) $dropdown_parts .= ' and l.project_id IN ('.implode(",",$bean->getAttribute('project')).')';
     if ($bean->getAttribute('task')) $dropdown_parts .= ' and l.task_id = '.$bean->getAttribute('task');
     if ($bean->getAttribute('include_records')=='1') $dropdown_parts .= ' and l.billable = 1';
     if ($bean->getAttribute('include_records')=='2') $dropdown_parts .= ' and l.billable = 0';
@@ -162,7 +162,7 @@ class ttReportHelper {
       $dropdown_parts .= ' and ei.client_id = '.$bean->getAttribute('client');
     elseif ($user->isClient() && $user->client_id)
       $dropdown_parts .= ' and ei.client_id = '.$user->client_id;
-    if ($bean->getAttribute('project')) $dropdown_parts .= ' and ei.project_id = '.$bean->getAttribute('project');
+    if ($bean->getAttribute('project')) $dropdown_parts .= ' and ei.project_id IN ('.implode(",",$bean->getAttribute('project')).')';
     if ($bean->getAttribute('invoice')=='1') $dropdown_parts .= ' and ei.invoice_id is not NULL';
     if ($bean->getAttribute('invoice')=='2') $dropdown_parts .= ' and ei.invoice_id is NULL';
 
