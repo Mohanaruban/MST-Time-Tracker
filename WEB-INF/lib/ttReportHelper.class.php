@@ -1139,14 +1139,23 @@ static function prepareReportBody($bean, $comment)
     $body .= '<table border="0" cellpadding="4" cellspacing="0" class="table table-bordered table-responsive table-hover">';
     $body .= '<tr>';
     $body .= '<td style="'.$tableHeader.'">'.$group_by_header.'</td>';
+    if ($group_by == 'user') 
+      $body .= '<td style="'.$tableHeaderCentered.'">Projects</td>';
     if ($bean->getAttribute('chduration'))
       $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.duration').'</td>';
     if ($bean->getAttribute('chcost'))
       $body .= '<td style="'.$tableHeaderCentered.'">'.$i18n->getKey('label.cost').'</td>';
+    if ($group_by == 'user') 
+      $body .= '<td style="'.$tableHeaderCentered.'">Utilization</td>';
     $body .= '</tr>';
     foreach($subtotals as $subtotal) {
       $body .= '<tr style="'.$rowSubtotal.'">';
       $body .= '<td style="'.$cellLeftAlignedSubtotal.'">'.($subtotal['name'] ? htmlspecialchars($subtotal['name']) : '&nbsp;').'</td>';
+      if(array_key_exists("projects",$subtotal)) {
+        $body .= '<td>';
+        $body .= $subtotal['projects'];
+        $body .= '</td>';
+      }
       if ($bean->getAttribute('chduration')) {
         $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
         if ($subtotal['time'] <> '0:00') $body .= $subtotal['time'];
@@ -1155,6 +1164,11 @@ static function prepareReportBody($bean, $comment)
       if ($bean->getAttribute('chcost')) {
         $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
         $body .= ($user->canManageTeam() || $user->isClient()) ? $subtotal['cost'] : $subtotal['expenses'];
+        $body .= '</td>';
+      }
+      if(array_key_exists("util",$subtotal)) {
+        $body .= '<td style="'.$cellRightAlignedSubtotal.'">';
+        $body .= $subtotal['util'].'%';
         $body .= '</td>';
       }
       $body .= '</tr>';
