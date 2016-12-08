@@ -139,7 +139,6 @@ static function getmailvalidate($cl_email) {
   // insert - inserts a user into database.
   static function insert($fields, $hash = true) {
   	$mdb2 = getConnection();
-
     $password = $mdb2->quote($fields['password']);
     if($hash)
       $password = 'md5('.$password.')';
@@ -153,7 +152,6 @@ static function getmailvalidate($cl_email) {
       $status_f = ', status';
       $status_v = ', '.$mdb2->quote($fields['status']);
     }
-
     $sql = "insert into tt_users (name, login, password, team_id, role, client_id, rate, email $status_f) values (".
       $mdb2->quote($fields['name']).", ".$mdb2->quote($fields['login']).
       ", $password, $team_id, $role, ".$mdb2->quote($fields['client_id']).", $rate, ".$mdb2->quote($email)." $status_v)";
@@ -174,11 +172,21 @@ static function getmailvalidate($cl_email) {
             $p['rate'] = 0;
           else
             $p['rate'] = str_replace(',', '.', $p['rate']);
-
           $sql = "insert into tt_user_project_binds (project_id, user_id, rate, status) values(".$p['id'].",".$last_id.",".$p['rate'].", 1)";
           $affected = $mdb2->exec($sql);
         }
       }
+
+      $billable = isset($fields['billable']) ? $fields['billable'] : array();
+      if (count($billable) > 0) {
+        // We have at least one project assigned. Insert corresponding entries in tt_user_project_binds table.
+        foreach($billable as $b) {
+          $sql = "update tt_user_project_binds set billable = 1 where project_id = $b and user_id = $last_id";
+          $affected = $mdb2->exec($sql);
+        }
+    }
+
+
       return $last_id;
     }
     return false;
@@ -280,7 +288,8 @@ static function getmailvalidate($cl_email) {
   static function updateAdmin($user_id, $fields) {
     global $user;
     $mdb2 = getConnection();
-    
+    // print_r($fields['billable']);
+    // exit;
     // Check parameters.
     if (!$user_id || !isset($fields['login']))
       return false;
@@ -312,7 +321,8 @@ static function getmailvalidate($cl_email) {
     //   "$pass_part, name = ".$mdb2->quote($fields['name']).
     //   "$role_part $client_part $rate_part $status_part, email = ".$mdb2->quote($fields['email']).
     //   " where id = $user_id";
-
+ // print_r($fields['projects']);
+ // exit;
     $sql = "update tt_users set login = ".$mdb2->quote($fields['login'])."$pass_part, name = ".$mdb2->quote($fields['name'])."$role_part $client_part $rate_part $status_part, email = ".$mdb2->quote($fields['email']).", team_id = ".$mdb2->quote($fields['team_id'])." where id = $user_id";
     $affected = $mdb2->exec($sql);
     if (is_a($affected, 'PEAR_Error')) return false;
@@ -356,8 +366,12 @@ static function getmailvalidate($cl_email) {
           if (is_a($res, 'PEAR_Error')) die ($res->getMessage());
           if ($val = $res->fetchRow()) {
             // Record exists. Update it.
-            $sql = "update tt_user_project_binds set status = 1, rate = $rate where id = ".$val['id'];
+            $sql = "update tt_user_project_binds set status = 1, billable = 0, rate = $rate where id = ".$val['id'];
             $affected = $mdb2->exec($sql);
+            foreach ($fields['billable'] as $value) {
+               $sql = "update tt_user_project_binds set status = 1, billable = 1 where id = ".$val['id']." and project_id =".$value;
+               $affected = $mdb2->exec($sql);
+            }
             if (is_a($affected, 'PEAR_Error')) die ($affected->getMessage());
           } else {
             // Record does not exist. Insert it.

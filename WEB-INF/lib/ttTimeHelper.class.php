@@ -387,6 +387,11 @@ class ttTimeHelper {
     if (!$billable) $billable = 0;
 
     if ($duration) {
+    $sql =  "select billable from tt_user_project_binds where project_id = ".$mdb2->quote($project)." and status = 1 and user_id = $user_id";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $billable = $res->fetchRow()['billable'];
+    }
       $sql = "insert into tt_log (timestamp, user_id, date, duration, client_id, project_id, task_id, invoice_id, comment, billable $status_f) ".
         "values ('$timestamp', $user_id, ".$mdb2->quote($date).", '$duration', ".$mdb2->quote($client).", ".$mdb2->quote($project).", ".$mdb2->quote($task).", ".$mdb2->quote($invoice).", ".$mdb2->quote($note).", $billable $status_v)";
       $affected = $mdb2->exec($sql);
@@ -434,6 +439,12 @@ class ttTimeHelper {
     if ($start) $duration = '';
 
     if ($duration) {
+      
+    $sql =  "select billable from tt_user_project_binds where project_id = ".$mdb2->quote($project)." and status = 1 and user_id = $user_id";
+    $res = $mdb2->query($sql);
+    if (!is_a($res, 'PEAR_Error')) {
+      $billable = $res->fetchRow()['billable'];
+    }
       $sql = "UPDATE tt_log set start = NULL, duration = '$duration', client_id = ".$mdb2->quote($client).", project_id = ".$mdb2->quote($project).", task_id = ".$mdb2->quote($task).", ".
         "comment = ".$mdb2->quote($note).", billable = $billable, date = '$date' WHERE id = $id";
       $affected = $mdb2->exec($sql);
