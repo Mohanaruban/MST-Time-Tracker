@@ -95,7 +95,7 @@
         {if $report_row_class == 'rowReportItem'} {$report_row_class = 'rowReportItemAlt'} {else} {$report_row_class = 'rowReportItem'} {/if}
         {/if}
         <tr>
-          <td>{$item.date}</td>
+          <td>{$item.date|date_format:'%m-%d-%Y'}</td>
           {if $user->canManageTeam() || $user->isClient()}<td>{$item.user|escape:'html'}</td>{/if}
           {if $bean->getAttribute('chclient')}<td>{$item.client|escape:'html'}</td>{/if}
           {if $bean->getAttribute('chproject')}<td>{$item.project|escape:'html'}</td>{/if}
