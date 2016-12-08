@@ -38,6 +38,8 @@ class CheckboxGroup extends FormElement {
 	var $mDataDeep	= 1;
 	var $lSelAll	= "All";
 	var $lSelNone	= "None";
+	var $mOnClickSelect = NULL;	// OnClick event on clicking Select button
+	var $mOnClickDeselect = NULL;	// OnClick event on clicking Deselect button
 
 	function __construct($name,$value="")
 	{
@@ -59,6 +61,12 @@ class CheckboxGroup extends FormElement {
 	
 	function setGroupIn($value)	{ $this->mGroupIn = $value; if ($this->mGroupIn<1) $this->mGroupIn = 1;}
 	function getGroupIn() { return $this->mGroupIn; }
+
+	function setClickSelect($value) { $this->mOnClickSelect = $value; }
+	function getClickSelect() { return $this->mOnClickSelect;}
+
+	function setClickDeselect($value) { $this->mOnClickDeselect = $value; }
+	function getClickDeselect() { return $this->mOnClickDeselect;}
 	
 	function setLocalization($i18n) {
 		FormElement::setLocalization($i18n);
@@ -137,7 +145,15 @@ class CheckboxGroup extends FormElement {
 		} else {
 			$html = "\n\t<table class=\"table\"><tr><td>\n";
 		}
-		$html .= '<a href="#" onclick="setAll'.$this->getName().'(true);return false;">'.$this->lSelAll.'</a>&nbsp;/&nbsp;<a href="#" onclick="setAll'.$this->getName().'(false);return false;">'.$this->lSelNone.'</a>';
+		$html .= '<a href="#" onclick="setAll'.$this->getName().'(true);';
+		if(!is_null($this->mOnClickSelect)) {
+			$html .= $this->mOnClickSelect.';';
+		}
+		$html .= 'return false;">'.$this->lSelAll.'</a>&nbsp;/&nbsp;<a href="#" onclick="setAll'.$this->getName().'(false);';
+		if(!is_null($this->mOnClickDeselect)) {
+			$html .= $this->mOnClickDeselect.';';
+		}
+		$html .= 'return false;">'.$this->lSelNone.'</a>';
 		$html .= "</td></tr>\n";
 		$html .= "<tr><td>";
 
