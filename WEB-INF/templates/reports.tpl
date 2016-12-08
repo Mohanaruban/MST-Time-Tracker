@@ -44,37 +44,6 @@ idx++;
 empty_label_project = '{$i18n.dropdown.select|escape:'javascript'}';
 
 function selectAssignedProjects(manager_id) {
-  // var str_ids = project_ids[id];
-  // var dropdown = document.getElementById("project");
-  // // Determine previously selected item.
-  // var selected_item = dropdown.options[dropdown.selectedIndex].value;
-  // // Remove existing content.
-  // dropdown.length = 0;
-  // // Add mandatory top option.
-  // dropdown.options[0] = new Option(empty_label_project, '', true);
-
-  // // Populate project dropdown.
-  // if (!id) {
-  //   // If we are here, client is not selected.
-  //   var len = projects.length;
-  //   for (var i = 0; i < len; i++) {
-  //     dropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
-  //     if (dropdown.options[i+1].value == selected_item)
-  //       dropdown.options[i+1].selected = true;
-  //   }
-  // } else if (str_ids) {
-  //   var ids = new Array();
-  //   ids = str_ids.split(",");
-  //   var len = ids.length;
-
-  //   for (var i = 0; i < len; i++) {
-  //     var p_id = ids[i];
-  //     dropdown.options[i+1] = new Option(project_names[p_id], p_id);
-  //     if (dropdown.options[i+1].value == selected_item)
-  //       dropdown.options[i+1].selected = true;
-  //   }
-  // } 
-  
   var project_id;
   var len;
 
@@ -245,6 +214,14 @@ function handleCheckboxes() {
     totalsOnlyCheckbox.disabled = true;
   } else
   totalsOnlyCheckbox.disabled = false;
+}
+
+function loadOnLoad() {
+  handleCheckboxes(); 
+  if(document.reportForm.manager != undefined) {
+    selectAssignedProjects(document.reportForm.manager.value); 
+  }
+  selectAssignedUsers()
 }
 
 
