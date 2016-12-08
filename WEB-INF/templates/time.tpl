@@ -337,7 +337,8 @@ function get_time() {
         </thead>
         <tbody>
           {foreach $time_records as $record}
-          <tr {if !$record.billable} class="not_billable" {/if}>
+          <!-- <tr {if !$record.billable} class="not_billable" {/if}> -->
+          <tr>
             {if $user->isPluginEnabled('cl')}
             <td valign='top'>{$record.client|escape:'html'}</td>
             {/if}
