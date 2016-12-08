@@ -130,6 +130,8 @@ if ($user->canManageTeam() || $user->isAdmin() || $user->isManager()) {
 $form->addInput(array('type'=>'checkboxgroup',
   'name'=>'project',
   'onchange'=>'selectAssignedUsers()',
+  'onClickSelect'=>'selectAssignedUsers()',
+  'onClickDeselect'=>'selectAssignedUsers()',
   'data'=>array_column($project_list,"name","id"),
   'layout'=>'C'));
 
