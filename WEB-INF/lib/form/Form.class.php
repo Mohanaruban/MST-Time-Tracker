@@ -188,6 +188,8 @@ class Form {
 			    if (isset($arguments["layout"])) $el->setLayout($arguments["layout"]);
 			    if (isset($arguments["groupin"])) $el->setGroupIn($arguments["groupin"]);
 			    if (isset($arguments["datakeys"])) $el->setDataKeys($arguments["datakeys"]);
+			    if (isset($arguments["onClickSelect"])) $el->setClickSelect($arguments["onClickSelect"]);
+			    if (isset($arguments["onClickDeselect"])) $el->setClickDeselect($arguments["onClickDeselect"]);
 			    $el->setData(@$arguments["data"]);
 			    break;
 			    
