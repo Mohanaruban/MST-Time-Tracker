@@ -334,6 +334,13 @@ function loadOnLoad() {
                       <div class="col-sm-8">{$forms.reportForm.users.control}</div>
                     </div>
                   </div>
+
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <label class="col-sm-3 control-label">{$i18n.form.time.billable}</label>
+                      <div class="col-sm-8">{$forms.reportForm.include_records.control}</div>
+                    </div>
+                  </div>
                   {/if}
 
                   <div class="form-group">
