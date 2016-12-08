@@ -104,7 +104,7 @@
           {if $bean->getAttribute('chstart')}<td>{$item.start}</td>{/if}
           {if $bean->getAttribute('chfinish')}<td>{$item.finish}</td>{/if}
           {if $bean->getAttribute('chduration')}<td>{$item.duration}</td>{/if}
-          {if $bean->getAttribute('chnote')}<td>{$item.note|escape:'html'}</td>{/if}
+          {if $bean->getAttribute('chnote')}<td class="text-left">{nl2br($item.note|escape:'html')}</td>{/if}
           {if $bean->getAttribute('chcost')}<td>{if $user->canManageTeam() || $user->isClient()}{$item.cost}{else}{$item.expense}{/if}</td>{/if}
           {if $bean->getAttribute('chinvoice')}
           <td>{$item.invoice|escape:'html'}</td>
