@@ -61,6 +61,7 @@ if ($request->isPost()) {
   $cl_client_id = $request->getParameter('client');
   $cl_rate = $request->getParameter('rate');
   $cl_projects = $request->getParameter('projects');
+  $cl_billableProjects = $request->getParameter('billable');
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
       if (ttValidFloat($request->getParameter('rate_'.$p), true)) {
@@ -120,6 +121,15 @@ class NameCellRenderer extends DefaultCellRenderer {
     return $this->toString();
   }
 }
+
+class BoxCellRenderer extends DefaultCellRenderer {
+  function render(&$table, $value, $row, $column, $selected = false) {
+    $this->setOptions(array('width'=>200,'valign'=>'top'));
+    $this->setValue("<input type='checkbox' id='billable_".$row."' name = 'billable[]' value=".$table->getValueAtName($row, 'id').">");
+    return $this->toString();
+  }
+}
+
 class RateCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     global $assigned_projects;
@@ -143,7 +153,10 @@ $table->setData($projects);
 $table->setKeyField('id');
 $table->setValue($cl_projects);
 $table->addColumn(new TableColumn('name', $i18n->getKey('label.project'), new NameCellRenderer()));
+$table->addColumn(new TableColumn('', "Billable",new BoxCellRenderer()));
 //$table->addColumn(new TableColumn('p_rate', $i18n->getKey('form.users.rate'), new RateCellRenderer()));
+
+
 $form->addInputElement($table);
 
 $form->addInput(array('type'=>'submit','name'=>'btn_submit','class'=>'btn btn-success','value'=>$i18n->getKey('button.submit')));
@@ -181,6 +194,7 @@ if(strlen($cl_password1)<6){
         'role' => $cl_role,
         'client_id' => $cl_client_id,
         'projects' => $assigned_projects,
+        'billable' => $cl_billableProjects,
         'email' => $cl_email);
       if (ttUserHelper::insert($fields)) {
         header('Location: users.php');

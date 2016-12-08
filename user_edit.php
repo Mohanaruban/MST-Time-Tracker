@@ -91,7 +91,7 @@ if($teamid != "") {
 $projects = ttTeamHelper::getActiveProjectsUserEditAdmin($user_id, $teamid);
 }
 }
-
+ $cl_billable = array();
 $assigned_projects = array();
 if ($request->isPost()) {
   $cl_teamid = trim($request->getParameter('manager_list'));
@@ -108,7 +108,7 @@ if ($request->isPost()) {
   $cl_rate = $request->getParameter('rate');
   $cl_projects = $request->getParameter('projects');
   $cl_projectList = $request->getParameter('projectList');
-
+  $cl_billableProjects = $request->getParameter('billable');
   if (is_array($cl_projects)) {
     foreach ($cl_projects as $p) {
       if (ttValidFloat($request->getParameter('rate_'.$p), true)) {
@@ -139,8 +139,13 @@ if ($request->isPost()) {
   foreach($assigned_projects as $p) {
     $cl_projects[] = $p['id'];
   }
+    if($user->isAdmin()) {
+  $assigned_billable = ttProjectHelper::getAssignedbillableAdmin($user_id,$teamid);
+  }
+    foreach($assigned_billable as $b) {
+    $cl_billable[] = $b['id'];
+  }
 }
-
 $form = new Form('userForm');
 $form->addFormStyle(array('class'=>'form-horizontal'));
 
@@ -178,12 +183,28 @@ $form->addInput(array('type'=>'floatfield','maxlength'=>'10', 'class'=>'form-con
 
 // Define classes for the projects table.
 class NameCellRenderer extends DefaultCellRenderer {
+
   function render(&$table, $value, $row, $column, $selected = false) {
     //$this->setOptions(array('width'=>200,'valign'=>'top'));
     $this->setValue('<label for = "'.$table->getName().'_'.$row.'">'.htmlspecialchars($value).'</label>');
     return $this->toString();
   }
 }
+
+class BoxCellRenderer extends DefaultCellRenderer {
+  function render(&$table, $value, $row, $column, $selected = false) {
+    global $cl_billable;
+    $this->setOptions(array('width'=>200,'valign'=>'top'));
+    $this->setValue("<input type='checkbox' id='billable_".$row."' name = 'billable[]' value=".$table->getValueAtName($row, 'id').">");
+    foreach ($cl_billable as $value) {
+      if($table->getValueAtName($row, 'id') == $value) {
+        $this->setValue("<input type='checkbox' id='billable_".$row."' name = 'billable[]' value=".$table->getValueAtName($row, 'id')." checked>");
+      }
+    }
+    return $this->toString();
+  }
+}
+
 class RateCellRenderer extends DefaultCellRenderer {
   function render(&$table, $value, $row, $column, $selected = false) {
     global $assigned_projects;
@@ -207,7 +228,9 @@ $table->setRowOptions(array('valign'=>'top'));
 $table->setData($projects);
 $table->setKeyField('id');
 $table->setValue($cl_projects);
+// $table->setValue($cl_billable);
 $table->addColumn(new TableColumn('name', $i18n->getKey('label.project'), new NameCellRenderer()));
+$table->addColumn(new TableColumn('', "Billable",new BoxCellRenderer()));
 // if($user->isAdmin()) {
 // $table->addColumn(new TableColumn('p_rate', $i18n->getKey('form.users.rate'), new RateCellRenderer()));
 // }
@@ -247,6 +270,7 @@ if ($request->isPost()) {
         'email' => $cl_email,
         'status' => $cl_status,
         'rate' => $cl_rate,
+        'billable' => $cl_billableProjects,
         'projects' => $assigned_projects);
       if (right_assign_roles & $user->rights) {
         $fields['role'] = $cl_role;
