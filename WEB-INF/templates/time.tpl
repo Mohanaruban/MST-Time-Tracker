@@ -351,8 +351,8 @@ function get_time() {
             <td nowrap align='right' valign='top'>{if $record.start}{$record.start}{else}&nbsp;{/if}</td>
             <td nowrap align='right' valign='top'>{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
             {/if}
-            <td align='right' valign='top'>{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
-            <td valign='top'>{if $record.comment}{$record.comment|escape:'html'}{else}&nbsp;{/if}</td>
+            <td valign='top'>{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
+            <td valign='top'>{if $record.comment}{nl2br($record.comment|escape:'html')}{else}&nbsp;{/if}</td>
             <td valign='top' align='center'>
               {if $record.invoice_id}
               &nbsp;
