@@ -44,37 +44,6 @@ idx++;
 empty_label_project = '{$i18n.dropdown.select|escape:'javascript'}';
 
 function selectAssignedProjects(manager_id) {
-  // var str_ids = project_ids[id];
-  // var dropdown = document.getElementById("project");
-  // // Determine previously selected item.
-  // var selected_item = dropdown.options[dropdown.selectedIndex].value;
-  // // Remove existing content.
-  // dropdown.length = 0;
-  // // Add mandatory top option.
-  // dropdown.options[0] = new Option(empty_label_project, '', true);
-
-  // // Populate project dropdown.
-  // if (!id) {
-  //   // If we are here, client is not selected.
-  //   var len = projects.length;
-  //   for (var i = 0; i < len; i++) {
-  //     dropdown.options[i+1] = new Option(projects[i][1], projects[i][0]);
-  //     if (dropdown.options[i+1].value == selected_item)
-  //       dropdown.options[i+1].selected = true;
-  //   }
-  // } else if (str_ids) {
-  //   var ids = new Array();
-  //   ids = str_ids.split(",");
-  //   var len = ids.length;
-
-  //   for (var i = 0; i < len; i++) {
-  //     var p_id = ids[i];
-  //     dropdown.options[i+1] = new Option(project_names[p_id], p_id);
-  //     if (dropdown.options[i+1].value == selected_item)
-  //       dropdown.options[i+1].selected = true;
-  //   }
-  // } 
-  
   var project_id;
   var len;
 
@@ -247,6 +216,14 @@ function handleCheckboxes() {
   totalsOnlyCheckbox.disabled = false;
 }
 
+function loadOnLoad() {
+  handleCheckboxes(); 
+  if(document.reportForm.manager != undefined) {
+    selectAssignedProjects(document.reportForm.manager.value); 
+  }
+  selectAssignedUsers()
+}
+
 
 </script>
 <style>
@@ -355,6 +332,13 @@ function handleCheckboxes() {
                     <div class="col-md-12">
                       <label class="col-sm-3 control-label">{$i18n.label.users}</label>
                       <div class="col-sm-8">{$forms.reportForm.users.control}</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <label class="col-sm-3 control-label">{$i18n.form.time.billable}</label>
+                      <div class="col-sm-8">{$forms.reportForm.include_records.control}</div>
                     </div>
                   </div>
                   {/if}

@@ -409,7 +409,7 @@ $smarty->assign('project_list', $project_list);
 $smarty->assign('task_list', $task_list);
 $smarty->assign('assigned_projects', $assigned_projects);
 $smarty->assign('forms', array($form->getName()=>$form->toArray()));
-$smarty->assign('onload', 'onLoad="handleCheckboxes(); selectAssignedProjects(document.reportForm.manager.value); selectAssignedUsers()"');
+$smarty->assign('onload', 'onLoad="loadOnLoad()"');
 $smarty->assign('title', $i18n->getKey('title.reports'));
 $smarty->assign('content_page_name', 'reports.tpl');
 $smarty->display('index.tpl');
