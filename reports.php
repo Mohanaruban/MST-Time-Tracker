@@ -251,6 +251,7 @@ if ($user->canManageTeam() || $user->isClient()) {
 $form->addInput(array('type'=>'combobox',
   'class'=>'form-control',
   'name'=>'period',
+  'onchange'=> 'handleTimePeriod()',
   'data'=>array(INTERVAL_THIS_MONTH=>$i18n->getKey('dropdown.this_month'),
     INTERVAL_LAST_MONTH=>$i18n->getKey('dropdown.last_month'),
     INTERVAL_THIS_WEEK=>$i18n->getKey('dropdown.this_week'),
@@ -302,7 +303,7 @@ $form->addInput(array('type'=>'checkbox','name'=>'chtotalsonly','data'=>1));
 // Add text field for a new favorite report name.
 $form->addInput(array('type'=>'text','name'=>'new_fav_report','maxlength'=>'30','class'=>'form-control','placeholder'=>'Enter Favorite'));
 // Save button.
-$form->addInput(array('type'=>'submit', 'class'=>'btn btn-success btn-xs', 'name'=>'btn_save','value'=>$i18n->getKey('button.save')));
+$form->addInput(array('type'=>'submit', 'class'=>'btn btn-success', 'name'=>'btn_save','value'=>$i18n->getKey('button.save')));
 
 $form->addInput(array('type'=>'submit', 'name'=>'btn_generate','value'=>$i18n->getKey('button.generate')));
 
