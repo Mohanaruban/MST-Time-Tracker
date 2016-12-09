@@ -1,16 +1,33 @@
 <script>
   function chLocation(newLocation) { document.location = newLocation; }
+
+  $(document).ready(function() {
+    $('#UserTable').DataTable({
+      "dom": '<"col-xs-6"l><"col-xs-6 text-right"f>t<"col-sm-6"i><"col-sm-6 text-right"p>'
+    });
+  });
 </script>
 <div class="col-sm-12">
   <div class="row">
     <div class="col-sm-12">
       {if $user->canManageTeam() && $user->isAdmin()}
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <form>
+                <input class="btn btn-success" " type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add_user}">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       {if $inactive_users}
       <div class="text-center h4">
         {$i18n.form.users.active_users}
       </div>
       {/if}
-      <table class="table table-responsive table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered" id="UserTable">
         <thead>
           <tr>
             <th>{$i18n.label.person_name}</th>
@@ -100,13 +117,6 @@
               {/foreach}
             </table>
             {/if}
-            <div class="row">
-              <div class="col-md-12 text-center">
-                <div class="form-group">
-                  <div class="col-sm-12"><form><input class="btn btn-success" " type="button" onclick="chLocation('user_add.php');" value="{$i18n.button.add_user}"></form></div>
-                </div>
-              </div>
-            </div>
             {else}
             {if $user->canManageTeam() && !$user->isAdmin()}
             {if $inactive_users}

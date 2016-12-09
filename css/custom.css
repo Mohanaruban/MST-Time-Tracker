@@ -1,10 +1,11 @@
 .text-muted {
-  color: #545758 !important;
+  color: #909090 !important;
 }
 
 html {
   background-image: url("../images/homebg/18_pages.jpg");
-  background-size:cover; 
+  background-size: cover; 
+  background-attachment: fixed;
 }
 
 table {
@@ -24,13 +25,18 @@ thead th {
 }
 a:not(.btn, .calendar-custom) {
   color: #ffffff !important;
-  text-decoration: none
+  text-decoration: none;
 }
-a:hover:not(.btn),
-a:focus:not(.btn) {
+a:hover:not(.btn, .pagination),
+a:focus:not(.btn, .pagination) {
   color: #1778bd !important;
-  text-decoration: underline
+  text-decoration: none;
 }
+
+.navbar-nav>li>a:hover {
+  color: #1778bd !important;
+}
+
 .table>thead>tr>td.warning,
 .table>tbody>tr>td.warning,
 .table>tfoot>tr>td.warning,
@@ -46,51 +52,27 @@ a:focus:not(.btn) {
   background-color: #258cd1 !important;
 }
 
-.btn-success {
-
-  color: #ffffff !important;
-  background-color: #1778bd !important;
-  border-color: rgba(0, 0, 0, 0) !important;
-
-}
-.btn-warning {
-
-  color: #ffffff !important;
-  background-color: #1778bd !important;
-  border-color: rgba(0, 0, 0, 0) !important;
-}
-.btn-primary {
-  color: #ffffff !important;
-  background-color: #1778bd !important;
-  border-color: rgba(0, 0, 0, 0) !important;
-}
 .nav-tabs>li>a {
   margin-right: 2px;
   line-height: 1.42857143;
   border: 1px solid #e6e6e6 !important;
   border-radius: 4px 4px 0 0
 }
-.btn-info {
+
+.btn-info, .btn-success, .btn-warning, .btn-primary, .btn-danger {
   color: #ffffff !important;
   background-color: #1778bd !important;
   border-color: rgba(0, 0, 0, 0) !important;
 }
 
-.btn-danger {
-
- color: #ffffff !important;
- background-color: #1778bd !important;
- border-color: rgba(0, 0, 0, 0) !important;
-
+.btn-info:hover, .btn-success:hover, .btn-warning:hover, .btn-primary:hover, .btn-danger:hover {
+  background-color: #12629a !important;
 }
 
-.btn-danger:hover {
-
-  color: #ffffff !important;
-  background-color: #1778bd !important;
-  border-color: rgba(0, 0, 0, 0) !important;
-
+.btn-info:active, .btn-success:active, .btn-warning:active, .btn-primary:active , .btn-danger:active {
+  background-color: #0d4a75 !important;
 }
+
 .panel-title {
 
   color: white !important;
@@ -134,4 +116,8 @@ a:focus:not(.btn) {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   margin-bottom: 0px;
+}
+
+.pagination {
+  margin: 0 0; 
 }

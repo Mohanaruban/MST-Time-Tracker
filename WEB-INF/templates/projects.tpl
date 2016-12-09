@@ -1,16 +1,33 @@
 <script>
   function chLocation(newLocation) { document.location = newLocation; }
+
+  $(document).ready(function() {
+    $('#ProjectTable').DataTable({
+      "dom": '<"col-xs-6"l><"col-xs-6 text-right"f>t<"col-sm-6"i><"col-sm-6 text-right"p>'
+    });
+  });
 </script>
 <div class="col-sm-12">
   <div class="row">
     <div class="col-sm-12">
       {if $user->canManageTeam() && $user->isAdmin()}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="col-sm-12 text-center">
+              <form>
+                <input class="btn btn-success" type="button" onclick="chLocation('project_add.php');" value="{$i18n.button.add_project}">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       {if $inactive_projects}
       <div class="text-center h4">
         {$i18n.form.projects.active_projects}
       </div>
       {/if}
-      <table class="table table-responsive table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered" id="ProjectTable">
         <thead>
           <tr>
             <th>{$i18n.label.thing_name}</th>
@@ -63,13 +80,6 @@
     </div>
   </div>
   {/if}
-  <div class="row">
-    <div class="col-md-12">
-      <div class="form-group">
-        <div class="col-sm-12 text-center"><form><input class="btn btn-success" type="button" onclick="chLocation('project_add.php');" value="{$i18n.button.add_project}"></form></div>
-      </div>
-    </div>
-  </div>
   {else}
   <table class="table table-responsive table-hover table-bordered">
     {if $inactive_projects}
