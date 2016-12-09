@@ -216,12 +216,36 @@ function handleCheckboxes() {
   totalsOnlyCheckbox.disabled = false;
 }
 
+function handleTimePeriod() {
+  var selectedValue = document.reportForm.period.value;
+  if(selectedValue != '') {
+    document.reportForm.start_date.disabled = true;
+    document.reportForm.end_date.disabled = true;
+  } else {
+    document.reportForm.start_date.disabled = false;
+    document.reportForm.end_date.disabled = false;
+  }
+}
+
+function dateCheck() {
+  var selectedValue = document.reportForm.period.value;
+  if(selectedValue != '') {
+    if(confirm("Reset time period field to set the date. Do you want to reset?")) {
+      document.reportForm.period.selectedIndex = 0;
+      document.reportForm.start_date.disabled = false;
+      document.reportForm.end_date.disabled = false;
+      document.reportForm.start_date.focus();
+    }
+  }
+}
+
 function loadOnLoad() {
   handleCheckboxes(); 
   if(document.reportForm.manager != undefined) {
     selectAssignedProjects(document.reportForm.manager.value); 
   }
-  selectAssignedUsers()
+  selectAssignedUsers();
+  handleTimePeriod();
 }
 
 
@@ -356,8 +380,8 @@ function loadOnLoad() {
                   <div class="form-group">
                     <div class="col-md-12">
                       <label class="col-sm-3 control-label">{$i18n.form.reports.set_period}</label>
-                      <div class="col-sm-4">{$forms.reportForm.start_date.control}</div>
-                      <div class="col-sm-4">{$forms.reportForm.end_date.control}</div>
+                      <div class="col-sm-4" onclick="dateCheck()">{$forms.reportForm.start_date.control}</div>
+                      <div class="col-sm-4" onclick="dateCheck()">{$forms.reportForm.end_date.control}</div>
                     </div>
                   </div>
 
@@ -407,7 +431,8 @@ function loadOnLoad() {
                       <div class="col-md-12">
                         <label class="col-sm-3 control-label"></label>
                         <div class="col-sm-8 text-left">
-                          {$forms.reportForm.chtotalsonly.control} {$i18n.form.reports.totals_only}
+                          {$forms.reportForm.chtotalsonly.control} 
+                          <label for="chtotalsonly">{$i18n.form.reports.totals_only}</label>
                         </div>
                       </div>
                     </div>
@@ -415,8 +440,13 @@ function loadOnLoad() {
                     <div class="form-group">
                       <div class="col-md-12">
                         <label class="col-sm-3 control-label">{$i18n.form.reports.save_as_favorite}</label>
-                        <div class="col-sm-8">{$forms.reportForm.new_fav_report.control}
-                          <span class="pull-down" style="float:right;">{$forms.reportForm.btn_save.control}</span>
+                        <div class="col-sm-8">
+                          <div class="input-group">
+                            {$forms.reportForm.new_fav_report.control}
+                            <span class="input-group-btn">
+                              <span>{$forms.reportForm.btn_save.control}</span>
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -424,7 +454,7 @@ function loadOnLoad() {
                 </div>
 
                 <div class="panel-footer">
-                  <div class="row">
+                  <div class="row text-center">
                     <div class="col-md-12">
                       {$forms.reportForm.btn_generate.control}
                     </div>
