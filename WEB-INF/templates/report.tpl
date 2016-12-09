@@ -2,27 +2,33 @@
   function chLocation(newLocation) { document.location = newLocation; }
 </script>
 <div class="col-sm-12 text-center">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <input type="button" class="btn btn-success" onclick="chLocation('report_send.php');" value="{$i18n.button.send_by_email}"/>
+      {if file_exists('WEB-INF/lib/tcpdf')}<a class="btn btn-info" href="topdf.php">Export as PDF</a>{/if} <a class="btn btn-warning" href="tofile.php?type=xml">Export as XML</a> <a class="btn btn-primary" href="tofile.php?type=csv">Export as CSV</a> <a class="btn btn-info" href="reports.php">Back to reports</a><br/><br/>
+    </div>
+  </div>
   {$forms.reportForm.open}
   <div class="row">
     <table class="table table-responsive table-hover table-bordered report-table">
       <!-- totals only report -->
       {if $bean->getAttribute('chtotalsonly')}
       <thead>
-      <tr>
-        <th>{$group_by_header|escape:'html'}</th>
-        {if $group_by == 'user'} 
+        <tr>
+          <th>{$group_by_header|escape:'html'}</th>
+          {if $group_by == 'user'} 
           <th>Projects</th>
-        {/if}
-        {if $bean->getAttribute('chduration')}
+          {/if}
+          {if $bean->getAttribute('chduration')}
           <th>{$i18n.label.duration}</th>
-        {/if}
-        {if $bean->getAttribute('chcost')}
+          {/if}
+          {if $bean->getAttribute('chcost')}
           <th>{$i18n.label.cost}</th>
-        {/if}
-        {if $group_by == 'user'} 
+          {/if}
+          {if $group_by == 'user'} 
           <th>Utilization</th>
-        {/if}
-      </tr>
+          {/if}
+        </tr>
       </thead>
       {foreach $subtotals as $subtotal}
       <tr class="table-total-group">
@@ -31,7 +37,7 @@
         <td>{$subtotal['projects']}</td>
         {/if}
         {if $bean->getAttribute('chduration')}
-          <td>{$subtotal['time']}</td>
+        <td>{$subtotal['time']}</td>
         {/if}
         {if $group_by == 'user'} 
         <td>{$subtotal['util']}%</td>
@@ -51,20 +57,20 @@
       {else}
       <!-- normal report -->
       <thead>
-      <tr>
-        <th style="width: 111px">{$i18n.label.date}</th>
-        {if $user->canManageTeam() || $user->isClient()}<th>{$i18n.label.user}</th>{/if}
-        {if $bean->getAttribute('chclient')}<th>{$i18n.label.client}</th>{/if}
-        {if $bean->getAttribute('chproject')}<th>{$i18n.label.project}</th>{/if}
-        {if $bean->getAttribute('chtask')}<th>{$i18n.label.task}</th>{/if}
-        {if $bean->getAttribute('chcf_1')}<th>{$custom_fields->fields[0]['label']|escape:'html'}</th>{/if}
-        {if $bean->getAttribute('chstart')}<th>{$i18n.label.start}</th>{/if}
-        {if $bean->getAttribute('chfinish')}<th>{$i18n.label.finish}</th>{/if}
-        {if $bean->getAttribute('chduration')}<th>{$i18n.label.duration}</th>{/if}
-        {if $bean->getAttribute('chnote')}<th>{$i18n.label.note}</th>{/if}
-        {if $bean->getAttribute('chcost')}<th>{$i18n.label.cost}</th>{/if}
-        {if $bean->getAttribute('chinvoice')}<th>{$i18n.label.invoice}</th>{/if}
-      </tr>
+        <tr>
+          <th style="width: 111px">{$i18n.label.date}</th>
+          {if $user->canManageTeam() || $user->isClient()}<th>{$i18n.label.user}</th>{/if}
+          {if $bean->getAttribute('chclient')}<th>{$i18n.label.client}</th>{/if}
+          {if $bean->getAttribute('chproject')}<th>{$i18n.label.project}</th>{/if}
+          {if $bean->getAttribute('chtask')}<th>{$i18n.label.task}</th>{/if}
+          {if $bean->getAttribute('chcf_1')}<th>{$custom_fields->fields[0]['label']|escape:'html'}</th>{/if}
+          {if $bean->getAttribute('chstart')}<th>{$i18n.label.start}</th>{/if}
+          {if $bean->getAttribute('chfinish')}<th>{$i18n.label.finish}</th>{/if}
+          {if $bean->getAttribute('chduration')}<th>{$i18n.label.duration}</th>{/if}
+          {if $bean->getAttribute('chnote')}<th>{$i18n.label.note}</th>{/if}
+          {if $bean->getAttribute('chcost')}<th>{$i18n.label.cost}</th>{/if}
+          {if $bean->getAttribute('chinvoice')}<th>{$i18n.label.invoice}</th>{/if}
+        </tr>
       </thead>
       {foreach $report_items as $item}
       <!-- print subtotal for a block of grouped values -->

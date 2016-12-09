@@ -2,7 +2,10 @@
   function chLocation(newLocation) { document.location = newLocation; }
 
   $(document).ready(function() {
-    $('#ProjectTable').DataTable({
+    $('#ProjectTableActive').DataTable({
+      "dom": '<"col-xs-6"l><"col-xs-6 text-right"f>t<"col-sm-6"i><"col-sm-6 text-right"p>'
+    });
+    $('#ProjectTableInactive').DataTable({
       "dom": '<"col-xs-6"l><"col-xs-6 text-right"f>t<"col-sm-6"i><"col-sm-6 text-right"p>'
     });
   });
@@ -27,7 +30,7 @@
         {$i18n.form.projects.active_projects}
       </div>
       {/if}
-      <table class="table table-responsive table-hover table-bordered" id="ProjectTable">
+      <table class="table table-responsive table-hover table-bordered" id="ProjectTableActive">
         <thead>
           <tr>
             <th>{$i18n.label.thing_name}</th>
@@ -58,7 +61,7 @@
       <div class="text-center h4">
         {$i18n.form.projects.inactive_projects}
       </div>
-      <table class="table table-responsive table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered" id="ProjectTableInactive">
         <thead>
           <tr>
             <th>{$i18n.label.thing_name}</th>
@@ -81,7 +84,7 @@
   </div>
   {/if}
   {else}
-  <table class="table table-responsive table-hover table-bordered">
+  <table class="table table-responsive table-hover table-bordered" id="ProjectTableActive">
     {if $inactive_projects}
     <tr><td class="sectionHeaderNoBorder">{$i18n.form.projects.active_projects}</td></tr>
     {/if}
@@ -107,7 +110,7 @@
   {if $inactive_projects}
   <div class="row">
     <div class="col-sm-12">
-      <table class="table table-responsive table-hover table-bordered">
+      <table class="table table-responsive table-hover table-bordered" id="ProjectTableInactive">
         <tr><td class="sectionHeaderNoBorder">{$i18n.form.projects.inactive_projects}</td></tr>
         <thead>
           <tr>

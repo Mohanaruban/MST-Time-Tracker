@@ -2,7 +2,10 @@
   function chLocation(newLocation) { document.location = newLocation; }
 
   $(document).ready(function() {
-    $('#UserTable').DataTable({
+    $('#UserTableInactive').DataTable({
+      "dom": '<"col-xs-6"l><"col-xs-6 text-right"f>t<"col-sm-6"i><"col-sm-6 text-right"p>'
+    });
+    $('#UserTableActive').DataTable({
       "dom": '<"col-xs-6"l><"col-xs-6 text-right"f>t<"col-sm-6"i><"col-sm-6 text-right"p>'
     });
   });
@@ -27,7 +30,7 @@
         {$i18n.form.users.active_users}
       </div>
       {/if}
-      <table class="table table-responsive table-hover table-bordered" id="UserTable">
+      <table class="table table-responsive table-hover table-bordered" id="UserTableActive">
         <thead>
           <tr>
             <th>{$i18n.label.person_name}</th>
@@ -79,7 +82,7 @@
         <div class="text-center h4">
           {$i18n.form.users.inactive_users}
         </div>
-        <table class="table table-responsive table-hover table-bordered">
+        <table class="table table-responsive table-hover table-bordered" id="UserTableInactive">
           <thead>
             <tr>
               <th>{$i18n.label.person_name}</th>
@@ -124,7 +127,7 @@
               {$i18n.form.users.active_users}
             </div>
             {/if}
-            <table class="table table-responsive table-hover table-bordered">
+            <table class="table table-responsive table-hover table-bordered" id="UserTableActive">
               <thead>
                 <tr>
                   <th>{$i18n.label.person_name}</th>
@@ -167,7 +170,7 @@
             <div class="text-center h4">
               {$i18n.form.users.inactive_users}
             </div>
-            <table class="table table-responsive table-hover table-bordered">
+            <table class="table table-responsive table-hover table-bordered" id="UserTableInactive">
               <thead>
                 <tr>
                   <th>{$i18n.label.person_name}</th>
