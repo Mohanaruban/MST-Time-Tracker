@@ -427,14 +427,14 @@ while ($val = $res->fetchRow()) {
     if ('date' == $group_by_option) {
 // This is needed to get the date in user date format.
       $o_date = new DateAndTime(DB_DATEFORMAT, $val['grouped_by']);
-      $val['grouped_by'] = date("m-d-Y", strtotime($o_date->toString($user->date_format)));
+      $val['grouped_by'] = $o_date->toString($user->date_format);
       unset($o_date);
     }
   }
 
 // This is needed to get the date in user date format.
   $o_date = new DateAndTime(DB_DATEFORMAT, $val['date']);
-  $val['date'] =  date("m-d-Y", strtotime($o_date->toString($user->date_format)));
+  $val['date'] =  $o_date->toString($user->date_format);
   unset($o_date);
 
   $row = $val;
