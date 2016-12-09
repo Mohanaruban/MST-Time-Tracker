@@ -120,6 +120,6 @@ $smarty->assign('report_items', $report_items);
 $smarty->assign('subtotals', $subtotals);
 $smarty->assign('totals', $totals);
 $smarty->assign('bean', $bean);
-$smarty->assign('title', $i18n->getKey('title.report').": ".$totals['start_date']." - ".$totals['end_date']);
+$smarty->assign('title', $i18n->getKey('title.report').": ".date('m-d-Y',strtotime($totals['start_date']))." - ".date('m-d-Y',strtotime($totals['end_date'])));
 $smarty->assign('content_page_name', 'report.tpl');
 $smarty->display('index.tpl');
