@@ -427,14 +427,14 @@ while ($val = $res->fetchRow()) {
     if ('date' == $group_by_option) {
 // This is needed to get the date in user date format.
       $o_date = new DateAndTime(DB_DATEFORMAT, $val['grouped_by']);
-      $val['grouped_by'] = $o_date->toString($user->date_format);
+      $val['grouped_by'] = date("m-d-Y", strtotime($o_date->toString($user->date_format)));
       unset($o_date);
     }
   }
 
 // This is needed to get the date in user date format.
   $o_date = new DateAndTime(DB_DATEFORMAT, $val['date']);
-  $val['date'] = $o_date->toString($user->date_format);
+  $val['date'] =  date("m-d-Y", strtotime($o_date->toString($user->date_format)));
   unset($o_date);
 
   $row = $val;
@@ -666,7 +666,7 @@ static function getSubtotals($bean) {
 // Determine group by field and a required join.
   switch ($group_by_option) {
     case 'date':
-    $group_field = 'l.date';
+    $group_field = 'DATE_FORMAT(l.date, "%m-%d-%Y")';
     $group_join = '';
     break;
     case 'user':
@@ -727,7 +727,7 @@ if ($bean->getAttribute('chcost') && $user->isPluginEnabled('ex')) { // if ex(pe
   $group_field = 'null';
   switch ($group_by_option) {
     case 'date':
-    $group_field = 'ei.date';
+    $group_field = 'date_format(ei.date, "%m-%d-%Y")';
     $group_join = '';
     break;
     case 'user':
@@ -753,18 +753,17 @@ if ($bean->getAttribute('chcost') && $user->isPluginEnabled('ex')) { // if ex(pe
 // Create a combined query.
   $sql = "select group_field, sum(time) as time, sum(cost) as cost, sum(expenses) as expenses from (($sql) union all ($sql_for_expenses)) t group by group_field";
 }
-
 // Execute query.
 $res = $mdb2->query($sql);
 if (is_a($res, 'PEAR_Error')) die($res->getMessage());
 
 while ($val = $res->fetchRow()) {
-  if ('date' == $group_by_option) {
-// This is needed to get the date in user date format.
-    $o_date = new DateAndTime(DB_DATEFORMAT, $val['group_field']);
-    $val['group_field'] = $o_date->toString($user->date_format);
-    unset($o_date);
-  }
+//   if ('date' == $group_by_option) {
+// // This is needed to get the date in user date format.
+//     $o_date = new DateAndTime(DB_DATEFORMAT, $val['group_field']);
+//     $val['group_field'] = $o_date->toString();
+//     unset($o_date);
+//   }
   $time = $val['time'] ? sec_to_time_fmt_hm($val['time']) : null;
   if ($bean->getAttribute('chcost')) {
     if ('.' != $user->decimal_mark) {
