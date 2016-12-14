@@ -435,9 +435,11 @@ while ($val = $res->fetchRow()) {
 // This is needed to get the date in user date format.
   $o_date = new DateAndTime(DB_DATEFORMAT, $val['date']);
   $val['date'] =  $o_date->toString($user->date_format);
+
   unset($o_date);
 
   $row = $val;
+$row['date'] = date("m-d-Y",strtotime($row['date']));
   $report_items[] = $row;
 }
 
@@ -1119,7 +1121,7 @@ static function prepareReportBody($bean, $comment)
   $body .= '<body>';
 
 // Output title.
-  $body .= '<p style="'.$style_title.'">'.$i18n->getKey('form.mail.report_subject').': '.$totals['start_date'].' - '.$totals['end_date'].'</p>';
+  $body .= '<p style="'.$style_title.'">'.$i18n->getKey('form.mail.report_subject').': '.date("m-d-Y",strtotime($totals['start_date'])).' - '.date("m-d-Y",strtotime($totals['end_date'])).'</p>';
 
 // Output comment.
   if ($comment) $body .= '<p>'.htmlspecialchars($comment).'</p>';

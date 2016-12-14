@@ -153,6 +153,7 @@ $i18n_key_words = array(
 'label.start' => 'Start',
 'label.finish' => 'Finish',
 'label.duration' => 'Duration',
+'label.durationtable' => 'Duration(Hours)',
 'label.note' => 'Comment',
 'label.item' => 'Item',
 'label.cost' => 'Cost',

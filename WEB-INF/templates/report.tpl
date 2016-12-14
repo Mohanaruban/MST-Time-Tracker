@@ -20,7 +20,7 @@
           <th>Projects</th>
           {/if}
           {if $bean->getAttribute('chduration')}
-          <th>{$i18n.label.duration}</th>
+          <th>{$i18n.label.durationtable}</th>
           {/if}
           {if $bean->getAttribute('chcost')}
           <th>{$i18n.label.cost}</th>
@@ -66,7 +66,7 @@
           {if $bean->getAttribute('chcf_1')}<th>{$custom_fields->fields[0]['label']|escape:'html'}</th>{/if}
           {if $bean->getAttribute('chstart')}<th>{$i18n.label.start}</th>{/if}
           {if $bean->getAttribute('chfinish')}<th>{$i18n.label.finish}</th>{/if}
-          {if $bean->getAttribute('chduration')}<th>{$i18n.label.duration}</th>{/if}
+          {if $bean->getAttribute('chduration')}<th>{$i18n.label.durationtable}</th>{/if}
           {if $bean->getAttribute('chnote')}<th>{$i18n.label.note}</th>{/if}
           {if $bean->getAttribute('chcost')}<th>{$i18n.label.cost}</th>{/if}
           {if $bean->getAttribute('chinvoice')}<th>{$i18n.label.invoice}</th>{/if}
@@ -101,7 +101,7 @@
         {if $report_row_class == 'rowReportItem'} {$report_row_class = 'rowReportItemAlt'} {else} {$report_row_class = 'rowReportItem'} {/if}
         {/if}
         <tr>
-          <td>{$item.date|date_format:'%m-%d-%Y'}</td>
+          <td>{$item.date}</td>
           {if $user->canManageTeam() || $user->isClient()}<td>{$item.user|escape:'html'}</td>{/if}
           {if $bean->getAttribute('chclient')}<td>{$item.client|escape:'html'}</td>{/if}
           {if $bean->getAttribute('chproject')}<td>{$item.project|escape:'html'}</td>{/if}

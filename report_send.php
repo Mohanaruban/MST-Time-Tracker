@@ -75,7 +75,6 @@ if ($request->isPost()) {
     $bean = new ActionForm('reportBean', new Form('reportForm'));
     // Prepare report body.
     $body = ttReportHelper::prepareReportBody($bean, $cl_comment);
-
     import('mail.Mailer');
     $mailer = new Mailer();
     $mailer->setCharSet(CHARSET);
